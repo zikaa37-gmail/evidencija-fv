@@ -1,0 +1,20 @@
+@import 'src/theme/theme-variables.scss';
+@import 'src/theme/theme-overides.scss';
+
+.tab {
+  margin-left: 40px;
+}
+
+.mat-card {
+  max-width: 300px;
+  height   : 420px;
+  border   : solid 1px $grey-border;
+}
+
+.inactive {
+  background: $lightblue;
+}
+
+.danger {
+  color: $danger;
+}

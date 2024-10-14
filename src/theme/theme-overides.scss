@@ -1,0 +1,21 @@
+@import './theme-variables.scss';
+
+.bg-success,
+.btn-success {
+  background: $success !important;
+}
+
+.bg-default,
+.btn-default {
+  background: $default !important;
+}
+
+.bg-primary,
+.btn-primary {
+  background: $primary !important;
+}
+
+.bg-secondary,
+.btn-secondary {
+  background: $secondary !important;
+}

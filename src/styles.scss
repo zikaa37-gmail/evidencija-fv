@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import './theme/theme-variables.scss';
+@import './theme/theme-overides.scss';
+@import 'ngx-toastr/toastr';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin     : 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size  : 16px;
+
+  @media screen and (max-device-width:640px),
+  screen and (max-width:640px) {
+    font-size: 14px;
+  }
+}
+
+.container-fluid {
+  margin : 0;
+  padding: 0;
+}
+
+a,
+i,
+.pointer {
+  cursor: pointer;
+}

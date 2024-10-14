@@ -1,0 +1,28 @@
+<mat-accordion>
+  <mat-expansion-panel
+    class="bg-primary"
+    [expanded]="panelOpenState"
+    (click)="panelOpenState=!panelOpenState"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{'SELECT_SECTION' | translate}}
+      </mat-panel-title>
+      <mat-panel-description *ngIf="
+    display">{{display}}</mat-panel-description>
+    </mat-expansion-panel-header>
+    <ul
+      class="departments"
+      *ngFor="let section of sections"
+      (click)="panelOpenState=true"
+    >
+      <li
+        class="border"
+        (click)="onSectionSelect(section.grade, department);"
+        *ngFor="let department of section.departments"
+        [ngClass]="{'active': selected?.grade ===section?.grade
+        && selected?.department === department}"
+      >{{section.grade}}-{{department}}</li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,1596 @@
+{
+  "status": "ACTIVE",
+  "cloned": false,
+  "id": 108674,
+  "code": "LD-16136",
+  "name": {
+    "textEn": "Construction and Contracting Business (Administrative office) (Dhofar).",
+    "textAr": "أعمال البناء والمقاولات (مكتب إداري) (ظفار).",
+    "filledText": "Construction and Contracting Business (Administrative office) (Dhofar).",
+    "textForCurrentLocale": "Construction and Contracting Business (Administrative office) (Dhofar)."
+  },
+  "description": {
+    "textEn": "License for companies that have Administrative office in Construction and Contracting Business - Construction of Roads and Railways",
+    "textAr": "الترخيص للشركات التي لديها مكتب إداري في أعمال البناء والمقاولات",
+    "filledText": "License for companies that have Administrative office in Construction and Contracting Business - Construction of Roads and Railways",
+    "textForCurrentLocale": "License for companies that have Administrative office in Construction and Contracting Business - Construction of Roads and Railways"
+  },
+  "definitionVersion": 3,
+  "approver": {
+    "id": 326279,
+    "governmentAgency": {
+      "id": 5073,
+      "name": {
+        "textEn": "Ministry of Commerce Industry and Investment Promotion - Commercial License",
+        "textAr": "وزارة التجارة والصناعة وترويج الاستثمار - التراخيص التجارية",
+        "filledText": "Ministry of Commerce Industry and Investment Promotion - Commercial License",
+        "textForCurrentLocale": "Ministry of Commerce Industry and Investment Promotion - Commercial License"
+      },
+      "code": "MOCI - Comm. Lic",
+      "contactName": null,
+      "email": "LD-1498@moci.gov.om",
+      "phone": null,
+      "fax": null,
+      "trace": {
+        "createdBy": {
+          "textEn": "Invest Easy System Admin",
+          "textAr": "مسوؤل نظام استثمر بسهولة",
+          "filledText": "Invest Easy System Admin",
+          "textForCurrentLocale": "Invest Easy System Admin"
+        },
+        "createdDate": "2016-02-16T13:12:12",
+        "updatedBy": {
+          "textEn": "'ABDULLAH MUSTAFA 'ABDUL RAHMAN MOHAMMED AL FARSI",
+          "textAr": "عبدالله مصطفى عبدالرحمن محمد الفارسي",
+          "filledText": "'ABDULLAH MUSTAFA 'ABDUL RAHMAN MOHAMMED AL FARSI",
+          "textForCurrentLocale": "'ABDULLAH MUSTAFA 'ABDUL RAHMAN MOHAMMED AL FARSI"
+        },
+        "updatedDate": "2021-03-26T18:15:59"
+      },
+      "mociPaymentAllowed": false,
+      "moci": false,
+      "persistent": true,
+      "notPersistent": false
+    },
+    "approvalType": "NOTICE",
+    "renewalApprovalType": "NOTICE",
+    "maximumProcessingTime": 0,
+    "licenseFeeCalculationModel": "FEE_PER_LICENSE",
+    "approvalFee": 0,
+    "renewalFee": 0,
+    "updateFee": 0,
+    "approvalFeeAfterApproval": 0,
+    "renewalFeeAfterApproval": 0,
+    "updateFeeAfterApproval": 0,
+    "children": [
+      {
+        "id": 326280,
+        "governmentAgency": {
+          "id": 5021,
+          "name": {
+            "textEn": "Civil Defence and Ambulance Authority",
+            "textAr": "هيئة الدفاع المدني والإسعاف",
+            "filledText": "Civil Defence and Ambulance Authority",
+            "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+          },
+          "code": "PACDA",
+          "contactName": {
+            "textEn": "Civil Defence and Ambulance Authority",
+            "textAr": "هيئة الدفاع المدني والإسعاف",
+            "filledText": "Civil Defence and Ambulance Authority",
+            "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+          },
+          "email": null,
+          "phone": null,
+          "fax": null,
+          "trace": {
+            "createdBy": {
+              "textEn": "Invest Easy System Admin",
+              "textAr": "مسوؤل نظام استثمر بسهولة",
+              "filledText": "Invest Easy System Admin",
+              "textForCurrentLocale": "Invest Easy System Admin"
+            },
+            "createdDate": "2014-09-25T18:05:13",
+            "updatedBy": {
+              "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+              "textAr": "عبدالله علي عبدالله الكلباني",
+              "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+              "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+            },
+            "updatedDate": "2021-04-26T10:23:24"
+          },
+          "mociPaymentAllowed": false,
+          "moci": false,
+          "persistent": true,
+          "notPersistent": false
+        },
+        "approvalType": "NOTICE",
+        "renewalApprovalType": "NOTICE",
+        "maximumProcessingTime": 0,
+        "licenseFeeCalculationModel": "FEE_PER_LICENSE",
+        "approvalFee": 8,
+        "renewalFee": 8,
+        "updateFee": 0,
+        "approvalFeeAfterApproval": 0,
+        "renewalFeeAfterApproval": 0,
+        "updateFeeAfterApproval": 0,
+        "children": [],
+        "persistent": true,
+        "notPersistent": false
+      },
+      {
+        "id": 326281,
+        "governmentAgency": {
+          "id": 5025,
+          "name": {
+            "textEn": "Dhofar Municipality",
+            "textAr": "بلدية ظفار",
+            "filledText": "Dhofar Municipality",
+            "textForCurrentLocale": "Dhofar Municipality"
+          },
+          "code": "DM",
+          "contactName": {
+            "textEn": "Dhofar Municipality",
+            "textAr": "بلدية ظفار",
+            "filledText": "Dhofar Municipality",
+            "textForCurrentLocale": "Dhofar Municipality"
+          },
+          "email": null,
+          "phone": null,
+          "fax": null,
+          "trace": {
+            "createdBy": {
+              "textEn": "Invest Easy System Admin",
+              "textAr": "مسوؤل نظام استثمر بسهولة",
+              "filledText": "Invest Easy System Admin",
+              "textForCurrentLocale": "Invest Easy System Admin"
+            },
+            "createdDate": "2014-09-25T00:00:00",
+            "updatedBy": {
+              "textEn": "Invest Easy System Admin",
+              "textAr": "مسوؤل نظام استثمر بسهولة",
+              "filledText": "Invest Easy System Admin",
+              "textForCurrentLocale": "Invest Easy System Admin"
+            },
+            "updatedDate": "2014-09-27T00:00:00"
+          },
+          "mociPaymentAllowed": false,
+          "moci": false,
+          "persistent": true,
+          "notPersistent": false
+        },
+        "approvalType": "NOTICE",
+        "renewalApprovalType": "NOTICE",
+        "maximumProcessingTime": 0,
+        "licenseFeeCalculationModel": "FEE_PER_ACTIVITY",
+        "approvalFee": 5,
+        "renewalFee": 5,
+        "updateFee": 0,
+        "approvalFeeAfterApproval": 0,
+        "renewalFeeAfterApproval": 0,
+        "updateFeeAfterApproval": 0,
+        "children": [],
+        "persistent": true,
+        "notPersistent": false
+      }
+    ],
+    "persistent": true,
+    "notPersistent": false
+  },
+  "licenseFormDefinition": {
+    "status": "ACTIVE",
+    "cloned": false,
+    "id": 364,
+    "code": "LF-1",
+    "formVersion": 7,
+    "name": {
+      "textEn": "Empty form",
+      "textAr": "استمارة فارغة",
+      "filledText": "Empty form",
+      "textForCurrentLocale": "Empty form"
+    },
+    "formData": "{\"typeId\":\"formdef\",\"id\":4,\"value\":{\"typeId\":\"root\",\"id\":6,\"value\":[],\"label\":{\"textEn\":\"Root 5\",\"textAr\":\"Root 5 AR\",\"typeId\":\"localizedString\"}},\"name\":\"\"}",
+    "formModel": {
+      "typeId": "formdef",
+      "id": "4",
+      "label": null,
+      "name": "",
+      "value": {
+        "typeId": "root",
+        "id": "6",
+        "label": {
+          "typeId": "localizedString",
+          "id": null,
+          "label": null,
+          "textAr": "Root 5 AR",
+          "textEn": "Root 5",
+          "empty": false,
+          "textForCurrentLocale": "Root 5"
+        },
+        "value": []
+      }
+    },
+    "label": {
+      "textEn": "LF-1 - Empty form",
+      "textAr": "LF-1 - استمارة فارغة",
+      "filledText": "LF-1 - Empty form",
+      "textForCurrentLocale": "LF-1 - Empty form"
+    },
+    "nameEn": "Empty form",
+    "nameAr": "استمارة فارغة",
+    "active": true,
+    "finalizable": false,
+    "deactivatable": true,
+    "deletable": false,
+    "revisable": true,
+    "editable": false,
+    "draft": false,
+    "persistent": true,
+    "notPersistent": false
+  },
+  "capitalThreshold": null,
+  "capitalLimit": null,
+  "investorComposition": [
+    "SPECIAL_TREATMENT_COUNTRIES_CITIZENS",
+    "OMANI_CITIZENS",
+    "GCC_CITIZENS",
+    "OTHER_COUNTRIES_CITIZENS"
+  ],
+  "period": 12,
+  "licenseDefinitionActivities": [
+    {
+      "id": 410138,
+      "activity": {
+        "id": 47564204,
+        "isicCode": "410002",
+        "isicVersion": "4.0",
+        "name": {
+          "textEn": "Construction of airport buildings",
+          "textAr": "إنشاء أبنية المطارات",
+          "filledText": "Construction of airport buildings",
+          "textForCurrentLocale": "Construction of airport buildings"
+        },
+        "licensed": false,
+        "restricted": false,
+        "mainActivity": false,
+        "active": true,
+        "validity": null,
+        "registrationDate": null,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 410139,
+      "activity": {
+        "id": 47564209,
+        "isicCode": "421001",
+        "isicVersion": "4.0",
+        "name": {
+          "textEn": "Construction of roads (including roads, bridges and tunnels)",
+          "textAr": "مقاولات إنشاء الطرق (تشمل الشوارع والجسور والأنفاق)",
+          "filledText": "Construction of roads (including roads, bridges and tunnels)",
+          "textForCurrentLocale": "Construction of roads (including roads, bridges and tunnels)"
+        },
+        "licensed": false,
+        "restricted": false,
+        "mainActivity": false,
+        "active": true,
+        "validity": null,
+        "registrationDate": null,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 410140,
+      "activity": {
+        "id": 47564224,
+        "isicCode": "429002",
+        "isicVersion": "4.0",
+        "name": {
+          "textEn": "Marine Construction (Surface breakers, sidewalk protectors, drilling and land fill...etc)",
+          "textAr": "أعمال الموانئ (كاسرات للأمواج ،الحمايات للأرصفة، الحفر، الردم....الخ)",
+          "filledText": "Marine Construction (Surface breakers, sidewalk protectors, drilling and land fill...etc)",
+          "textForCurrentLocale": "Marine Construction (Surface breakers, sidewalk protectors, drilling and land fill...etc)"
+        },
+        "licensed": false,
+        "restricted": false,
+        "mainActivity": false,
+        "active": true,
+        "validity": null,
+        "registrationDate": null,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 410141,
+      "activity": {
+        "id": 47565725,
+        "isicCode": "429003",
+        "isicVersion": "4.0",
+        "name": {
+          "textEn": "Construction of Dams",
+          "textAr": "تشييد السدود",
+          "filledText": "Construction of Dams",
+          "textForCurrentLocale": "Construction of Dams"
+        },
+        "licensed": false,
+        "restricted": false,
+        "mainActivity": false,
+        "active": true,
+        "validity": null,
+        "registrationDate": null,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 410142,
+      "activity": {
+        "id": 47564232,
+        "isicCode": "431202",
+        "isicVersion": "4.0",
+        "name": {
+          "textEn": "Site preparation for mining purposes",
+          "textAr": "إعداد مواقع لأعمال التعدين",
+          "filledText": "Site preparation for mining purposes",
+          "textForCurrentLocale": "Site preparation for mining purposes"
+        },
+        "licensed": false,
+        "restricted": false,
+        "mainActivity": false,
+        "active": true,
+        "validity": null,
+        "registrationDate": null,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 410143,
+      "activity": {
+        "id": 47564233,
+        "isicCode": "431203",
+        "isicVersion": "4.0",
+        "name": {
+          "textEn": "Cleaning and levelling of the site",
+          "textAr": "تنظيف وتسوية الموقع",
+          "filledText": "Cleaning and levelling of the site",
+          "textForCurrentLocale": "Cleaning and levelling of the site"
+        },
+        "licensed": false,
+        "restricted": false,
+        "mainActivity": false,
+        "active": true,
+        "validity": null,
+        "registrationDate": null,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "persistent": true,
+      "notPersistent": false
+    }
+  ],
+  "licenseDefinitionLegalTypes": [
+    {
+      "id": 821449,
+      "legalType": "JP",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 821450,
+      "legalType": "IFM",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 821451,
+      "legalType": "LP",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 821452,
+      "legalType": "LLC",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 821453,
+      "legalType": "SLLC",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 821454,
+      "legalType": "CJSC",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 821455,
+      "legalType": "PJSC",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 821456,
+      "legalType": "FCB",
+      "persistent": true,
+      "notPersistent": false
+    }
+  ],
+  "licenseDefinitionLocations": [
+    {
+      "id": 570209,
+      "location": {
+        "id": 34407525,
+        "isoCode": "02",
+        "parent": null,
+        "level": 1,
+        "name": {
+          "textEn": "Dhofar Governorate",
+          "textAr": "محافظة ظفار",
+          "filledText": "Dhofar Governorate",
+          "textForCurrentLocale": "Dhofar Governorate"
+        },
+        "active": true,
+        "specialZone": false,
+        "descendants": [],
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2016-07-21T15:55:35",
+          "updatedBy": {
+            "textEn": "'ABDULLAH MUSTAFA 'ABDUL RAHMAN MOHAMMED AL FARSI",
+            "textAr": "عبدالله مصطفى عبدالرحمن محمد الفارسي",
+            "filledText": "'ABDULLAH MUSTAFA 'ABDUL RAHMAN MOHAMMED AL FARSI",
+            "textForCurrentLocale": "'ABDULLAH MUSTAFA 'ABDUL RAHMAN MOHAMMED AL FARSI"
+          },
+          "updatedDate": "2018-03-03T14:54:02"
+        },
+        "onMaximumLevel": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "persistent": true,
+      "notPersistent": false
+    }
+  ],
+  "licenseDefinitionRequiredDocuments": [],
+  "licenseDefinitionConditions": [
+    {
+      "id": 3371490,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "Organize the store as separate stacks and should not tough the ceiling, stacking should be one meter lower than the ceiling.",
+        "textAr": "تنظيم التخزين على شكل رصّات متباعدة وعدم ملامستها للأسقف بحيث يكون التخزين أقل من مستوى الأسقف بمقدار متر واحد.",
+        "filledText": "Organize the store as separate stacks and should not tough the ceiling, stacking should be one meter lower than the ceiling.",
+        "textForCurrentLocale": "Organize the store as separate stacks and should not tough the ceiling, stacking should be one meter lower than the ceiling."
+      },
+      "conditionEn": "Organize the store as separate stacks and should not tough the ceiling, stacking should be one meter lower than the ceiling.",
+      "conditionAr": "تنظيم التخزين على شكل رصّات متباعدة وعدم ملامستها للأسقف بحيث يكون التخزين أقل من مستوى الأسقف بمقدار متر واحد.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371491,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "Battery operated smoke detectors should be fixed at distances of not more than 8 meters in between them for each closed area.",
+        "textAr": "تر كيب كواشف دخان تعمل بالبطارية بالمنشأة بحيث لا تزيد المسافة بين كاشف وآخر عن (8) متر وذلك لكل منطقة مغلقة.",
+        "filledText": "Battery operated smoke detectors should be fixed at distances of not more than 8 meters in between them for each closed area.",
+        "textForCurrentLocale": "Battery operated smoke detectors should be fixed at distances of not more than 8 meters in between them for each closed area."
+      },
+      "conditionEn": "Battery operated smoke detectors should be fixed at distances of not more than 8 meters in between them for each closed area.",
+      "conditionAr": "تر كيب كواشف دخان تعمل بالبطارية بالمنشأة بحيث لا تزيد المسافة بين كاشف وآخر عن (8) متر وذلك لكل منطقة مغلقة.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371492,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "Battery operated heat detectors in the cooking areas and areas with high temperature emissions and electrical rooms.",
+        "textAr": "تركيب كواشف حرارة تعمل بالبطارية في أماكن الطبخ والأماكن التي يوجد بها إنبعاثات حرارية عالية وغرف الكهرباء.",
+        "filledText": "Battery operated heat detectors in the cooking areas and areas with high temperature emissions and electrical rooms.",
+        "textForCurrentLocale": "Battery operated heat detectors in the cooking areas and areas with high temperature emissions and electrical rooms."
+      },
+      "conditionEn": "Battery operated heat detectors in the cooking areas and areas with high temperature emissions and electrical rooms.",
+      "conditionAr": "تركيب كواشف حرارة تعمل بالبطارية في أماكن الطبخ والأماكن التي يوجد بها إنبعاثات حرارية عالية وغرف الكهرباء.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371493,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "All electrical cables should be wrapped and covered with special pipes.",
+        "textAr": "لف وتغطية جميع الأسلاك الكهربائية بمواسير خاصة بها.",
+        "filledText": "All electrical cables should be wrapped and covered with special pipes.",
+        "textForCurrentLocale": "All electrical cables should be wrapped and covered with special pipes."
+      },
+      "conditionEn": "All electrical cables should be wrapped and covered with special pipes.",
+      "conditionAr": "لف وتغطية جميع الأسلاك الكهربائية بمواسير خاصة بها.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371497,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "The Public Authority for Civil Defence and Ambulance may issue a ticket for any violation or noncompliance with the civil protection conditions, in accordance with the applicable laws and regulations.",
+        "textAr": "يحق للهيئة العامة للدفاع المدني والإسعاف تحرير مخالفة في حالة عدم التقيد بمتطلبات الحماية المدنية بالمنشأة حسب القوانين واللوائح والأنظمة المنظمة لذلك.",
+        "filledText": "The Public Authority for Civil Defence and Ambulance may issue a ticket for any violation or noncompliance with the civil protection conditions, in accordance with the applicable laws and regulations.",
+        "textForCurrentLocale": "The Public Authority for Civil Defence and Ambulance may issue a ticket for any violation or noncompliance with the civil protection conditions, in accordance with the applicable laws and regulations."
+      },
+      "conditionEn": "The Public Authority for Civil Defence and Ambulance may issue a ticket for any violation or noncompliance with the civil protection conditions, in accordance with the applicable laws and regulations.",
+      "conditionAr": "يحق للهيئة العامة للدفاع المدني والإسعاف تحرير مخالفة في حالة عدم التقيد بمتطلبات الحماية المدنية بالمنشأة حسب القوانين واللوائح والأنظمة المنظمة لذلك.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371494,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "If the facility has internal dividers or mezzanine, it should be made of fire-resistant materials supplied by an authorized company licensed from the Public Authority for Civil Defence and Ambulance, together with supporting documents.",
+        "textAr": "في حالة إضافة تقسيمات داخلية أو ميزانين بالمنشأة، فإنه يجب أن تكون من مواد مقاومة للحريق يتم توريدها وتركيبها من قبل إحدى الشركات المرخصة من الهيئة العامة للدفاع المدني والإسعاف مع إحضار ما يثبت ذلك.",
+        "filledText": "If the facility has internal dividers or mezzanine, it should be made of fire-resistant materials supplied by an authorized company licensed from the Public Authority for Civil Defence and Ambulance, together with supporting documents.",
+        "textForCurrentLocale": "If the facility has internal dividers or mezzanine, it should be made of fire-resistant materials supplied by an authorized company licensed from the Public Authority for Civil Defence and Ambulance, together with supporting documents."
+      },
+      "conditionEn": "If the facility has internal dividers or mezzanine, it should be made of fire-resistant materials supplied by an authorized company licensed from the Public Authority for Civil Defence and Ambulance, together with supporting documents.",
+      "conditionAr": "في حالة إضافة تقسيمات داخلية أو ميزانين بالمنشأة، فإنه يجب أن تكون من مواد مقاومة للحريق يتم توريدها وتركيبها من قبل إحدى الشركات المرخصة من الهيئة العامة للدفاع المدني والإسعاف مع إحضار ما يثبت ذلك.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371495,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "Ensure continuous operation of the civil protection systems (alarm, fire) through regular maintenance by a licensed company",
+        "textAr": "ضمان استمرارية عمل أنظمة الحماية المدنية ( الإنذار والإطفاء)، وذلك من خلال القيام بأعمال الصيانة الدورية لها من قبل إحدى الشركات المعتمدة من الهيئة العامة للدفاع المدني والإسعاف.",
+        "filledText": "Ensure continuous operation of the civil protection systems (alarm, fire) through regular maintenance by a licensed company",
+        "textForCurrentLocale": "Ensure continuous operation of the civil protection systems (alarm, fire) through regular maintenance by a licensed company"
+      },
+      "conditionEn": "Ensure continuous operation of the civil protection systems (alarm, fire) through regular maintenance by a licensed company",
+      "conditionAr": "ضمان استمرارية عمل أنظمة الحماية المدنية ( الإنذار والإطفاء)، وذلك من خلال القيام بأعمال الصيانة الدورية لها من قبل إحدى الشركات المعتمدة من الهيئة العامة للدفاع المدني والإسعاف.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371496,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "New activities requiring plans approval, should be through a local engineering consultancy firm detailing the requirements of civil defence.",
+        "textAr": "في حال تطلب الأمر إعداد خرائط خاصة للموقع الذي سيزاول فيه النشاط، فإن ذلك يكون بواسطة إحدى المكاتب الإستشارية الهندسية المعتمدة موضحا بها متطلبات الحماية المدنية ويتم اعتمادها من قبل الهيئة العامة للدفاع المدني والإسعاف .",
+        "filledText": "New activities requiring plans approval, should be through a local engineering consultancy firm detailing the requirements of civil defence.",
+        "textForCurrentLocale": "New activities requiring plans approval, should be through a local engineering consultancy firm detailing the requirements of civil defence."
+      },
+      "conditionEn": "New activities requiring plans approval, should be through a local engineering consultancy firm detailing the requirements of civil defence.",
+      "conditionAr": "في حال تطلب الأمر إعداد خرائط خاصة للموقع الذي سيزاول فيه النشاط، فإن ذلك يكون بواسطة إحدى المكاتب الإستشارية الهندسية المعتمدة موضحا بها متطلبات الحماية المدنية ويتم اعتمادها من قبل الهيئة العامة للدفاع المدني والإسعاف .",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371498,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "The Public Authority for Civil Defence and Ambulance may request additional civil defence precautions in the facility.",
+        "textAr": "يحق للهيئة العامة للدفاع المدني والإسعاف طلب تعديل أو إضافة متطلبات الحماية المدنية بالمنشأة.",
+        "filledText": "The Public Authority for Civil Defence and Ambulance may request additional civil defence precautions in the facility.",
+        "textForCurrentLocale": "The Public Authority for Civil Defence and Ambulance may request additional civil defence precautions in the facility."
+      },
+      "conditionEn": "The Public Authority for Civil Defence and Ambulance may request additional civil defence precautions in the facility.",
+      "conditionAr": "يحق للهيئة العامة للدفاع المدني والإسعاف طلب تعديل أو إضافة متطلبات الحماية المدنية بالمنشأة.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371499,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "Civil protection officials shall visit the site to ensure compliance with the civil protection requirements according to the prevailing rules and regulations.",
+        "textAr": "سيقوم المعنيين بالهيئة العامة للدفاع المدني والإسعاف بزيارة الموقع للتأكد من تنفيذ متطلبات الحماية المدنية حسب القوانين واللوائح المعمول بها.",
+        "filledText": "Civil protection officials shall visit the site to ensure compliance with the civil protection requirements according to the prevailing rules and regulations.",
+        "textForCurrentLocale": "Civil protection officials shall visit the site to ensure compliance with the civil protection requirements according to the prevailing rules and regulations."
+      },
+      "conditionEn": "Civil protection officials shall visit the site to ensure compliance with the civil protection requirements according to the prevailing rules and regulations.",
+      "conditionAr": "سيقوم المعنيين بالهيئة العامة للدفاع المدني والإسعاف بزيارة الموقع للتأكد من تنفيذ متطلبات الحماية المدنية حسب القوانين واللوائح المعمول بها.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371500,
+      "governmentAgency": {
+        "id": 5021,
+        "name": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "code": "PACDA",
+        "contactName": {
+          "textEn": "Civil Defence and Ambulance Authority",
+          "textAr": "هيئة الدفاع المدني والإسعاف",
+          "filledText": "Civil Defence and Ambulance Authority",
+          "textForCurrentLocale": "Civil Defence and Ambulance Authority"
+        },
+        "email": null,
+        "phone": null,
+        "fax": null,
+        "trace": {
+          "createdBy": {
+            "textEn": "Invest Easy System Admin",
+            "textAr": "مسوؤل نظام استثمر بسهولة",
+            "filledText": "Invest Easy System Admin",
+            "textForCurrentLocale": "Invest Easy System Admin"
+          },
+          "createdDate": "2014-09-25T18:05:13",
+          "updatedBy": {
+            "textEn": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textAr": "عبدالله علي عبدالله الكلباني",
+            "filledText": "ABDULLA ALI ABDULLA AL KALBANI",
+            "textForCurrentLocale": "ABDULLA ALI ABDULLA AL KALBANI"
+          },
+          "updatedDate": "2021-04-26T10:23:24"
+        },
+        "mociPaymentAllowed": false,
+        "moci": false,
+        "persistent": true,
+        "notPersistent": false
+      },
+      "condition": {
+        "textEn": "One 2 kg CO2 and one 6 liters foam fire extinguishers for every 30 square meters should be fixed near the facility entrances and exits at a height of one meter from the ground.",
+        "textAr": "توفير طفاية حريق من نوع ثاني أكسيد الكربون وزن ( 2 ) كغم وأخرى من نوع الرغوة سعة ( 6 ) لتر توضع بالقرب من مداخل ومخارج المنشأة لكل (30) متر مربع ويتم تثبيتها على الجدار بارتفاع متر واحد عن سطح الأرض.",
+        "filledText": "One 2 kg CO2 and one 6 liters foam fire extinguishers for every 30 square meters should be fixed near the facility entrances and exits at a height of one meter from the ground.",
+        "textForCurrentLocale": "One 2 kg CO2 and one 6 liters foam fire extinguishers for every 30 square meters should be fixed near the facility entrances and exits at a height of one meter from the ground."
+      },
+      "conditionEn": "One 2 kg CO2 and one 6 liters foam fire extinguishers for every 30 square meters should be fixed near the facility entrances and exits at a height of one meter from the ground.",
+      "conditionAr": "توفير طفاية حريق من نوع ثاني أكسيد الكربون وزن ( 2 ) كغم وأخرى من نوع الرغوة سعة ( 6 ) لتر توضع بالقرب من مداخل ومخارج المنشأة لكل (30) متر مربع ويتم تثبيتها على الجدار بارتفاع متر واحد عن سطح الأرض.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371501,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Provide company rent agreement form the governance municipality.",
+        "textAr": "تقديم عقد إيجار للشركة مصدقا عليه من بلدية الولاية.",
+        "filledText": "Provide company rent agreement form the governance municipality.",
+        "textForCurrentLocale": "Provide company rent agreement form the governance municipality."
+      },
+      "conditionEn": "Provide company rent agreement form the governance municipality.",
+      "conditionAr": "تقديم عقد إيجار للشركة مصدقا عليه من بلدية الولاية.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371502,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Provide either a proof emptied one of the authorized partners or provide an Omani director should be appointed by the administration and the signing of full time management of the company.",
+        "textAr": "تقديم خطاب بتفرغ أحد الشركاء لإدارة الشركة على أن يكون أحدهم أو جميعهم مدراء بالشركة أو تعيين مدير عماني مفوض بالإدارة والتوقيع متفرغ لإدارة الشركة.",
+        "filledText": "Provide either a proof emptied one of the authorized partners or provide an Omani director should be appointed by the administration and the signing of full time management of the company.",
+        "textForCurrentLocale": "Provide either a proof emptied one of the authorized partners or provide an Omani director should be appointed by the administration and the signing of full time management of the company."
+      },
+      "conditionEn": "Provide either a proof emptied one of the authorized partners or provide an Omani director should be appointed by the administration and the signing of full time management of the company.",
+      "conditionAr": "تقديم خطاب بتفرغ أحد الشركاء لإدارة الشركة على أن يكون أحدهم أو جميعهم مدراء بالشركة أو تعيين مدير عماني مفوض بالإدارة والتوقيع متفرغ لإدارة الشركة.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371503,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Company activity should only registered with only one or more contracting activities.",
+        "textAr": "أن يقتصر نشاط الشركة على أحد أو بعض أنشطة المقاولات.",
+        "filledText": "Company activity should only registered with only one or more contracting activities.",
+        "textForCurrentLocale": "Company activity should only registered with only one or more contracting activities."
+      },
+      "conditionEn": "Company activity should only registered with only one or more contracting activities.",
+      "conditionAr": "أن يقتصر نشاط الشركة على أحد أو بعض أنشطة المقاولات.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371504,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "The CR capital should not be less than R.O 25 thousnad",
+        "textAr": "ألا يقل رأس مال الشركة عن 25 ألف ريال عماني",
+        "filledText": "The CR capital should not be less than R.O 25 thousnad",
+        "textForCurrentLocale": "The CR capital should not be less than R.O 25 thousnad"
+      },
+      "conditionEn": "The CR capital should not be less than R.O 25 thousnad",
+      "conditionAr": "ألا يقل رأس مال الشركة عن 25 ألف ريال عماني",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371505,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Provide a bank certificate which shows capital deposit if capital in cash, or provide partners to assess the kind of asset if the capital in asset Capital.",
+        "textAr": "تقديم شهادة بنكية تفيد بإيداع رأس المال، أو تقديم تقرير بالأصول العينية معتمد من مكتب خمتص إن كان رأس المال عينيا",
+        "filledText": "Provide a bank certificate which shows capital deposit if capital in cash, or provide partners to assess the kind of asset if the capital in asset Capital.",
+        "textForCurrentLocale": "Provide a bank certificate which shows capital deposit if capital in cash, or provide partners to assess the kind of asset if the capital in asset Capital."
+      },
+      "conditionEn": "Provide a bank certificate which shows capital deposit if capital in cash, or provide partners to assess the kind of asset if the capital in asset Capital.",
+      "conditionAr": "تقديم شهادة بنكية تفيد بإيداع رأس المال، أو تقديم تقرير بالأصول العينية معتمد من مكتب خمتص إن كان رأس المال عينيا",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371506,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "The activity is allowed in shops and apartments (multi-story buildings in commercial housing units)",
+        "textAr": "يسمح ممارسة النشاط في المحلات والشقق (المباني متعددة الادوار في الوحدات السكنية التجارية)",
+        "filledText": "The activity is allowed in shops and apartments (multi-story buildings in commercial housing units)",
+        "textForCurrentLocale": "The activity is allowed in shops and apartments (multi-story buildings in commercial housing units)"
+      },
+      "conditionEn": "The activity is allowed in shops and apartments (multi-story buildings in commercial housing units)",
+      "conditionAr": "يسمح ممارسة النشاط في المحلات والشقق (المباني متعددة الادوار في الوحدات السكنية التجارية)",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371507,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "The use of residential commercial lands, commercial lands, or industrial lands",
+        "textAr": "يجب أن يكون استخدام الارض سكني تجاري أو التجاري أو الصناعي.",
+        "filledText": "The use of residential commercial lands, commercial lands, or industrial lands",
+        "textForCurrentLocale": "The use of residential commercial lands, commercial lands, or industrial lands"
+      },
+      "conditionEn": "The use of residential commercial lands, commercial lands, or industrial lands",
+      "conditionAr": "يجب أن يكون استخدام الارض سكني تجاري أو التجاري أو الصناعي.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371508,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Best environmental practices and best available techniques shall be applied early enough during the design stage, and the mitigation measures required to comply with environmental standards and to prevent or reduce the generation of waste and pollutants at source shall be incorporated in all stages of the project. Costs of environmental mitigation and management shall be incorporated in the feasibility studies and cost-benefit analysis.",
+        "textAr": "يجب تضمين أفضل الممارسات البيئية، وأفضل التكنولوجيا المتاحة عالميا في مرحلة التصميم وإدراج الإجراءات التخفيفية اللازمة للإلتزام بالمعايير البيئية في جميع مراحل المشروع لمنع أو للحد من تولد المخلفات والملوثات من المصدر مع تضمين تكاليف الإدارة البيئية في دراسات الجدوى وتحليل التكلفة والعائد.",
+        "filledText": "Best environmental practices and best available techniques shall be applied early enough during the design stage, and the mitigation measures required to comply with environmental standards and to prevent or reduce the generation of waste and pollutants at source shall be incorporated in all stages of the project. Costs of environmental mitigation and management shall be incorporated in the feasibility studies and cost-benefit analysis.",
+        "textForCurrentLocale": "Best environmental practices and best available techniques shall be applied early enough during the design stage, and the mitigation measures required to comply with environmental standards and to prevent or reduce the generation of waste and pollutants at source shall be incorporated in all stages of the project. Costs of environmental mitigation and management shall be incorporated in the feasibility studies and cost-benefit analysis."
+      },
+      "conditionEn": "Best environmental practices and best available techniques shall be applied early enough during the design stage, and the mitigation measures required to comply with environmental standards and to prevent or reduce the generation of waste and pollutants at source shall be incorporated in all stages of the project. Costs of environmental mitigation and management shall be incorporated in the feasibility studies and cost-benefit analysis.",
+      "conditionAr": "يجب تضمين أفضل الممارسات البيئية، وأفضل التكنولوجيا المتاحة عالميا في مرحلة التصميم وإدراج الإجراءات التخفيفية اللازمة للإلتزام بالمعايير البيئية في جميع مراحل المشروع لمنع أو للحد من تولد المخلفات والملوثات من المصدر مع تضمين تكاليف الإدارة البيئية في دراسات الجدوى وتحليل التكلفة والعائد.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371514,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Project owners shall provide an annual report on environmental performance to the ministry.",
+        "textAr": "يجب على صاحب المشروع تقديم تقرير سنوي عن الأداء البيئي.",
+        "filledText": "Project owners shall provide an annual report on environmental performance to the ministry.",
+        "textForCurrentLocale": "Project owners shall provide an annual report on environmental performance to the ministry."
+      },
+      "conditionEn": "Project owners shall provide an annual report on environmental performance to the ministry.",
+      "conditionAr": "يجب على صاحب المشروع تقديم تقرير سنوي عن الأداء البيئي.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371509,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "The Ministry of Environmental and Climate Affairs shall be promptly notified of any incidences of environmental pollution or appearance of frequent environmental problems, and appropriate measures shall be taken by the owner to immediately rectify such incidences. Project's owners are fully responsible for any environmental impacts or damages occurring during all stages of the project including remedy and compensation costs. The Ministry has the right to stop project operations in such cases.",
+        "textAr": "يجب عند حدوث حالات للتلوث البيئي أو ظهور مشكلات بيئية متكررة، إخطار هيئة البيئة فوراً واتخاذ التدابير الملائمة لإحتوائها، و يعتبر صاحب المشروع مسؤول بشكل كامل عن أية تأثيرات بيئية تحدث في جميع مراحل المشروع بما في ذلك تكاليف إجراءات المعالجة والتعويض وللوزارة الحق في إيقاف المشروع في حالة حدوث ذلك",
+        "filledText": "The Ministry of Environmental and Climate Affairs shall be promptly notified of any incidences of environmental pollution or appearance of frequent environmental problems, and appropriate measures shall be taken by the owner to immediately rectify such incidences. Project's owners are fully responsible for any environmental impacts or damages occurring during all stages of the project including remedy and compensation costs. The Ministry has the right to stop project operations in such cases.",
+        "textForCurrentLocale": "The Ministry of Environmental and Climate Affairs shall be promptly notified of any incidences of environmental pollution or appearance of frequent environmental problems, and appropriate measures shall be taken by the owner to immediately rectify such incidences. Project's owners are fully responsible for any environmental impacts or damages occurring during all stages of the project including remedy and compensation costs. The Ministry has the right to stop project operations in such cases."
+      },
+      "conditionEn": "The Ministry of Environmental and Climate Affairs shall be promptly notified of any incidences of environmental pollution or appearance of frequent environmental problems, and appropriate measures shall be taken by the owner to immediately rectify such incidences. Project's owners are fully responsible for any environmental impacts or damages occurring during all stages of the project including remedy and compensation costs. The Ministry has the right to stop project operations in such cases.",
+      "conditionAr": "يجب عند حدوث حالات للتلوث البيئي أو ظهور مشكلات بيئية متكررة، إخطار هيئة البيئة فوراً واتخاذ التدابير الملائمة لإحتوائها، و يعتبر صاحب المشروع مسؤول بشكل كامل عن أية تأثيرات بيئية تحدث في جميع مراحل المشروع بما في ذلك تكاليف إجراءات المعالجة والتعويض وللوزارة الحق في إيقاف المشروع في حالة حدوث ذلك",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371510,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Information submitted to the ministry or contained in the application for the environmental permit shall be accurate and correct, and represent all components and stages of the project, including  inter alia production capacity, type of energy and materials used, etc. Applications should be accompanied by appropriate maps and illustrations of the project. The Ministry shall be informed of any changes made to the original submissi",
+        "textAr": "يجب أن تكون المعلومات المقدمة للوزارة أو الواردة في طلب الحصول على التصريح البيئي دقيقة وصحيحة وتمثل جميع مكونات المشروع ومراحله والطاقة الإنتاجية ونوع الطاقة والمواد المستخدمه مع تقديم كافة الخرائط والرسومات التوضيحية للمشروع، وأن يتم إبلاغ هذه الوزارة بالنسبة لأي تغيير يتم إجراءه",
+        "filledText": "Information submitted to the ministry or contained in the application for the environmental permit shall be accurate and correct, and represent all components and stages of the project, including  inter alia production capacity, type of energy and materials used, etc. Applications should be accompanied by appropriate maps and illustrations of the project. The Ministry shall be informed of any changes made to the original submissi",
+        "textForCurrentLocale": "Information submitted to the ministry or contained in the application for the environmental permit shall be accurate and correct, and represent all components and stages of the project, including  inter alia production capacity, type of energy and materials used, etc. Applications should be accompanied by appropriate maps and illustrations of the project. The Ministry shall be informed of any changes made to the original submissi"
+      },
+      "conditionEn": "Information submitted to the ministry or contained in the application for the environmental permit shall be accurate and correct, and represent all components and stages of the project, including  inter alia production capacity, type of energy and materials used, etc. Applications should be accompanied by appropriate maps and illustrations of the project. The Ministry shall be informed of any changes made to the original submissi",
+      "conditionAr": "يجب أن تكون المعلومات المقدمة للوزارة أو الواردة في طلب الحصول على التصريح البيئي دقيقة وصحيحة وتمثل جميع مكونات المشروع ومراحله والطاقة الإنتاجية ونوع الطاقة والمواد المستخدمه مع تقديم كافة الخرائط والرسومات التوضيحية للمشروع، وأن يتم إبلاغ هذه الوزارة بالنسبة لأي تغيير يتم إجراءه",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371511,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Specialists from the Environment Authority Affairs shall be allowed to enter units and facilities of the project anytime and without prior notification to carry out environmental inspection and monitoring processes",
+        "textAr": "يجب السماح للمختصين من هيئة البيئة بدخول وحدات ومرافق المشروع لإجراء عمليات التفتيش والرقابة البيئية.",
+        "filledText": "Specialists from the Environment Authority Affairs shall be allowed to enter units and facilities of the project anytime and without prior notification to carry out environmental inspection and monitoring processes",
+        "textForCurrentLocale": "Specialists from the Environment Authority Affairs shall be allowed to enter units and facilities of the project anytime and without prior notification to carry out environmental inspection and monitoring processes"
+      },
+      "conditionEn": "Specialists from the Environment Authority Affairs shall be allowed to enter units and facilities of the project anytime and without prior notification to carry out environmental inspection and monitoring processes",
+      "conditionAr": "يجب السماح للمختصين من هيئة البيئة بدخول وحدات ومرافق المشروع لإجراء عمليات التفتيش والرقابة البيئية.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371512,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Project owners shall contact the Environment Authority Affairs to obtain all necessary licenses for the project in the operational stage.",
+        "textAr": "يجب على صاحب المشروع مراجعة هيئة البيئة للحصول على كافة التراخيص اللازمة للمشروع في مرحلة التشغيل.",
+        "filledText": "Project owners shall contact the Environment Authority Affairs to obtain all necessary licenses for the project in the operational stage.",
+        "textForCurrentLocale": "Project owners shall contact the Environment Authority Affairs to obtain all necessary licenses for the project in the operational stage."
+      },
+      "conditionEn": "Project owners shall contact the Environment Authority Affairs to obtain all necessary licenses for the project in the operational stage.",
+      "conditionAr": "يجب على صاحب المشروع مراجعة هيئة البيئة للحصول على كافة التراخيص اللازمة للمشروع في مرحلة التشغيل.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371513,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Wastewater and industrial liquid waste shall be linked to the Industrial Estates wastewater network After initial treatment if necessary and in case of non - availability the project's owner shall be required to conduct necessary on - site treatment for that waste or transfer it to other treatment locations approved by the Ministry.",
+        "textAr": "يجب ربط مخلفات الصرف الصحي والصناعي السائلة بشبكة الصرف التابعة للمدينة الصناعية وذلك بعد المعالجة الأولية إن تطلب الأمر وفي حالة عدم توفرها سيتوجب على صاحب المشروع إجراء المعالجة اللازمة لتلك المخلفات أو نقلها إلى مواقع معالجة أخرى توافق عليها الوزارة.",
+        "filledText": "Wastewater and industrial liquid waste shall be linked to the Industrial Estates wastewater network After initial treatment if necessary and in case of non - availability the project's owner shall be required to conduct necessary on - site treatment for that waste or transfer it to other treatment locations approved by the Ministry.",
+        "textForCurrentLocale": "Wastewater and industrial liquid waste shall be linked to the Industrial Estates wastewater network After initial treatment if necessary and in case of non - availability the project's owner shall be required to conduct necessary on - site treatment for that waste or transfer it to other treatment locations approved by the Ministry."
+      },
+      "conditionEn": "Wastewater and industrial liquid waste shall be linked to the Industrial Estates wastewater network After initial treatment if necessary and in case of non - availability the project's owner shall be required to conduct necessary on - site treatment for that waste or transfer it to other treatment locations approved by the Ministry.",
+      "conditionAr": "يجب ربط مخلفات الصرف الصحي والصناعي السائلة بشبكة الصرف التابعة للمدينة الصناعية وذلك بعد المعالجة الأولية إن تطلب الأمر وفي حالة عدم توفرها سيتوجب على صاحب المشروع إجراء المعالجة اللازمة لتلك المخلفات أو نقلها إلى مواقع معالجة أخرى توافق عليها الوزارة.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371515,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Project owners shall notify the ministry one month prior to the project commissioning stage that all mitigation measures of potential impacts have been incorporated before operation.",
+        "textAr": "يجب على صاحب المشروع إخطار هيئة البيئة قبل التشغيل التجريبي بشهر واحد يفيد إستيفاء المشروع لجميع الإجراءات التخفيفية للتأثيرات المتوقعة من تشغيل المشروع.",
+        "filledText": "Project owners shall notify the ministry one month prior to the project commissioning stage that all mitigation measures of potential impacts have been incorporated before operation.",
+        "textForCurrentLocale": "Project owners shall notify the ministry one month prior to the project commissioning stage that all mitigation measures of potential impacts have been incorporated before operation."
+      },
+      "conditionEn": "Project owners shall notify the ministry one month prior to the project commissioning stage that all mitigation measures of potential impacts have been incorporated before operation.",
+      "conditionAr": "يجب على صاحب المشروع إخطار هيئة البيئة قبل التشغيل التجريبي بشهر واحد يفيد إستيفاء المشروع لجميع الإجراءات التخفيفية للتأثيرات المتوقعة من تشغيل المشروع.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371516,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "After three months of project operation, Project owners shall submit a technical report prepared by an environmental consultant registered at the Ministr, illustrating the level of efficiency of the adopted mitigation measure",
+        "textAr": "يجب على صاحب المشروع تقديم تقرير عن طريق استشاري بيئي معتمد من هيئة البيئة يوضح مستوى فاعلية الإجراءات التخفيفية ومدى الإلتزام بالمعايير البيئية، على أن يتم ذلك بعد مرور ثلاثة أشهر من بدء تشغيل المشروع",
+        "filledText": "After three months of project operation, Project owners shall submit a technical report prepared by an environmental consultant registered at the Ministr, illustrating the level of efficiency of the adopted mitigation measure",
+        "textForCurrentLocale": "After three months of project operation, Project owners shall submit a technical report prepared by an environmental consultant registered at the Ministr, illustrating the level of efficiency of the adopted mitigation measure"
+      },
+      "conditionEn": "After three months of project operation, Project owners shall submit a technical report prepared by an environmental consultant registered at the Ministr, illustrating the level of efficiency of the adopted mitigation measure",
+      "conditionAr": "يجب على صاحب المشروع تقديم تقرير عن طريق استشاري بيئي معتمد من هيئة البيئة يوضح مستوى فاعلية الإجراءات التخفيفية ومدى الإلتزام بالمعايير البيئية، على أن يتم ذلك بعد مرور ثلاثة أشهر من بدء تشغيل المشروع",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371517,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Environment Authority Affairs has the right to amend or add any environmental requirements for the project at any time.",
+        "textAr": "يحق لهيئة البيئة تعديل أو إضافة أي إشتراطات بيئية للمشروع في أي وقـــــت.",
+        "filledText": "Environment Authority Affairs has the right to amend or add any environmental requirements for the project at any time.",
+        "textForCurrentLocale": "Environment Authority Affairs has the right to amend or add any environmental requirements for the project at any time."
+      },
+      "conditionEn": "Environment Authority Affairs has the right to amend or add any environmental requirements for the project at any time.",
+      "conditionAr": "يحق لهيئة البيئة تعديل أو إضافة أي إشتراطات بيئية للمشروع في أي وقـــــت.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371518,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "The investor should be aware of environmental terms and conditions provisioned by the Environment Authority Affairs.",
+        "textAr": "يجب على المستثمر الاطلاع على الاشتراطات والضوابط البيئية التي تنظمها هيئة البيئة.",
+        "filledText": "The investor should be aware of environmental terms and conditions provisioned by the Environment Authority Affairs.",
+        "textForCurrentLocale": "The investor should be aware of environmental terms and conditions provisioned by the Environment Authority Affairs."
+      },
+      "conditionEn": "The investor should be aware of environmental terms and conditions provisioned by the Environment Authority Affairs.",
+      "conditionAr": "يجب على المستثمر الاطلاع على الاشتراطات والضوابط البيئية التي تنظمها هيئة البيئة.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371519,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Project owners and their representatives should familiarize themselves with all environmental laws and regulations before the start of their projects. They also to have to abide by and commit to fully comply with such laws and regulations during all stages of the project cycle (construction- operation - closure).",
+        "textAr": "يجب التعرف والإلمام التام والتقيد التام بالقوانين واللوائح البيئية بالسلطنة قبل الشروع في تنفيذ المشاريع مع التعهد بالإلتزام الكامل بتلك القوانين واللوائح في جميع مراحل المشروع (البناء - التشغيل- الإغلاق(",
+        "filledText": "Project owners and their representatives should familiarize themselves with all environmental laws and regulations before the start of their projects. They also to have to abide by and commit to fully comply with such laws and regulations during all stages of the project cycle (construction- operation - closure).",
+        "textForCurrentLocale": "Project owners and their representatives should familiarize themselves with all environmental laws and regulations before the start of their projects. They also to have to abide by and commit to fully comply with such laws and regulations during all stages of the project cycle (construction- operation - closure)."
+      },
+      "conditionEn": "Project owners and their representatives should familiarize themselves with all environmental laws and regulations before the start of their projects. They also to have to abide by and commit to fully comply with such laws and regulations during all stages of the project cycle (construction- operation - closure).",
+      "conditionAr": "يجب التعرف والإلمام التام والتقيد التام بالقوانين واللوائح البيئية بالسلطنة قبل الشروع في تنفيذ المشاريع مع التعهد بالإلتزام الكامل بتلك القوانين واللوائح في جميع مراحل المشروع (البناء - التشغيل- الإغلاق(",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371520,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "You must study the environmental impact assessment to be issued by a certified Environmental Consulting Office by the Environment Authority Affairs.",
+        "textAr": "يجب ان تكون دراسة التقييم التأثيرات البيئية صادرة من مكتب استشارات بيئية معتمد من قبل هيئة البيئة .",
+        "filledText": "You must study the environmental impact assessment to be issued by a certified Environmental Consulting Office by the Environment Authority Affairs.",
+        "textForCurrentLocale": "You must study the environmental impact assessment to be issued by a certified Environmental Consulting Office by the Environment Authority Affairs."
+      },
+      "conditionEn": "You must study the environmental impact assessment to be issued by a certified Environmental Consulting Office by the Environment Authority Affairs.",
+      "conditionAr": "يجب ان تكون دراسة التقييم التأثيرات البيئية صادرة من مكتب استشارات بيئية معتمد من قبل هيئة البيئة .",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371521,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "The Environment Authority Affairs will attach the project's environmental requirements and conditions in Invest Easily system after approval",
+        "textAr": "ستقوم هيئة البيئة بإرفاق الاشتراطات البيئية الخاصة بالمشروع في نظام استثمر بسهولة بعد اعتماد الموافقة من قبل الوزارة",
+        "filledText": "The Environment Authority Affairs will attach the project's environmental requirements and conditions in Invest Easily system after approval",
+        "textForCurrentLocale": "The Environment Authority Affairs will attach the project's environmental requirements and conditions in Invest Easily system after approval"
+      },
+      "conditionEn": "The Environment Authority Affairs will attach the project's environmental requirements and conditions in Invest Easily system after approval",
+      "conditionAr": "ستقوم هيئة البيئة بإرفاق الاشتراطات البيئية الخاصة بالمشروع في نظام استثمر بسهولة بعد اعتماد الموافقة من قبل الوزارة",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371524,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Storage stores must be organized so that they are in the form of packages, spaced from each other, and the ceiling level storage should be less than one meter away from the lighting.",
+        "textAr": "تنظيم التخزين بالمخازن بحيث تكون على شكل حزم متباعدة عن بعضها، وعلى أن يكون التخزين اقل من مستوى السقف بمقدار متر واحد بعيدة عن الانارة.",
+        "filledText": "Storage stores must be organized so that they are in the form of packages, spaced from each other, and the ceiling level storage should be less than one meter away from the lighting.",
+        "textForCurrentLocale": "Storage stores must be organized so that they are in the form of packages, spaced from each other, and the ceiling level storage should be less than one meter away from the lighting."
+      },
+      "conditionEn": "Storage stores must be organized so that they are in the form of packages, spaced from each other, and the ceiling level storage should be less than one meter away from the lighting.",
+      "conditionAr": "تنظيم التخزين بالمخازن بحيث تكون على شكل حزم متباعدة عن بعضها، وعلى أن يكون التخزين اقل من مستوى السقف بمقدار متر واحد بعيدة عن الانارة.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371522,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "It shall be coordinated with the Omani Holding Company for Environmental Services (Beah) for disposal of solid waste (hazardous and non-hazardous) which is generated from the project prior to project operation.",
+        "textAr": "يجب التنسيق مع الشركة العمانية القابضة لخدمات البيئة (بيئة) للتخلص من المخلفات الصلبة بأنواعها الخطرة وغير الخطرة الناتجة من المشروع قبل البدء بالمشروع.",
+        "filledText": "It shall be coordinated with the Omani Holding Company for Environmental Services (Beah) for disposal of solid waste (hazardous and non-hazardous) which is generated from the project prior to project operation.",
+        "textForCurrentLocale": "It shall be coordinated with the Omani Holding Company for Environmental Services (Beah) for disposal of solid waste (hazardous and non-hazardous) which is generated from the project prior to project operation."
+      },
+      "conditionEn": "It shall be coordinated with the Omani Holding Company for Environmental Services (Beah) for disposal of solid waste (hazardous and non-hazardous) which is generated from the project prior to project operation.",
+      "conditionAr": "يجب التنسيق مع الشركة العمانية القابضة لخدمات البيئة (بيئة) للتخلص من المخلفات الصلبة بأنواعها الخطرة وغير الخطرة الناتجة من المشروع قبل البدء بالمشروع.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 3371523,
+      "governmentAgency": null,
+      "condition": {
+        "textEn": "Provide the financial solvency of the partner (Statement of their accounts or any financial or in kind assets they own such a stocks and bonds, land or real estate)",
+        "textAr": "تقديم ما يفيد وجود الملاءة المالية للشركاء. (كشوف الحسابات الخاصة بهم أو أية أصول عينية يمتلكونها كالأسهم والسندات أو الأراضي أو العقارات)",
+        "filledText": "Provide the financial solvency of the partner (Statement of their accounts or any financial or in kind assets they own such a stocks and bonds, land or real estate)",
+        "textForCurrentLocale": "Provide the financial solvency of the partner (Statement of their accounts or any financial or in kind assets they own such a stocks and bonds, land or real estate)"
+      },
+      "conditionEn": "Provide the financial solvency of the partner (Statement of their accounts or any financial or in kind assets they own such a stocks and bonds, land or real estate)",
+      "conditionAr": "تقديم ما يفيد وجود الملاءة المالية للشركاء. (كشوف الحسابات الخاصة بهم أو أية أصول عينية يمتلكونها كالأسهم والسندات أو الأراضي أو العقارات)",
+      "persistent": true,
+      "notPersistent": false
+    }
+  ],
+  "licenseDefinitionAdditionalInformations": [
+    {
+      "id": 1153721,
+      "additionalInformation": {
+        "textEn": "Royal Decree 2001/114 Environmental Protection and Pollution Control Act.",
+        "textAr": "مرسوم سلطاني 2001/114 قانون حماية البيئة ومكافحة التلوث.",
+        "filledText": "Royal Decree 2001/114 Environmental Protection and Pollution Control Act.",
+        "textForCurrentLocale": "Royal Decree 2001/114 Environmental Protection and Pollution Control Act."
+      },
+      "additionalInformationAr": "مرسوم سلطاني 2001/114 قانون حماية البيئة ومكافحة التلوث.",
+      "additionalInformationEn": "Royal Decree 2001/114 Environmental Protection and Pollution Control Act.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153722,
+      "additionalInformation": {
+        "textEn": "Ministerial Resolution 1994/80 list control pollution in work environment.",
+        "textAr": "قرار وزاري 1994/80 لائحة التحكم في التلوث بالضوضاء في بيئة العمل.",
+        "filledText": "Ministerial Resolution 1994/80 list control pollution in work environment.",
+        "textForCurrentLocale": "Ministerial Resolution 1994/80 list control pollution in work environment."
+      },
+      "additionalInformationAr": "قرار وزاري 1994/80 لائحة التحكم في التلوث بالضوضاء في بيئة العمل.",
+      "additionalInformationEn": "Ministerial Resolution 1994/80 list control pollution in work environment.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153723,
+      "additionalInformation": {
+        "textEn": "Royal Decree 1995/46 trading system and the use of chemicals.",
+        "textAr": "مرسوم سلطاني 1995/46 نظام تداول واستخدام الكيميائيات.",
+        "filledText": "Royal Decree 1995/46 trading system and the use of chemicals.",
+        "textForCurrentLocale": "Royal Decree 1995/46 trading system and the use of chemicals."
+      },
+      "additionalInformationAr": "مرسوم سلطاني 1995/46 نظام تداول واستخدام الكيميائيات.",
+      "additionalInformationEn": "Royal Decree 1995/46 trading system and the use of chemicals.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153724,
+      "additionalInformation": {
+        "textEn": "Ministerial Decision 2001/187 list organization issuing the final environmental approvals and environmental permit.",
+        "textAr": "قرار وزاري 2001/187 لائحة تنظيم استصدار الموافقات البيئية والتصريح البيئي النهائي.",
+        "filledText": "Ministerial Decision 2001/187 list organization issuing the final environmental approvals and environmental permit.",
+        "textForCurrentLocale": "Ministerial Decision 2001/187 list organization issuing the final environmental approvals and environmental permit."
+      },
+      "additionalInformationAr": "قرار وزاري 2001/187 لائحة تنظيم استصدار الموافقات البيئية والتصريح البيئي النهائي.",
+      "additionalInformationEn": "Ministerial Decision 2001/187 list organization issuing the final environmental approvals and environmental permit.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153725,
+      "additionalInformation": {
+        "textEn": "Ministerial Decision 2004/68 amending some provisions of the Regulation issuing environmental approvals and final environmental statement Ministerial Decision 2001/187",
+        "textAr": "قرار وزاري 2004/68 بتعديل بعض أحكام لائحة تنظيم استصدار الموافقات البيئية والتصريح البيئي النهائي بالقرار الوزاري 2001/187.",
+        "filledText": "Ministerial Decision 2004/68 amending some provisions of the Regulation issuing environmental approvals and final environmental statement Ministerial Decision 2001/187",
+        "textForCurrentLocale": "Ministerial Decision 2004/68 amending some provisions of the Regulation issuing environmental approvals and final environmental statement Ministerial Decision 2001/187"
+      },
+      "additionalInformationAr": "قرار وزاري 2004/68 بتعديل بعض أحكام لائحة تنظيم استصدار الموافقات البيئية والتصريح البيئي النهائي بالقرار الوزاري 2001/187.",
+      "additionalInformationEn": "Ministerial Decision 2004/68 amending some provisions of the Regulation issuing environmental approvals and final environmental statement Ministerial Decision 2001/187",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153726,
+      "additionalInformation": {
+        "textEn": "Ministerial decision 2004/118 list control pollutants emitted from stationary sources of air source.",
+        "textAr": "قرار وزاري 2004/118 لائحة التحكم في ملوثات الهواء المنبعثة من مصادر ثابتة المصدر.",
+        "filledText": "Ministerial decision 2004/118 list control pollutants emitted from stationary sources of air source.",
+        "textForCurrentLocale": "Ministerial decision 2004/118 list control pollutants emitted from stationary sources of air source."
+      },
+      "additionalInformationAr": "قرار وزاري 2004/118 لائحة التحكم في ملوثات الهواء المنبعثة من مصادر ثابتة المصدر.",
+      "additionalInformationEn": "Ministerial decision 2004/118 list control pollutants emitted from stationary sources of air source.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153727,
+      "additionalInformation": {
+        "textEn": "Ministerial Resolution 2010/16 by issuing a list of environmental requirements for the organization of activities of industrial and service",
+        "textAr": "قرار وزاري 2010/16 بإصدار لائحة تنظيم الاشتراطات البيئية للأنشطة الخدمية والصناعية",
+        "filledText": "Ministerial Resolution 2010/16 by issuing a list of environmental requirements for the organization of activities of industrial and service",
+        "textForCurrentLocale": "Ministerial Resolution 2010/16 by issuing a list of environmental requirements for the organization of activities of industrial and service"
+      },
+      "additionalInformationAr": "قرار وزاري 2010/16 بإصدار لائحة تنظيم الاشتراطات البيئية للأنشطة الخدمية والصناعية",
+      "additionalInformationEn": "Ministerial Resolution 2010/16 by issuing a list of environmental requirements for the organization of activities of industrial and service",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153728,
+      "additionalInformation": {
+        "textEn": "Royal Decree No. 1976/1991 Issue of the Civil Defense Law",
+        "textAr": "مرسوم سلطاني رقم 1976/91م بإصدار قانون الدفاع المدني",
+        "filledText": "Royal Decree No. 1976/1991 Issue of the Civil Defense Law",
+        "textForCurrentLocale": "Royal Decree No. 1976/1991 Issue of the Civil Defense Law"
+      },
+      "additionalInformationAr": "مرسوم سلطاني رقم 1976/91م بإصدار قانون الدفاع المدني",
+      "additionalInformationEn": "Royal Decree No. 1976/1991 Issue of the Civil Defense Law",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153729,
+      "additionalInformation": {
+        "textEn": "Decision No. 1993/21 on the regulation of civil defense measures",
+        "textAr": "قرار رقم 1993/21  بشأن لائحة تدابير الدفاع المدني",
+        "filledText": "Decision No. 1993/21 on the regulation of civil defense measures",
+        "textForCurrentLocale": "Decision No. 1993/21 on the regulation of civil defense measures"
+      },
+      "additionalInformationAr": "قرار رقم 1993/21  بشأن لائحة تدابير الدفاع المدني",
+      "additionalInformationEn": "Decision No. 1993/21 on the regulation of civil defense measures",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153730,
+      "additionalInformation": {
+        "textEn": "Ministerial Decree No. 174/2014 Issuing the regulations on organization of work for establishment and companies operating in the contracting activity.",
+        "textAr": "قــرار وزاري رقم  174/ 2014 بإصدار لائحة تنظيم أعمال المؤسسات والشركات العاملة في نشاط المقاولات.",
+        "filledText": "Ministerial Decree No. 174/2014 Issuing the regulations on organization of work for establishment and companies operating in the contracting activity.",
+        "textForCurrentLocale": "Ministerial Decree No. 174/2014 Issuing the regulations on organization of work for establishment and companies operating in the contracting activity."
+      },
+      "additionalInformationAr": "قــرار وزاري رقم  174/ 2014 بإصدار لائحة تنظيم أعمال المؤسسات والشركات العاملة في نشاط المقاولات.",
+      "additionalInformationEn": "Ministerial Decree No. 174/2014 Issuing the regulations on organization of work for establishment and companies operating in the contracting activity.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153731,
+      "additionalInformation": {
+        "textEn": "Local order (2010/3) regarding the protection of public health and the governorates commercial and industrial activities in Dhofar Governorate",
+        "textAr": "الامر المحلي (3/2010 ) بشأن وقاية الصحة العامة ومراقبة الأنشطة التجارية والمهنية والصناعية بمحافظة ظفار ",
+        "filledText": "Local order (2010/3) regarding the protection of public health and the governorates commercial and industrial activities in Dhofar Governorate",
+        "textForCurrentLocale": "Local order (2010/3) regarding the protection of public health and the governorates commercial and industrial activities in Dhofar Governorate"
+      },
+      "additionalInformationAr": "الامر المحلي (3/2010 ) بشأن وقاية الصحة العامة ومراقبة الأنشطة التجارية والمهنية والصناعية بمحافظة ظفار ",
+      "additionalInformationEn": "Local order (2010/3) regarding the protection of public health and the governorates commercial and industrial activities in Dhofar Governorate",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153732,
+      "additionalInformation": {
+        "textEn": "Local Order No. 9/87 on regulating markets in Dhofar Governorate.",
+        "textAr": "الامر المحلي (9/87 ) بشأن تنظيم الأسواق ",
+        "filledText": "Local Order No. 9/87 on regulating markets in Dhofar Governorate.",
+        "textForCurrentLocale": "Local Order No. 9/87 on regulating markets in Dhofar Governorate."
+      },
+      "additionalInformationAr": "الامر المحلي (9/87 ) بشأن تنظيم الأسواق ",
+      "additionalInformationEn": "Local Order No. 9/87 on regulating markets in Dhofar Governorate.",
+      "persistent": true,
+      "notPersistent": false
+    },
+    {
+      "id": 1153733,
+      "additionalInformation": {
+        "textEn": "Local order (2/98) regarding the collection of Dhofar municipality fees",
+        "textAr": "الامر المحلي (2/98 ) في شأن تحصيل رسوم البلدية",
+        "filledText": "Local order (2/98) regarding the collection of Dhofar municipality fees",
+        "textForCurrentLocale": "Local order (2/98) regarding the collection of Dhofar municipality fees"
+      },
+      "additionalInformationAr": "الامر المحلي (2/98 ) في شأن تحصيل رسوم البلدية",
+      "additionalInformationEn": "Local order (2/98) regarding the collection of Dhofar municipality fees",
+      "persistent": true,
+      "notPersistent": false
+    }
+  ],
+  "totalApprovalFee": 8,
+  "totalRenewalFee": 8,
+  "totalUpdateFee": 0,
+  "totalApprovalFeePerActivity": 5,
+  "totalRenewalFeePerActivity": 5,
+  "totalPaymentBeforeApprovalFee": 8,
+  "totalPaymentBeforeRenewalFee": 8,
+  "totalPaymentBeforeUpdateFee": 0,
+  "totalPaymentBeforeApprovalFeePerActivity": 5,
+  "totalPaymentBeforeRenewalFeePerActivity": 5,
+  "totalPaymentAfterApprovalFee": 0,
+  "totalPaymentAfterRenewalFee": 0,
+  "totalPaymentAfterUpdateFee": 0,
+  "totalPaymentAfterApprovalFeePerActivity": 0,
+  "totalPaymentAfterRenewalFeePerActivity": 0,
+  "firstPayment": true,
+  "secondPayment": true,
+  "totalMaximumProcessingTime": 0,
+  "totalApprovers": 0,
+  "dateFinalized": "2023-01-22T09:57:38",
+  "limitedLicenseOwner": false,
+  "nameEn": "Construction and Contracting Business (Administrative office) (Dhofar).",
+  "nameAr": "أعمال البناء والمقاولات (مكتب إداري) (ظفار).",
+  "approvalNoticesOnly": true,
+  "descriptionAr": "الترخيص للشركات التي لديها مكتب إداري في أعمال البناء والمقاولات",
+  "descriptionEn": "License for companies that have Administrative office in Construction and Contracting Business - Construction of Roads and Railways",
+  "wsCalculationModel": false,
+  "totalFeeCalculationModel": "FEE_MIXED",
+  "active": true,
+  "finalizable": false,
+  "deactivatable": true,
+  "deletable": false,
+  "revisable": true,
+  "editable": false,
+  "draft": false,
+  "persistent": true,
+  "notPersistent": false
+}

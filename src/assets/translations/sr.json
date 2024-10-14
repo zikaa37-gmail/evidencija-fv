@@ -1,0 +1,125 @@
+{
+  "SELECT_SECTION": "Odaberi odeljenje",
+  "SELECT_SECTIONS": "Odaberi odeljenja u kojima predajes",
+  "SECTION": "Odeljenje",
+  "SELECTED_DATE": "Datum",
+  "PRESENCE": "Prisustvo",
+  "STUDENT": "Ucenik",
+  "DAYS": {
+    "MONDAY": "Ponedeljak",
+    "TUESDAY": "Utorak",
+    "WEDNESDAY": "Sreda",
+    "THURSDAY": "Cetvrtak",
+    "FRIDAY": "Petak",
+    "SATURDAY": "Subota",
+    "SUNDAY": "Nedelja"
+  },
+  "MONTHS": {
+    "JANUARY": "januar",
+    "FEBRUARY": "februar",
+    "MARCH": "mart",
+    "APRIL": "april",
+    "MAY": "maj",
+    "JUNE": "juni",
+    "JULY": "juli",
+    "AUGUST": "avgust",
+    "SEPTEMBER": "septembar",
+    "OCTOBER": "oktobar",
+    "NOVEMBER": "novembar",
+    "DECEMBER": "decembar"
+  },
+  "ISSUES": "Ogranicenja",
+  "INFO": "Informacije",
+  "EMERGENCY": "Hitni slucajevi",
+  "DEPARTMENT_HEAD": "Odeljenski staresina",
+  "SPORTS": {
+    "SPORTS": "Sportovi",
+    "BASKETBALL": "Kosarka",
+    "VOLLEYBALL": "Odbojka",
+    "SOCCER": "Fudbal",
+    "GYMNASTICS": "Gimnastika",
+    "HANDBALL": "Rukomet",
+    "FIGHT": "Borilacki sportovi",
+    "x": "x"
+  },
+  "NOTES": {
+    "NOTE": "Beleska",
+    "ADD_NOTE": "Dodaj belesku",
+    "CANCEL": "Odustani"
+  },
+  "MENU": {
+    "CALENDAR": "Kalendar",
+    "STUDENTS": "Ucenici",
+    "LOGIN": "Prijava",
+    "LOGOUT": "Odjava",
+    "STUDENTS_UPLOAD": "Upload ucenika",
+    "STUDENTS_LIST": "Lista ucenika",
+    "DEPARTMENTS": "Odeljenja"
+  },
+  "GENERAL": {
+    "NO_ITEMS": "Nema ucitanih podataka"
+  },
+  "DELETE": {
+    "TITLE": "Brisanje",
+    "CONTENT": "Da li ste sigurni da hocete da obrisete podatak?",
+    "LEFT_BUTTON": "Odustani",
+    "RIGHT_BUTTON": "Obrisi",
+    "": ""
+  },
+  "FORM": {
+    "CREATE": "Novi",
+    "EDIT": "Izmeni",
+    "DELETE": "Obrisi",
+    "SAVE": "Sacuvaj",
+    "CANCEL": "Odustani",
+    "SEARCH": "Pretraga"
+  },
+  "STUDENTS": {
+    "STUDENTS": "Ucenici",
+    "CREATE": "Kreiraj korisnika",
+    "EDIT": "Izmeni korisnika",
+    "FIRST_NAME": "Ime",
+    "LAST_NAME": "Prezime",
+    "SAVE": "Sacuvaj",
+    "SELECT": "Odaberi fajl",
+    "FILE_UPLOAD": "Ucitavanje podataka",
+    "UPLOAD": "Ucitaj"
+  },
+  "SEXES": {
+    "SEX": "Pol",
+    "MALE": "Muski",
+    "FEMALE": "Zenski"
+  },
+  "OPTIONS": {
+    "EQUIPMENT": "Oprema",
+    "PITY": "Posteda",
+    "LATE": "Kasnjenje",
+    "ILL": "Bolest",
+    "ABSEND": "Odsutan",
+    "NONE": "Obrisi"
+  },
+  "STATUSES": {
+    "ACTIVE": "Aktivan",
+    "PENDING": "NA cekanju",
+    "INACTIVE": "Neaktivan"
+  },
+  "ERROR": {
+    "REQUIRED": "Obavezno polje!",
+    "MIN": "Uneto je {{actual}}/{{required}}!",
+    "MAX": "Dostigli ste maksimum od {{required}} karaktera!",
+    "PATTERN": "Unos nije odgovarajuci",
+    "INVALID_NUMBER": "Uneti podatak nije broj",
+    "EMAIL": "Nevalidan email",
+    "MIN_NUMBER": "Broj {{actual}} jemanji od {{min}}",
+    "MAX_NUMBER": "Broj {{actual}} je veci od maksimalnog ({{max}})"
+  },
+  "LOGIN": {
+    "USERNAME": "Korisnicko ime",
+    "PASSWORD": "Lozinka",
+    "LOGIN": "Prijava"
+  },
+  "TOASTER": {
+    "SUCCESS": "&#128515;",
+    "SAVED": "Uspesno snimljeni podaci"
+  }
+}

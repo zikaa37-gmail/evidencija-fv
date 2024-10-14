@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill">
+  <mat-label>Font size</mat-label>
+  <mat-select>
+    <mat-option
+      [value]="item.value"
+      *ngFor="let item of items"
+    >10px</mat-option>
+  </mat-select>
+</mat-form-field>

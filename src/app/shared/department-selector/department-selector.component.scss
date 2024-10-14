@@ -1,0 +1,30 @@
+@import 'src/theme/theme-variables.scss';
+
+.departments li {
+  list-style-type: none;
+  display        : inline-block;
+  width          : 13.6%;
+  text-align     : center;
+  margin         : 5px;
+  font-size      : 12px;
+  line-height    : 30px;
+  color          : #777;
+  cursor         : pointer;
+  padding        : 10px 0;
+  background     : #eee;
+  font-weight    : bold;
+  border-radius  : 5px;
+
+  &:hover span {
+    background: #666;
+    color     : white;
+    display   : inline-block;
+    width     : 30px;
+    height    : 30px;
+  }
+}
+
+.active {
+  background: $success !important; //#1abc9c
+  color     : $white !important;
+}

@@ -1,0 +1,83 @@
+{
+    "TEST": {
+        "CHECKBOX_EXAMPLE": "Primer checkboxova",
+        "OPT1": "Opcija 1",
+        "OPT2": "Opcija 2",
+        "OPT3": "Opcija 3"
+    },
+    "MENU": {
+        "USERS": "Korisnici",
+        "E_DOC": "E-pripreme",
+        "DOC": "Pripreme",
+        "EXERCISES": "Vezbe",
+        "TEMPLATES": "Sabloni",
+        "LOGIN": "Prijava",
+        "LOGOUT": "Odjava"
+    },
+    "GENERAL": {
+        "NO_ITEMS": "Nema ucitanih podataka"
+    },
+    "DELETE": {
+        "TITLE": "Brisanje",
+        "CONTENT": "Da li ste sigurni da hocete da obrisete podatak?",
+        "LEFT_BUTTON": "Odustani",
+        "RIGHT_BUTTON": "Obrisi",
+        "": ""
+    },
+    "FORM": {
+        "CREATE": "Novi",
+        "EDIT": "Izmeni",
+        "DELETE": "Obrisi",
+        "SAVE": "Sacuvaj",
+        "CANCEL": "Odustani"
+    },
+    "USER": {
+        "NAME": "Korisnik",
+        "ID_NUMBER": "JMBG",
+        "PHONE": "Telefon",
+        "EMAIL": "Email",
+        "CITY": "Grad",
+        "ASSOCIATION": "Udruzenje"
+    },
+    "USERS": {
+        "USERS": "Korisnici",
+        "CREATE": "Kreiraj korisnika",
+        "EDIT": "Izmeni korisnika",
+        "FIRST_NAME": "Ime",
+        "LAST_NAME": "Prezime",
+        "ID_NUMBER": "JMBG",
+        "CITY": "Grad",
+        "PHONE": "Telefon",
+        "EMAIL": "Email",
+        "ASSOCIATION": "Udruzenje",
+        "SEARCH": "Pretraga",
+        "SCHOOL_LIST": "Skole",
+        "SEX": "Pol",
+        "MALE": "Muski",
+        "FEMALE": "Zenski"
+    },
+    "ADDRESS": {
+        "NAME": "Adresa",
+        "STREET": "Ulica",
+        "STREET_NUMBER": "Broj",
+        "CITY": "Grad",
+        "ZIP": "Postanski broj",
+        "ADD_ADDRESS": "Dodaj adresu",
+        "REMOVE_ADDRESS": "Ukloni adresu"
+    },
+    "ERROR": {
+        "REQUIRED": "Required field!",
+        "MIN": "Minimum of {{required}} characters required. You have entered {{actual}} characters!",
+        "MAX": "Maximum of {{required}} characters reached!",
+        "PATTERN": "You have entered wrong characters",
+        "INVALID_NUMBER": "An invalid number entered",
+        "EMAIL": "An invalid email entered",
+        "MIN_NUMBER": "Number {{actual}} is less then {{min}}",
+        "MAX_NUMBER": "Number {{actual}} is bigger then expected ({{max}})"
+    },
+    "LOGIN": {
+        "EMAIL": "E-mail",
+        "PASSWORD": "Lozinka",
+        "LOGIN": "Prijava"
+    }
+}

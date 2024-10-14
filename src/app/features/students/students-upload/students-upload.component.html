@@ -1,0 +1,46 @@
+<!-- <div class="d-flex flex-row justify-content-around flex-wrap my-4">
+  <h4>{{'STUDENTS.FILE_UPLOAD' | translate}}</h4>
+
+  <app-xlsx-file-upload
+    (data)="mapData($event)"
+    *ngIf="!students?.length"
+  ></app-xlsx-file-upload> -->
+
+<div class="d-flex flex-row justify-content-between no-wrap my-4 mx-2">
+
+  <h4>{{'STUDENTS.STUDENTS' | translate}}</h4>
+
+  <app-xlsx-file-upload
+    (data)="mapData($event)"
+    *ngIf="!students?.length"
+  ></app-xlsx-file-upload>
+</div>
+
+<hr>
+
+<app-department-selector
+  *ngIf="students?.length"
+  [sections]="sections$"
+  (selectedSection)="onSectionChange($event)"
+></app-department-selector>
+
+<hr *ngIf="students?.length">
+
+<div class="d-flex flex-row justify-content-around flex-wrap overflow-auto card-container">
+  <ng-container *ngFor="let student of filteredStudents">
+    <app-card
+      class="mx-2 my-2"
+      [item]="student"
+      (deletedItem)="onStudentDelete($event)"
+      (publishedItem)="onStudentPublish($event)"
+    ></app-card>
+  </ng-container>
+</div>
+
+<div class="d-flex flex-row justify-content-around my-4">
+  <button
+    *ngIf="filteredStudents?.length"
+    class="btn btn-success"
+    (click)="saveStudents()"
+  >{{'STUDENTS.SAVE' | translate}}</button>
+</div>

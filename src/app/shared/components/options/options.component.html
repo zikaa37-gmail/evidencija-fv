@@ -1,0 +1,9 @@
+<ul class="options">
+  <li
+    class=""
+    *ngFor="let option of options"
+    (click)="setOption(option)"
+    [title]="option.option | translate"
+    [ngClass]="{'active': option.selected}"
+  ><i [class]="option.icon"></i></li>
+</ul>

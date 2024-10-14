@@ -1,0 +1,20 @@
+<app-department-selector
+  [sections]="sections"
+  (selectedSection)="onSectionChange($event)"
+></app-department-selector>
+
+<ng-container *ngIf="section">
+  <app-month-selector
+    [month]="selectedMonth"
+    [monthIndex]="selectedMonthIndex"
+    [year]="selectedYear"
+    (action)="onMonthChange($event)"
+  ></app-month-selector>
+
+  <app-calendar-body
+    [dates]="dates"
+    [days]="days"
+    [selected]="selectedDate"
+    (selectedDate)="onDateSelect($event)"
+  ></app-calendar-body>
+</ng-container>

@@ -1,0 +1,15 @@
+<div class="month">
+  <ul>
+    <li
+      class="prev"
+      (click)="setAction('prev')"
+    ><i class="fa-solid fa-chevron-left"></i></li>
+    <!-- &#10094; -->
+    <li
+      class="next"
+      (click)="setAction('next')"
+    ><i class="fa-solid fa-chevron-right"></i></li>
+    <!-- &#10095; -->
+    <li>{{('MONTHS.'+month | translate) | titlecase}}<br><span>{{year}}</span></li>
+  </ul>
+</div>

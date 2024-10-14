@@ -1,0 +1,63 @@
+// Set Font Awesome font path
+$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
+
+
+$white   : #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black   : #212121;
+
+$blue  : #0073dd;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink  : #e83e8c;
+$red   : #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green : #28a745;
+$teal  : #20c997;
+$cyan  : #17a2b8;
+$maroon: #ac8807;
+
+$light-blue              : #84BDDF;
+$menu-dropdown-blue      : #3BB3E0;
+$menu-dropdown-hover-blue: #C5E8F6;
+$li-grey                 :#8c8989;
+$footer-text             :#8c8989;
+$header-text             : #333333;
+$table-bg                : #EBEBEB;
+$table-filter-bg         : #F5F5F5;
+$acc-blue                : #2089C7;
+$acc-item                : #F5F5F5;
+$pagination-blue         : #077cc1;
+$table-title-active      : #CBCBCB;
+$multi-border            : #ced4da;
+
+$li-grey : #eee;
+
+$li-grey-color : #777;
+$li-active     : #1abc9c;
+$li-hover      : #666;
+$grey-border   : #ced4da;
+$lightblue     : lightblue;
+
+
+// $theme-colors: ()
+$default  : #9fd8e4;
+$primary  :#809cff;
+$secondary: #d9d9d9;
+$success  : #F5C924; // #1abc9c;
+$danger   : #4971ff;
+
+$bg-default  : $default !important;
+$bg-primary  : $primary;
+$bg-secondary: $secondary;
+$bg-success  : $success;
+$bg-danger   : $danger;
