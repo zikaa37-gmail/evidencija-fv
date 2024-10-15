@@ -1,0 +1,125 @@
+{
+  "selectSection": "Odaberi odeljenje",
+  "selectSections": "Odaberi odeljenja u kojima predaješ",
+  "section": "Odeljenje",
+  "selectedDate": "Datum",
+  "presence": "Prisustvo",
+  "student": "Učenik",
+  "days": {
+    "monday": "Ponedeljak",
+    "tuesday": "Utorak",
+    "wednesday": "Sreda",
+    "thursday": "Četvrtak",
+    "friday": "Petak",
+    "saturday": "Subota",
+    "sunday": "Nedelja"
+  },
+  "months": {
+    "january": "Januar",
+    "february": "Februar",
+    "march": "Mart",
+    "april": "April",
+    "may": "Maj",
+    "june": "Juni",
+    "july": "Juli",
+    "august": "Avgust",
+    "september": "Septembar",
+    "october": "Oktobar",
+    "november": "Novembar",
+    "december": "Decembar"
+  },
+  "issues": "Ograničenja",
+  "info": "Informacije",
+  "emergency": "Hitni slučajevi",
+  "departmentHead": "Odeljenski starešina",
+  "sports": {
+    "sports": "Sportovi",
+    "basketball": "Košarka",
+    "volleyball": "Odbojka",
+    "soccer": "Fudbal",
+    "gymnastics": "Gimnastika",
+    "handball": "Rukomet",
+    "fight": "Borilački sportovi",
+    "x": "x"
+  },
+  "notes": {
+    "note": "Beleska",
+    "addNote": "Dodaj belešku",
+    "cancel": "Odustani"
+  },
+  "menu": {
+    "calendar": "Kalendar",
+    "students": "Učenici",
+    "login": "Prijava",
+    "logout": "Odjava",
+    "studentsUpload": "Upload učenika",
+    "studentsList": "Lista učenika",
+    "departments": "Odeljenja"
+  },
+  "general": {
+    "noItems": "Nema učitanih podataka"
+  },
+  "delete": {
+    "title": "Brisanje",
+    "content": "Da li ste sigurni da hoćete da obrišete podatak?",
+    "leftButton": "Odustani",
+    "rightButton": "Obriši",
+    "": ""
+  },
+  "buttons": {
+    "create": "Novi",
+    "edit": "Izmeni",
+    "delete": "Obriši",
+    "save": "Sačuvaj",
+    "cancel": "Odustani",
+    "search": "Pretraga"
+  },
+  "students": {
+    "students": "Učenici",
+    "create": "Kreiraj korisnika",
+    "edit": "Izmeni korisnika",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "save": "Sačuvaj",
+    "select": "Odaberi fajl",
+    "fileUpload": "Učitavanje podataka",
+    "upload": "Učitaj"
+  },
+  "sexes": {
+    "sex": "Pol",
+    "male": "Muški",
+    "female": "Ženski"
+  },
+  "options": {
+    "equipment": "Oprema",
+    "pity": "Pošteda",
+    "late": "Kašnjenje",
+    "ill": "Bolest",
+    "absent": "Odsutan",
+    "none": "Obriši"
+  },
+  "statuses": {
+    "active": "Aktivan",
+    "pending": "Na čekanju",
+    "inactive": "Neaktivan"
+  },
+  "error": {
+    "required": "Obavezno polje!",
+    "min": "Uneto je {{actual}}/{{required}}!",
+    "max": "Dostigli ste maksimum od {{required}} karaktera!",
+    "pattern": "Unos nije odgovarajući",
+    "invalidNumber": "Uneti podatak nije broj",
+    "email": "Nevalidan email",
+    "minNumber": "Broj {{actual}} je manji od {{min}}",
+    "maxNumber": "Broj {{actual}} je veći od maksimalnog ({{max}})"
+  },
+  "login": {
+    "username": "Korisničko ime",
+    "password": "Lozinka",
+    "login": "Prijava"
+  },
+  "toaster": {
+    "success": "&#128515;",
+    "saved": "Uspešno snimljeni podaci"
+  }
+}

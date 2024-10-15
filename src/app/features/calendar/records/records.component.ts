@@ -6,11 +6,23 @@ import { NOTETYPE } from './records-modal/recodrs-modal.constants';
 import { RecordsModalComponent } from './records-modal/records-modal.component';
 import { RecordsHelperService } from './records.helper.service';
 import { Record } from './records.interface';
-
+import { CommonModule } from '@angular/common';
+import { MatDividerModule } from '@angular/material/divider';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { OptionsComponent } from 'src/app/shared/components/options/options.component';
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
-  styleUrls: ['./records.component.scss']
+  styleUrls: ['./records.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    TranslateModule,
+    MatDividerModule,
+    NgbPopoverModule,
+    OptionsComponent,
+  ],
 })
 export class RecordsComponent implements OnInit {
   record!: Record;
@@ -23,11 +35,12 @@ export class RecordsComponent implements OnInit {
   constructor(
     private helper: RecordsHelperService,
     public globalService: GlobalService,
-    private dialog: MatDialog
-  ) { this.globalService.isMobile$.subscribe(x => this.isMobile = x) }
-
-  ngOnInit(): void {
+    private dialog: MatDialog,
+  ) {
+    this.globalService.isMobile$.subscribe((x) => (this.isMobile = x));
   }
+
+  ngOnInit(): void {}
 
   fetchSelectedOption(option: any) {
     console.log('selectedOption', option);
@@ -39,7 +52,7 @@ export class RecordsComponent implements OnInit {
       width: this.isMobile ? '100vw' : '600px',
       maxWidth: '100vw',
       panelClass: 'user-dialog',
-      disableClose: true
+      disableClose: true,
     });
 
     dialogRef.componentInstance.type = type;

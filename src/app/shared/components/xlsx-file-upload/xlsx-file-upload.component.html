@@ -5,9 +5,8 @@
   #fileUploader
   accept=".xlsx, .xls"
   class="d-none"
->
+/>
 
-<button
-  class="btn btn-success"
-  (click)="fileUploader.click()"
->{{'STUDENTS.SELECT' | translate}}</button>
+<button class="btn btn-success" (click)="fileUploader.click()">
+  {{ "students.select" | translate }}
+</button>

@@ -1,13 +1,19 @@
 <ul class="weekdays">
-  <li *ngFor="let day of days">
-    <span *ngIf="!(globalService.isMobile$ | async)">{{'DAYS.'+day | translate}}</span>
-    <span *ngIf="(globalService.isMobile$ | async)">{{('DAYS.'+day | translate).charAt(0)}}</span>
-  </li>
+  @for (day of days; track day) {
+    <li>
+      @if (!globalService.isMobile()) {
+        <span>{{ "days." + day | translate }}</span>
+      } @else {
+        <span>{{ ("days." + day | translate).charAt(0) }}</span>
+      }
+    </li>
+  }
 </ul>
 
 <ul class="days">
-  <li
-    *ngFor="let date of dates"
-    (click)="onDateSelect(date)"
-  ><span [ngClass]="{'active': date === selected}">{{date}}</span></li>
+  @for (date of dates; let i = $index; track i) {
+    <li (click)="onDateSelect(date)">
+      <span [ngClass]="{ active: date === selected }">{{ date }}</span>
+    </li>
+  }
 </ul>

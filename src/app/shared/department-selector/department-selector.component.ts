@@ -1,23 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Section } from '../../features/students/students.interface';
+import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CommonModule } from '@angular/common';
+import { StudentsService } from 'src/app/features/students/students.service';
 
 @Component({
   selector: 'app-department-selector',
   templateUrl: './department-selector.component.html',
-  styleUrls: ['./department-selector.component.scss']
+  styleUrls: ['./department-selector.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatExpansionModule, TranslateModule],
 })
 export class DepartmentSelectorComponent {
-  @Input() sections!: any;
-  @Output() selectedSection = new EventEmitter<Section>();
-  selected!: Section;
-  display!: string;
-  panelOpenState = true;
+  studentsService = inject(StudentsService);
+  panelOpenState = signal<boolean>(false);
 
   onSectionSelect(grade: string, department: string) {
-    this.display = grade + '-' + department;
-    this.selected = { grade, department };
-    this.panelOpenState = false;
-    this.selectedSection.emit({ grade, department });
+    this.studentsService.setSelectedSection(grade, department);
+    this.togglePanel();
+    this.studentsService.setSelectedSection(grade, department);
   }
 
+  togglePanel() {
+    const isOpen = this.panelOpenState();
+    this.panelOpenState.set(!isOpen);
+  }
 }

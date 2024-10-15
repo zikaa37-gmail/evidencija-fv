@@ -4,11 +4,16 @@ import { Student } from '../../../students/students.interface';
 import { Note } from '../records.interface';
 import { RecordsService } from '../records.service';
 import { NOTETYPE } from './recodrs-modal.constants';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-records-modal',
   templateUrl: './records-modal.component.html',
-  styleUrls: ['./records-modal.component.scss']
+  styleUrls: ['./records-modal.component.scss'],
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule],
 })
 export class RecordsModalComponent {
   public NOTETYPE = NOTETYPE;
@@ -17,21 +22,20 @@ export class RecordsModalComponent {
   note: Note = {
     student: this.student,
     note: '',
-    type: this.type
-  }
+    type: this.type,
+  };
 
   constructor(
     private recordsService: RecordsService,
     private dialogRef: MatDialogRef<RecordsModalComponent>,
     // @Inject(MAT_DIALOG_DATA) data: any
-  ) { }
+  ) {}
 
   addNote() {
     console.log('SAVED');
     this.closeModal();
     // this.recordsService.addNote(this.note)
     //   .subscribe(note => this.closeModal());
-
   }
 
   setType(type: string) {

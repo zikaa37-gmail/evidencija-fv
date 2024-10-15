@@ -1,47 +1,44 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Section, Student } from './students.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentsService {
-  apiUrl = environment.apiUrl;
-  sectionsSubject = new BehaviorSubject<Section[]>([]);
-  sections$ = this.sectionsSubject.asObservable();
+  private apiUrl = environment.apiUrl;
+  private http = inject(HttpClient);
 
-  selectedSectionSubject = new BehaviorSubject<Section>({
+  sections = signal<Section[][]>([]);
+  selectedSection = signal<Section>({
     grade: '5',
-    department: '1'
+    department: '1',
   });
-  selectedSection$ = this.selectedSectionSubject.asObservable();
+  possibleSections = signal<Section[][]>([]);
+  existingSections = signal<Section[][]>([]);
 
-  studentsSubject = new BehaviorSubject<Student[]>([]);
-  students$ = this.studentsSubject.asObservable();
+  students = signal<Student[]>([]);
+  filteredStudents = signal<Student[]>([]);
 
-  filteredStudentsSubject = new BehaviorSubject<Student[]>([]);
-  filteredStudents$ = this.filteredStudentsSubject.asObservable();
-
-  constructor(private http: HttpClient) { }
-
-  getSections(): Observable<any[]> {
-    //TODO
-    // return this.http.get<any[]>(`${this.apiUrl}/sections`);
-    return of([
-      [{ grade: '5', department: '1' }, { grade: '5', department: '2' }],
-      [{ grade: '6', department: '1' }, { grade: '6', department: '2' }],
-      [{ grade: '7', department: '1' }, { grade: '7', department: '2' }],
-      [{ grade: '8', department: '1' }, { grade: '8', department: '2' }, { grade: '8', department: '3' }],
-    ])
+  constructor() {
+    // this.getSections();
+    this.getPossibleSections();
   }
 
+  getSections(): void {
+    //TODO
+    // return this.http.get<any[]>(`${this.apiUrl}/sections`);
+    this.sections.set(this.mockedSections());
+    this.existingSections.set(this.mockedSections());
+  }
+  // .subscribe();
+
   saveSections(sections: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/sections`, sections)
-      .pipe(
-        tap(sections => this.sectionsSubject.next(sections))
-      );
+    return this.http
+      .post<any>(`${this.apiUrl}/sections`, sections)
+      .pipe(tap((sections) => this.sections.set(sections)));
   }
 
   updateSections(sections: any): Observable<any> {
@@ -49,24 +46,43 @@ export class StudentsService {
   }
 
   saveStudents(students: Student[]): Observable<any> {
-    const body = students.filter(s => s.status === 'active')!;
+    const body = students.filter((s) => s.status === 'active')!;
     // return
-    this.http.post<Student[]>(`${this.apiUrl}/students`, body).pipe(
-      tap(students => this.studentsSubject.next(students))
-
-    );
+    this.http
+      .post<Student[]>(`${this.apiUrl}/students`, body)
+      .pipe(tap((students) => this.students.set(students)));
     return of(true);
   }
 
-  getStudents(): Observable<any> {
+  getAllStudents(): void {
     // return this.http.get(`${this.apiUrl}/students`)
     //   .pipe(
     //     tap((students: any) => this.studentsSubject.next(students))
     //   )
-    const students = this.getMockedStudents();
-    this.studentsSubject.next(students);
+    // TODO get real data
+    // const students = ;
+    this.students.set(this.mockedStudents());
     this.filterStudents();
-    return of(students);
+    // return of(this.mockedStudents());
+  }
+
+  getPossibleSections(): void {
+    let x = [];
+    for (let i = 5; i <= 8; i++) {
+      let arr: Section[] = [];
+      for (let j = 1; j <= 10; j++) {
+        arr.push({ grade: i.toString(), department: j.toString() });
+        this.sortItemsByDepartment(arr);
+      }
+      x.push(arr);
+    }
+    this.possibleSections.set(x);
+  }
+
+  sortItemsByDepartment(arr: Section[]): Section[] {
+    return arr.sort((a, b) => {
+      return parseInt(a.department) - parseInt(b.department);
+    });
   }
 
   mapStudentFromExcelData(row: any[]): Student {
@@ -87,194 +103,204 @@ export class StudentsService {
   }
 
   filterStudents() {
-    const students = this.studentsSubject.getValue();
-    const section = this.selectedSectionSubject.getValue();
+    const section = this.selectedSection();
 
-    const filteredStudents = students.filter(
-      student =>
-        student.section.grade === section.grade
-        &&
-        student.section.department === section.department);
-    this.filteredStudentsSubject.next(filteredStudents);
+    const filteredStudents = this.students().filter(
+      (student) =>
+        student.section.grade === section.grade &&
+        student.section.department === section.department,
+    );
+    this.filteredStudents.set(filteredStudents);
   }
 
   setSelectedSection(grade: string, department: string) {
     const section = { grade, department };
-    this.selectedSectionSubject.next(section);
-    // this.selectedSection.grade = grade;
-    // this.selectedSection.department = department;
+    this.selectedSection.set(section);
     this.filterStudents();
   }
 
-  // findStudent(student: Student): Student{
+  mockedSections = signal<Section[][]>([
+    [
+      { grade: '5', department: '1' },
+      { grade: '5', department: '2' },
+    ],
+    [
+      { grade: '6', department: '1' },
+      { grade: '6', department: '2' },
+    ],
+    [
+      { grade: '7', department: '1' },
+      { grade: '7', department: '2' },
+    ],
+    [
+      { grade: '8', department: '1' },
+      { grade: '8', department: '2' },
+      { grade: '8', department: '3' },
+    ],
+  ]);
 
-  // }
-
-  getMockedStudents(): Student[] {
-
-    return [
-      {
-        'id': null,
-        'firstName': 'Igor',
-        'lastName': 'Zivanovic',
-        'sex': 'male',
-        'section': {
-          'grade': '5',
-          'department': '1'
-        },
-        'issues': [],
-        'info': {
-          'emergency': {
-            'name': 'Lidija Comagic',
-            'phone': '063/331050'
-          },
-          'departmentHead': {
-            'name': 'Dominik Vilkins',
-            'phone': '069/2709207'
-          },
-          'sports': ['basket']
-        },
-        'status': 'active'
+  mockedStudents = signal<Student[]>([
+    {
+      id: null,
+      firstName: 'Igor',
+      lastName: 'Zivanovic',
+      sex: 'male',
+      section: {
+        grade: '5',
+        department: '1',
       },
-      {
-        'id': null,
-        'firstName': 'Jovan',
-        'lastName': 'Peric',
-        'sex': 'male',
-        'section': {
-          'grade': '5',
-          'department': '1'
+      issues: [],
+      info: {
+        emergency: {
+          name: 'Lidija Comagic',
+          phone: '063/331050',
         },
-        'issues': [],
-        'info': {
-          'emergency': {
-            'name': 'Sofija Peric',
-            'phone': '063/331050'
-          },
-          'departmentHead': {
-            'name': 'Dominik Vilkins',
-            'phone': '069/2709207'
-          },
-          'sports': ['basket']
+        departmentHead: {
+          name: 'Dominik Vilkins',
+          phone: '069/2709207',
         },
-        'status': 'active'
+        sports: ['basket'],
       },
-      {
-        'id': null,
-        'firstName': 'Dejan',
-        'lastName': 'Simic',
-        'sex': 'male',
-        'section': {
-          'grade': '5',
-          'department': '1'
-        },
-        'issues': ['head'],
-        'info': {
-          'emergency': {
-            'name': 'Jovan Simic',
-            'phone': '063/331050'
-          },
-          'departmentHead': {
-            'name': 'Dominik Vilkins',
-            'phone': '069/2709207'
-          },
-          'sports': ['basket']
-        },
-        'status': 'inactive'
+      status: 'active',
+    },
+    {
+      id: null,
+      firstName: 'Jovan',
+      lastName: 'Peric',
+      sex: 'male',
+      section: {
+        grade: '5',
+        department: '1',
       },
-      {
-        'id': null,
-        'firstName': 'Sima',
-        'lastName': 'Jankovic',
-        'sex': 'male',
-        'section': {
-          'grade': '5',
-          'department': '1'
+      issues: [],
+      info: {
+        emergency: {
+          name: 'Sofija Peric',
+          phone: '063/331050',
         },
-        'issues': ['legs'],
-        'info': {
-          'emergency': {
-            'name': 'Danilo Jankovic',
-            'phone': '063/331050'
-          },
-          'departmentHead': {
-            'name': 'Dominik Vilkins',
-            'phone': '069/2709207'
-          },
-          'sports': ['basket']
+        departmentHead: {
+          name: 'Dominik Vilkins',
+          phone: '069/2709207',
         },
-        'status': 'active'
+        sports: ['basket'],
       },
-      {
-        'id': null,
-        'firstName': 'Lidija',
-        'lastName': 'Petrovic',
-        'sex': 'male',
-        'section': {
-          'grade': '5',
-          'department': '1'
-        },
-        'issues': [],
-        'info': {
-          'emergency': {
-            'name': 'Lidija Petrovic',
-            'phone': '063/331050'
-          },
-          'departmentHead': {
-            'name': 'Dominik Vilkins',
-            'phone': '069/2709207'
-          },
-          'sports': ['basket']
-        },
-        'status': 'inactive'
+      status: 'active',
+    },
+    {
+      id: null,
+      firstName: 'Dejan',
+      lastName: 'Simic',
+      sex: 'male',
+      section: {
+        grade: '5',
+        department: '1',
       },
-      {
-        'id': null,
-        'firstName': 'Vuk',
-        'lastName': 'Karas',
-        'sex': 'male',
-        'section': {
-          'grade': '5',
-          'department': '2'
+      issues: ['head'],
+      info: {
+        emergency: {
+          name: 'Jovan Simic',
+          phone: '063/331050',
         },
-        'issues': ['Astma'],
-        'info': {
-          'emergency': {
-            'name': 'Ana Karas',
-            'phone': '063/331050'
-          },
-          'departmentHead': {
-            'name': 'Dominik Vilkins',
-            'phone': '069/2709207'
-          },
-          'sports': ['basket']
+        departmentHead: {
+          name: 'Dominik Vilkins',
+          phone: '069/2709207',
         },
-        'status': 'active'
+        sports: ['basket'],
       },
-      {
-        'id': null,
-        'firstName': 'Petar',
-        'lastName': 'Prebicevic',
-        'sex': 'male',
-        'section': {
-          'grade': '5',
-          'department': '2'
+      status: 'inactive',
+    },
+    {
+      id: null,
+      firstName: 'Sima',
+      lastName: 'Jankovic',
+      sex: 'male',
+      section: {
+        grade: '5',
+        department: '1',
+      },
+      issues: ['legs'],
+      info: {
+        emergency: {
+          name: 'Danilo Jankovic',
+          phone: '063/331050',
         },
-        'issues': ['Astma'],
-        'info': {
-          'emergency': {
-            'name': 'Dejana Prebicevic',
-            'phone': '063/331050'
-          },
-          'departmentHead': {
-            'name': 'Dominik Vilkins',
-            'phone': '069/2709207'
-          },
-          'sports': ['basket']
+        departmentHead: {
+          name: 'Dominik Vilkins',
+          phone: '069/2709207',
         },
-        'status': 'active'
-      }
-    ];
-
-  }
+        sports: ['basket'],
+      },
+      status: 'active',
+    },
+    {
+      id: null,
+      firstName: 'Lidija',
+      lastName: 'Petrovic',
+      sex: 'male',
+      section: {
+        grade: '5',
+        department: '1',
+      },
+      issues: [],
+      info: {
+        emergency: {
+          name: 'Lidija Petrovic',
+          phone: '063/331050',
+        },
+        departmentHead: {
+          name: 'Dominik Vilkins',
+          phone: '069/2709207',
+        },
+        sports: ['basket'],
+      },
+      status: 'inactive',
+    },
+    {
+      id: null,
+      firstName: 'Vuk',
+      lastName: 'Karas',
+      sex: 'male',
+      section: {
+        grade: '5',
+        department: '2',
+      },
+      issues: ['Astma'],
+      info: {
+        emergency: {
+          name: 'Ana Karas',
+          phone: '063/331050',
+        },
+        departmentHead: {
+          name: 'Dominik Vilkins',
+          phone: '069/2709207',
+        },
+        sports: ['basket'],
+      },
+      status: 'active',
+    },
+    {
+      id: null,
+      firstName: 'Petar',
+      lastName: 'Prebicevic',
+      sex: 'male',
+      section: {
+        grade: '5',
+        department: '2',
+      },
+      issues: ['Astma'],
+      info: {
+        emergency: {
+          name: 'Dejana Prebicevic',
+          phone: '063/331050',
+        },
+        departmentHead: {
+          name: 'Dominik Vilkins',
+          phone: '069/2709207',
+        },
+        sports: ['basket'],
+      },
+      status: 'active',
+    },
+  ]);
 }
+// }

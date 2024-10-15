@@ -1,44 +1,43 @@
-<div
-  class="d-flex flex-column w-100"
-  *ngIf="type && student"
->
-  <form #form="ngForm">
-    <label matLabel>{{'NOTES.NOTE' | translate}}</label>
+@if (type && student) {
+  <div class="d-flex flex-column w-100">
+    <form #form="ngForm">
+      <label matLabel>{{ "notes.note" | translate }}</label>
 
-    <div class="d-flex flex-row justify-content-start my-4 w-100">
+      <div class="d-flex flex-row justify-content-start my-4 w-100">
+        <i
+          class="fa-regular fa-face-smile fa-2x text-success mx-2"
+          [ngClass]="{ 'fa-solid': type === NOTETYPE.GOOD }"
+          (click)="setType(NOTETYPE.GOOD)"
+        ></i>
+        <i
+          class="fa-regular fa-face-frown fa-2x text-danger mx-2"
+          [ngClass]="{ 'fa-solid': type === NOTETYPE.BAD }"
+          (click)="setType(NOTETYPE.BAD)"
+        ></i>
+      </div>
+      <textarea
+        [(ngModel)]="note.note"
+        matInput
+        rows="6"
+        name="note"
+        class="w-100"
+        [placeholder]="'notes.addNote' | translate"
+      ></textarea>
 
-      <i
-        class="fa-regular fa-face-smile fa-2x text-success mx-2"
-        [ngClass]="{'fa-solid': type===NOTETYPE.GOOD}"
-        (click)="setType(NOTETYPE.GOOD)"
-      ></i>
-      <i
-        class="fa-regular fa-face-frown fa-2x text-danger mx-2"
-        [ngClass]="{'fa-solid': type===NOTETYPE.BAD}"
-        (click)="setType(NOTETYPE.BAD)"
-      ></i>
-    </div>
-    <textarea
-      [(ngModel)]="note.note"
-      matInput
-      rows="6"
-      name="note"
-      class="w-100"
-      [placeholder]="'NOTES.ADD_NOTE' | translate"
-    ></textarea>
+      <div class="d-flex flex-row justify-content-between my-4 w-100">
+        <button mat-raised-button (click)="closeModal()">
+          {{ "notes.cancel" | translate }}
+        </button>
 
-    <div class="d-flex flex-row justify-content-between my-4 w-100">
-      <button
-        mat-raised-button
-        (click)="closeModal()"
-      >{{'NOTES.CANCEL' | translate}}</button>
-
-      <button
-        class="mx-3"
-        mat-raised-button
-        color="primary"
-        (click)="addNote()"
-      >{{'NOTES.ADD_NOTE' | translate}}</button>
-    </div>
-  </form>
-</div>
+        <button
+          class="mx-3"
+          mat-raised-button
+          color="primary"
+          (click)="addNote()"
+        >
+          {{ "notes.addNote" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+}

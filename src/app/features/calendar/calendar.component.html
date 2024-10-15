@@ -1,9 +1,6 @@
-<app-department-selector
-  [sections]="sections"
-  (selectedSection)="onSectionChange($event)"
-></app-department-selector>
+<app-department-selector />
 
-<ng-container *ngIf="section">
+@if (studentsService.existingSections()) {
   <app-month-selector
     [month]="selectedMonth"
     [monthIndex]="selectedMonthIndex"
@@ -17,4 +14,4 @@
     [selected]="selectedDate"
     (selectedDate)="onDateSelect($event)"
   ></app-calendar-body>
-</ng-container>
+}

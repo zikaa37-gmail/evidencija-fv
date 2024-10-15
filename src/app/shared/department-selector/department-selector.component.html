@@ -1,34 +1,43 @@
+{{ panelOpenState() }}
 <mat-accordion>
   <mat-expansion-panel
     class="bg-primary"
-    [expanded]="panelOpenState"
-    (click)="panelOpenState = !panelOpenState"
+    [expanded]="panelOpenState()"
+    (click)="togglePanel()"
   >
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ "SELECT_SECTION" | translate }}
+        {{ "section" | translate }}
       </mat-panel-title>
-      <mat-panel-description *ngIf="display">{{
-        display
-      }}</mat-panel-description>
+      <!-- @if (display) { -->
+      <mat-panel-description class="department">
+        {{ studentsService.selectedSection().grade }} -
+        {{ studentsService.selectedSection().department }}
+      </mat-panel-description>
+      <!-- } -->
     </mat-expansion-panel-header>
-    <ul
-      class="departments"
-      *ngFor="let section of sections"
-      (click)="panelOpenState = true"
-    >
-      <li
-        class="border"
-        (click)="onSectionSelect(section.grade, department)"
-        *ngFor="let department of section.departments"
-        [ngClass]="{
-          active:
-            selected.grade === section.grade &&
-            selected.department === department
-        }"
-      >
-        {{ section.grade }}-{{ department }}
-      </li>
-    </ul>
+
+    @for (
+      sectionArray of studentsService.existingSections();
+      let i = $index;
+      track sectionArray
+    ) {
+      <ul class="departments" (click)="panelOpenState.set(true)">
+        @for (section of sectionArray; track section) {
+          <li
+            class="border"
+            (click)="onSectionSelect(section.grade, section.department)"
+            [ngClass]="{
+              active:
+                studentsService.selectedSection().grade === section.grade &&
+                studentsService.selectedSection().department ===
+                  section.department,
+            }"
+          >
+            {{ section.grade }}-{{ section.department }}
+          </li>
+        }
+      </ul>
+    }
   </mat-expansion-panel>
 </mat-accordion>

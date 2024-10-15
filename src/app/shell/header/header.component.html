@@ -1,13 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-default">
   <div class="container-fluid mx-3">
-    <a
-      class="navbar-brand"
-      title="Evidencija"
-      alt="Evidencija"
-    ><img
-        src="assets/images/logo.png"
-        class="img"
-      ></a>
+    <a class="navbar-brand" title="Evidencija" alt="Evidencija"
+      ><img src="images/logo.png" class="img"
+    /></a>
     <!-- athletics- -->
     <button
       class="navbar-toggler"
@@ -21,10 +16,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div
-      class="collapse navbar-collapse"
-      id="content"
-    >
+    <div class="collapse navbar-collapse" id="content">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
@@ -32,7 +24,8 @@
             aria-current="page"
             [routerLink]="['calendar']"
             [routerLinkActive]="['router-link-active']"
-          >{{'MENU.CALENDAR' | translate}}</a>
+            >{{ "menu.calendar" | translate }}</a
+          >
         </li>
         <li class="nav-item dropdown">
           <a
@@ -42,31 +35,35 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {{'MENU.STUDENTS' | translate}}
+            {{ "menu.students" | translate }}
           </a>
-          <ul
-            class="dropdown-menu"
-            aria-labelledby="navbarDropdown"
-          >
-            <li><a
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a
                 class="dropdown-item"
                 [routerLink]="['students/upload']"
                 [routerLinkActive]="['router-link-active']"
-              >{{'MENU.STUDENTS_UPLOAD' | translate}}</a></li>
-            <li><a
+                >{{ "menu.studentsUpload" | translate }}</a
+              >
+            </li>
+            <li>
+              <a
                 class="dropdown-item"
                 [routerLink]="['students']"
                 [routerLinkActive]="['router-link-active']"
-              >{{'MENU.STUDENTS_LIST' | translate}}</a></li>
-            <li><a
+                >{{ "menu.studentsList" | translate }}</a
+              >
+            </li>
+            <li>
+              <a
                 class="dropdown-item"
                 [routerLink]="['students/departments']"
                 [routerLinkActive]="['router-link-active']"
-              >{{'MENU.DEPARTMENTS' | translate}}</a></li>
-
+                >{{ "menu.departments" | translate }}</a
+              >
+            </li>
           </ul>
         </li>
-
       </ul>
       <!-- <form class="d-flex">
         <input

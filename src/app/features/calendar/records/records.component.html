@@ -1,9 +1,6 @@
 <div class="d-flex flex-row justify-content-between">
-  {{'SELECTED_DATE' | translate}}: {{selectedDate | date:'dd.MM.YYYY'}}
-  <i
-    class="fa fa-close"
-    (click)="closeModal()"
-  ></i>
+  {{ "selectedDate" | translate }}: {{ selectedDate | date: "dd.MM.YYYY" }}
+  <i class="fa fa-close" (click)="closeModal()"></i>
 </div>
 
 <mat-divider class="mb-4"></mat-divider>
@@ -21,85 +18,95 @@
   </thead> -->
 
   <tbody>
-    <tr *ngFor="let student of students">
-      <td class="text-center first-col no-border">
-        <ul class="info">
-          <ng-template #popTitleInfo>
-            {{'INFO' | translate}}
-          </ng-template>
-          <ng-template #popContentInfo>
-            <p>
-              <b>{{'EMERGENCY' | translate}}</b><br>
-              {{student.info.emergency.name}}<br>
-              {{student.info.emergency.phone}}
-            </p>
-            <p>
-              <b>{{'DEPARTMENT_HEAD' | translate}}</b><br>
-              {{student.info.departmentHead.name}}<br>
-              {{student.info.departmentHead.phone}}
-            </p>
-            <p>
-              <b>{{'SPORTS.SPORTS' | translate}}</b>
-            </p>
-            <!-- {{student.info.sports | json}} -->
-            <div *ngFor="let sport of student.info.sports">
-              {{sport | translate}}</div>
+    @for (student of students; track student.id) {
+      <tr>
+        <td class="text-center first-col no-border">
+          <ul class="info">
+            <ng-template #popTitleInfo>
+              {{ "info" | translate }}
+            </ng-template>
+            <ng-template #popContentInfo>
+              <p>
+                <b>{{ "emergency" | translate }}</b
+                ><br />
+                {{ student.info.emergency.name }}<br />
+                {{ student.info.emergency.phone }}
+              </p>
+              <p>
+                <b>{{ "departmentHead" | translate }}</b
+                ><br />
+                {{ student.info.departmentHead.name }}<br />
+                {{ student.info.departmentHead.phone }}
+              </p>
+              <p>
+                <b>{{ "sports.sports" | translate }}</b>
+              </p>
+              <!-- {{student.info.sports | json}} -->
+              @for (sport of student.info.sports; track sport) {
+                {{ sport | translate }}
+              }
+            </ng-template>
+            <li>
+              <i
+                class="fa fa-circle-info my-2"
+                [ngbPopover]="popContentInfo"
+                [popoverTitle]="popTitleInfo"
+                placement="right"
+                container="body"
+              ></i>
+              <!-- [style.lineHeight.px]="(student.issues.length === 0) ? 100: 50" -->
+            </li>
+            <ng-template #popTitleIssue>
+              {{ "issues" | translate }}
+            </ng-template>
+            <ng-template #popContentIssue>
+              {{ student.issues }}
+            </ng-template>
+            <li
+              [ngStyle]="{
+                visibility: student.issues.length > 0 ? 'visible' : 'hidden',
+              }"
+            >
+              @if (student.issues.length > 0) {
+                <i
+                  class="fa fa-heart text-danger"
+                  placement="right"
+                  [ngbPopover]="popContentIssue"
+                  [popoverTitle]="popTitleIssue"
+                  container="body"
+                ></i>
+              }
+            </li>
+          </ul>
+        </td>
 
-          </ng-template>
-          <li><i
-              class="fa fa-circle-info my-2"
-              [ngbPopover]="popContentInfo"
-              [popoverTitle]="popTitleInfo"
-              placement="right"
-              container="body"
-            ></i>
-            <!-- [style.lineHeight.px]="(student.issues.length === 0) ? 100: 50" -->
-          </li>
-          <ng-template #popTitleIssue>
-            {{'ISSUES' | translate}}
-          </ng-template>
-          <ng-template #popContentIssue>
-            {{student.issues}}
-          </ng-template>
-          <li [ngStyle]="{'visibility': student.issues.length > 0 ?  'visible' : 'hidden'}">
-            <i
-              class="fa fa-heart text-danger"
-              *ngIf="student.issues.length > 0"
-              placement="right"
-              [ngbPopover]="popContentIssue"
-              [popoverTitle]="popTitleIssue"
-              container="body"
-            ></i>
-          </li>
+        <td class="student" [style.lineHeight.px]="50">
+          {{ student.firstName }} {{ student.lastName }}
+        </td>
 
-        </ul>
-      </td>
+        <td class="notes-col">
+          <ul class="notes">
+            <li>
+              <i
+                class="fa-regular fa-note-sticky"
+                (click)="openModal(NOTETYPE.GOOD, student)"
+              ></i>
+            </li>
+            <li>
+              <i
+                class="fa-regular fa-note-sticky text-danger"
+                (click)="openModal(NOTETYPE.BAD, student)"
+              ></i>
+            </li>
+          </ul>
+        </td>
 
-      <td
-        class="student"
-        [style.lineHeight.px]="50"
-      >{{student.firstName}} {{student.lastName}}</td>
-
-      <td class="notes-col">
-        <ul class="notes">
-          <li><i
-              class="fa-regular fa-note-sticky"
-              (click)="openModal(NOTETYPE.GOOD, student)"
-            ></i>
-          </li>
-          <li><i
-              class="fa-regular fa-note-sticky text-danger"
-              (click)="openModal(NOTETYPE.BAD, student)"
-            ></i>
-          </li>
-        </ul>
-
-
-      </td>
-
-      <td class="options">
-        <app-options (selectedOption)="fetchSelectedOption($event)"></app-options>
-      </td>
-    </tr>
+        <td class="options">
+          <app-options
+            (selectedOption)="fetchSelectedOption($event)"
+          ></app-options>
+        </td>
+      </tr>
+    }
   </tbody>
 </table>

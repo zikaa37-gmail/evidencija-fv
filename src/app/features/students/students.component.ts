@@ -1,38 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
-import { CalendarHelperService } from '../calendar/calendar.helper.service';
+import { TranslateModule } from '@ngx-translate/core';
+// import { ToastrService } from 'ngx-toastr';
+import { sections } from '../calendar/calendar.service';
 import { Section, Student } from './students.interface';
 import { StudentsService } from './students.service';
+import { CommonModule } from '@angular/common';
+import { CardComponent } from 'src/app/shared/components/card/card.component';
+import { DepartmentSelectorComponent } from 'src/app/shared/department-selector/department-selector.component';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+  styleUrls: ['./students.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    TranslateModule,
+    CardComponent,
+    DepartmentSelectorComponent,
+  ],
 })
 export class StudentsComponent implements OnInit {
-  students$ = this.studentsService.students$;//.getStudents();
-  filteredStudents$ = this.studentsService.filteredStudents$;//: Student[] = [];
-  sections$ = this.helper.getSections();
+  // private toaster = inject(ToastrService);
+  // private translate = inject(TranslateService);
+  private router = inject(Router);
+  studentsService = inject(StudentsService);
+  // students$ = this.studentsService.students(); //.getStudents();
+  // filteredStudents$ = this.studentsService.filteredStudents$; //: Student[] = [];
+  sections$ = sections();
   // TODO
   // sections$ = this.studentsService.sections$;
   selectedSection: Section = {
     grade: '5',
-    department: '1'
+    department: '1',
   };
   selectedStudent: Student | null = null;
 
-  constructor(
-    private studentsService: StudentsService,
-    private toaster: ToastrService,
-    private translate: TranslateService,
-    private router: Router,
-    private helper: CalendarHelperService, // TODO remove
-  ) { }
-
   ngOnInit(): void {
-    this.studentsService.getStudents().subscribe();
+    // this.studentsService.getSections(); //.subscribe();
+    this.studentsService.getAllStudents(); //.subscribe();
   }
 
   setSelectedSection(grade: string, department: string) {
@@ -41,7 +48,10 @@ export class StudentsComponent implements OnInit {
 
   onSectionChange(section: any) {
     this.selectedSection = section;
-    this.setSelectedSection(this.selectedSection.grade, this.selectedSection.department);
+    this.setSelectedSection(
+      this.selectedSection.grade,
+      this.selectedSection.department,
+    );
   }
 
   onStudentDelete(student: Student) {
@@ -55,7 +65,7 @@ export class StudentsComponent implements OnInit {
   }
 
   gotoUpload() {
-    this.router.navigate(['students/upload'])
+    this.router.navigate(['students/upload']);
   }
   // saveStudents() {
   //   this.studentsService.saveStudents(this.students).subscribe(() => {

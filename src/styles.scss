@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import './theme/theme-variables.scss';
-@import './theme/theme-overides.scss';
-@import 'ngx-toastr/toastr';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./theme/theme-variables.scss";
+@import "./theme/theme-overides.scss";
+@import "ngx-toastr/toastr";
 
 html,
 body {
@@ -9,18 +10,17 @@ body {
 }
 
 body {
-  margin     : 0;
+  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size  : 16px;
+  font-size: 16px;
 
-  @media screen and (max-device-width:640px),
-  screen and (max-width:640px) {
+  @media screen and (max-device-width: 640px), screen and (max-width: 640px) {
     font-size: 14px;
   }
 }
 
 .container-fluid {
-  margin : 0;
+  margin: 0;
   padding: 0;
 }
 
@@ -29,3 +29,6 @@ i,
 .pointer {
   cursor: pointer;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
