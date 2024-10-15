@@ -1,0 +1,66 @@
+@import 'src/theme/theme-variables.scss';
+
+.departments {
+  background   : $white;
+  margin       : 0;
+  padding      : 5px;
+  width        : 360px;
+  text-align   : center;
+  border-bottom: solid 1px $li-grey;
+
+  li {
+    list-style-type: none;
+    display        : inline-block;
+    width          : 50px;
+    height         : 50px;
+    text-align     : center;
+    vertical-align : middle;
+    margin         : 5px;
+    font-size      : 12px;
+    line-height    : 30px;
+    color          : $li-grey-color;
+    cursor         : pointer;
+    padding        : 10px 0;
+    background     : $li-grey;
+
+    &:hover {
+      background: $li-hover;
+      color     : white;
+    }
+  }
+}
+
+.selected-departments {
+  background   : $white;
+  margin       : 0;
+  margin-bottom: 10px;
+  padding      : 5px;
+  width        : 360px;
+  text-align   : center;
+  border-bottom: solid 1px $li-grey;
+
+  li {
+    list-style-type: none;
+    display        : inline-block;
+    width          : 50px;
+    height         : 50px;
+    text-align     : center;
+    vertical-align : middle;
+    margin         : 5px;
+    font-size      : 12px;
+    line-height    : 30px;
+    color          : $white;
+    cursor         : pointer;
+    padding        : 10px 0;
+    background     : $li-active;
+
+    &:hover {
+      background: $li-hover;
+      color     : white;
+    }
+  }
+}
+
+button {
+  width: 200px;
+}

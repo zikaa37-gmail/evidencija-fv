@@ -1,0 +1,17 @@
+<app-department-selector />
+
+@if (studentsService.existingSections()) {
+  <app-month-selector
+    [month]="selectedMonth"
+    [monthIndex]="selectedMonthIndex"
+    [year]="selectedYear"
+    (action)="onMonthChange($event)"
+  ></app-month-selector>
+
+  <app-calendar-body
+    [dates]="dates"
+    [days]="days"
+    [selected]="selectedDate"
+    (selectedDate)="onDateSelect($event)"
+  ></app-calendar-body>
+}

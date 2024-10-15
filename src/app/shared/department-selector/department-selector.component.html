@@ -1,0 +1,43 @@
+{{ panelOpenState() }}
+<mat-accordion>
+  <mat-expansion-panel
+    class="bg-primary"
+    [expanded]="panelOpenState()"
+    (click)="togglePanel()"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ "section" | translate }}
+      </mat-panel-title>
+      <!-- @if (display) { -->
+      <mat-panel-description class="department">
+        {{ studentsService.selectedSection().grade }} -
+        {{ studentsService.selectedSection().department }}
+      </mat-panel-description>
+      <!-- } -->
+    </mat-expansion-panel-header>
+
+    @for (
+      sectionArray of studentsService.existingSections();
+      let i = $index;
+      track sectionArray
+    ) {
+      <ul class="departments" (click)="panelOpenState.set(true)">
+        @for (section of sectionArray; track section) {
+          <li
+            class="border"
+            (click)="onSectionSelect(section.grade, section.department)"
+            [ngClass]="{
+              active:
+                studentsService.selectedSection().grade === section.grade &&
+                studentsService.selectedSection().department ===
+                  section.department,
+            }"
+          >
+            {{ section.grade }}-{{ section.department }}
+          </li>
+        }
+      </ul>
+    }
+  </mat-expansion-panel>
+</mat-accordion>

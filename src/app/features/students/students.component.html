@@ -1,0 +1,36 @@
+<div class="d-flex flex-row justify-content-between no-wrap my-4 mx-2">
+  <h4>{{ "students.students" | translate }}</h4>
+
+  <button class="btn btn-primary" (click)="gotoUpload()">
+    {{ "students.upload" | translate }}
+  </button>
+</div>
+
+<hr />
+@if (studentsService.existingSections().length) {
+  <app-department-selector />
+}
+
+<hr />
+
+<div
+  class="d-flex flex-row justify-content-around flex-wrap overflow-auto card-container"
+>
+  @if (
+    studentsService.filteredStudents() &&
+    studentsService.filteredStudents().length
+  ) {
+    @for (student of studentsService.filteredStudents(); track student) {
+      <app-card
+        class="mx-2 my-2"
+        [item]="student"
+        (deletedItem)="onStudentDelete($event)"
+        (publishedItem)="onStudentPublish($event)"
+      ></app-card>
+    }
+  } @else {
+    @if (studentsService.selectedSection()) {
+      No items
+    }
+  }
+</div>

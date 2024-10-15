@@ -1,0 +1,58 @@
+<h3 class="text-center my-4">
+  {{ "selectSections" | translate }}
+</h3>
+
+<div
+  class="d-flex"
+  [ngClass]="{
+    'flex-column': (globalService.isMobile$ | async),
+    'flex-row justify-content-around mx-3': !(globalService.isMobile$ | async),
+  }"
+>
+  <div class="border my-4">
+    <h5 class="text-center mt-3">Mogucnosti</h5>
+    @for (
+      section of studentsService.possibleSections();
+      let i = $index;
+      track section
+    ) {
+      <ul class="departments">
+        @for (item of section; track item) {
+          <li
+            class="border"
+            (click)="onSectionSelect(item.grade, item.department, i)"
+          >
+            {{ item.grade }}-{{ item.department }}
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  <div class="border my-4">
+    <h5 class="text-center mt-3">Odabrano</h5>
+
+    @for (
+      section of studentsService.existingSections();
+      let i = $index;
+      track section
+    ) {
+      <ul class="selected-departments">
+        @for (item of section; track item) {
+          <li
+            class="border"
+            (click)="onSectionSelect(item.grade, item.department, i)"
+          >
+            {{ item.grade }}-{{ item.department }}
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</div>
+
+<div class="d-flex flex-row justify-content-around">
+  <button class="my-4" mat-raised-button color="primary" (click)="save()">
+    {{ "buttons.save" | translate }}
+  </button>
+</div>

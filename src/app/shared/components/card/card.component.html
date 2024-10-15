@@ -1,0 +1,52 @@
+<mat-card [ngClass]="{ inactive: item.status === 'inactive' }">
+  <mat-card-header>
+    <div class="d-flex flex-row justify-content-between no-wrap w-100">
+      <h4>{{ item.firstName }} {{ item.lastName }}</h4>
+
+      @if (item.status === "active") {
+        <mat-icon class="pointer" (click)="onItemDelete()">delete</mat-icon>
+      }
+      @if (item.status === "inactive") {
+        <mat-icon class="pointer" (click)="onItemPublish()">star</mat-icon>
+      }
+    </div>
+  </mat-card-header>
+
+  <hr />
+
+  <mat-card-content>
+    <p><b>Sex:</b> {{ item.sex }}</p>
+    @if (item.issues && item.issues.length) {
+      <p class="danger"><b>Issues:</b> {{ item.issues }}</p>
+    }
+    <p><b>Emergency</b></p>
+    <p class="tab"><b>Contact person:</b> {{ item.info.emergency.name }}</p>
+    <p class="tab">
+      <b>Contact phone number:</b> {{ item.info.emergency.phone }}
+    </p>
+    <p><b>Department Head</b></p>
+    <p class="tab"><b>Contact name:</b> {{ item.info.departmentHead.name }}</p>
+    <p class="tab">
+      <b>Contact phone number:</b> {{ item.info.departmentHead.phone }}
+    </p>
+    <!-- <p><b>Status:</b> {{item.status}}</p> -->
+  </mat-card-content>
+
+  <!-- <mat-card-footer class="text-right">
+    <hr>
+    <div class="d-flex flex-row justify-content-end">
+      <mat-icon
+        *ngIf="item.status === 'active'"
+        class="pointer m-2"
+        (click)="onItemDelete()"
+      >delete</mat-icon>
+
+      <mat-icon
+        *ngIf="item.status === 'inactive'"
+        class="pointer m-2"
+        (click)="onItemPublish()"
+      >star</mat-icon>
+    </div>
+
+  </mat-card-footer> -->
+</mat-card>

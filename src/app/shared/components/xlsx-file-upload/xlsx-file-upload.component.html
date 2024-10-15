@@ -1,0 +1,12 @@
+<input
+  type="file"
+  multiple="false"
+  (change)="onFileChange($event)"
+  #fileUploader
+  accept=".xlsx, .xls"
+  class="d-none"
+/>
+
+<button class="btn btn-success" (click)="fileUploader.click()">
+  {{ "students.select" | translate }}
+</button>

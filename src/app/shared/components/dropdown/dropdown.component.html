@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+  <mat-label>Font size</mat-label>
+  <mat-select>
+    @for (item of items; track item) {
+      <mat-option [value]="item.value">10px</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-default">
+  <div class="container-fluid mx-3">
+    <a class="navbar-brand" title="Evidencija" alt="Evidencija"
+      ><img src="images/logo.png" class="img"
+    /></a>
+    <!-- athletics- -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#content"
+      aria-controls="content"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="content">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="['calendar']"
+            [routerLinkActive]="['router-link-active']"
+            >{{ "menu.calendar" | translate }}</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ "menu.students" | translate }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['students/upload']"
+                [routerLinkActive]="['router-link-active']"
+                >{{ "menu.studentsUpload" | translate }}</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['students']"
+                [routerLinkActive]="['router-link-active']"
+                >{{ "menu.studentsList" | translate }}</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['students/departments']"
+                [routerLinkActive]="['router-link-active']"
+                >{{ "menu.departments" | translate }}</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <form class="d-flex">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        >
+        <button
+          class="btn btn-outline-success"
+          type="submit"
+        >Search</button>
+      </form> -->
+    </div>
+  </div>
+</nav>

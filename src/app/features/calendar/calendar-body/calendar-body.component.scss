@@ -1,0 +1,51 @@
+@import 'src/theme/theme-variables.scss';
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+  margin          : 0;
+  padding         : 10px 0;
+  background-color: #ddd;
+}
+
+.weekdays li {
+  display   : inline-block;
+  width     : 13.6%;
+  color     : #666;
+  text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+  padding   : 10px 0;
+  background: #eee;
+  margin    : 0;
+}
+
+.days li {
+  list-style-type: none;
+  display        : inline-block;
+  width          : 13.6%;
+  text-align     : center;
+  margin-bottom  : 5px;
+  font-size      : 12px;
+  line-height    : 30px;
+  color          : #777;
+  cursor         : pointer;
+
+  &:hover span {
+    background: #666;
+    color     : white;
+    display   : inline-block;
+    width     : 30px;
+    height    : 30px;
+  }
+}
+
+/* Highlight the "current" day */
+.days li .active {
+  background: $success; //$primary; //$default; // #1abc9c;
+  color     : white !important;
+  display   : inline-block;
+  width     : 30px;
+  height    : 30px;
+}
