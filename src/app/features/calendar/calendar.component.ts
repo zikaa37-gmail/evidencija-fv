@@ -47,7 +47,6 @@ export class CalendarComponent {
   selectedDate = this.today.getDate().toString();
   selectedDateName = moment(this.today).format('dddd');
   section!: Section;
-  isMobile = this.globalService.isMobileSubject.getValue();
 
   onMonthChange(action: any) {
     if (action === 'prev') {
@@ -122,7 +121,7 @@ export class CalendarComponent {
   openModal() {
     const dialogRef = this.dialog.open(RecordsComponent, {
       height: 'auto',
-      width: this.isMobile ? '100vw' : '600px',
+      width: this.globalService.isMobile() ? '100vw' : '600px',
       maxWidth: '100vw',
       panelClass: 'user-dialog',
       disableClose: true,

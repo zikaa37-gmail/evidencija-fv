@@ -5,8 +5,8 @@
 <div
   class="d-flex"
   [ngClass]="{
-    'flex-column': (globalService.isMobile$ | async),
-    'flex-row justify-content-around mx-3': !(globalService.isMobile$ | async),
+    'flex-column': globalService.isMobile(),
+    'flex-row justify-content-around mx-3': !globalService.isMobile(),
   }"
 >
   <div class="border my-4">

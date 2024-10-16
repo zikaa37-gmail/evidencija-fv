@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { GlobalService } from 'src/app/shared/services/global.service';
 
@@ -11,12 +18,11 @@ import { GlobalService } from 'src/app/shared/services/global.service';
   imports: [CommonModule, TranslateModule],
 })
 export class CalendarBodyComponent {
+  protected globalService = inject(GlobalService);
   @Input() dates!: string[];
   @Input() days!: string[];
   @Input() selected!: string;
   @Output() selectedDate = new EventEmitter<string>();
-
-  constructor(public globalService: GlobalService) {}
 
   onDateSelect(date: string) {
     this.selectedDate.emit(date);

@@ -25,18 +25,18 @@ import { RecordsService } from './records.service';
 })
 export class RecordsComponent {
   private recordsService = inject(RecordsService);
-  public globalService = inject(GlobalService);
+  protected globalService = inject(GlobalService);
   private dialog = inject(MatDialog);
-  record!: Record;
+  protected record!: Record;
   selectedDate!: Date;
-  options = this.recordsService.getOptions();
-  students = this.recordsService.getStudents();
-  isMobile!: boolean;
-  public NOTETYPE = NOTETYPE;
+  protected options = this.recordsService.getOptions();
+  protected students = this.recordsService.getStudents();
+  // isMobile!: boolean;
+  protected NOTETYPE = NOTETYPE;
 
-  constructor() {
-    this.globalService.isMobile$.subscribe((x) => (this.isMobile = x));
-  }
+  // constructor() {
+  //   this.globalService.isMobile$.subscribe((x) => (this.isMobile = x));
+  // }
 
   fetchSelectedOption(option: any) {
     console.log('selectedOption', option);
@@ -45,7 +45,7 @@ export class RecordsComponent {
   openNotesModal(type: string, student: Student) {
     const dialogRef = this.dialog.open(RecordsModalComponent, {
       height: 'auto',
-      width: this.isMobile ? '100vw' : '600px',
+      width: this.globalService.isMobile() ? '100vw' : '600px',
       maxWidth: '100vw',
       panelClass: 'user-dialog',
       disableClose: true,

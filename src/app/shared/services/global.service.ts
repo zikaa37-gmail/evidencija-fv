@@ -1,11 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import {
-  BehaviorSubject,
   debounceTime,
   distinctUntilChanged,
   map,
-  Observable,
   fromEvent,
   startWith,
   tap,
@@ -15,8 +13,6 @@ import {
   providedIn: 'root',
 })
 export class GlobalService {
-  isMobileSubject = new BehaviorSubject<boolean>(false);
-  isMobile$ = this.isMobileSubject.asObservable();
   isMobile = signal<boolean>(window.innerWidth < 480);
 
   isLoginUrl = signal<boolean>(false);
@@ -30,11 +26,11 @@ export class GlobalService {
     });
 
     this._resize$ = fromEvent(window, 'resize').pipe(
-      debounceTime(200),
+      // debounceTime(200),
       map(() => window.innerWidth),
       distinctUntilChanged(),
       startWith(window.innerWidth),
-      tap((width) => this.isMobileSubject.next(!!(width < 768))),
+      tap((width) => this.isMobile.set(!!(width < 768))),
     );
     this._resize$.subscribe();
   }
