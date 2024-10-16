@@ -8,12 +8,10 @@
       <mat-panel-title>
         {{ "section" | translate }}
       </mat-panel-title>
-      <!-- @if (display) { -->
       <mat-panel-description class="department">
         {{ studentsService.selectedSection().grade }} -
         {{ studentsService.selectedSection().department }}
       </mat-panel-description>
-      <!-- } -->
     </mat-expansion-panel-header>
 
     @for (
