@@ -9,27 +9,6 @@ export interface Student {
   status: string; //Statuses;
 }
 
-// export class Student {
-//   id: string | number | null = null;
-//   firstName: string = '';
-//   lastName: string = '';
-//   sex: Sex = 'male'; // Sexes;
-//   section: Section = { grade: '', department: '' };
-//   issues: string[] = [];
-//   info: Info = {
-//     emergency: {
-//       name: '',
-//       phone: '',
-//     },
-//     departmentHead: {
-//       name: '',
-//       phone: '',
-//     },
-//     sports: [],
-//   };
-//   status: string = ''; //Statuses;
-// }
-
 export interface Info {
   emergency: NameNumber;
   departmentHead: NameNumber;
