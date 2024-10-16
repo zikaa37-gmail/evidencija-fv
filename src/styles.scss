@@ -31,4 +31,8 @@ i,
 }
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
+
+.mat-mdc-dialog-container {
+  margin: 10px !important;
+}

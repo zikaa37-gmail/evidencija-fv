@@ -1,4 +1,4 @@
-import { Student } from "../../students/students.interface";
+import { Student } from '../../students/students.interface';
 
 export interface Record {
   id: string | number;
@@ -7,15 +7,16 @@ export interface Record {
   note: {
     type: NoteTypes;
     text: string;
-  }
+  };
   recordDate: Date;
 }
 
 export interface OptionItem {
-  id: string | number,
-  option: string,
-  icon: string,
-  selected: boolean
+  id: string | number;
+  option: string;
+  icon: string;
+  selected: boolean;
+  bgColor: 'primary' | 'accent';
 }
 
 export interface Note {
@@ -29,11 +30,16 @@ export enum RecordOptions {
   'PITY' = 'pity',
   'LATE' = 'late',
   'ILL' = 'ill',
-  'ABSEND' = 'absend',
-  'NONE' = 'none'
+  'ABSENT' = 'absent',
+  'NONE' = 'none',
 }
 
 export enum NoteTypes {
   'POSITIVE' = 'positive',
   'NEGATIVE' = 'negative',
 }
+
+export const NOTETYPE = {
+  GOOD: 'good',
+  BAD: 'bad',
+};

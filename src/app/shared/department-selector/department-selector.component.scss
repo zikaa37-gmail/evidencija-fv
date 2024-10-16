@@ -1,4 +1,7 @@
 @import "src/theme/theme-variables.scss";
+.mat-expansion-panel-header-description {
+  flex-grow: 1 !important;
+}
 
 .departments li {
   list-style-type: none;

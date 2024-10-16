@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GlobalService } from 'src/app/shared/services/global.service';
 import { Student } from '../../students/students.interface';
-import { NOTETYPE } from './records-modal/recodrs-modal.constants';
 import { RecordsModalComponent } from './records-modal/records-modal.component';
-import { RecordsHelperService } from './records.helper.service';
-import { Record } from './records.interface';
+import { NOTETYPE, Record } from './records.interface';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { OptionsComponent } from 'src/app/shared/components/options/options.component';
+import { RecordsService } from './records.service';
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
@@ -24,29 +23,26 @@ import { OptionsComponent } from 'src/app/shared/components/options/options.comp
     OptionsComponent,
   ],
 })
-export class RecordsComponent implements OnInit {
+export class RecordsComponent {
+  private recordsService = inject(RecordsService);
+  public globalService = inject(GlobalService);
+  private dialog = inject(MatDialog);
   record!: Record;
   selectedDate!: Date;
-  options = this.helper.getOptions();
-  students = this.helper.getStudents();
+  options = this.recordsService.getOptions();
+  students = this.recordsService.getStudents();
   isMobile!: boolean;
   public NOTETYPE = NOTETYPE;
 
-  constructor(
-    private helper: RecordsHelperService,
-    public globalService: GlobalService,
-    private dialog: MatDialog,
-  ) {
+  constructor() {
     this.globalService.isMobile$.subscribe((x) => (this.isMobile = x));
   }
-
-  ngOnInit(): void {}
 
   fetchSelectedOption(option: any) {
     console.log('selectedOption', option);
   }
 
-  openModal(type: string, student: Student) {
+  openNotesModal(type: string, student: Student) {
     const dialogRef = this.dialog.open(RecordsModalComponent, {
       height: 'auto',
       width: this.isMobile ? '100vw' : '600px',
@@ -57,6 +53,16 @@ export class RecordsComponent implements OnInit {
 
     dialogRef.componentInstance.type = type;
     dialogRef.componentInstance.student = student;
+  }
+
+  openModal(student: Student) {
+    const dialogRef = this.dialog.open(OptionsComponent, {
+      height: 'auto',
+      width: '300px',
+      // maxWidth: '200px',
+      panelClass: 'user-dialog',
+      disableClose: true,
+    });
   }
 
   closeModal() {

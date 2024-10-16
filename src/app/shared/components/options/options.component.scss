@@ -1,39 +1,38 @@
 /* Days (1-31) */
-.options {
-  padding      : 0px 0;
-  // background: #eee;
-  margin       : 0;
-}
+// .options {
+//   padding: 0px 0;
+//   // background: #eee;
+//   margin: 0;
+// }
 
-.options li {
-  list-style-type: none;
-  display        : inline-block;
-  width          : 30px;
-  text-align     : center;
-  margin         : 2px;
-  font-size      : 12px;
-  line-height    : 30px;
-  color          : #777;
-  cursor         : pointer;
-  border         : solid 1px #666;
+// .options li {
+//   list-style-type: none;
+//   display: inline-block;
+//   width: 30px;
+//   text-align: center;
+//   margin: 2px;
+//   font-size: 12px;
+//   line-height: 30px;
+//   color: #777;
+//   cursor: pointer;
+//   border: solid 1px #666;
 
-  &:hover {
-    background: #666;
-    color     : white;
-    display   : inline-block;
-    width     : 30px;
-    height    : 30px;
-  }
+//   &:hover {
+//     background: #666;
+//     color: white;
+//     display: inline-block;
+//     width: 30px;
+//     height: 30px;
+//   }
 
-  // .active {
-  //   background: #1abc9c;
-  //   color     : white !important;
-  //   display   : inline-block;
-  //   width     : 30px;
-  //   height    : 30px;
-  // }
-
-}
+// .active {
+//   background: #1abc9c;
+//   color     : white !important;
+//   display   : inline-block;
+//   width     : 30px;
+//   height    : 30px;
+// }
+// }
 
 /* Highlight the "current" day */
 // .options li .active {
@@ -44,10 +43,19 @@
 //   height    : 30px;
 // }
 
+// .option {
+//   background-color: #34c9d9;
+//   color: white;
+
+//   &:hover {
+//     background-color: #13717b;
+//   }
+// }
+
 .active {
   background: #1abc9c;
-  color     : white !important;
-  display   : inline-block;
-  width     : 30px;
-  height    : 30px;
+  // color: white !important;
+  // display: inline-block;
+  // width: 30px;
+  // height: 30px;
 }

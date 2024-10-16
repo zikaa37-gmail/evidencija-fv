@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Section, Student } from './students.interface';
+import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ import { Section, Student } from './students.interface';
 export class StudentsService {
   private apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
+  private errorHandlerService = inject(ErrorHandlerService);
 
   sections = signal<Section[][]>([]);
   selectedSection = signal<Section>({
@@ -86,7 +88,7 @@ export class StudentsService {
   }
 
   mapStudentFromExcelData(row: any[]): Student {
-    const student: Student = new Student();
+    const student: Student = {} as Student;
     student.firstName = row[0];
     student.lastName = row[1];
     student.sex = row[2];

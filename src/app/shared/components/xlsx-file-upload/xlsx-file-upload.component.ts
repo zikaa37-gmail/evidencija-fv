@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import * as XLSX from 'xlsx';
 
@@ -8,7 +9,7 @@ import * as XLSX from 'xlsx';
   templateUrl: './xlsx-file-upload.component.html',
   styleUrls: ['./xlsx-file-upload.component.scss'],
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, MatButtonModule],
 })
 export class XlsxFileUploadComponent implements OnInit {
   allSheetsData: any[] = [];

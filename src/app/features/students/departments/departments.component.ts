@@ -12,13 +12,14 @@ import { Section } from '../students.interface';
 import { StudentsService } from '../students.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-departments',
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.scss'],
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, MatButtonModule],
 })
 export class DepartmentsComponent implements OnInit {
   studentsService = inject(StudentsService);

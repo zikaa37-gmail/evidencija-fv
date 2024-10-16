@@ -2,35 +2,36 @@ export interface Student {
   id: string | number | null;
   firstName: string;
   lastName: string;
-  sex: string;// Sexes;
+  sex: Sex; // string; // Sexes;
   section: Section;
   issues: string[];
   info: Info;
-  status: string;//Statuses;
+  status: string; //Statuses;
 }
 
-export class Student {
-  id: string | number | null = null;
-  firstName: string = '';
-  lastName: string = '';
-  sex: string = '';// Sexes;
-  section: Section = { grade: '', department: '' };
-  issues: string[] = [];
-  info: Info = {
-    emergency: {
-      name: '',
-      phone: ''
-    },
-    departmentHead: {
-      name: '',
-      phone: ''
-    }, sports: []
-  };
-  status: string = '';//Statuses;
-}
+// export class Student {
+//   id: string | number | null = null;
+//   firstName: string = '';
+//   lastName: string = '';
+//   sex: Sex = 'male'; // Sexes;
+//   section: Section = { grade: '', department: '' };
+//   issues: string[] = [];
+//   info: Info = {
+//     emergency: {
+//       name: '',
+//       phone: '',
+//     },
+//     departmentHead: {
+//       name: '',
+//       phone: '',
+//     },
+//     sports: [],
+//   };
+//   status: string = ''; //Statuses;
+// }
 
 export interface Info {
-  emergency: NameNumber,
+  emergency: NameNumber;
   departmentHead: NameNumber;
   sports: string[];
 }
@@ -48,10 +49,12 @@ export interface Section {
 export enum Statuses {
   'ACTIVE' = 'active',
   'PENDING' = 'pending',
-  'INACTIVE' = 'inactive'
+  'INACTIVE' = 'inactive',
 }
 
 export enum Sexes {
   'MALE' = 'male',
-  'FEMALE' = 'female'
+  'FEMALE' = 'female',
 }
+
+export type Sex = 'male' | 'female';

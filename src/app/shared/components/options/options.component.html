@@ -1,12 +1,17 @@
-<ul class="options">
+<div class="d-flex flex-column p-2">
   @for (option of options; track option) {
-    <li
-      class=""
+    <button
+      mat-fab
+      extended
+      [color]="option.bgColor"
+      [style.maxWidth]="150"
+      class="d-flex flex-row align-items-center py-2 m-2 option"
       (click)="setOption(option)"
       [title]="option.option | translate"
       [ngClass]="{ active: option.selected }"
     >
-      <i [class]="option.icon"></i>
-    </li>
+      <i [class]="option.icon + ' fa-2x'"></i>
+      <span class="mx-2">{{ option.option | translate }}</span>
+    </button>
   }
-</ul>
+</div>
