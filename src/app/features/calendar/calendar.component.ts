@@ -70,10 +70,6 @@ export class CalendarComponent {
     this.firstOfTheMonth = this.setFistDayOfTheMonth();
     this.numberOfDaysInMonth = this.getNumberOfDaysInMonth();
     this.setDatesOfMonth();
-
-    // console.log('Selected Month Index:', this.selectedMonthIndex);
-    // console.log('Selected Year Index:', this.selectedYearIndex);
-    // console.log('Number of Days in Month:', this.numberOfDaysInMonth);
   }
 
   onDateSelect(date: string) {
@@ -119,16 +115,18 @@ export class CalendarComponent {
   }
 
   openModal() {
-    const dialogRef = this.dialog.open(RecordsComponent, {
-      height: 'auto',
-      width: this.globalService.isMobile() ? '100vw' : '600px',
-      maxWidth: '100vw',
-      panelClass: 'user-dialog',
-      disableClose: true,
-    });
+    setTimeout(() => {
+      const dialogRef = this.dialog.open(RecordsComponent, {
+        height: 'auto',
+        width: this.globalService.isMobile() ? '100vw' : '600px',
+        maxWidth: '100vw',
+        panelClass: 'user-dialog',
+        disableClose: true,
+      });
 
-    dialogRef.componentInstance.selectedDate = new Date(
-      `${this.selectedYear}-${this.selectedMonth}-${this.selectedDate}`,
-    );
+      dialogRef.componentInstance.selectedDate = new Date(
+        `${this.selectedYear}-${this.selectedMonth}-${this.selectedDate}`,
+      );
+    }, 300);
   }
 }

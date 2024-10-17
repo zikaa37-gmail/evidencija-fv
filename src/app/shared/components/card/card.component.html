@@ -18,6 +18,8 @@
     <p><b>Sex:</b> {{ item.sex }}</p>
     @if (item.issues && item.issues.length) {
       <p class="danger"><b>Issues:</b> {{ item.issues }}</p>
+    } @else {
+      <p class=""><b>Issues:</b> -</p>
     }
     <p><b>Emergency</b></p>
     <p class="tab"><b>Contact person:</b> {{ item.info.emergency.name }}</p>

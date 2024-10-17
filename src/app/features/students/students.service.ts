@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Section, Student } from './students.interface';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
@@ -19,7 +19,7 @@ export class StudentsService {
     department: '1',
   });
   possibleSections = signal<Section[][]>([]);
-  existingSections = signal<Section[][]>([]);
+  thisYearSections = signal<Section[][]>([]);
 
   students = signal<Student[]>([]);
   filteredStudents = signal<Student[]>([]);
@@ -31,29 +31,57 @@ export class StudentsService {
 
   getSections(): void {
     //TODO
-    // return this.http.get<any[]>(`${this.apiUrl}/sections`);
-    this.sections.set(this.mockedSections());
-    this.existingSections.set(this.mockedSections());
-  }
-  // .subscribe();
+    this.http
+      .get<any[]>(`${this.apiUrl}/sections`)
+      .pipe(
+        tap((sections) => this.sections.set(sections)),
+        catchError((err) => {
+          // TODO remove on api implementation
+          this.sections.set(this.mockedSections());
+          this.thisYearSections.set(this.mockedSections());
 
-  saveSections(sections: any): Observable<any> {
-    return this.http
-      .post<any>(`${this.apiUrl}/sections`, sections)
-      .pipe(tap((sections) => this.sections.set(sections)));
+          return this.errorHandlerService.handleError(err);
+        }),
+      )
+      .subscribe();
   }
 
-  updateSections(sections: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/sections`, sections);
+  saveSections(): void {
+    const sections: Section[] = this.thisYearSections().flat();
+
+    this.http
+      .post<Section[][]>(`${this.apiUrl}/sections`, sections)
+      .pipe(
+        tap((sections) => this.sections.set(sections)),
+        tap((sections) => this.thisYearSections.set(sections)),
+        catchError((err) => this.errorHandlerService.handleError(err)),
+      )
+      .subscribe();
   }
 
-  saveStudents(students: Student[]): Observable<any> {
+  updateSections(): void {
+    const sections: Section[] = this.thisYearSections().flat();
+
+    this.http
+      .post<Section[][]>(`${this.apiUrl}/sections`, sections)
+      .pipe(
+        tap((sections) => this.sections.set(sections)),
+        tap((sections) => this.thisYearSections.set(sections)),
+        catchError((err) => this.errorHandlerService.handleError(err)),
+      )
+      .subscribe();
+  }
+
+  saveStudents(students: Student[]): void {
     const body = students.filter((s) => s.status === 'active')!;
-    // return
+
     this.http
       .post<Student[]>(`${this.apiUrl}/students`, body)
-      .pipe(tap((students) => this.students.set(students)));
-    return of(true);
+      .pipe(
+        tap((students) => this.students.set(students)),
+        catchError((err) => this.errorHandlerService.handleError(err)),
+      )
+      .subscribe();
   }
 
   getAllStudents(): void {
@@ -66,6 +94,17 @@ export class StudentsService {
     this.students.set(this.mockedStudents());
     this.filterStudents();
     // return of(this.mockedStudents());
+  }
+
+  getStudentsBySection() {
+    const grade = this.selectedSection().grade;
+    const department = this.selectedSection().department;
+    const filteredStudents = this.students().filter(
+      (student) =>
+        student.section.grade === grade &&
+        student.section.department === department,
+    );
+    this.filteredStudents.set(filteredStudents);
   }
 
   getPossibleSections(): void {
@@ -161,7 +200,7 @@ export class StudentsService {
           name: 'Dominik Vilkins',
           phone: '069/2709207',
         },
-        sports: ['basket'],
+        sports: ['basketball'],
       },
       status: 'active',
     },
@@ -184,7 +223,7 @@ export class StudentsService {
           name: 'Dominik Vilkins',
           phone: '069/2709207',
         },
-        sports: ['basket'],
+        sports: ['basketball', 'volleyball'],
       },
       status: 'active',
     },
@@ -207,7 +246,7 @@ export class StudentsService {
           name: 'Dominik Vilkins',
           phone: '069/2709207',
         },
-        sports: ['basket'],
+        sports: ['basketball'],
       },
       status: 'inactive',
     },
@@ -230,7 +269,7 @@ export class StudentsService {
           name: 'Dominik Vilkins',
           phone: '069/2709207',
         },
-        sports: ['basket'],
+        sports: ['soccer'],
       },
       status: 'active',
     },
@@ -253,7 +292,7 @@ export class StudentsService {
           name: 'Dominik Vilkins',
           phone: '069/2709207',
         },
-        sports: ['basket'],
+        sports: ['gymnastics'],
       },
       status: 'inactive',
     },
@@ -276,7 +315,7 @@ export class StudentsService {
           name: 'Dominik Vilkins',
           phone: '069/2709207',
         },
-        sports: ['basket'],
+        sports: ['basketball', 'fight'],
       },
       status: 'active',
     },
@@ -299,7 +338,7 @@ export class StudentsService {
           name: 'Dominik Vilkins',
           phone: '069/2709207',
         },
-        sports: ['basket'],
+        sports: ['basketball'],
       },
       status: 'active',
     },

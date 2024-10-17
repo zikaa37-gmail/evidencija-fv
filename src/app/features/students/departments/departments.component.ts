@@ -32,7 +32,7 @@ export class DepartmentsComponent implements OnInit {
   }
 
   getSections() {
-    this.studentsService.existingSections().forEach((row, index) => {
+    this.studentsService.thisYearSections().forEach((row, index) => {
       row.forEach((section: Section) => {
         this.filterSections(section.grade, section.department, index);
       });
@@ -53,7 +53,7 @@ export class DepartmentsComponent implements OnInit {
   onSectionSelect(grade: string, department: string, arrIndex: number) {
     const item: Section = { grade, department };
 
-    const destinationArr = this.studentsService.existingSections()[arrIndex];
+    const destinationArr = this.studentsService.thisYearSections()[arrIndex];
     const destItem = destinationArr.find(
       (el: any) => el.department === item.department,
     )!;
@@ -73,6 +73,9 @@ export class DepartmentsComponent implements OnInit {
     }
 
     destinationArr.sort();
+    console.log('sourceArr', sourceArr);
+
+    console.log('destinationArr', destinationArr);
   }
 
   addToArray(arr: Section[], item: Section) {
@@ -87,5 +90,6 @@ export class DepartmentsComponent implements OnInit {
 
   save() {
     console.log('SAVED');
+    this.studentsService.saveSections();
   }
 }

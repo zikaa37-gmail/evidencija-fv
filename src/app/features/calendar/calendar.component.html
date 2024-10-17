@@ -1,6 +1,6 @@
 <app-department-selector />
 
-@if (studentsService.existingSections()) {
+@if (studentsService.thisYearSections()) {
   <app-month-selector
     [month]="selectedMonth"
     [monthIndex]="selectedMonthIndex"

@@ -15,7 +15,7 @@
     </mat-expansion-panel-header>
 
     @for (
-      sectionArray of studentsService.existingSections();
+      sectionArray of studentsService.thisYearSections();
       let i = $index;
       track sectionArray
     ) {

@@ -3,6 +3,10 @@
 .student {
   min-width: 150px;
   word-wrap: no-break;
+
+  &:hover {
+    color: $gray-500;
+  }
 }
 
 .options {
@@ -11,68 +15,12 @@
   word-wrap: break-word;
 }
 
-table > :not(caption) > * > * {
-  padding: 0;
-}
-
-td {
-  // align-items: center;
-  line-height: 50px;
-  vertical-align: middle;
-}
-
-.first-col {
-  width: 20px;
-  word-wrap: break-word;
-  vertical-align: middle;
-}
-
-.notes-col {
-  width: 30px;
-  word-wrap: break-word;
-  vertical-align: middle;
+i {
+  &:hover {
+    color: $gray-500;
+  }
 }
 
 ::ng-deep .mat-dialog-container {
   padding: 10px !important;
-}
-
-.notes {
-  padding: 0px 0;
-  // background: #eee;
-  margin: 0;
-  margin-right: 10px;
-}
-
-.notes li {
-  list-style-type: none;
-  display: inline-block;
-  width: 30px;
-  text-align: center;
-  margin: 2px;
-  font-size: 12px;
-  line-height: 30px;
-  color: #777;
-  cursor: pointer;
-  border: solid 1px #666;
-}
-
-.info {
-  padding: 0px 0;
-  // background: #eee;
-  margin: 0;
-  margin-right: 10px;
-}
-
-.info li {
-  list-style-type: none;
-  display: inline-block;
-  width: 30px;
-  text-align: center;
-  margin: 2px;
-  font-size: 12px;
-  line-height: 30px;
-  color: #777;
-  cursor: pointer;
-  border: solid 1px #666;
 }

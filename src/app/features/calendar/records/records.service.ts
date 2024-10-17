@@ -77,80 +77,80 @@ export class RecordsService {
     ];
   }
 
-  getStudents(): Student[] {
-    return [
-      {
-        id: 1,
-        firstName: 'Petar',
-        lastName: 'Zivanovic',
-        sex: 'male',
-        section: {
-          grade: '7',
-          department: '3',
-        },
-        issues: [],
-        info: {
-          emergency: {
-            name: 'Igor Zivanovic',
-            phone: '+38163331030',
-          },
-          departmentHead: {
-            name: 'Jovan Memedovic',
-            phone: '265456554645',
-          },
-          sports: [this.translate.instant('sports.basketball')],
-        },
-        status: this.statuses.ACTIVE,
-      },
-      {
-        id: 2,
-        firstName: 'Vuk',
-        lastName: 'Zivanovic',
-        sex: 'male', //'SEXES.MALE',
-        section: {
-          grade: '5',
-          department: '2',
-        },
-        issues: ['HEART'],
-        info: {
-          emergency: {
-            name: 'Igor Zivanovic',
-            phone: '+38163331030',
-          },
-          departmentHead: {
-            name: 'Slavko Tatic',
-            phone: '658854841',
-          },
-          sports: [this.translate.instant('sports.basketball')],
-        },
-        status: this.statuses.ACTIVE,
-      },
-      {
-        id: 3,
-        firstName: 'Lidija',
-        lastName: 'Comagic Zivanovic',
-        sex: 'male', //SEXES.MALE',
-        section: {
-          grade: '5',
-          department: '2',
-        },
-        issues: ['HEAD', 'LEGS'],
-        info: {
-          emergency: {
-            name: 'Igor Zivanovic',
-            phone: '+38163331030',
-          },
-          departmentHead: {
-            name: 'Srecko Susic',
-            phone: '324322432',
-          },
-          sports: [
-            this.translate.instant('sports.gymnastics'),
-            this.translate.instant('sports.volleyball'),
-          ],
-        },
-        status: this.statuses.ACTIVE,
-      },
-    ];
-  }
+  // getStudents(): Student[] {
+  //   return [
+  //     {
+  //       id: 1,
+  //       firstName: 'Petar',
+  //       lastName: 'Zivanovic',
+  //       sex: 'male',
+  //       section: {
+  //         grade: '7',
+  //         department: '3',
+  //       },
+  //       issues: [],
+  //       info: {
+  //         emergency: {
+  //           name: 'Igor Zivanovic stariji',
+  //           phone: '+38163331030',
+  //         },
+  //         departmentHead: {
+  //           name: 'Jovan Memedovic',
+  //           phone: '265456554645',
+  //         },
+  //         sports: [this.translate.instant('sports.basketball')],
+  //       },
+  //       status: this.statuses.ACTIVE,
+  //     },
+  //     {
+  //       id: 2,
+  //       firstName: 'Vuk',
+  //       lastName: 'Zivanovic',
+  //       sex: 'male', //'SEXES.MALE',
+  //       section: {
+  //         grade: '5',
+  //         department: '2',
+  //       },
+  //       issues: ['HEART'],
+  //       info: {
+  //         emergency: {
+  //           name: 'Igor Zivanovic',
+  //           phone: '+38163331030',
+  //         },
+  //         departmentHead: {
+  //           name: 'Slavko Tatic',
+  //           phone: '658854841',
+  //         },
+  //         sports: [this.translate.instant('sports.basketball')],
+  //       },
+  //       status: this.statuses.ACTIVE,
+  //     },
+  //     {
+  //       id: 3,
+  //       firstName: 'Lidija',
+  //       lastName: 'Comagic Zivanovic',
+  //       sex: 'male', //SEXES.MALE',
+  //       section: {
+  //         grade: '5',
+  //         department: '2',
+  //       },
+  //       issues: ['HEAD', 'LEGS'],
+  //       info: {
+  //         emergency: {
+  //           name: 'Igor Zivanovic',
+  //           phone: '+38163331030',
+  //         },
+  //         departmentHead: {
+  //           name: 'Srecko Susic',
+  //           phone: '324322432',
+  //         },
+  //         sports: [
+  //           this.translate.instant('sports.gymnastics'),
+  //           this.translate.instant('sports.volleyball'),
+  //         ],
+  //       },
+  //       status: this.statuses.ACTIVE,
+  //     },
+  //   ];
+  // }
 }

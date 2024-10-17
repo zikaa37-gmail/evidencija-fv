@@ -1,62 +1,66 @@
-@import 'src/theme/theme-variables.scss';
+@import "src/theme/theme-variables.scss";
 
 .departments {
-  background   : $white;
-  margin       : 0;
-  padding      : 5px;
-  width        : 360px;
-  text-align   : center;
-  border-bottom: solid 1px $li-grey;
+  background: $white;
+  margin: 0;
+  padding: 5px;
+  width: 360px;
+  text-align: center;
+  border-bottom: solid 1px $gray-200;
 
   li {
     list-style-type: none;
-    display        : inline-block;
-    width          : 50px;
-    height         : 50px;
-    text-align     : center;
-    vertical-align : middle;
-    margin         : 5px;
-    font-size      : 12px;
-    line-height    : 30px;
-    color          : $li-grey-color;
-    cursor         : pointer;
-    padding        : 10px 0;
-    background     : $li-grey;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 5px;
+    font-size: 12px;
+    line-height: 30px;
+    color: $gray-800;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 0;
+    background: $primary;
+    border-radius: 20%;
 
     &:hover {
-      background: $li-hover;
-      color     : white;
+      background: $success;
+      color: $gray-800;
     }
   }
 }
 
 .selected-departments {
-  background   : $white;
-  margin       : 0;
+  margin: 0;
   margin-bottom: 10px;
-  padding      : 5px;
-  width        : 360px;
-  text-align   : center;
-  border-bottom: solid 1px $li-grey;
+  padding: 5px;
+  width: 360px;
+  text-align: center;
+  border-bottom: solid 1px $gray-200;
 
   li {
     list-style-type: none;
-    display        : inline-block;
-    width          : 50px;
-    height         : 50px;
-    text-align     : center;
-    vertical-align : middle;
-    margin         : 5px;
-    font-size      : 12px;
-    line-height    : 30px;
-    color          : $white;
-    cursor         : pointer;
-    padding        : 10px 0;
-    background     : $li-active;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 5px;
+    line-height: 30px;
+    background: $success;
+    color: $gray-800;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 0;
+    border-radius: 20%;
 
     &:hover {
-      background: $li-hover;
-      color     : white;
+      background: $primary;
+      color: $gray-800;
     }
   }
 }

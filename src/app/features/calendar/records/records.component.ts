@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { OptionsComponent } from 'src/app/shared/components/options/options.component';
 import { RecordsService } from './records.service';
+import { StudentsService } from '../../students/students.service';
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
@@ -23,20 +24,26 @@ import { RecordsService } from './records.service';
     OptionsComponent,
   ],
 })
-export class RecordsComponent {
+export class RecordsComponent implements OnInit {
   private recordsService = inject(RecordsService);
+  protected studentsService = inject(StudentsService);
   protected globalService = inject(GlobalService);
   private dialog = inject(MatDialog);
   protected record!: Record;
   selectedDate!: Date;
   protected options = this.recordsService.getOptions();
-  protected students = this.recordsService.getStudents();
+  protected students = this.studentsService.getAllStudents();
   // isMobile!: boolean;
   protected NOTETYPE = NOTETYPE;
 
   // constructor() {
   //   this.globalService.isMobile$.subscribe((x) => (this.isMobile = x));
   // }
+
+  ngOnInit() {
+    this.studentsService.getStudentsBySection();
+    console.log('students', this.studentsService.filteredStudents());
+  }
 
   fetchSelectedOption(option: any) {
     console.log('selectedOption', option);
