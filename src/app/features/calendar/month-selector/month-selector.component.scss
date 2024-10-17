@@ -1,42 +1,31 @@
-@import 'src/theme/theme-variables.scss';
+@import "src/theme/theme-variables.scss";
 
 ul {
   list-style-type: none;
 }
 
-body {
-  font-family: Verdana, sans-serif;
-}
-
-/* Month header */
 .month {
-  padding   : 70px 25px;
-  width     : 100%;
-  background: $success; // #1abc9c;
+  padding: 70px 25px;
+  width: 100%;
+  background: $success;
   text-align: center;
-}
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      color: $gray-800;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+  }
 
-/* Month list */
-.month ul {
-  margin : 0;
-  padding: 0;
-}
-
-.month ul li {
-  color            : white;
-  font-size        : 20px;
-  // text-transform: uppercase;
-  letter-spacing   : 3px;
-}
-
-/* Previous button inside month header */
-.month .prev {
-  float      : left;
-  padding-top: 10px;
-}
-
-/* Next button */
-.month .next {
-  float      : right;
-  padding-top: 10px;
+  .prev {
+    float: left;
+    padding-top: 10px;
+  }
+  .next {
+    float: right;
+    padding-top: 10px;
+  }
 }

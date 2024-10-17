@@ -121,5 +121,9 @@
   "toaster": {
     "success": "&#128515;",
     "saved": "Uspešno snimljeni podaci"
+  },
+  "departments": {
+    "possibilities": "Odeljenja koja nisu odabrana",
+    "selected": "Odabrana odeljenja"
   }
 }

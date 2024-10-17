@@ -10,7 +10,12 @@
   }"
 >
   <div class="border my-4">
-    <h5 class="text-center mt-3">Mogucnosti</h5>
+    <h5 class="text-center mt-3">
+      {{ "departments.possibilities" | translate }}
+    </h5>
+
+    <hr />
+
     @for (
       section of studentsService.possibleSections();
       let i = $index;
@@ -30,10 +35,14 @@
   </div>
 
   <div class="border my-4">
-    <h5 class="text-center mt-3">Odabrano</h5>
+    <h5 class="text-center mt-3">
+      {{ "departments.selected" | translate }}
+    </h5>
+
+    <hr />
 
     @for (
-      section of studentsService.existingSections();
+      section of studentsService.thisYearSections();
       let i = $index;
       track section
     ) {

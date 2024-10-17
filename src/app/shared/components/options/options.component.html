@@ -1,4 +1,8 @@
 <div class="d-flex flex-column p-2">
+  <div class="d-flex justify-content-end">
+    <i class="fa fa-2x fa-close m-2" (click)="closeModal()"></i>
+  </div>
+
   @for (option of options; track option) {
     <button
       mat-fab

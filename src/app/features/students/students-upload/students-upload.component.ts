@@ -88,10 +88,14 @@ export class StudentsUploadComponent {
     this.selectedStudent.status = 'active';
   }
 
-  saveStudents() {
-    this.studentsService.saveStudents(this.students).subscribe(() => {
-      // this.toaster.success(this.translate.instant('TOASTER.SAVED'));
-      this.router.navigate(['students']);
-    });
+  saveStudents(): void {
+    //TODO implement
+    console.log('Saved students');
+    this.router.navigate(['students']);
+
+    // this.studentsService.saveStudents(this.students).subscribe(() => {
+    //   // this.toaster.success(this.translate.instant('TOASTER.SAVED'));
+    //   this.router.navigate(['students']);
+    // });
   }
 }
