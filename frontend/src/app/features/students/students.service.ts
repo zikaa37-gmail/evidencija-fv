@@ -9,7 +9,33 @@ import { ErrorHandlerService } from '../../shared/services/error-handler.service
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { ClassesService } from '../classes/classes.service';
-import { Sex, Student, StudentStatus } from './students.interface';
+import {
+  ImportSummary,
+  Sex,
+  Student,
+  StudentImportRow,
+  StudentPayload,
+} from './students.interface';
+
+const MALE_VALUES = ['m', 'male', 'muški', 'muski', 'dečak', 'decak'];
+const FEMALE_VALUES = ['ž', 'z', 'f', 'female', 'ženski', 'zenski', 'devojčica', 'devojcica'];
+
+function splitList(value: unknown): string[] {
+  return value == null
+    ? []
+    : String(value)
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+}
+
+function parseSex(value: string): Sex | null {
+  const normalized = value.trim().toLowerCase();
+  if (MALE_VALUES.includes(normalized)) {
+    return 'male';
+  }
+  return FEMALE_VALUES.includes(normalized) ? 'female' : null;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +51,10 @@ export class StudentsService {
   #translate = inject(TranslateService);
 
   #studentsResource = httpResource<Student[]>(
-    () => (this.#auth.isAuthenticated() ? `${this.#apiUrl}/students` : undefined),
+    () =>
+      this.#auth.isAuthenticated()
+        ? { url: `${this.#apiUrl}/students/list`, method: 'POST', body: {} }
+        : undefined,
     { defaultValue: [] },
   );
 
@@ -35,7 +64,7 @@ export class StudentsService {
 
   readonly filteredStudents = computed(() =>
     this.students().filter(
-      (student) => student.className === this.#classesService.selectedClass(),
+      (student) => student.class_name === this.#classesService.selectedClass(),
     ),
   );
 
@@ -48,100 +77,99 @@ export class StudentsService {
     });
   }
 
-  saveStudents(students: Student[]): Observable<Student[]> {
-    const activeStudents = students.filter(
-      (student) => student.status === StudentStatus.ACTIVE,
-    );
-
+  create(payload: StudentPayload): Observable<Student> {
     return this.#loader
-      .track(
-        this.#http.post<Student[]>(`${this.#apiUrl}/students`, activeStudents),
-      )
+      .track(this.#http.post<Student>(`${this.#apiUrl}/students`, payload))
       .pipe(
-        tap((saved) => {
-          this.#studentsResource.value.set(saved);
-          this.#notifySuccess('saveStudentsSuccess');
+        tap((student) => {
+          this.#studentsResource.value.update((students) => [...students, student]);
+          this.#classesService.reload();
+          this.#notifySuccess('createStudentSuccess');
         }),
-        catchError((error) =>
-          this.#errorHandler.handleError(error, 'saveStudentsError'),
-        ),
+        catchError((error) => this.#errorHandler.handleError(error, 'createStudentError')),
       );
   }
 
-  deleteStudent(student: Student): void {
-    this.#loader
-      .track(this.#http.delete(`${this.#apiUrl}/students/${student.id}`))
+  update(id: number, payload: StudentPayload): Observable<Student> {
+    return this.#loader
+      .track(this.#http.put<Student>(`${this.#apiUrl}/students/${id}`, payload))
       .pipe(
-        catchError((error) =>
-          this.#errorHandler.handleError(error, 'deleteStudentsError'),
-        ),
-      )
-      .subscribe(() => {
-        this.#studentsResource.value.update((students) =>
-          students.filter((s) => s.id !== student.id),
-        );
-        this.#notifySuccess('deleteStudentsSuccess');
-      });
+        tap((student) => {
+          this.#replace(student);
+          this.#classesService.reload();
+          this.#notifySuccess('updateStudentsSuccess');
+        }),
+        catchError((error) => this.#errorHandler.handleError(error, 'updateStudentsError')),
+      );
+  }
+
+  import(rows: StudentImportRow[]): Observable<ImportSummary> {
+    return this.#loader
+      .track(this.#http.post<ImportSummary>(`${this.#apiUrl}/students/import`, { students: rows }))
+      .pipe(
+        tap((summary) => {
+          this.#studentsResource.reload();
+          this.#classesService.reload();
+          this.#notification.success(
+            this.#translate.instant('toaster.importSuccess', summary),
+          );
+        }),
+        catchError((error) => this.#errorHandler.handleError(error, 'importError')),
+      );
   }
 
   reactivateStudent(student: Student): void {
-    this.#changeStatus(student, StudentStatus.ACTIVE, 'activate', 'reactivateStudent');
+    this.#changeStatus(student, 'activate', 'reactivateStudent');
   }
 
   deactivateStudent(student: Student): void {
-    this.#changeStatus(student, StudentStatus.INACTIVE, 'deactivate', 'deactivateStudent');
+    this.#changeStatus(student, 'deactivate', 'deactivateStudent');
   }
 
-  mapStudentFromExcelData(row: unknown[]): Student {
+  parseExcelRow(row: unknown[]): StudentImportRow | null {
     const cell = (index: number) =>
       row[index] == null ? '' : String(row[index]).trim();
+    const sex = parseSex(cell(2));
+
+    if (!cell(0) || !cell(1) || !sex || !cell(3)) {
+      return null;
+    }
 
     return {
-      id: '',
-      firstName: cell(0),
-      lastName: cell(1),
-      sex: cell(2) as Sex,
-      className: cell(3),
-      classNameId: '',
-      schoolYearId: '',
-      schoolYear: '',
-      info: {
-        emergency: { name: cell(4), phone: cell(5) },
-        departmentHead: { name: cell(6), phone: cell(7) },
-        sports: cell(8)
-          .split(',')
-          .map((sport) => sport.trim())
-          .filter(Boolean),
-      },
-      status: (cell(9) as StudentStatus) || StudentStatus.ACTIVE,
-      notes: { healthIssues: [], negativeComments: [], positiveComments: [] },
+      first_name: cell(0),
+      last_name: cell(1),
+      sex,
+      class_name: cell(3).replace(/\s+/g, ''),
+      emergency_contact_name: cell(4) || null,
+      emergency_contact_phone: cell(5) || null,
+      sports: splitList(row[8]),
+      health_issues: splitList(row[10]),
     };
   }
 
   #changeStatus(
     student: Student,
-    status: StudentStatus,
     endpoint: 'activate' | 'deactivate',
     messagePrefix: string,
   ): void {
     this.#loader
-      .track(
-        this.#http.patch(
-          `${this.#apiUrl}/students/${endpoint}/${student.id}`,
-          student,
-        ),
-      )
+      .track(this.#http.patch<Student>(`${this.#apiUrl}/students/${student.id}/${endpoint}`, {}))
       .pipe(
         catchError((error) =>
-          this.#errorHandler.handleError(error, `${messagePrefix}Error`),
+          this.#errorHandler.notifyAndComplete(error, `${messagePrefix}Error`),
         ),
       )
-      .subscribe(() => {
-        this.#studentsResource.value.update((students) =>
-          students.map((s) => (s.id === student.id ? { ...s, status } : s)),
-        );
+      .subscribe((updated) => {
+        this.#replace(updated);
+        this.#classesService.reload();
         this.#notifySuccess(`${messagePrefix}Success`);
       });
+  }
+
+  #replace(student: Student): void {
+    this.#studentsResource.value.update((students) =>
+      students.map((item) => (item.id === student.id ? student : item)),
+    );
   }
 
   #notifySuccess(messageKey: string): void {

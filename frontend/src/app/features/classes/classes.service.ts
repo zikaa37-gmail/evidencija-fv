@@ -8,26 +8,24 @@ import { AuthService } from '../../core/auth/auth.service';
 import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { NotificationService } from '../../shared/services/notification.service';
-import { ActiveClass } from './classes.model';
+import { ClassSlot, SchoolClass } from './classes.model';
 
 const GRADES = [5, 6, 7, 8];
 const SECTIONS_PER_GRADE = 10;
 
-const ALL_CLASSES: ActiveClass[] = GRADES.flatMap((grade) =>
+const ALL_SLOTS: ClassSlot[] = GRADES.flatMap((grade) =>
   Array.from({ length: SECTIONS_PER_GRADE }, (_, index) => ({
-    className: `${grade}-${index + 1}`,
+    name: `${grade}-${index + 1}`,
+    grade,
+    section: index + 1,
   })),
 );
 
-function sectionOf(className: string): number {
-  return Number(className.split('-')[1]);
-}
-
-function groupByGrade(classes: ActiveClass[]): ActiveClass[][] {
+function groupByGrade<T extends ClassSlot>(classes: T[]): T[][] {
   return GRADES.map((grade) =>
     classes
-      .filter((item) => item.className.startsWith(`${grade}-`))
-      .sort((a, b) => sectionOf(a.className) - sectionOf(b.className)),
+      .filter((item) => item.grade === grade)
+      .sort((a, b) => a.section - b.section),
   ).filter((group) => group.length > 0);
 }
 
@@ -43,25 +41,33 @@ export class ClassesService {
   #notification = inject(NotificationService);
   #translate = inject(TranslateService);
 
-  #classesResource = httpResource<ActiveClass[]>(
-    () => (this.#auth.isAuthenticated() ? `${this.#apiUrl}/classes` : undefined),
+  #classesResource = httpResource<SchoolClass[]>(
+    () =>
+      this.#auth.isAuthenticated()
+        ? { url: `${this.#apiUrl}/classes/list`, method: 'POST', body: {} }
+        : undefined,
     { defaultValue: [] },
   );
 
-  #activeClasses = computed(() =>
+  readonly classes = computed(() =>
     this.#classesResource.hasValue() ? this.#classesResource.value() : [],
   );
 
+  #draft = signal<ClassSlot[] | null>(null);
+  readonly #editedSlots = computed(() => this.#draft() ?? this.classes());
+
   readonly selectedClass = signal('5-1');
 
-  readonly thisYearClasses = computed(() =>
-    groupByGrade(this.#activeClasses()),
-  );
+  readonly thisYearClasses = computed(() => groupByGrade(this.classes()));
+
+  readonly selectedSlots = computed(() => groupByGrade(this.#editedSlots()));
 
   readonly possibleClasses = computed(() => {
-    const active = new Set(this.#activeClasses().map((c) => c.className));
-    return groupByGrade(ALL_CLASSES.filter((c) => !active.has(c.className)));
+    const selected = new Set(this.#editedSlots().map((slot) => slot.name));
+    return groupByGrade(ALL_SLOTS.filter((slot) => !selected.has(slot.name)));
   });
+
+  readonly hasChanges = computed(() => this.#draft() !== null);
 
   constructor() {
     this.#loader.watch(this.#classesResource.isLoading);
@@ -72,35 +78,41 @@ export class ClassesService {
     });
   }
 
-  toggleClass(className: string): void {
-    const classes = this.#activeClasses();
-    const isActive = classes.some((c) => c.className === className);
-    this.#classesResource.value.set(
-      isActive
-        ? classes.filter((c) => c.className !== className)
-        : [...classes, { className }],
+  toggleClass(slot: ClassSlot): void {
+    const slots = this.#editedSlots();
+    const isSelected = slots.some((item) => item.name === slot.name);
+    this.#draft.set(
+      isSelected
+        ? slots.filter((item) => item.name !== slot.name)
+        : [...slots, { name: slot.name, grade: slot.grade, section: slot.section }],
     );
   }
 
+  discardChanges(): void {
+    this.#draft.set(null);
+  }
+
   saveClasses(): void {
+    const classes = this.#editedSlots().map(({ grade, section }) => ({ grade, section }));
+
     this.#loader
-      .track(
-        this.#http.post<ActiveClass[]>(
-          `${this.#apiUrl}/classes`,
-          this.#activeClasses(),
-        ),
-      )
+      .track(this.#http.post<SchoolClass[]>(`${this.#apiUrl}/classes/sync`, { classes }))
       .pipe(
         catchError((error) =>
-          this.#errorHandler.handleError(error, 'saveClassesError'),
+          this.#errorHandler.notifyAndComplete(error, 'saveClassesError'),
         ),
       )
-      .subscribe((classes) => {
-        this.#classesResource.value.set(classes);
+      .subscribe((saved) => {
+        this.#classesResource.value.set(saved);
+        this.#draft.set(null);
         this.#notification.success(
           this.#translate.instant('toaster.saveClassesSuccess'),
         );
       });
+  }
+
+  reload(): void {
+    this.#classesResource.reload();
   }
 
   setSelectedClass(className: string): void {

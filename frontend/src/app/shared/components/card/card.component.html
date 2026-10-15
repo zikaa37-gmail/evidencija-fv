@@ -1,27 +1,40 @@
 <mat-card [class.inactive]="item().status === 'inactive'">
   <mat-card-header>
     <div class="d-flex flex-row justify-content-between no-wrap w-100">
-      <h4>{{ item().firstName }} {{ item().lastName }}</h4>
+      <h4>{{ item().first_name }} {{ item().last_name }}</h4>
 
-      @if (item().status === "active") {
-        <button
-          type="button"
-          class="plain-button"
-          [attr.aria-label]="'buttons.delete' | translate"
-          (click)="onItemDelete()"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-      }
-      @if (item().status === "inactive") {
-        <button
-          type="button"
-          class="plain-button"
-          [attr.aria-label]="'buttons.reactivate' | translate"
-          (click)="onItemPublish()"
-        >
-          <mat-icon>star</mat-icon>
-        </button>
+      @if (editable()) {
+        <div class="d-flex flex-row no-wrap">
+          @if (allowEdit()) {
+            <button
+              type="button"
+              class="plain-button mx-1"
+              [attr.aria-label]="'buttons.edit' | translate"
+              (click)="edited.emit(item())"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          }
+          @if (item().status === "active") {
+            <button
+              type="button"
+              class="plain-button mx-1"
+              [attr.aria-label]="'buttons.delete' | translate"
+              (click)="deletedItem.emit(item())"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          } @else {
+            <button
+              type="button"
+              class="plain-button mx-1"
+              [attr.aria-label]="'buttons.reactivate' | translate"
+              (click)="reactivatedItem.emit(item())"
+            >
+              <mat-icon>star</mat-icon>
+            </button>
+          }
+        </div>
       }
     </div>
   </mat-card-header>
@@ -36,13 +49,10 @@
 
     <p>
       <b>{{ "issues" | translate }}:</b><br />
-
-      @if (item().notes.healthIssues && item().notes.healthIssues.length > 0) {
-        @for (issue of item().notes.healthIssues; track issue) {
-          {{ issue }}
-          <br />
-        }
-      } @else {
+      @for (issue of item().health_issues; track $index) {
+        {{ issue }}
+        <br />
+      } @empty {
         -
       }
     </p>
@@ -52,22 +62,22 @@
     </p>
     <p>
       <i class="fa fa-user mx-2"></i>
-      {{ item().info ? item().info.emergency.name : "N/A" }}
+      {{ item().emergency_contact_name || "-" }}
     </p>
     <p>
       <i class="fa fa-phone mx-2"></i>
-      {{ item().info.emergency.phone }}
+      {{ item().emergency_contact_phone || "-" }}
     </p>
     <p>
       <b>{{ "departmentHead" | translate }}</b>
     </p>
     <p>
       <i class="fa fa-user mx-2"></i>
-      {{ item().info.departmentHead.name }}
+      {{ item().head_teacher_name || "-" }}
     </p>
     <p>
       <i class="fa fa-phone mx-2"></i>
-      {{ item().info.departmentHead.phone }}
+      {{ item().head_teacher_phone || "-" }}
     </p>
   </mat-card-content>
 </mat-card>

@@ -17,14 +17,9 @@ import { Student } from '../../../features/students/students.interface';
 })
 export class CardComponent {
   readonly item = input.required<Student>();
+  readonly editable = input(false);
+  readonly allowEdit = input(true);
   readonly deletedItem = output<Student>();
   readonly reactivatedItem = output<Student>();
-
-  onItemDelete(): void {
-    this.deletedItem.emit(this.item());
-  }
-
-  onItemPublish(): void {
-    this.reactivatedItem.emit(this.item());
-  }
+  readonly edited = output<Student>();
 }

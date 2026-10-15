@@ -19,14 +19,14 @@
 
     @for (group of classesService.possibleClasses(); track $index) {
       <ul class="classes">
-        @for (item of group; track item.className) {
+        @for (item of group; track item.name) {
           <li class="border">
             <button
               type="button"
               class="plain-button fill"
-              (click)="classesService.toggleClass(item.className)"
+              (click)="classesService.toggleClass(item)"
             >
-              {{ item.className }}
+              {{ item.name }}
             </button>
           </li>
         }
@@ -41,16 +41,16 @@
 
     <hr />
 
-    @for (group of classesService.thisYearClasses(); track $index) {
+    @for (group of classesService.selectedSlots(); track $index) {
       <ul class="selected-classes">
-        @for (item of group; track item.className) {
+        @for (item of group; track item.name) {
           <li class="border">
             <button
               type="button"
               class="plain-button fill"
-              (click)="classesService.toggleClass(item.className)"
+              (click)="classesService.toggleClass(item)"
             >
-              {{ item.className }}
+              {{ item.name }}
             </button>
           </li>
         }
@@ -63,7 +63,17 @@
   <button
     class="my-4"
     mat-raised-button
+    [disabled]="!classesService.hasChanges()"
+    (click)="classesService.discardChanges()"
+  >
+    {{ "buttons.cancel" | translate }}
+  </button>
+  <button
+    class="my-4"
+    mat-raised-button
     color="primary"
+    data-testid="save-classes"
+    [disabled]="!classesService.hasChanges()"
     (click)="classesService.saveClasses()"
   >
     {{ "buttons.save" | translate }}

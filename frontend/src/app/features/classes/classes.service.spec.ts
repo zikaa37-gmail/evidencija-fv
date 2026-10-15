@@ -10,7 +10,12 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { environment } from '../../../environments/environment';
 import { ClassesService } from './classes.service';
 
-const CLASSES_URL = `${environment.apiUrl}/classes`;
+const CLASSES_URL = `${environment.apiUrl}/classes/list`;
+
+function schoolClass(name: string) {
+  const [grade, section] = name.split('-').map(Number);
+  return { id: grade * 100 + section, name, grade, section, head_teacher_name: null, head_teacher_phone: null, students_count: 0 };
+}
 
 function configure(): HttpTestingController {
   TestBed.configureTestingModule({
@@ -31,15 +36,15 @@ describe('ClassesService', () => {
     TestBed.inject(ClassesService);
     TestBed.tick();
 
-    http.expectNone(CLASSES_URL);
+    http.expectNone(() => true);
   });
 
   describe('when logged in', () => {
     let service: ClassesService;
     let http: HttpTestingController;
 
-    const names = (groups: { className: string }[][]) =>
-      groups.map((group) => group.map((item) => item.className));
+    const names = (groups: { name: string }[][]) =>
+      groups.map((group) => group.map((item) => item.name));
 
     beforeEach(async () => {
       localStorage.setItem('efv_refresh_token', 'refresh');
@@ -52,8 +57,8 @@ describe('ClassesService', () => {
 
       TestBed.tick();
       http
-        .expectOne(CLASSES_URL)
-        .flush([{ className: '6-1' }, { className: '5-10' }, { className: '5-2' }]);
+        .expectOne((request) => request.url === CLASSES_URL && request.method === 'POST')
+        .flush([schoolClass('6-1'), schoolClass('5-10'), schoolClass('5-2')]);
       await TestBed.inject(ApplicationRef).whenStable();
     });
 
@@ -71,12 +76,29 @@ describe('ClassesService', () => {
       expect(possible).toHaveLength(37);
     });
 
-    it('toggles a class between possible and active', () => {
-      service.toggleClass('8-3');
-      expect(names(service.thisYearClasses()).at(-1)).toEqual(['8-3']);
+    it('toggles a class in the draft without touching saved classes', () => {
+      const slot = { name: '8-3', grade: 8, section: 3 };
 
-      service.toggleClass('8-3');
+      service.toggleClass(slot);
+      expect(names(service.selectedSlots()).at(-1)).toEqual(['8-3']);
       expect(names(service.thisYearClasses()).flat()).not.toContain('8-3');
+      expect(service.hasChanges()).toBe(true);
+
+      service.discardChanges();
+      expect(names(service.selectedSlots()).flat()).not.toContain('8-3');
+      expect(service.hasChanges()).toBe(false);
+    });
+
+    it('saves the draft through the sync endpoint', () => {
+      service.toggleClass({ name: '5-2', grade: 5, section: 2 });
+      service.saveClasses();
+
+      const request = http.expectOne(`${environment.apiUrl}/classes/sync`);
+      expect(request.request.body).toEqual({ classes: [{ grade: 6, section: 1 }, { grade: 5, section: 10 }] });
+      request.flush([schoolClass('6-1'), schoolClass('5-10')]);
+
+      expect(names(service.thisYearClasses())).toEqual([['5-10'], ['6-1']]);
+      expect(service.hasChanges()).toBe(false);
     });
   });
 });

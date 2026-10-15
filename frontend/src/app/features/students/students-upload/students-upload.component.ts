@@ -3,43 +3,68 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { XlsxFileUploadComponent } from '../../../shared/components/xlsx-file-upload/xlsx-file-upload.component';
-import { ClassSelectorComponent } from '../../../shared/class-selector/class-selector.component';
 import { CardComponent } from '../../../shared/components/card/card.component';
-import { ClassesService } from '../../classes/classes.service';
-import { Student, StudentStatus } from '../students.interface';
+import { Student, StudentImportRow, StudentStatus } from '../students.interface';
 import { StudentsService } from '../students.service';
+
+interface PreviewRow {
+  row: StudentImportRow;
+  student: Student;
+}
+
+function toPreview(row: StudentImportRow, index: number): PreviewRow {
+  return {
+    row,
+    student: {
+      ...row,
+      id: -(index + 1),
+      status: StudentStatus.ACTIVE,
+      school_class_id: 0,
+      head_teacher_name: null,
+      head_teacher_phone: null,
+    },
+  };
+}
 
 @Component({
   selector: 'app-students-upload',
   templateUrl: './students-upload.component.html',
   styleUrl: './students-upload.component.scss',
-  imports: [
-    TranslatePipe,
-    ClassSelectorComponent,
-    XlsxFileUploadComponent,
-    CardComponent,
-  ],
+  imports: [TranslatePipe, XlsxFileUploadComponent, CardComponent],
 })
 export class StudentsUploadComponent {
   #studentsService = inject(StudentsService);
-  #classesService = inject(ClassesService);
   #router = inject(Router);
 
-  protected readonly students = signal<Student[]>([]);
-  protected readonly filteredStudents = computed(() =>
-    this.students().filter(
-      (student) => student.className === this.#classesService.selectedClass(),
+  protected readonly preview = signal<PreviewRow[]>([]);
+  protected readonly skippedRows = signal(0);
+  protected readonly selectedClass = signal<string | null>(null);
+
+  protected readonly classNames = computed(() =>
+    [...new Set(this.preview().map((item) => item.row.class_name))].sort(
+      (a, b) => a.localeCompare(b, 'sr', { numeric: true }),
     ),
   );
 
+  protected readonly visible = computed(() =>
+    this.preview().filter((item) => item.row.class_name === this.selectedClass()),
+  );
+
+  protected readonly activeCount = computed(
+    () =>
+      this.preview().filter((item) => item.student.status === StudentStatus.ACTIVE)
+        .length,
+  );
+
   mapData(sheets: unknown[][][]): void {
-    const imported = sheets.flatMap((rows) =>
-      rows.map((row) => this.#studentsService.mapStudentFromExcelData(row)),
-    );
-    this.students.set(imported);
-    if (imported.length) {
-      this.#classesService.setSelectedClass(imported[0].className);
-    }
+    const rows = sheets.flat();
+    const parsed = rows
+      .map((row) => this.#studentsService.parseExcelRow(row))
+      .filter((row): row is StudentImportRow => row !== null);
+
+    this.skippedRows.set(rows.filter((row) => row.some((cell) => cell != null && String(cell).trim())).length - parsed.length);
+    this.preview.set(parsed.map(toPreview));
+    this.selectedClass.set(this.classNames()[0] ?? null);
   }
 
   onStudentDelete(student: Student): void {
@@ -51,14 +76,25 @@ export class StudentsUploadComponent {
   }
 
   saveStudents(): void {
+    const rows = this.preview()
+      .filter((item) => item.student.status === StudentStatus.ACTIVE)
+      .map((item) => item.row);
+
     this.#studentsService
-      .saveStudents(this.students())
-      .subscribe(() => this.#router.navigate(['students']));
+      .import(rows)
+      .subscribe({
+        next: () => this.#router.navigate(['students']),
+        error: () => undefined,
+      });
   }
 
   #setStatus(student: Student, status: StudentStatus): void {
-    this.students.update((students) =>
-      students.map((s) => (s === student ? { ...s, status } : s)),
+    this.preview.update((items) =>
+      items.map((item) =>
+        item.student.id === student.id
+          ? { ...item, student: { ...item.student, status } }
+          : item,
+      ),
     );
   }
 }
