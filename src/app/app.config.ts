@@ -21,7 +21,10 @@ import {
   provideAnimations,
 } from '@angular/platform-browser/animations';
 import { LoaderService } from './shared/components/loader/loader.service';
+// import { StudentsService } from './features/students/students.service';
 import { StudentsService } from './features/students/students.service';
+import { ClassesService } from './features/classes/classes.service';
+import { ToastrModule } from 'ngx-toastr';
 //   import { AuthInterceptor } from '../auth/auth.interceptor';
 //   import { LoaderService } from '../shared/components/loader/loader.service';
 export const appConfig: ApplicationConfig = {
@@ -36,6 +39,9 @@ export const appConfig: ApplicationConfig = {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient],
         },
+      }),
+      ToastrModule.forRoot({
+        positionClass: 'toast-top-full-width',
       }),
     ),
     provideAnimations(),
@@ -52,17 +58,22 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       useFactory: initData,
-      deps: [StudentsService],
+      deps: [ClassesService, StudentsService],
       multi: true,
     },
     LoaderService,
+    ClassesService,
     StudentsService,
   ],
 };
 
-export function initData(dataService: StudentsService) {
+export function initData(
+  classesService: ClassesService,
+  studentsService: StudentsService,
+) {
   return (): void => {
-    dataService.getSections();
+    classesService.getClasses();
+    studentsService.getAllStudents();
   };
 }
 

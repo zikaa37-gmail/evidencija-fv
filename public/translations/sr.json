@@ -31,30 +31,34 @@
   "issues": "Ograničenja",
   "info": "Informacije",
   "emergency": "Hitni slučajevi",
+  "emergencyContact": "Kontakt za hitne slučajeve",
   "departmentHead": "Odeljenski starešina",
   "sports": {
     "sports": "Sportovi",
     "basketball": "Košarka",
     "volleyball": "Odbojka",
     "soccer": "Fudbal",
+    "football": "Fudbal",
     "gymnastics": "Gimnastika",
     "handball": "Rukomet",
     "fight": "Borilački sportovi",
     "x": "x"
   },
   "notes": {
-    "note": "Beleska",
+    "note": "Beleška",
+    "notes": "Beleške",
     "addNote": "Dodaj belešku",
     "cancel": "Odustani"
   },
   "menu": {
     "calendar": "Kalendar",
+    "student-records": "Evidencija učenika",
     "students": "Učenici",
     "login": "Prijava",
     "logout": "Odjava",
-    "studentsUpload": "Upload učenika",
+    "uploadStudents": "Učitavanje učenika",
     "studentsList": "Lista učenika",
-    "departments": "Odeljenja"
+    "classes": "Odabir odeljenja"
   },
   "general": {
     "noItems": "Nema učitanih podataka"
@@ -72,6 +76,9 @@
     "delete": "Obriši",
     "save": "Sačuvaj",
     "cancel": "Odustani",
+    "reactivate": "Reaktiviraj",
+    "upload": "Učitaj",
+    "close": "Zatvori",
     "search": "Pretraga"
   },
   "students": {
@@ -82,8 +89,7 @@
     "lastName": "Prezime",
     "save": "Sačuvaj",
     "select": "Odaberi fajl",
-    "fileUpload": "Učitavanje podataka",
-    "upload": "Učitaj"
+    "fileUpload": "Učitavanje podataka"
   },
   "sexes": {
     "sex": "Pol",
@@ -118,12 +124,37 @@
     "password": "Lozinka",
     "login": "Prijava"
   },
-  "toaster": {
-    "success": "&#128515;",
-    "saved": "Uspešno snimljeni podaci"
-  },
-  "departments": {
+  "classes": {
     "possibilities": "Odeljenja koja nisu odabrana",
     "selected": "Odabrana odeljenja"
+  },
+  "modal": {
+    "deleteTitle": "Brisanje",
+    "deleteQuestion": "Da li ste sigurni da želite da obrišete podatak?",
+    "reactivateTitle": "Reaktivacija",
+    "reactivateQuestion": "Da li ste sigurni da želite da reaktivirate podatak?"
+  },
+  "toaster": {
+    "studentsSuccess": "Uspešno učitani podaci o studentima",
+    "studentsError": "Greška prilikom učitavanja podataka o studentima",
+    "saveStudentsSuccess": "Uspešno snimljeni podaci o studentima",
+    "saveStudentsError": "Greška prilikom snimanja podataka o studentima",
+    "updateStudentsSuccess": "Uspešno ažurirani podaci o studentima",
+    "updateStudentsError": "Greška prilikom ažuriranja podataka o studentima",
+    "deleteStudentsSuccess": "Uspešno obrisan student",
+    "deleteStudentsError": "Greška prilikom brisanja studenta",
+    "reactivateStudentSuccess": "Uspešno reaktiviran student",
+    "reactivateStudentError": "Greška prilikom objavljivanja studenta",
+    "classesSuccess": "Uspešno učitana odeljenja",
+    "classesError": "Greška prilikom učitavanja odeljenja",
+    "saveSuccess": "Uspešno snimljeni podaci",
+    "saveError": "Greška prilikom snimanja podataka",
+
+    "addNoteSuccess": "Uspešno dodata beleška",
+    "addNoteError": "Greška prilikom dodavanja beleške",
+    "saveClassesSuccess": "Uspešno snimljena odeljenja",
+    "saveClassesError": "Greška prilikom snimanja odeljenja",
+    "updateClassesSuccess": "Uspešno ažurirana odeljenja",
+    "updateClassesError": "Greška prilikom ažuriranja odeljenja"
   }
 }

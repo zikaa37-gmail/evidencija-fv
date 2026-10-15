@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -8,15 +9,34 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterModule], //NgbNavModule
+  imports: [CommonModule, TranslateModule, RouterModule, MatButtonModule],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   links = [
-    { title: 'One', fragment: 'one' },
-    { title: 'Two', fragment: 'two' },
+    {
+      name: 'student-records',
+      url: '/student-records',
+    },
+    {
+      name: 'classes',
+      url: '/classes',
+    },
+
+    {
+      name: 'uploadStudents',
+      url: '/students/upload',
+    },
+    {
+      name: 'studentsList',
+      url: '/students',
+    },
+    // {
+    //   name: 'Settings',
+    //   url: '/settings',
+    // },
+    // {
+    //   name: 'Logout',
+    //   url: '/logout',
+    // },
   ];
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

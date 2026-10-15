@@ -16,7 +16,7 @@ export interface OptionItem {
   option: string;
   icon: string;
   selected: boolean;
-  bgColor: 'primary' | 'accent';
+  bgColor: 'primary' | 'accent' | 'warn' | 'success' | 'danger';
 }
 
 export interface Note {
@@ -39,7 +39,7 @@ export enum NoteTypes {
   'NEGATIVE' = 'negative',
 }
 
-export const NOTETYPE = {
+export const NOTE_TYPE = {
   GOOD: 'good',
   BAD: 'bad',
 };

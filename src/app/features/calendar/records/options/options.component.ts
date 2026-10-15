@@ -1,17 +1,10 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { OptionItem } from 'src/app/features/calendar/records/records.interface';
 import { RecordsService } from 'src/app/features/calendar/records/records.service';
-import { LoaderService } from '../loader/loader.service';
+import { LoaderService } from '../../../../shared/components/loader/loader.service';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -21,17 +14,16 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [CommonModule, TranslateModule, MatButtonModule],
 })
-export class OptionsComponent implements OnInit {
-  private recordsService = inject(RecordsService);
+export class OptionsComponent {
+  protected recordsService = inject(RecordsService);
   private dialogRef = inject(MatDialogRef<OptionsComponent>);
   loaderService = inject(LoaderService);
-  options = this.recordsService.getOptions();
-  @Output() selectedOption = new EventEmitter<OptionItem>();
-
-  ngOnInit(): void {}
+  selectedOption = output<OptionItem>();
 
   setOption(option: OptionItem) {
-    this.options.forEach((op: OptionItem) => (op.selected = !!(op === option)));
+    this.recordsService
+      .options()
+      .forEach((op: OptionItem) => (op.selected = !!(op === option)));
     this.selectedOption.emit(option);
     this.closeModal();
 

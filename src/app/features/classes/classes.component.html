@@ -11,23 +11,20 @@
 >
   <div class="border my-4">
     <h5 class="text-center mt-3">
-      {{ "departments.possibilities" | translate }}
+      {{ "classes.possibilities" | translate }}
     </h5>
 
     <hr />
 
     @for (
-      section of studentsService.possibleSections();
+      classes of classesService.possibleClasses();
       let i = $index;
-      track section
+      track classes
     ) {
-      <ul class="departments">
-        @for (item of section; track item) {
-          <li
-            class="border"
-            (click)="onSectionSelect(item.grade, item.department, i)"
-          >
-            {{ item.grade }}-{{ item.department }}
+      <ul class="classes">
+        @for (item of classes; track item) {
+          <li class="border" (click)="onClassSelect(item.className, i)">
+            {{ item.className }}
           </li>
         }
       </ul>
@@ -36,23 +33,20 @@
 
   <div class="border my-4">
     <h5 class="text-center mt-3">
-      {{ "departments.selected" | translate }}
+      {{ "classes.selected" | translate }}
     </h5>
 
     <hr />
 
     @for (
-      section of studentsService.thisYearSections();
+      section of classesService.thisYearClasses();
       let i = $index;
       track section
     ) {
-      <ul class="selected-departments">
+      <ul class="selected-classes">
         @for (item of section; track item) {
-          <li
-            class="border"
-            (click)="onSectionSelect(item.grade, item.department, i)"
-          >
-            {{ item.grade }}-{{ item.department }}
+          <li class="border" (click)="onClassSelect(item.className, i)">
+            {{ item.className }}
           </li>
         }
       </ul>

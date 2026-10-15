@@ -1,12 +1,19 @@
 export interface Student {
-  id: string | number | null;
+  id: string;
   firstName: string;
   lastName: string;
-  sex: Sex; // string; // Sexes;
-  section: Section;
-  issues: string[];
+  sex: 'male' | 'female';
   info: Info;
-  status: string; //Statuses;
+  status: StudentStatus;
+  classNameId: string;
+  className: string;
+  schoolYearId: string;
+  schoolYear: string;
+  notes: {
+    healthIssues: string[];
+    negativeComments: string[];
+    positiveComments: string[];
+  };
 }
 
 export interface Info {
@@ -20,12 +27,12 @@ export interface NameNumber {
   phone: string;
 }
 
-export interface Section {
-  grade: string;
-  department: string;
-}
+// export interface Section {
+//   grade: string;
+//   department: string;
+// }
 
-export enum Statuses {
+export enum StudentStatus {
   'ACTIVE' = 'active',
   'PENDING' = 'pending',
   'INACTIVE' = 'inactive',

@@ -1,12 +1,15 @@
 import { Injectable, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 import {
-  debounceTime,
   distinctUntilChanged,
   map,
   fromEvent,
   startWith,
   tap,
+  takeUntil,
+  Subject,
 } from 'rxjs';
 
 @Injectable({
@@ -19,14 +22,13 @@ export class GlobalService {
   private _resize$: any;
 
   constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
+    this.router.events.pipe(takeUntilDestroyed()).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isLoginUrl.set(!!(event.url === '/auth/login'));
       }
     });
 
     this._resize$ = fromEvent(window, 'resize').pipe(
-      // debounceTime(200),
       map(() => window.innerWidth),
       distinctUntilChanged(),
       startWith(window.innerWidth),

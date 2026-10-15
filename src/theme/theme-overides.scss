@@ -1,4 +1,4 @@
-@import './theme-variables.scss';
+@import "./theme-variables.scss";
 
 .bg-success,
 .btn-success {
@@ -18,4 +18,13 @@
 .bg-secondary,
 .btn-secondary {
   background: $secondary !important;
+}
+
+.bg-warning {
+  background-color: $warning !important;
+  color: $white !important;
+}
+
+.container-fluid {
+  padding: 0 !important;
 }
