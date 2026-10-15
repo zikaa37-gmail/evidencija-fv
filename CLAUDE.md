@@ -2,13 +2,23 @@
 
 ## Project
 
-Angular SPA za evidenciju učenika na časovima fizičkog vaspitanja: odeljenja (`features/classes`),
-učenici i uvoz iz Excela (`features/students`), kalendar sa evidencijom po danu
-(`features/calendar`). UI: Angular Material + Bootstrap, prevodi preko `@ngx-translate`
-(`public/translations/sr.json`).
+Evidencija učenika na časovima fizičkog vaspitanja u jednoj školi:
 
-Angular 22, zoneless (bez zone.js), OnPush je podrazumevan. Backend za sada ne postoji
-(`environment.apiUrl` = `http://localhost:3000`) — Laravel backend je planiran u issue-ima #18–#24.
+- `frontend/`: Angular 22 SPA (zoneless, OnPush podrazumevan, signali). Odeljenja
+  (`features/classes`), učenici i uvoz iz Excela (`features/students`), kalendar sa evidencijom
+  po danu (`features/calendar`). UI: Angular Material + Bootstrap, prevodi preko `@ngx-translate`
+  (`frontend/public/translations/sr.json`).
+- `backend/`: Laravel 13 API sa MySQL, prefiks tabela `efv_` (`DB_PREFIX`). Lokalno zasebna baza
+  `evidencija_fv`; na serveru deljena baza, razdvajanje isključivo preko prefiksa.
+- `docs/`: plan (`TODO.md`), API rute (`api-rute.md`), radni tok (`git-workflow.md`).
+
+Domen: škola (`schools`) → školska godina (`school_years`, jedna `is_current`) → odeljenja
+(`school_classes`: razred 5–8 + broj odeljenja, razredni starešina) → upis učenika u odeljenje za
+tu godinu (`enrollments`, status aktivan/neaktivan). Učenik (`students`) traje kroz godine; osmaci
+posle završetka idu u arhivu (`archived_at`). Sve se vezuje za konkretan `school_year_id`.
+1. septembra svako odeljenje prelazi razred gore (5-1 → 6-1), četvrtaci dolaze u nova 5-x
+odeljenja, osmaci u arhivu (#30). Admin poslovi (odeljenja, učenici, prelazak godine) su odvojeni
+od svakodnevne evidencije (#32).
 
 Plan upgrade-a i modernizacije: `docs/TODO.md`. Radni tok (issue → grana → PR): `docs/git-workflow.md`.
 Isti obrazac kao `D:\Playground\Angular\kosarkaska-evidencija` — pogledaj taj repo za
@@ -42,17 +52,27 @@ referentne konvencije ako nešto ovde nije eksplicitno napisano.
   `isLoading` ručno.
 - Obaveštenja korisniku idu kroz `NotificationService` (`MatSnackBar`), tekst iz prevoda (`toaster.*`).
 - Destruktivne akcije idu kroz zajednički `ConfirmationModalComponent`; ne uvoditi `window.confirm()`.
-- Ne dodavati tajne u repozitorijum.
+- Ne dodavati tajne u repozitorijum. Lokalni backend kredencijali idu u `backend/.env`.
+- Backend: kontroleri u `app/Http/Controllers/Api`, odgovor se slaže u `present()` metodi
+  kontrolera (snake_case ključevi), validacija preko `$request->validate(...)`. API čitanja sa
+  filterima idu kao `POST .../list` sa JSON telom (kao u kosarkaska-evidencija); `GET` samo za id
+  u putanji i jednostavna čitanja bez filtera. Pri izmeni ruta ažuriraj `docs/api-rute.md`.
 
 ## Local development
+
+Backend (iz `backend/`):
+
+```bash
+composer install
+php artisan migrate:fresh --seed
+php artisan serve
+```
+
+Frontend (iz `frontend/`; `/api` ide preko `proxy.conf.json` na `localhost:8000`):
 
 ```bash
 npm install
 ng serve
 ```
 
-Provera posle izmena:
-
-```bash
-ng build
-```
+Provera posle izmena: `php artisan test` (backend), `ng build`, `ng test`, `ng lint` (frontend).
