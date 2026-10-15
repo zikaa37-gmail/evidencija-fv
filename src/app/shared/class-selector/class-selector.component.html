@@ -9,32 +9,29 @@
         {{ "section" | translate }}
       </mat-panel-title>
       <mat-panel-description class="department">
-        {{ studentsService.selectedSection().grade }} -
-        {{ studentsService.selectedSection().department }}
+        {{ classesService.selectedClass() }}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     @for (
-      sectionArray of studentsService.thisYearSections();
+      classesArray of classesService.thisYearClasses();
       let i = $index;
-      track sectionArray
+      track classesArray
     ) {
       <ul class="departments" (click)="panelOpenState.set(true)">
-        @for (section of sectionArray; track section) {
+        @for (item of classesArray; track item) {
           <li
             class="border"
-            (click)="onSectionSelect(section.grade, section.department)"
+            (click)="onClassSelect(item.className)"
             [ngClass]="{
-              active:
-                studentsService.selectedSection().grade === section.grade &&
-                studentsService.selectedSection().department ===
-                  section.department,
+              active: item.className === classesService.selectedClass(),
             }"
           >
-            {{ section.grade }}-{{ section.department }}
+            {{ item.className }}
           </li>
         }
       </ul>
+      <hr />
     }
   </mat-expansion-panel>
 </mat-accordion>

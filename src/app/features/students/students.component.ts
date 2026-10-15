@@ -1,13 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-// import { ToastrService } from 'ngx-toastr';
-import { sections } from '../calendar/calendar.service';
-import { Section, Student } from './students.interface';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Student, StudentStatus } from './students.interface';
 import { StudentsService } from './students.service';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
-import { DepartmentSelectorComponent } from 'src/app/shared/department-selector/department-selector.component';
+import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-selector.component';
+import { ClassesService } from '../classes/classes.service';
+import { ConfirmationModalComponent } from 'src/app/shared/components/confirmation-modal/confirmation-modal.component';
+import { GlobalService } from 'src/app/shared/services/global.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-students',
@@ -18,61 +22,77 @@ import { DepartmentSelectorComponent } from 'src/app/shared/department-selector/
     CommonModule,
     TranslateModule,
     CardComponent,
-    DepartmentSelectorComponent,
+    ClassSelectorComponent,
+    MatDialogModule,
+    MatButtonModule,
   ],
 })
-export class StudentsComponent implements OnInit {
-  // private toaster = inject(ToastrService);
-  // private translate = inject(TranslateService);
-  private router = inject(Router);
+export class StudentsComponent {
+  #translate = inject(TranslateService);
+  #dialog = inject(MatDialog);
+  #router = inject(Router);
+  #globalService = inject(GlobalService);
   studentsService = inject(StudentsService);
-  // students$ = this.studentsService.students(); //.getStudents();
-  // filteredStudents$ = this.studentsService.filteredStudents$; //: Student[] = [];
-  sections$ = sections();
-  // TODO
-  // sections$ = this.studentsService.sections$;
-  selectedSection: Section = {
-    grade: '5',
-    department: '1',
-  };
-  selectedStudent: Student | null = null;
+  classesService = inject(ClassesService);
 
-  ngOnInit(): void {
-    // this.studentsService.getSections(); //.subscribe();
-    this.studentsService.getAllStudents(); //.subscribe();
-  }
+  selectedClass = '5-1';
+  selectedStudent = signal<Student>({} as Student);
 
-  setSelectedSection(grade: string, department: string) {
-    this.studentsService.setSelectedSection(grade, department);
-  }
-
-  onSectionChange(section: any) {
-    this.selectedSection = section;
-    this.setSelectedSection(
-      this.selectedSection.grade,
-      this.selectedSection.department,
-    );
+  setSelectedClass(className: string) {
+    this.classesService.setSelectedClass(className);
   }
 
   onStudentDelete(student: Student) {
-    this.selectedStudent = student;
-    this.selectedStudent.status = 'inactive';
+    this.selectedStudent.set(student);
+    this.openConfirmationModal(true);
   }
 
-  onStudentPublish(student: Student) {
-    this.selectedStudent = student;
-    this.selectedStudent.status = 'active';
+  onStudentReactivate(student: Student) {
+    this.selectedStudent.set(student);
+    this.openConfirmationModal(false);
+
+    // this.selectedStudent().status = StudentStatus.ACTIVE;
   }
 
   gotoUpload() {
-    this.router.navigate(['students/upload']);
+    this.#router.navigate(['students/upload']);
   }
-  // saveStudents() {
-  //   this.studentsService.saveStudents(this.students).subscribe(() => {
-  //     this.toaster.success(
-  //       this.translate.instant('TOASTER.SAVED'),
-  //     );
-  //     // this.router.navigate(['students']);
-  //   })
-  // }
+
+  openConfirmationModal(isDeactivate: boolean) {
+    const dialogRef = this.#dialog.open(ConfirmationModalComponent, {
+      height: 'auto',
+      width: this.#globalService.isMobile() ? '100vw' : '600px',
+      maxWidth: '100vw',
+      panelClass: 'user-dialog',
+      disableClose: true,
+    });
+
+    dialogRef.componentInstance.data = {
+      title: this.#translate.instant(
+        isDeactivate ? 'modal.deleteTitle' : 'modal.reactivateTitle',
+      ),
+      question: this.#translate.instant(
+        isDeactivate ? 'modal.deleteQuestion' : 'modal.reactivateQuestion',
+      ),
+      leftButtonText: this.#translate.instant('buttons.cancel'),
+      rightButtonText: this.#translate.instant(
+        isDeactivate ? 'buttons.delete' : 'buttons.reactivate',
+      ),
+      leftButtonIcon: 'close ',
+      rightButtonIcon: isDeactivate ? 'delete' : 'star',
+    };
+
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((result: boolean) => {
+        if (result) {
+          if (isDeactivate) {
+            this.studentsService.deactivateStudent(this.selectedStudent());
+          } else {
+            this.studentsService.reactivateStudent(this.selectedStudent());
+          }
+        }
+      });
+  }
 }

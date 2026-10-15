@@ -1,12 +1,12 @@
-<mat-card [ngClass]="{ inactive: item.status === 'inactive' }">
+<mat-card [ngClass]="{ inactive: item().status === 'inactive' }">
   <mat-card-header>
     <div class="d-flex flex-row justify-content-between no-wrap w-100">
-      <h4>{{ item.firstName }} {{ item.lastName }}</h4>
+      <h4>{{ item().firstName }} {{ item().lastName }}</h4>
 
-      @if (item.status === "active") {
+      @if (item().status === "active") {
         <mat-icon class="pointer" (click)="onItemDelete()">delete</mat-icon>
       }
-      @if (item.status === "inactive") {
+      @if (item().status === "inactive") {
         <mat-icon class="pointer" (click)="onItemPublish()">star</mat-icon>
       }
     </div>
@@ -15,40 +15,45 @@
   <hr />
 
   <mat-card-content>
-    <p><b>Sex:</b> {{ item.sex }}</p>
-    @if (item.issues && item.issues.length) {
-      <p class="danger"><b>Issues:</b> {{ item.issues }}</p>
-    } @else {
-      <p class=""><b>Issues:</b> -</p>
-    }
-    <p><b>Emergency</b></p>
-    <p class="tab"><b>Contact person:</b> {{ item.info.emergency.name }}</p>
-    <p class="tab">
-      <b>Contact phone number:</b> {{ item.info.emergency.phone }}
+    <p>
+      <b>{{ "sexes.sex" | translate }}:</b>
+      {{ "sexes." + item().sex | translate }}
     </p>
-    <p><b>Department Head</b></p>
-    <p class="tab"><b>Contact name:</b> {{ item.info.departmentHead.name }}</p>
-    <p class="tab">
-      <b>Contact phone number:</b> {{ item.info.departmentHead.phone }}
+
+    <p>
+      <b>{{ "issues" | translate }}:</b><br />
+
+      @if (item().notes.healthIssues && item().notes.healthIssues.length > 0) {
+        @for (issue of item().notes.healthIssues; track issue) {
+          {{ issue }}
+          <br />
+        }
+      } @else {
+        -
+      }
     </p>
-    <!-- <p><b>Status:</b> {{item.status}}</p> -->
+
+    <p>
+      <b>{{ "emergencyContact" | translate }}</b>
+    </p>
+    <p>
+      <i class="fa fa-user mx-2"></i>
+      {{ item().info ? item().info.emergency.name : "N/A" }}
+    </p>
+    <p>
+      <i class="fa fa-phone mx-2"></i>
+      {{ item().info.emergency.phone }}
+    </p>
+    <p>
+      <b>{{ "departmentHead" | translate }}</b>
+    </p>
+    <p>
+      <i class="fa fa-user mx-2"></i>
+      {{ item().info.departmentHead.name }}
+    </p>
+    <p>
+      <i class="fa fa-phone mx-2"></i>
+      {{ item().info.departmentHead.phone }}
+    </p>
   </mat-card-content>
-
-  <!-- <mat-card-footer class="text-right">
-    <hr>
-    <div class="d-flex flex-row justify-content-end">
-      <mat-icon
-        *ngIf="item.status === 'active'"
-        class="pointer m-2"
-        (click)="onItemDelete()"
-      >delete</mat-icon>
-
-      <mat-icon
-        *ngIf="item.status === 'inactive'"
-        class="pointer m-2"
-        (click)="onItemPublish()"
-      >star</mat-icon>
-    </div>
-
-  </mat-card-footer> -->
 </mat-card>

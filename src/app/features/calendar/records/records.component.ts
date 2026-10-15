@@ -2,15 +2,15 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GlobalService } from 'src/app/shared/services/global.service';
 import { Student } from '../../students/students.interface';
-import { RecordsModalComponent } from './records-modal/records-modal.component';
-import { NOTETYPE, Record } from './records.interface';
+import { NOTE_TYPE, Record } from './records.interface';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
-import { OptionsComponent } from 'src/app/shared/components/options/options.component';
+import { OptionsComponent } from 'src/app/features/calendar/records/options/options.component';
 import { RecordsService } from './records.service';
 import { StudentsService } from '../../students/students.service';
+import { NotesModalComponent } from './notes-modal/notes-modal.component';
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
@@ -31,17 +31,11 @@ export class RecordsComponent implements OnInit {
   private dialog = inject(MatDialog);
   protected record!: Record;
   selectedDate!: Date;
-  protected options = this.recordsService.getOptions();
-  protected students = this.studentsService.getAllStudents();
-  // isMobile!: boolean;
-  protected NOTETYPE = NOTETYPE;
-
-  // constructor() {
-  //   this.globalService.isMobile$.subscribe((x) => (this.isMobile = x));
-  // }
+  // protected options = this.recordsService.options();
+  protected NOTE_TYPE = NOTE_TYPE;
 
   ngOnInit() {
-    this.studentsService.getStudentsBySection();
+    this.studentsService.getStudentsByClassName();
     console.log('students', this.studentsService.filteredStudents());
   }
 
@@ -50,7 +44,7 @@ export class RecordsComponent implements OnInit {
   }
 
   openNotesModal(type: string, student: Student) {
-    const dialogRef = this.dialog.open(RecordsModalComponent, {
+    const dialogRef = this.dialog.open(NotesModalComponent, {
       height: 'auto',
       width: this.globalService.isMobile() ? '100vw' : '600px',
       maxWidth: '100vw',

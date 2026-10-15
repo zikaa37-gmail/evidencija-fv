@@ -9,8 +9,8 @@
         >
           <i
             class="fa-regular fa-face-smile fa-2x text-success mx-4"
-            [ngClass]="{ 'fa-solid': type === NOTETYPE.GOOD }"
-            (click)="setType(NOTETYPE.GOOD)"
+            [ngClass]="{ 'fa-solid': type === NOTE_TYPE.GOOD }"
+            (click)="setType(NOTE_TYPE.GOOD)"
           ></i>
           Pohvala
         </div>
@@ -20,8 +20,8 @@
         >
           <i
             class="fa-regular fa-face-frown fa-2x text-danger mx-4"
-            [ngClass]="{ 'fa-solid': type === NOTETYPE.BAD }"
-            (click)="setType(NOTETYPE.BAD)"
+            [ngClass]="{ 'fa-solid': type === NOTE_TYPE.BAD }"
+            (click)="setType(NOTE_TYPE.BAD)"
           ></i>
           Opomena
         </div>

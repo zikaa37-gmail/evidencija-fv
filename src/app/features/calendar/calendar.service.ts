@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { Section } from '../students/students.interface';
 
 @Injectable({ providedIn: 'root' })
 export class CalendarService {
@@ -49,18 +48,30 @@ export class CalendarService {
   }
 }
 
-export const sections = signal<Section[]>([
-  { grade: '5', department: '1' },
-  { grade: '5', department: '2' },
-  { grade: '6', department: '1' },
-  { grade: '6', department: '2' },
-  { grade: '6', department: '3' },
-  { grade: '6', department: '4' },
-  { grade: '7', department: '1' },
-  { grade: '7', department: '2' },
-  { grade: '7', department: '3' },
-  { grade: '8', department: '1' },
-  { grade: '8', department: '2' },
-  { grade: '8', department: '3' },
-  { grade: '8', department: '4' },
+export const classes = signal<string[]>([
+  '5-1',
+  '5-2',
+  '5-3',
+  '6-1',
+  '6-2',
+  '6-3',
+  '7-1',
+  '7-2',
+  '7-3',
+  '8-1',
+  '8-2',
+  '8-3',
+  // { grade: '5', department: '1' },
+  // { grade: '5', department: '2' },
+  // { grade: '6', department: '1' },
+  // { grade: '6', department: '2' },
+  // { grade: '6', department: '3' },
+  // { grade: '6', department: '4' },
+  // { grade: '7', department: '1' },
+  // { grade: '7', department: '2' },
+  // { grade: '7', department: '3' },
+  // { grade: '8', department: '1' },
+  // { grade: '8', department: '2' },
+  // { grade: '8', department: '3' },
+  // { grade: '8', department: '4' },
 ]);

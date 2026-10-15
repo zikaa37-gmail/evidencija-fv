@@ -17,7 +17,7 @@
 <hr />
 
 @if (students.length) {
-  <app-department-selector />
+  <app-class-selector />
 }
 
 @if (students.length) {
@@ -32,7 +32,7 @@
       class="mx-2 my-2"
       [item]="student"
       (deletedItem)="onStudentDelete($event)"
-      (publishedItem)="onStudentPublish($event)"
+      (reactivatedItem)="onStudentReactivate($event)"
     ></app-card>
   }
 </div>

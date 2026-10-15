@@ -1,10 +1,16 @@
-@if(loaderService.isLoading()){
-<div class="loader-container">
-  <mat-progress-spinner
-    [diameter]="diameter"
-    [color]="color"
-    mode="indeterminate"
-  >
-  </mat-progress-spinner>
-</div>
+@if (loaderService.isLoading()) {
+  <div class="loader-container">
+    <mat-progress-spinner
+      [diameter]="diameter"
+      [color]="color"
+      mode="indeterminate"
+    >
+    </mat-progress-spinner>
+
+    @if (loaderService.errorMessage()) {
+      <div class="mt-4 p-3 bg-warning">
+        {{ loaderService.errorMessage() }}
+      </div>
+    }
+  </div>
 }

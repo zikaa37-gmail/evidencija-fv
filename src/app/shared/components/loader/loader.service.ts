@@ -5,4 +5,5 @@ import { Injectable, signal } from '@angular/core';
 })
 export class LoaderService {
   isLoading = signal<boolean>(false);
+  errorMessage = signal<string | null>(null);
 }

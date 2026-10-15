@@ -2,13 +2,13 @@
   <h4>{{ "students.students" | translate }}</h4>
 
   <button mat-raised-button color="primary" (click)="gotoUpload()">
-    {{ "students.upload" | translate }}
+    {{ "buttons.upload" | translate }}
   </button>
 </div>
 
 <hr />
-@if (studentsService.thisYearSections().length) {
-  <app-department-selector />
+@if (classesService.thisYearClasses().length) {
+  <app-class-selector />
 }
 
 <hr />
@@ -25,11 +25,11 @@
         class="mx-2 my-2"
         [item]="student"
         (deletedItem)="onStudentDelete($event)"
-        (publishedItem)="onStudentPublish($event)"
+        (reactivatedItem)="onStudentReactivate($event)"
       ></app-card>
     }
   } @else {
-    @if (studentsService.selectedSection()) {
+    @if (classesService.selectedClass()) {
       No items
     }
   }

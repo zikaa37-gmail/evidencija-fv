@@ -11,16 +11,16 @@
   margin: 5px;
   font-size: 12px;
   line-height: 30px;
-  color: #777;
+  color: $li-grey-color;
   cursor: pointer;
   padding: 10px 0;
-  background: #eee;
+  background: $li-grey;
   font-weight: bold;
   border-radius: 5px;
 
   &:hover span {
-    background: #666;
-    color: white;
+    background: $li-hover;
+    color: $white;
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -35,4 +35,8 @@
 .department {
   font-size: 20px;
   font-weight: bold;
+}
+
+li {
+  color: $gray-800;
 }

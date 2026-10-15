@@ -3,14 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { GlobalService } from 'src/app/shared/services/global.service';
 import { RecordsComponent } from './records/records.component';
-import { Section } from '../students/students.interface';
-import { CalendarService, sections } from './calendar.service';
+import { CalendarService } from './calendar.service';
 import { CalendarType } from './calendar.interface';
 import { CommonModule } from '@angular/common';
-import { DepartmentSelectorComponent } from 'src/app/shared/department-selector/department-selector.component';
+import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-selector.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import { CalendarBodyComponent } from './calendar-body/calendar-body.component';
-import { StudentsService } from '../students/students.service';
+import { ClassesService } from '../classes/classes.service';
 
 @Component({
   selector: 'app-calendar',
@@ -19,17 +18,16 @@ import { StudentsService } from '../students/students.service';
   standalone: true,
   imports: [
     CommonModule,
-    DepartmentSelectorComponent,
+    ClassSelectorComponent,
     MonthSelectorComponent,
     CalendarBodyComponent,
   ],
 })
 export class CalendarComponent {
-  protected studentsService = inject(StudentsService);
+  protected classesService = inject(ClassesService);
   private calendarService = inject(CalendarService);
   private globalService = inject(GlobalService);
   private dialog = inject(MatDialog);
-  sections = sections();
 
   today = new Date();
   calendarType: CalendarType = CalendarType.MONTH;
@@ -46,7 +44,6 @@ export class CalendarComponent {
   dates = this.setDatesOfMonth();
   selectedDate = this.today.getDate().toString();
   selectedDateName = moment(this.today).format('dddd');
-  section!: Section;
 
   onMonthChange(action: any) {
     if (action === 'prev') {
@@ -75,11 +72,6 @@ export class CalendarComponent {
   onDateSelect(date: string) {
     this.selectedDate = date;
     this.openModal();
-  }
-
-  onSectionChange(section: any) {
-    this.section = section;
-    console.log(this.section);
   }
 
   setFistDayOfTheMonth(): Date {
