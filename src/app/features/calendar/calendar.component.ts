@@ -5,6 +5,7 @@ import { ClassSelectorComponent } from '../../shared/class-selector/class-select
 import { GlobalService } from '../../shared/services/global.service';
 import { CalendarBodyComponent } from './calendar-body/calendar-body.component';
 import { MONTHS, MonthAction, WEEKDAYS } from './calendar.constants';
+import { buildMonthGrid } from './month-grid';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import {
   RecordsComponent,
@@ -30,20 +31,9 @@ export class CalendarComponent {
   );
   protected readonly year = computed(() => this.visibleMonth().getFullYear());
 
-  protected readonly dates = computed(() => {
-    const month = this.visibleMonth();
-    const daysInMonth = new Date(
-      month.getFullYear(),
-      month.getMonth() + 1,
-      0,
-    ).getDate();
-    const mondayBasedOffset = (month.getDay() + 6) % 7;
-
-    return [
-      ...Array<null>(mondayBasedOffset).fill(null),
-      ...Array.from({ length: daysInMonth }, (_, index) => index + 1),
-    ];
-  });
+  protected readonly dates = computed(() =>
+    buildMonthGrid(this.visibleMonth()),
+  );
 
   protected readonly selectedDay = computed(() => {
     const selected = this.selectedDate();

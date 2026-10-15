@@ -13,8 +13,14 @@
 <ul class="days">
   @for (date of dates(); track $index) {
     @if (date) {
-      <li (click)="dateSelect.emit(date)">
-        <span [class.active]="date === selected()">{{ date }}</span>
+      <li>
+        <button
+          type="button"
+          class="plain-button fill"
+          (click)="dateSelect.emit(date)"
+        >
+          <span [class.active]="date === selected()">{{ date }}</span>
+        </button>
       </li>
     } @else {
       <li></li>

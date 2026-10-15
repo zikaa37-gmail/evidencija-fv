@@ -1,6 +1,13 @@
 <div class="d-flex flex-column p-2">
   <div class="d-flex justify-content-end">
-    <i class="fa fa-2x fa-close m-2" (click)="closeModal()"></i>
+    <button
+      type="button"
+      class="plain-button m-2"
+      [attr.aria-label]="'buttons.close' | translate"
+      (click)="closeModal()"
+    >
+      <i class="fa fa-2x fa-close"></i>
+    </button>
   </div>
 
   @for (option of recordsService.options(); track option.id) {

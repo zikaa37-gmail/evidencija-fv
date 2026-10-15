@@ -1,6 +1,6 @@
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
-@import "./theme/theme-variables.scss";
-@import "./theme/theme-overides.scss";
+@use "sass:meta";
+@use "./theme/theme-variables" as *;
+@use "./theme/theme-overides";
 
 html,
 body {
@@ -29,8 +29,54 @@ i,
   cursor: pointer;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import "bootstrap/scss/bootstrap";
+@include meta.load-css(
+  "bootstrap/scss/bootstrap",
+  $with: (
+    "white": $white,
+    "gray-100": $gray-100,
+    "gray-200": $gray-200,
+    "gray-300": $gray-300,
+    "gray-400": $gray-400,
+    "gray-500": $gray-500,
+    "gray-600": $gray-600,
+    "gray-700": $gray-700,
+    "gray-800": $gray-800,
+    "gray-900": $gray-900,
+    "black": $black,
+    "blue": $blue,
+    "indigo": $indigo,
+    "purple": $purple,
+    "pink": $pink,
+    "red": $red,
+    "orange": $orange,
+    "yellow": $yellow,
+    "green": $green,
+    "teal": $teal,
+    "cyan": $cyan,
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "danger": $danger,
+    "warning": $warning,
+  )
+);
+
+.plain-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  cursor: pointer;
+
+  &.fill {
+    width: 100%;
+    height: 100%;
+  }
+}
 
 .mat-mdc-dialog-container {
   margin: 10px !important;

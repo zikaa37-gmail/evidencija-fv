@@ -1,4 +1,4 @@
-@import "./theme-variables.scss";
+@use "./theme-variables" as *;
 
 .bg-success,
 .btn-success {

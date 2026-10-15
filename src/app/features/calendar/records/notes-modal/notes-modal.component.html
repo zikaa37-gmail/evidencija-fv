@@ -3,20 +3,32 @@
 
   <div class="d-flex flex-row justify-content-start my-4 w-100">
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <i
-        class="fa-regular fa-face-smile fa-2x text-success mx-4"
-        [class.fa-solid]="type() === NOTE_TYPE.GOOD"
+      <button
+        type="button"
+        class="plain-button mx-4"
+        [attr.aria-pressed]="type() === NOTE_TYPE.GOOD"
         (click)="type.set(NOTE_TYPE.GOOD)"
-      ></i>
+      >
+        <i
+          class="fa-regular fa-face-smile fa-2x text-success"
+          [class.fa-solid]="type() === NOTE_TYPE.GOOD"
+        ></i>
+      </button>
       {{ "notes.praise" | translate }}
     </div>
 
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <i
-        class="fa-regular fa-face-frown fa-2x text-danger mx-4"
-        [class.fa-solid]="type() === NOTE_TYPE.BAD"
+      <button
+        type="button"
+        class="plain-button mx-4"
+        [attr.aria-pressed]="type() === NOTE_TYPE.BAD"
         (click)="type.set(NOTE_TYPE.BAD)"
-      ></i>
+      >
+        <i
+          class="fa-regular fa-face-frown fa-2x text-danger"
+          [class.fa-solid]="type() === NOTE_TYPE.BAD"
+        ></i>
+      </button>
       {{ "notes.warning" | translate }}
     </div>
   </div>

@@ -20,11 +20,14 @@
     @for (group of classesService.possibleClasses(); track $index) {
       <ul class="classes">
         @for (item of group; track item.className) {
-          <li
-            class="border"
-            (click)="classesService.toggleClass(item.className)"
-          >
-            {{ item.className }}
+          <li class="border">
+            <button
+              type="button"
+              class="plain-button fill"
+              (click)="classesService.toggleClass(item.className)"
+            >
+              {{ item.className }}
+            </button>
           </li>
         }
       </ul>
@@ -41,11 +44,14 @@
     @for (group of classesService.thisYearClasses(); track $index) {
       <ul class="selected-classes">
         @for (item of group; track item.className) {
-          <li
-            class="border"
-            (click)="classesService.toggleClass(item.className)"
-          >
-            {{ item.className }}
+          <li class="border">
+            <button
+              type="button"
+              class="plain-button fill"
+              (click)="classesService.toggleClass(item.className)"
+            >
+              {{ item.className }}
+            </button>
           </li>
         }
       </ul>
