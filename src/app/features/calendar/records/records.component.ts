@@ -20,7 +20,6 @@ import { NotesModalComponent } from './notes-modal/notes-modal.component';
         TranslateModule,
         MatDividerModule,
         NgbPopoverModule,
-        OptionsComponent,
     ]
 })
 export class RecordsComponent implements OnInit {

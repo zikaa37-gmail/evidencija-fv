@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import * as moment from 'moment';
+import moment from 'moment';
 import { GlobalService } from 'src/app/shared/services/global.service';
 import { RecordsComponent } from './records/records.component';
 import { CalendarService } from './calendar.service';
