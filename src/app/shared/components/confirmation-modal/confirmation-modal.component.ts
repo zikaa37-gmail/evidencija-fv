@@ -12,22 +12,21 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 @Component({
-  selector: 'app-confirmation-modal',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    MatDialogModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    MatButtonModule,
-    MatIconModule,
-  ],
-  templateUrl: './confirmation-modal.component.html',
-  styleUrl: './confirmation-modal.component.scss',
+    selector: 'app-confirmation-modal',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        TranslateModule,
+        MatDialogModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose,
+        MatButtonModule,
+        MatIconModule,
+    ],
+    templateUrl: './confirmation-modal.component.html',
+    styleUrl: './confirmation-modal.component.scss'
 })
 export class ConfirmationModalComponent {
   constructor(

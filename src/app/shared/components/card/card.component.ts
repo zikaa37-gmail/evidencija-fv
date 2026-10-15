@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
-  standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, TranslateModule],
+    selector: 'app-card',
+    templateUrl: './card.component.html',
+    styleUrls: ['./card.component.scss'],
+    imports: [CommonModule, MatCardModule, MatIconModule, TranslateModule]
 })
 export class CardComponent {
   item = input.required<Student>();

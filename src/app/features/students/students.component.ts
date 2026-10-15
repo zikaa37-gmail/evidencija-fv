@@ -14,18 +14,17 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-students',
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    CardComponent,
-    ClassSelectorComponent,
-    MatDialogModule,
-    MatButtonModule,
-  ],
+    selector: 'app-students',
+    templateUrl: './students.component.html',
+    styleUrls: ['./students.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        CardComponent,
+        ClassSelectorComponent,
+        MatDialogModule,
+        MatButtonModule,
+    ]
 })
 export class StudentsComponent {
   #translate = inject(TranslateService);

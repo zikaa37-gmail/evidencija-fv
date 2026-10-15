@@ -10,17 +10,16 @@ import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-sele
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 
 @Component({
-  selector: 'app-students-upload',
-  templateUrl: './students-upload.component.html',
-  styleUrls: ['./students-upload.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    ClassSelectorComponent,
-    XlsxFileUploadComponent,
-    CardComponent,
-  ],
+    selector: 'app-students-upload',
+    templateUrl: './students-upload.component.html',
+    styleUrls: ['./students-upload.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        ClassSelectorComponent,
+        XlsxFileUploadComponent,
+        CardComponent,
+    ]
 })
 export class StudentsUploadComponent {
   private studentsService = inject(StudentsService);

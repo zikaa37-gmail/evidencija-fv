@@ -12,17 +12,16 @@ import { RecordsService } from './records.service';
 import { StudentsService } from '../../students/students.service';
 import { NotesModalComponent } from './notes-modal/notes-modal.component';
 @Component({
-  selector: 'app-records',
-  templateUrl: './records.component.html',
-  styleUrls: ['./records.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    MatDividerModule,
-    NgbPopoverModule,
-    OptionsComponent,
-  ],
+    selector: 'app-records',
+    templateUrl: './records.component.html',
+    styleUrls: ['./records.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        MatDividerModule,
+        NgbPopoverModule,
+        OptionsComponent,
+    ]
 })
 export class RecordsComponent implements OnInit {
   private recordsService = inject(RecordsService);

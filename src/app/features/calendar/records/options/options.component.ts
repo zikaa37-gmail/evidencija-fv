@@ -8,11 +8,10 @@ import { LoaderService } from '../../../../shared/components/loader/loader.servi
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-options',
-  templateUrl: './options.component.html',
-  styleUrls: ['./options.component.scss'],
-  standalone: true,
-  imports: [CommonModule, TranslateModule, MatButtonModule],
+    selector: 'app-options',
+    templateUrl: './options.component.html',
+    styleUrls: ['./options.component.scss'],
+    imports: [CommonModule, TranslateModule, MatButtonModule]
 })
 export class OptionsComponent {
   protected recordsService = inject(RecordsService);

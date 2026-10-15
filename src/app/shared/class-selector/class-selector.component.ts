@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 import { ClassesService } from 'src/app/features/classes/classes.service';
 
 @Component({
-  selector: 'app-class-selector',
-  templateUrl: './class-selector.component.html',
-  styleUrls: ['./class-selector.component.scss'],
-  standalone: true,
-  imports: [CommonModule, MatExpansionModule, TranslateModule],
+    selector: 'app-class-selector',
+    templateUrl: './class-selector.component.html',
+    styleUrls: ['./class-selector.component.scss'],
+    imports: [CommonModule, MatExpansionModule, TranslateModule]
 })
 export class ClassSelectorComponent {
   classesService = inject(ClassesService);

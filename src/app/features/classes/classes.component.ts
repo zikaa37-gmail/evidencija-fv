@@ -7,11 +7,10 @@ import { ActiveClass } from './classes.model';
 import { ClassesService } from './classes.service';
 
 @Component({
-  selector: 'app-classes',
-  templateUrl: './classes.component.html',
-  styleUrls: ['./classes.component.scss'],
-  standalone: true,
-  imports: [CommonModule, TranslateModule, MatButtonModule],
+    selector: 'app-classes',
+    templateUrl: './classes.component.html',
+    styleUrls: ['./classes.component.scss'],
+    imports: [CommonModule, TranslateModule, MatButtonModule]
 })
 export class ClassesComponent implements OnInit {
   classesService = inject(ClassesService);

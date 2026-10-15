@@ -12,16 +12,15 @@ import { CalendarBodyComponent } from './calendar-body/calendar-body.component';
 import { ClassesService } from '../classes/classes.service';
 
 @Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    ClassSelectorComponent,
-    MonthSelectorComponent,
-    CalendarBodyComponent,
-  ],
+    selector: 'app-calendar',
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.scss'],
+    imports: [
+        CommonModule,
+        ClassSelectorComponent,
+        MonthSelectorComponent,
+        CalendarBodyComponent,
+    ]
 })
 export class CalendarComponent {
   protected classesService = inject(ClassesService);

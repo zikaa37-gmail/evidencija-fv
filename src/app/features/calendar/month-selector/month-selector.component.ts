@@ -11,11 +11,10 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-month-selector',
-  templateUrl: './month-selector.component.html',
-  styleUrls: ['./month-selector.component.scss'],
-  standalone: true,
-  imports: [CommonModule, TranslateModule],
+    selector: 'app-month-selector',
+    templateUrl: './month-selector.component.html',
+    styleUrls: ['./month-selector.component.scss'],
+    imports: [CommonModule, TranslateModule]
 })
 export class MonthSelectorComponent {
   protected calendarService = inject(CalendarService);

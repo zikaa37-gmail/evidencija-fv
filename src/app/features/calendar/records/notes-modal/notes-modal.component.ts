@@ -9,11 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-notes-modal',
-  templateUrl: './notes-modal.component.html',
-  styleUrls: ['./notes-modal.component.scss'],
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatButtonModule],
+    selector: 'app-notes-modal',
+    templateUrl: './notes-modal.component.html',
+    styleUrls: ['./notes-modal.component.scss'],
+    imports: [CommonModule, TranslateModule, FormsModule, MatButtonModule]
 })
 export class NotesModalComponent {
   private recordsService = inject(RecordsService);

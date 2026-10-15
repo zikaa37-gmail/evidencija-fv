@@ -8,11 +8,10 @@ import { Title } from '@angular/platform-browser';
 import { Subject, takeUntil } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, LoaderComponent],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [CommonModule, RouterOutlet, HeaderComponent, LoaderComponent]
 })
 export class AppComponent {
   title = 'evidencija-fv';

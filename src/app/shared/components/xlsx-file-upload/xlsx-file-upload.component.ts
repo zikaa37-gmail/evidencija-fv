@@ -5,11 +5,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-xlsx-file-upload',
-  templateUrl: './xlsx-file-upload.component.html',
-  styleUrls: ['./xlsx-file-upload.component.scss'],
-  standalone: true,
-  imports: [CommonModule, TranslateModule, MatButtonModule],
+    selector: 'app-xlsx-file-upload',
+    templateUrl: './xlsx-file-upload.component.html',
+    styleUrls: ['./xlsx-file-upload.component.scss'],
+    imports: [CommonModule, TranslateModule, MatButtonModule]
 })
 export class XlsxFileUploadComponent implements OnInit {
   allSheetsData: any[] = [];
