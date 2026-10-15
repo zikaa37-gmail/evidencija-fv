@@ -1,28 +1,24 @@
 import { Student } from '../../students/students.interface';
 
-export interface Record {
-  id: string | number;
-  studentId: string | number;
-  reason: RecordOptions;
-  note: {
-    type: NoteTypes;
-    text: string;
-  };
-  recordDate: Date;
-}
-
 export interface OptionItem {
-  id: string | number;
+  id: number;
   option: string;
   icon: string;
   selected: boolean;
   bgColor: 'primary' | 'accent' | 'warn' | 'success' | 'danger';
 }
 
+export const NOTE_TYPE = {
+  GOOD: 'good',
+  BAD: 'bad',
+} as const;
+
+export type NoteType = (typeof NOTE_TYPE)[keyof typeof NOTE_TYPE];
+
 export interface Note {
   student: Student;
   note: string;
-  type: string;
+  type: NoteType;
 }
 
 export enum RecordOptions {
@@ -33,13 +29,3 @@ export enum RecordOptions {
   'ABSENT' = 'absent',
   'NONE' = 'none',
 }
-
-export enum NoteTypes {
-  'POSITIVE' = 'positive',
-  'NEGATIVE' = 'negative',
-}
-
-export const NOTE_TYPE = {
-  GOOD: 'good',
-  BAD: 'bad',
-};

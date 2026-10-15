@@ -1,18 +1,12 @@
-import {
-  ApplicationConfig,
-  inject,
-  provideAppInitializer,
-  provideZoneChangeDetection,
-} from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideHttpClient, withXhr } from '@angular/common/http';
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter, TitleStrategy } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { routes } from './app.routes';
-import { StudentsService } from './features/students/students.service';
-import { ClassesService } from './features/classes/classes.service';
+import { TranslatedTitleStrategy } from './shared/services/translated-title.strategy';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,13 +18,9 @@ export const appConfig: ApplicationConfig = {
         suffix: '.json',
       }),
     }),
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    { provide: TitleStrategy, useClass: TranslatedTitleStrategy },
     provideAnimationsAsync(),
-    provideHttpClient(withXhr()),
-    provideAppInitializer(() => {
-      inject(ClassesService).getClasses();
-      inject(StudentsService).getAllStudents();
-    }),
+    provideHttpClient(),
   ],
 };

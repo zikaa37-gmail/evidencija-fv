@@ -1,53 +1,38 @@
-import {
-  Component,
-  inject,
-  Inject,
-  Input,
-  input,
-  signal,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Student } from '../../../students/students.interface';
-import { Note, NOTE_TYPE } from '../records.interface';
-import { RecordsService } from '../records.service';
-import { CommonModule } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+
+import { Student } from '../../../students/students.interface';
+import { Note, NOTE_TYPE, NoteType } from '../records.interface';
+
+export interface NotesModalData {
+  type: NoteType;
+  student: Student;
+}
 
 @Component({
   selector: 'app-notes-modal',
   templateUrl: './notes-modal.component.html',
-  styleUrls: ['./notes-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [CommonModule, TranslatePipe, FormsModule, MatButtonModule],
+  styleUrl: './notes-modal.component.scss',
+  imports: [TranslatePipe, MatButton],
 })
 export class NotesModalComponent {
-  private recordsService = inject(RecordsService);
-  private dialogRef = inject(MatDialogRef<NotesModalComponent>);
-  public NOTE_TYPE = NOTE_TYPE;
-  // type = input<string>(NOTETYPE.BAD); // signal<string>(NOTETYPE.BAD);
-  @Input() type = NOTE_TYPE.BAD;
-  student!: Student;
-  note: Note = {
-    student: this.student,
-    note: '',
-    type: this.type,
-  };
+  #dialogRef = inject(MatDialogRef<NotesModalComponent, Note>);
+  readonly #data = inject<NotesModalData>(MAT_DIALOG_DATA);
+  protected readonly NOTE_TYPE = NOTE_TYPE;
+  protected readonly type = signal<NoteType>(this.#data.type);
+  protected readonly text = signal('');
 
-  addNote() {
-    console.log('SAVED');
-    this.closeModal();
-    // this.recordsService.addNote(this.note, this.type())
-    //   .subscribe(note => this.closeModal());
+  addNote(): void {
+    this.#dialogRef.close({
+      student: this.#data.student,
+      note: this.text(),
+      type: this.type(),
+    });
   }
 
-  setType(type: string) {
-    this.type = type;
-  }
-
-  closeModal() {
-    this.dialogRef.close(null);
+  closeModal(): void {
+    this.#dialogRef.close();
   }
 }

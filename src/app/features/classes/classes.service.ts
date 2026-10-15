@@ -1,12 +1,34 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
-import { tap, catchError, take } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
+import { catchError } from 'rxjs';
 
-import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 import { environment } from '../../../environments/environment';
+import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
-
+import { NotificationService } from '../../shared/services/notification.service';
 import { ActiveClass } from './classes.model';
+
+const GRADES = [5, 6, 7, 8];
+const SECTIONS_PER_GRADE = 10;
+
+const ALL_CLASSES: ActiveClass[] = GRADES.flatMap((grade) =>
+  Array.from({ length: SECTIONS_PER_GRADE }, (_, index) => ({
+    className: `${grade}-${index + 1}`,
+  })),
+);
+
+function sectionOf(className: string): number {
+  return Number(className.split('-')[1]);
+}
+
+function groupByGrade(classes: ActiveClass[]): ActiveClass[][] {
+  return GRADES.map((grade) =>
+    classes
+      .filter((item) => item.className.startsWith(`${grade}-`))
+      .sort((a, b) => sectionOf(a.className) - sectionOf(b.className)),
+  ).filter((group) => group.length > 0);
+}
 
 @Injectable({
   providedIn: 'root',
@@ -14,135 +36,72 @@ import { ActiveClass } from './classes.model';
 export class ClassesService {
   #apiUrl = environment.apiUrl;
   #http = inject(HttpClient);
-  #errorHandlerService = inject(ErrorHandlerService);
-  #loaderService = inject(LoaderService);
+  #errorHandler = inject(ErrorHandlerService);
+  #loader = inject(LoaderService);
+  #notification = inject(NotificationService);
+  #translate = inject(TranslateService);
 
-  selectedClass = signal<string>('5-1');
+  #classesResource = httpResource<ActiveClass[]>(
+    () => `${this.#apiUrl}/classes`,
+    { defaultValue: [] },
+  );
 
-  #possibleClasses = signal<ActiveClass[][]>([]);
-  possibleClasses = this.#possibleClasses.asReadonly();
+  #activeClasses = computed(() =>
+    this.#classesResource.hasValue() ? this.#classesResource.value() : [],
+  );
 
-  #thisYearClasses = signal<ActiveClass[][]>([]);
-  thisYearClasses = this.#thisYearClasses.asReadonly();
+  readonly selectedClass = signal('5-1');
 
-  triggerFilteredStudents = signal<boolean>(false);
+  readonly thisYearClasses = computed(() =>
+    groupByGrade(this.#activeClasses()),
+  );
+
+  readonly possibleClasses = computed(() => {
+    const active = new Set(this.#activeClasses().map((c) => c.className));
+    return groupByGrade(ALL_CLASSES.filter((c) => !active.has(c.className)));
+  });
 
   constructor() {
-    this.getPossibleClasses();
+    this.#loader.watch(this.#classesResource.isLoading);
+    effect(() => {
+      if (this.#classesResource.error()) {
+        this.#errorHandler.notify('classesError');
+      }
+    });
   }
 
-  getClasses() {
-    this.#loaderService.isLoading.set(true);
-
-    this.#http
-      .get<ActiveClass[]>(`${this.#apiUrl}/classes`)
-      .pipe(
-        take(1),
-        tap((classes) => {
-          this.setThisYearClasses(classes);
-          this.#loaderService.isLoading.set(false);
-        }),
-        catchError((err) => {
-          return this.#errorHandlerService.handleError(
-            err,
-            'classesError',
-            true,
-          );
-        }),
-      )
-      .subscribe();
+  toggleClass(className: string): void {
+    const classes = this.#activeClasses();
+    const isActive = classes.some((c) => c.className === className);
+    this.#classesResource.value.set(
+      isActive
+        ? classes.filter((c) => c.className !== className)
+        : [...classes, { className }],
+    );
   }
 
   saveClasses(): void {
-    this.#loaderService.isLoading.set(true);
-
-    const classes: ActiveClass[] = this.#thisYearClasses().flat();
-
-    this.#http
-      .post<ActiveClass[][]>(`${this.#apiUrl}/classes`, classes)
-      .pipe(
-        take(1),
-        tap((classes) => {
-          this.#thisYearClasses.set(classes);
-          this.#loaderService.isLoading.set(false);
-        }),
-        catchError((err) =>
-          this.#errorHandlerService.handleError(err, 'saveClassesError', true),
+    this.#loader
+      .track(
+        this.#http.post<ActiveClass[]>(
+          `${this.#apiUrl}/classes`,
+          this.#activeClasses(),
         ),
       )
-      .subscribe();
-  }
-
-  updateClasses(): void {
-    const classes: ActiveClass[] = this.#thisYearClasses().flat();
-
-    this.#http
-      .post<ActiveClass[]>(`${this.#apiUrl}/classes`, classes)
       .pipe(
-        take(1),
-        tap((classes) => {
-          this.setThisYearClasses(classes);
-          this.#loaderService.isLoading.set(false);
-        }),
-        catchError((err) =>
-          this.#errorHandlerService.handleError(
-            err,
-            'updateClassesError',
-            true,
-          ),
+        catchError((error) =>
+          this.#errorHandler.handleError(error, 'saveClassesError'),
         ),
       )
-      .subscribe();
+      .subscribe((classes) => {
+        this.#classesResource.value.set(classes);
+        this.#notification.success(
+          this.#translate.instant('toaster.saveClassesSuccess'),
+        );
+      });
   }
 
-  getPossibleClasses(): void {
-    let x = [];
-    for (let i = 5; i <= 8; i++) {
-      let arr: ActiveClass[] = [];
-      for (let j = 1; j <= 10; j++) {
-        arr.push({ className: `${i.toString()}-${j.toString()}` });
-        this.sortItemsByClassName(arr);
-      }
-      x.push(arr);
-    }
-    this.#possibleClasses.set(x);
-  }
-
-  setThisYearClasses(classes: ActiveClass[]): void {
-    const classesNames: ActiveClass[] = classes.map((c) => ({
-      id: c.id,
-      className: c.className,
-    }));
-    const classesArr: ActiveClass[][] = [[], [], [], []];
-
-    classesNames.map((c) => {
-      const className = c.className;
-      switch (true) {
-        case className.includes('5-'):
-          classesArr[0].push(c);
-          break;
-        case className.includes('6-'):
-          classesArr[1].push(c);
-          break;
-        case className.includes('7-'):
-          classesArr[2].push(c);
-          break;
-        case className.includes('8-'):
-          classesArr[3].push(c);
-          break;
-      }
-    });
-    this.#thisYearClasses.set(classesArr);
-  }
-
-  sortItemsByClassName(arr: ActiveClass[]): ActiveClass[] {
-    return arr.sort((a, b) => {
-      return parseInt(a.className) - parseInt(b.className);
-    });
-  }
-
-  setSelectedClass(className: string) {
+  setSelectedClass(className: string): void {
     this.selectedClass.set(className);
-    this.triggerFilteredStudents.set(true);
   }
 }

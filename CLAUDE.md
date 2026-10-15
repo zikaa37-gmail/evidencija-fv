@@ -7,7 +7,8 @@ učenici i uvoz iz Excela (`features/students`), kalendar sa evidencijom po danu
 (`features/calendar`). UI: Angular Material + Bootstrap, prevodi preko `@ngx-translate`
 (`public/translations/sr.json`).
 
-Backend za sada ne postoji (`environment.apiUrl` = `http://localhost:3000`) — vidi issue #15.
+Angular 22, zoneless (bez zone.js), OnPush je podrazumevan. Backend za sada ne postoji
+(`environment.apiUrl` = `http://localhost:3000`) — Laravel backend je planiran u issue-ima #18–#24.
 
 Plan upgrade-a i modernizacije: `docs/TODO.md`. Radni tok (issue → grana → PR): `docs/git-workflow.md`.
 Isti obrazac kao `D:\Playground\Angular\kosarkaska-evidencija` — pogledaj taj repo za
@@ -34,6 +35,12 @@ referentne konvencije ako nešto ovde nije eksplicitno napisano.
   getter/setter (`get x()`/`set x()`) property-a.
 - Podaci za Material dijalog idu kroz `dialog.open(X, { data })` + `inject(MAT_DIALOG_DATA)`, ne
   preko `dialogRef.componentInstance`.
+- Čitanje sa API-ja ide preko `httpResource` u servisu (`hasValue() ? value() : []` u `computed`),
+  uz `LoaderService.watch(resource.isLoading)` i `effect` koji na `error()` zove
+  `ErrorHandlerService.notify`. Upis (POST/PATCH/DELETE) ide preko `HttpClient` umotanog u
+  `LoaderService.track(...)`; posle uspeha lokalno se ažurira `resource.value`. Ne postavljati
+  `isLoading` ručno.
+- Obaveštenja korisniku idu kroz `NotificationService` (`MatSnackBar`), tekst iz prevoda (`toaster.*`).
 - Destruktivne akcije idu kroz zajednički `ConfirmationModalComponent`; ne uvoditi `window.confirm()`.
 - Ne dodavati tajne u repozitorijum.
 

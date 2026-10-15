@@ -24,14 +24,8 @@
               "base": "dist/evidencija-fv"
             },
             "index": "src/index.html",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": [
-              "moment"
-            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -106,10 +100,6 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [

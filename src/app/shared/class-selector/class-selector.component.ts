@@ -1,32 +1,34 @@
+import { Component, inject, signal } from '@angular/core';
 import {
-  Component,
-  inject,
-  signal,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle,
+} from '@angular/material/expansion';
 import { TranslatePipe } from '@ngx-translate/core';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { CommonModule } from '@angular/common';
+
 import { ClassesService } from '../../features/classes/classes.service';
 
 @Component({
   selector: 'app-class-selector',
   templateUrl: './class-selector.component.html',
-  styleUrls: ['./class-selector.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [CommonModule, MatExpansionModule, TranslatePipe],
+  styleUrl: './class-selector.component.scss',
+  imports: [
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatExpansionPanelDescription,
+    TranslatePipe,
+  ],
 })
 export class ClassSelectorComponent {
-  classesService = inject(ClassesService);
-  panelOpenState = signal<boolean>(false);
+  protected classesService = inject(ClassesService);
+  protected readonly panelOpen = signal(false);
 
-  onClassSelect(className: string) {
+  onClassSelect(className: string): void {
     this.classesService.setSelectedClass(className);
-    this.togglePanel();
-  }
-
-  togglePanel() {
-    const isOpen = this.panelOpenState();
-    this.panelOpenState.set(!isOpen);
+    this.panelOpen.set(false);
   }
 }

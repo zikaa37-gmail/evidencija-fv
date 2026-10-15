@@ -1,4 +1,5 @@
 {
+  "appTitle": "Evidencija učenika",
   "selectSection": "Odaberi odeljenje",
   "selectSections": "Odaberi odeljenja u kojima predaješ",
   "section": "Odeljenje",
@@ -48,6 +49,8 @@
     "note": "Beleška",
     "notes": "Beleške",
     "addNote": "Dodaj belešku",
+    "praise": "Pohvala",
+    "warning": "Opomena",
     "cancel": "Odustani"
   },
   "menu": {

@@ -1,24 +1,18 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import { CalendarService } from '../../calendar/calendar.service';
-import { Student, StudentStatus } from '../students.interface';
-import { StudentsService } from '../students.service';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { XlsxFileUploadComponent } from '../../../shared/components/xlsx-file-upload/xlsx-file-upload.component';
 import { ClassSelectorComponent } from '../../../shared/class-selector/class-selector.component';
 import { CardComponent } from '../../../shared/components/card/card.component';
+import { ClassesService } from '../../classes/classes.service';
+import { Student, StudentStatus } from '../students.interface';
+import { StudentsService } from '../students.service';
 
 @Component({
   selector: 'app-students-upload',
   templateUrl: './students-upload.component.html',
-  styleUrls: ['./students-upload.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './students-upload.component.scss',
   imports: [
     TranslatePipe,
     ClassSelectorComponent,
@@ -27,60 +21,44 @@ import { CardComponent } from '../../../shared/components/card/card.component';
   ],
 })
 export class StudentsUploadComponent {
-  private studentsService = inject(StudentsService);
-  private translate = inject(TranslateService);
-  private router = inject(Router);
-  private calendarService = inject(CalendarService);
-  students: Student[] = [];
-  filteredStudents: Student[] = [];
+  #studentsService = inject(StudentsService);
+  #classesService = inject(ClassesService);
+  #router = inject(Router);
 
-  selectedClass = '5-1';
-  selectedStudent: Student | null = null;
+  protected readonly students = signal<Student[]>([]);
+  protected readonly filteredStudents = computed(() =>
+    this.students().filter(
+      (student) => student.className === this.#classesService.selectedClass(),
+    ),
+  );
 
-  mapData(data: any) {
-    for (let i = 0; i < data.length; i++) {
-      const dataRow: any[] = data[i];
-
-      for (let x = 0; x < dataRow.length; x++) {
-        const row = dataRow[x];
-        const student = this.studentsService.mapStudentFromExcelData(row);
-        if (i === 0) {
-          this.selectedClass = student.className;
-        }
-        this.students.push(student);
-      }
-    }
-    this.filterStudents();
-  }
-
-  setSelectedClass(className: string) {
-    this.selectedClass = className;
-  }
-
-  filterStudents() {
-    this.filteredStudents = this.students.filter(
-      (student) => student.className === this.selectedClass,
+  mapData(sheets: unknown[][][]): void {
+    const imported = sheets.flatMap((rows) =>
+      rows.map((row) => this.#studentsService.mapStudentFromExcelData(row)),
     );
+    this.students.set(imported);
+    if (imported.length) {
+      this.#classesService.setSelectedClass(imported[0].className);
+    }
   }
 
-  onStudentDelete(student: Student) {
-    this.selectedStudent = student;
-    this.selectedStudent.status = StudentStatus.INACTIVE;
+  onStudentDelete(student: Student): void {
+    this.#setStatus(student, StudentStatus.INACTIVE);
   }
 
-  onStudentReactivate(student: Student) {
-    this.selectedStudent = student;
-    this.selectedStudent.status = StudentStatus.ACTIVE;
+  onStudentReactivate(student: Student): void {
+    this.#setStatus(student, StudentStatus.ACTIVE);
   }
 
   saveStudents(): void {
-    //TODO implement
-    console.log('Saved students');
-    this.router.navigate(['students']);
+    this.#studentsService
+      .saveStudents(this.students())
+      .subscribe(() => this.#router.navigate(['students']));
+  }
 
-    // this.studentsService.saveStudents(this.students).pipe(take(1)).subscribe(() => {
-    //   // this.toaster.success(this.translate.instant('TOASTER.SAVED'));
-    //   this.router.navigate(['students']);
-    // });
+  #setStatus(student: Student, status: StudentStatus): void {
+    this.students.update((students) =>
+      students.map((s) => (s === student ? { ...s, status } : s)),
+    );
   }
 }

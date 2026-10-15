@@ -1,4 +1,4 @@
-<mat-card [ngClass]="{ inactive: item().status === 'inactive' }">
+<mat-card [class.inactive]="item().status === 'inactive'">
   <mat-card-header>
     <div class="d-flex flex-row justify-content-between no-wrap w-100">
       <h4>{{ item().firstName }} {{ item().lastName }}</h4>
