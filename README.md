@@ -1,12 +1,13 @@
 # Evidencija FV
 
-Evidencija učenika na časovima fizičkog vaspitanja (Angular).
+Evidencija učenika na časovima fizičkog vaspitanja.
+
+- `frontend/` — Angular 22
+- `backend/` — Laravel 13 + MySQL (prefiks tabela `efv_`)
 
 ```bash
-npm install
-ng serve      # http://localhost:4200
-ng build      # produkcioni build u dist/
-ng test
+cd backend && composer install && php artisan migrate:fresh --seed && php artisan serve
+cd frontend && npm install && ng serve      # http://localhost:4200
 ```
 
-Konvencije: `CLAUDE.md`. Plan rada: `docs/TODO.md`. Git radni tok: `docs/git-workflow.md`.
+Konvencije: `CLAUDE.md`. Plan rada: `docs/TODO.md`. API: `docs/api-rute.md`. Git radni tok: `docs/git-workflow.md`.

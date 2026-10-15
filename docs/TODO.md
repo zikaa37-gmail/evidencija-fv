@@ -16,7 +16,15 @@ Trenutno: Angular 22.2, TypeScript 6.0, zoneless (bez zone.js), esbuild (`@angul
 | #12 | OnPush svuda, zoneless | ✅ |
 | #13 | Sass `@use`, Material M3 tema, `xlsx` sa CDN-a, Vitest, ESLint | |
 | #14 | Bagovi u kalendaru i uvozu učenika | ✅ |
-| #18–#24 | Backend (Laravel), restrukturiranje u `frontend/` + `backend/` | |
+| #18 | Restrukturiranje `frontend/` + `backend/`, Laravel 13 + MySQL (`efv_`), šema, seed | ✅ |
+| #19 | Autentifikacija nastavnika (JWT), uloge admin / korisnik | |
+| #20 | Odeljenja (API + frontend) | |
+| #21 | Učenici (API + frontend), Excel uvoz za nove đake i izmene | |
+| #30 | Prelazak u novu školsku godinu (1. septembar) | |
+| #32 | Admin deo vs. korisnički deo, obaveštenja jun–avgust | |
+| #22 | Evidencija na času (izostanci, oprema...) | |
+| #23 | Napomene (pohvale / opomene) | |
+| #24 | Izveštaji | |
 | #15 | Deploy na cPanel | |
 
 ## Napomene
