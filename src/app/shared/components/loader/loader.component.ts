@@ -1,12 +1,18 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { LoaderService } from './loader.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-    selector: 'app-loader',
-    imports: [MatProgressSpinnerModule],
-    templateUrl: './loader.component.html',
-    styleUrl: './loader.component.scss'
+  selector: 'app-loader',
+  imports: [MatProgressSpinnerModule],
+  templateUrl: './loader.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './loader.component.scss',
 })
 export class LoaderComponent {
   loaderService = inject(LoaderService);

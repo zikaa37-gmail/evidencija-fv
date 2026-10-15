@@ -1,13 +1,19 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [TranslateModule, RouterModule, MatButtonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [TranslatePipe, RouterModule, MatButtonModule],
 })
 export class HeaderComponent {
   links = [

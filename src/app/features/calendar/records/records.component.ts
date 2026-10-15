@@ -1,26 +1,27 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GlobalService } from 'src/app/shared/services/global.service';
+import { GlobalService } from '../../../shared/services/global.service';
 import { Student } from '../../students/students.interface';
 import { NOTE_TYPE, Record } from './records.interface';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
-import { OptionsComponent } from 'src/app/features/calendar/records/options/options.component';
+import { OptionsComponent } from './options/options.component';
 import { RecordsService } from './records.service';
 import { StudentsService } from '../../students/students.service';
 import { NotesModalComponent } from './notes-modal/notes-modal.component';
 @Component({
-    selector: 'app-records',
-    templateUrl: './records.component.html',
-    styleUrls: ['./records.component.scss'],
-    imports: [
-        CommonModule,
-        TranslateModule,
-        MatDividerModule,
-        NgbPopoverModule,
-    ]
+  selector: 'app-records',
+  templateUrl: './records.component.html',
+  styleUrls: ['./records.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [CommonModule, TranslatePipe, MatDividerModule, NgbPopoverModule],
 })
 export class RecordsComponent implements OnInit {
   private recordsService = inject(RecordsService);

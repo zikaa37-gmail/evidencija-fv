@@ -6,15 +6,17 @@ import {
   Input,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { GlobalService } from 'src/app/shared/services/global.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { GlobalService } from '../../../shared/services/global.service';
 
 @Component({
-    selector: 'app-calendar-body',
-    templateUrl: './calendar-body.component.html',
-    styleUrls: ['./calendar-body.component.scss'],
-    imports: [CommonModule, TranslateModule]
+  selector: 'app-calendar-body',
+  templateUrl: './calendar-body.component.html',
+  styleUrls: ['./calendar-body.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [CommonModule, TranslatePipe],
 })
 export class CalendarBodyComponent {
   protected globalService = inject(GlobalService);

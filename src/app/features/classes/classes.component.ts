@@ -1,16 +1,23 @@
-import { Component, inject, OnInit, output } from '@angular/core';
-import { GlobalService } from 'src/app/shared/services/global.service';
+import {
+  Component,
+  inject,
+  OnInit,
+  output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { GlobalService } from '../../shared/services/global.service';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ActiveClass } from './classes.model';
 import { ClassesService } from './classes.service';
 
 @Component({
-    selector: 'app-classes',
-    templateUrl: './classes.component.html',
-    styleUrls: ['./classes.component.scss'],
-    imports: [CommonModule, TranslateModule, MatButtonModule]
+  selector: 'app-classes',
+  templateUrl: './classes.component.html',
+  styleUrls: ['./classes.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [CommonModule, TranslatePipe, MatButtonModule],
 })
 export class ClassesComponent implements OnInit {
   classesService = inject(ClassesService);

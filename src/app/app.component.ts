@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shell/header/header.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterOutlet, HeaderComponent, LoaderComponent],
 })
 export class AppComponent {

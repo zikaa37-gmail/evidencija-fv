@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { effect, inject, Injectable, signal } from '@angular/core';
 import { catchError, Observable, of, take, tap } from 'rxjs';
-import { NotificationService } from 'src/app/shared/services/notification.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 
-import { environment } from 'src/environments/environment';
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
-import { LoaderService } from 'src/app/shared/components/loader/loader.service';
+import { environment } from '../../../environments/environment';
+import { ErrorHandlerService } from '../../shared/services/error-handler.service';
+import { LoaderService } from '../../shared/components/loader/loader.service';
 
 import { Student, StudentStatus } from './students.interface';
 import { ClassesService } from '../classes/classes.service';

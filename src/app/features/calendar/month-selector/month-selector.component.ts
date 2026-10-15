@@ -5,16 +5,18 @@ import {
   Input,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { CalendarService } from '../calendar.service';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-month-selector',
-    templateUrl: './month-selector.component.html',
-    styleUrls: ['./month-selector.component.scss'],
-    imports: [CommonModule, TranslateModule]
+  selector: 'app-month-selector',
+  templateUrl: './month-selector.component.html',
+  styleUrls: ['./month-selector.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [CommonModule, TranslatePipe],
 })
 export class MonthSelectorComponent {
   protected calendarService = inject(CalendarService);

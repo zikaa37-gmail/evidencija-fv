@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Note, OptionItem, RecordOptions } from './records.interface';
 import { TranslateService } from '@ngx-translate/core';
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
+import { ErrorHandlerService } from '../../../shared/services/error-handler.service';
 import { StudentStatus } from '../../students/students.interface';
 
 @Injectable({

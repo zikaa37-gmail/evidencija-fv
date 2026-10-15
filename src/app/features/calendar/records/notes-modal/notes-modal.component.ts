@@ -1,18 +1,27 @@
-import { Component, inject, Inject, Input, input, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  Inject,
+  Input,
+  input,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Student } from '../../../students/students.interface';
 import { Note, NOTE_TYPE } from '../records.interface';
 import { RecordsService } from '../records.service';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'app-notes-modal',
-    templateUrl: './notes-modal.component.html',
-    styleUrls: ['./notes-modal.component.scss'],
-    imports: [CommonModule, TranslateModule, FormsModule, MatButtonModule]
+  selector: 'app-notes-modal',
+  templateUrl: './notes-modal.component.html',
+  styleUrls: ['./notes-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [CommonModule, TranslatePipe, FormsModule, MatButtonModule],
 })
 export class NotesModalComponent {
   private recordsService = inject(RecordsService);

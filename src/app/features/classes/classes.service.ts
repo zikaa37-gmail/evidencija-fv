@@ -2,9 +2,9 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { tap, catchError, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
-import { environment } from 'src/environments/environment';
-import { LoaderService } from 'src/app/shared/components/loader/loader.service';
+import { ErrorHandlerService } from '../../shared/services/error-handler.service';
+import { environment } from '../../../environments/environment';
+import { LoaderService } from '../../shared/components/loader/loader.service';
 
 import { ActiveClass } from './classes.model';
 

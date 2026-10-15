@@ -1,17 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, output } from '@angular/core';
+import {
+  Component,
+  inject,
+  output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { TranslateModule } from '@ngx-translate/core';
-import { OptionItem } from 'src/app/features/calendar/records/records.interface';
-import { RecordsService } from 'src/app/features/calendar/records/records.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { OptionItem } from '../records.interface';
+import { RecordsService } from '../records.service';
 import { LoaderService } from '../../../../shared/components/loader/loader.service';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'app-options',
-    templateUrl: './options.component.html',
-    styleUrls: ['./options.component.scss'],
-    imports: [CommonModule, TranslateModule, MatButtonModule]
+  selector: 'app-options',
+  templateUrl: './options.component.html',
+  styleUrls: ['./options.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [CommonModule, TranslatePipe, MatButtonModule],
 })
 export class OptionsComponent {
   protected recordsService = inject(RecordsService);

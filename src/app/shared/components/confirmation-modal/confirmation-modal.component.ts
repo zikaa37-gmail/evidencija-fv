@@ -9,12 +9,12 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-confirmation-modal',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     MatDialogModule,
     MatDialogTitle,
     MatDialogContent,

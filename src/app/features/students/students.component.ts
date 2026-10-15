@@ -1,14 +1,19 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Student, StudentStatus } from './students.interface';
 import { StudentsService } from './students.service';
 
-import { CardComponent } from 'src/app/shared/components/card/card.component';
-import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-selector.component';
+import { CardComponent } from '../../shared/components/card/card.component';
+import { ClassSelectorComponent } from '../../shared/class-selector/class-selector.component';
 import { ClassesService } from '../classes/classes.service';
-import { ConfirmationModalComponent } from 'src/app/shared/components/confirmation-modal/confirmation-modal.component';
-import { GlobalService } from 'src/app/shared/services/global.service';
+import { ConfirmationModalComponent } from '../../shared/components/confirmation-modal/confirmation-modal.component';
+import { GlobalService } from '../../shared/services/global.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { take } from 'rxjs';
@@ -17,8 +22,9 @@ import { take } from 'rxjs';
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CardComponent,
     ClassSelectorComponent,
     MatDialogModule,

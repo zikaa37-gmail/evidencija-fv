@@ -1,12 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import moment from 'moment';
-import { GlobalService } from 'src/app/shared/services/global.service';
+import { GlobalService } from '../../shared/services/global.service';
 import { RecordsComponent } from './records/records.component';
 import { CalendarService } from './calendar.service';
 import { CalendarType } from './calendar.interface';
 
-import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-selector.component';
+import { ClassSelectorComponent } from '../../shared/class-selector/class-selector.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import { CalendarBodyComponent } from './calendar-body/calendar-body.component';
 import { ClassesService } from '../classes/classes.service';
@@ -15,6 +20,7 @@ import { ClassesService } from '../classes/classes.service';
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     ClassSelectorComponent,
     MonthSelectorComponent,
