@@ -1,9 +1,5 @@
 <mat-accordion>
-  <mat-expansion-panel
-    class="bg-primary"
-    [expanded]="panelOpenState()"
-    (click)="togglePanel()"
-  >
+  <mat-expansion-panel class="bg-primary" [(expanded)]="panelOpen">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{ "section" | translate }}
@@ -13,21 +9,20 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    @for (
-      classesArray of classesService.thisYearClasses();
-      let i = $index;
-      track classesArray
-    ) {
-      <ul class="departments" (click)="panelOpenState.set(true)">
-        @for (item of classesArray; track item) {
+    @for (group of classesService.thisYearClasses(); track $index) {
+      <ul class="departments">
+        @for (item of group; track item.className) {
           <li
             class="border"
-            (click)="onClassSelect(item.className)"
-            [ngClass]="{
-              active: item.className === classesService.selectedClass(),
-            }"
+            [class.active]="item.className === classesService.selectedClass()"
           >
-            {{ item.className }}
+            <button
+              type="button"
+              class="plain-button fill"
+              (click)="onClassSelect(item.className)"
+            >
+              {{ item.className }}
+            </button>
           </li>
         }
       </ul>

@@ -1,17 +1,14 @@
 <app-class-selector />
 
-@if (classesService.thisYearClasses()) {
-  <app-month-selector
-    [month]="selectedMonth"
-    [monthIndex]="selectedMonthIndex"
-    [year]="selectedYear"
-    (action)="onMonthChange($event)"
-  ></app-month-selector>
+<app-month-selector
+  [month]="monthName()"
+  [year]="year()"
+  (action)="onMonthChange($event)"
+/>
 
-  <app-calendar-body
-    [dates]="dates"
-    [days]="days"
-    [selected]="selectedDate"
-    (selectedDate)="onDateSelect($event)"
-  ></app-calendar-body>
-}
+<app-calendar-body
+  [dates]="dates()"
+  [days]="days"
+  [selected]="selectedDay()"
+  (dateSelect)="onDateSelect($event)"
+/>

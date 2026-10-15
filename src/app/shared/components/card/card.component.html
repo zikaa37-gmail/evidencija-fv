@@ -1,13 +1,27 @@
-<mat-card [ngClass]="{ inactive: item().status === 'inactive' }">
+<mat-card [class.inactive]="item().status === 'inactive'">
   <mat-card-header>
     <div class="d-flex flex-row justify-content-between no-wrap w-100">
       <h4>{{ item().firstName }} {{ item().lastName }}</h4>
 
       @if (item().status === "active") {
-        <mat-icon class="pointer" (click)="onItemDelete()">delete</mat-icon>
+        <button
+          type="button"
+          class="plain-button"
+          [attr.aria-label]="'buttons.delete' | translate"
+          (click)="onItemDelete()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
       }
       @if (item().status === "inactive") {
-        <mat-icon class="pointer" (click)="onItemPublish()">star</mat-icon>
+        <button
+          type="button"
+          class="plain-button"
+          [attr.aria-label]="'buttons.reactivate' | translate"
+          (click)="onItemPublish()"
+        >
+          <mat-icon>star</mat-icon>
+        </button>
       }
     </div>
   </mat-card-header>

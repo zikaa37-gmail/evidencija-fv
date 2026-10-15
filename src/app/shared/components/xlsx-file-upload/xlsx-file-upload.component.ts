@@ -1,47 +1,31 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component, output } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
 import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-xlsx-file-upload',
   templateUrl: './xlsx-file-upload.component.html',
-  styleUrls: ['./xlsx-file-upload.component.scss'],
-  standalone: true,
-  imports: [CommonModule, TranslateModule, MatButtonModule],
+  styleUrl: './xlsx-file-upload.component.scss',
+  imports: [TranslatePipe, MatButton],
 })
-export class XlsxFileUploadComponent implements OnInit {
-  allSheetsData: any[] = [];
-  @Output() data = new EventEmitter<any>(); //
+export class XlsxFileUploadComponent {
+  readonly data = output<unknown[][][]>();
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  onFileChange(event: any) {
-    const target: DataTransfer = <DataTransfer>event.target;
-
-    if (target.files.length !== 1) {
-      throw new Error('Can not upload multiple files');
+  async onFileChange(event: Event): Promise<void> {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) {
+      return;
     }
 
-    const reader: FileReader = new FileReader();
-    reader.onload = (e: any) => {
-      const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
-      for (let i = 0; i < wb.SheetNames.length; i++) {
-        const wsname: string = wb.SheetNames[i];
-        const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-        const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+    const workbook = XLSX.read(await file.arrayBuffer(), { type: 'array' });
+    const sheets = workbook.SheetNames.map((name) => {
+      const rows = XLSX.utils.sheet_to_json<unknown[]>(workbook.Sheets[name], {
+        header: 1,
+      });
+      return rows.slice(1);
+    });
 
-        data.shift();
-        this.allSheetsData.push(data);
-      }
-
-      this.data.emit(this.allSheetsData);
-      // console.log('allSheetsData', this.allSheetsData);
-    };
-    reader.readAsBinaryString(target.files[0]);
+    this.data.emit(sheets);
   }
 }

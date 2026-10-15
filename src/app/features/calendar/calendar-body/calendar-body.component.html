@@ -1,5 +1,5 @@
 <ul class="weekdays">
-  @for (day of days; track day) {
+  @for (day of days(); track day) {
     <li>
       @if (!globalService.isMobile()) {
         <span>{{ "days." + day | translate }}</span>
@@ -11,9 +11,19 @@
 </ul>
 
 <ul class="days">
-  @for (date of dates; let i = $index; track i) {
-    <li (click)="onDateSelect(date)">
-      <span [ngClass]="{ active: date === selected }">{{ date }}</span>
-    </li>
+  @for (date of dates(); track $index) {
+    @if (date) {
+      <li>
+        <button
+          type="button"
+          class="plain-button fill"
+          (click)="dateSelect.emit(date)"
+        >
+          <span [class.active]="date === selected()">{{ date }}</span>
+        </button>
+      </li>
+    } @else {
+      <li></li>
+    }
   }
 </ul>

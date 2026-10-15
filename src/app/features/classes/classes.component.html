@@ -4,10 +4,11 @@
 
 <div
   class="d-flex"
-  [ngClass]="{
-    'flex-column': globalService.isMobile(),
-    'flex-row justify-content-around mx-3': !globalService.isMobile(),
-  }"
+  [class]="
+    globalService.isMobile()
+      ? 'flex-column'
+      : 'flex-row justify-content-around mx-3'
+  "
 >
   <div class="border my-4">
     <h5 class="text-center mt-3">
@@ -16,15 +17,17 @@
 
     <hr />
 
-    @for (
-      classes of classesService.possibleClasses();
-      let i = $index;
-      track classes
-    ) {
+    @for (group of classesService.possibleClasses(); track $index) {
       <ul class="classes">
-        @for (item of classes; track item) {
-          <li class="border" (click)="onClassSelect(item.className, i)">
-            {{ item.className }}
+        @for (item of group; track item.className) {
+          <li class="border">
+            <button
+              type="button"
+              class="plain-button fill"
+              (click)="classesService.toggleClass(item.className)"
+            >
+              {{ item.className }}
+            </button>
           </li>
         }
       </ul>
@@ -38,15 +41,17 @@
 
     <hr />
 
-    @for (
-      section of classesService.thisYearClasses();
-      let i = $index;
-      track section
-    ) {
+    @for (group of classesService.thisYearClasses(); track $index) {
       <ul class="selected-classes">
-        @for (item of section; track item) {
-          <li class="border" (click)="onClassSelect(item.className, i)">
-            {{ item.className }}
+        @for (item of group; track item.className) {
+          <li class="border">
+            <button
+              type="button"
+              class="plain-button fill"
+              (click)="classesService.toggleClass(item.className)"
+            >
+              {{ item.className }}
+            </button>
           </li>
         }
       </ul>
@@ -55,7 +60,12 @@
 </div>
 
 <div class="d-flex flex-row justify-content-around">
-  <button class="my-4" mat-raised-button color="primary" (click)="save()">
+  <button
+    class="my-4"
+    mat-raised-button
+    color="primary"
+    (click)="classesService.saveClasses()"
+  >
     {{ "buttons.save" | translate }}
   </button>
 </div>

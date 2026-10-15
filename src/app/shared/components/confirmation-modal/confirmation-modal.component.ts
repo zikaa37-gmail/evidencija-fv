@@ -1,44 +1,38 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, inject } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
   MatDialogActions,
   MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule } from '@ngx-translate/core';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
+
+export interface ConfirmationModalData {
+  title: string;
+  question: string;
+  leftButtonText: string;
+  rightButtonText: string;
+  leftButtonIcon: string;
+  rightButtonIcon: string;
+}
+
 @Component({
   selector: 'app-confirmation-modal',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
-    TranslateModule,
-    MatDialogModule,
+    TranslatePipe,
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    MatButtonModule,
-    MatIconModule,
+    MatButton,
+    MatIcon,
   ],
   templateUrl: './confirmation-modal.component.html',
   styleUrl: './confirmation-modal.component.scss',
 })
 export class ConfirmationModalComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public data: {
-      title: string;
-      question: string;
-      leftButtonText: string;
-      rightButtonText: string;
-      leftButtonIcon: string;
-      rightButtonIcon: string;
-    }
-  ) {}
+  protected readonly data = inject<ConfirmationModalData>(MAT_DIALOG_DATA);
 }

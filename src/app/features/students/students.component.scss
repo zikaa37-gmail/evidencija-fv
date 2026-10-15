@@ -1,2 +1,2 @@
-@import "src/theme/theme-variables.scss";
-@import "src/theme/theme-overides.scss";
+@use "src/theme/theme-variables" as *;
+@use "src/theme/theme-overides";

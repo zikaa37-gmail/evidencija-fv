@@ -1,17 +1,17 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+
 import { LoaderService } from './loader.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-loader',
-  standalone: true,
-  imports: [MatProgressSpinnerModule],
+  imports: [MatProgressSpinner],
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
 })
 export class LoaderComponent {
-  loaderService = inject(LoaderService);
-  @Input() diameter: number = 50;
-  @Input() color: string = 'primary';
-  // @Input() strokeWidth: number = 1;
+  protected loaderService = inject(LoaderService);
+  readonly diameter = input(50);
+  readonly color = input<ThemePalette>('primary');
 }

@@ -1,4 +1,5 @@
 {
+  "appTitle": "Evidencija učenika",
   "selectSection": "Odaberi odeljenje",
   "selectSections": "Odaberi odeljenja u kojima predaješ",
   "section": "Odeljenje",
@@ -48,6 +49,8 @@
     "note": "Beleška",
     "notes": "Beleške",
     "addNote": "Dodaj belešku",
+    "praise": "Pohvala",
+    "warning": "Opomena",
     "cancel": "Odustani"
   },
   "menu": {
@@ -79,6 +82,8 @@
     "reactivate": "Reaktiviraj",
     "upload": "Učitaj",
     "close": "Zatvori",
+    "previous": "Prethodni",
+    "next": "Sledeći",
     "search": "Pretraga"
   },
   "students": {
@@ -144,7 +149,9 @@
     "deleteStudentsSuccess": "Uspešno obrisan student",
     "deleteStudentsError": "Greška prilikom brisanja studenta",
     "reactivateStudentSuccess": "Uspešno reaktiviran student",
-    "reactivateStudentError": "Greška prilikom objavljivanja studenta",
+    "reactivateStudentError": "Greška prilikom reaktiviranja studenta",
+    "deactivateStudentSuccess": "Uspešno deaktiviran student",
+    "deactivateStudentError": "Greška prilikom deaktiviranja studenta",
     "classesSuccess": "Uspešno učitana odeljenja",
     "classesError": "Greška prilikom učitavanja odeljenja",
     "saveSuccess": "Uspešno snimljeni podaci",

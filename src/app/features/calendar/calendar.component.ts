@@ -1,124 +1,79 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import * as moment from 'moment';
-import { GlobalService } from 'src/app/shared/services/global.service';
-import { RecordsComponent } from './records/records.component';
-import { CalendarService } from './calendar.service';
-import { CalendarType } from './calendar.interface';
-import { CommonModule } from '@angular/common';
-import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-selector.component';
-import { MonthSelectorComponent } from './month-selector/month-selector.component';
+
+import { ClassSelectorComponent } from '../../shared/class-selector/class-selector.component';
+import { GlobalService } from '../../shared/services/global.service';
 import { CalendarBodyComponent } from './calendar-body/calendar-body.component';
-import { ClassesService } from '../classes/classes.service';
+import { MONTHS, MonthAction, WEEKDAYS } from './calendar.constants';
+import { buildMonthGrid } from './month-grid';
+import { MonthSelectorComponent } from './month-selector/month-selector.component';
+import {
+  RecordsComponent,
+  RecordsDialogData,
+} from './records/records.component';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    ClassSelectorComponent,
-    MonthSelectorComponent,
-    CalendarBodyComponent,
-  ],
+  styleUrl: './calendar.component.scss',
+  imports: [ClassSelectorComponent, MonthSelectorComponent, CalendarBodyComponent],
 })
 export class CalendarComponent {
-  protected classesService = inject(ClassesService);
-  private calendarService = inject(CalendarService);
-  private globalService = inject(GlobalService);
-  private dialog = inject(MatDialog);
+  #globalService = inject(GlobalService);
+  #dialog = inject(MatDialog);
 
-  today = new Date();
-  calendarType: CalendarType = CalendarType.MONTH;
+  protected readonly days = WEEKDAYS;
+  protected readonly visibleMonth = signal(this.#firstOfMonth(new Date()));
+  protected readonly selectedDate = signal(new Date());
 
-  selectedMonthIndex = this.today.getMonth();
-  selectedMonth = this.calendarService.getMonth(this.selectedMonthIndex);
+  protected readonly monthName = computed(
+    () => MONTHS[this.visibleMonth().getMonth()],
+  );
+  protected readonly year = computed(() => this.visibleMonth().getFullYear());
 
-  selectedYearIndex = new Date().getFullYear();
-  selectedYear = new Date().getFullYear().toString();
-  firstOfTheMonth = this.setFistDayOfTheMonth();
-  numberOfDaysInMonth = this.getNumberOfDaysInMonth();
+  protected readonly dates = computed(() =>
+    buildMonthGrid(this.visibleMonth()),
+  );
 
-  days = this.calendarService.getDays();
-  dates = this.setDatesOfMonth();
-  selectedDate = this.today.getDate().toString();
-  selectedDateName = moment(this.today).format('dddd');
+  protected readonly selectedDay = computed(() => {
+    const selected = this.selectedDate();
+    const month = this.visibleMonth();
+    const isVisible =
+      selected.getFullYear() === month.getFullYear() &&
+      selected.getMonth() === month.getMonth();
+    return isVisible ? selected.getDate() : null;
+  });
 
-  onMonthChange(action: any) {
-    if (action === 'prev') {
-      this.selectedMonthIndex--;
-      if (this.selectedMonthIndex < 0) {
-        this.selectedMonthIndex += 11;
-
-        this.selectedYearIndex--;
-        this.selectedYear = this.selectedYearIndex.toString();
-      }
-    } else {
-      this.selectedMonthIndex++;
-      if (this.selectedMonthIndex > 11) {
-        this.selectedMonthIndex = 0;
-
-        this.selectedYearIndex++;
-        this.selectedYear = this.selectedYearIndex.toString();
-      }
-    }
-    this.setSelectedMonth(this.selectedMonthIndex);
-    this.firstOfTheMonth = this.setFistDayOfTheMonth();
-    this.numberOfDaysInMonth = this.getNumberOfDaysInMonth();
-    this.setDatesOfMonth();
+  onMonthChange(action: MonthAction): void {
+    this.visibleMonth.update(
+      (month) =>
+        new Date(
+          month.getFullYear(),
+          month.getMonth() + (action === 'prev' ? -1 : 1),
+          1,
+        ),
+    );
   }
 
-  onDateSelect(date: string) {
-    this.selectedDate = date;
-    this.openModal();
+  onDateSelect(day: number): void {
+    const month = this.visibleMonth();
+    const date = new Date(month.getFullYear(), month.getMonth(), day);
+    this.selectedDate.set(date);
+    this.#openRecords(date);
   }
 
-  setFistDayOfTheMonth(): Date {
-    return new Date(`${this.selectedYear}-${this.selectedMonth}-01`);
+  #openRecords(date: Date): void {
+    this.#dialog.open<RecordsComponent, RecordsDialogData>(RecordsComponent, {
+      data: { date },
+      height: 'auto',
+      width: this.#globalService.isMobile() ? '100vw' : '600px',
+      maxWidth: '100vw',
+      panelClass: 'user-dialog',
+      disableClose: true,
+    });
   }
 
-  setDatesOfMonth(): string[] {
-    this.dates = [];
-    const dates = [];
-
-    for (let i = 1; i <= this.numberOfDaysInMonth; i++) {
-      dates.push(i.toString());
-    }
-
-    const dt = moment(this.firstOfTheMonth); //, 'YYYY-MM-DD HH:mm:ss'
-    const weekday = dt.day();
-
-    for (let i = 0; i < weekday; i++) {
-      dates.unshift('');
-    }
-
-    this.dates = dates;
-    // console.log('Dates', this.dates);
-    return dates;
-  }
-
-  getNumberOfDaysInMonth(): number {
-    return moment(this.firstOfTheMonth).daysInMonth();
-  }
-
-  setSelectedMonth(monthIndex: number) {
-    this.selectedMonth = this.calendarService.getMonth(monthIndex);
-  }
-
-  openModal() {
-    setTimeout(() => {
-      const dialogRef = this.dialog.open(RecordsComponent, {
-        height: 'auto',
-        width: this.globalService.isMobile() ? '100vw' : '600px',
-        maxWidth: '100vw',
-        panelClass: 'user-dialog',
-        disableClose: true,
-      });
-
-      dialogRef.componentInstance.selectedDate = new Date(
-        `${this.selectedYear}-${this.selectedMonth}-${this.selectedDate}`,
-      );
-    }, 300);
+  #firstOfMonth(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), 1);
   }
 }

@@ -1,194 +1,150 @@
-import { HttpClient } from '@angular/common/http';
-import { effect, inject, Injectable, signal } from '@angular/core';
-import { catchError, Observable, of, take, tap } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { computed, effect, inject, Injectable } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { catchError, Observable, tap } from 'rxjs';
 
-import { environment } from 'src/environments/environment';
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
-import { LoaderService } from 'src/app/shared/components/loader/loader.service';
-
-import { Student, StudentStatus } from './students.interface';
+import { environment } from '../../../environments/environment';
+import { ErrorHandlerService } from '../../shared/services/error-handler.service';
+import { LoaderService } from '../../shared/components/loader/loader.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { ClassesService } from '../classes/classes.service';
+import { Sex, Student, StudentStatus } from './students.interface';
+
 @Injectable({
   providedIn: 'root',
 })
 export class StudentsService {
   #apiUrl = environment.apiUrl;
   #http = inject(HttpClient);
-  #errorHandlerService = inject(ErrorHandlerService);
-  #loaderService = inject(LoaderService);
+  #errorHandler = inject(ErrorHandlerService);
+  #loader = inject(LoaderService);
   #classesService = inject(ClassesService);
-  #toaster = inject(ToastrService);
+  #notification = inject(NotificationService);
   #translate = inject(TranslateService);
 
-  #students = signal<Student[]>([]);
-  students = this.#students.asReadonly();
+  #studentsResource = httpResource<Student[]>(
+    () => `${this.#apiUrl}/students`,
+    { defaultValue: [] },
+  );
 
-  #filteredStudents = signal<Student[]>([]);
-  filteredStudents = this.#filteredStudents.asReadonly();
+  readonly students = computed(() =>
+    this.#studentsResource.hasValue() ? this.#studentsResource.value() : [],
+  );
+
+  readonly filteredStudents = computed(() =>
+    this.students().filter(
+      (student) => student.className === this.#classesService.selectedClass(),
+    ),
+  );
 
   constructor() {
-    effect(
-      () => {
-        if (this.#classesService.triggerFilteredStudents()) {
-          this.filterStudents();
-        }
+    this.#loader.watch(this.#studentsResource.isLoading);
+    effect(() => {
+      if (this.#studentsResource.error()) {
+        this.#errorHandler.notify('studentsError');
+      }
+    });
+  }
+
+  saveStudents(students: Student[]): Observable<Student[]> {
+    const activeStudents = students.filter(
+      (student) => student.status === StudentStatus.ACTIVE,
+    );
+
+    return this.#loader
+      .track(
+        this.#http.post<Student[]>(`${this.#apiUrl}/students`, activeStudents),
+      )
+      .pipe(
+        tap((saved) => {
+          this.#studentsResource.value.set(saved);
+          this.#notifySuccess('saveStudentsSuccess');
+        }),
+        catchError((error) =>
+          this.#errorHandler.handleError(error, 'saveStudentsError'),
+        ),
+      );
+  }
+
+  deleteStudent(student: Student): void {
+    this.#loader
+      .track(this.#http.delete(`${this.#apiUrl}/students/${student.id}`))
+      .pipe(
+        catchError((error) =>
+          this.#errorHandler.handleError(error, 'deleteStudentsError'),
+        ),
+      )
+      .subscribe(() => {
+        this.#studentsResource.value.update((students) =>
+          students.filter((s) => s.id !== student.id),
+        );
+        this.#notifySuccess('deleteStudentsSuccess');
+      });
+  }
+
+  reactivateStudent(student: Student): void {
+    this.#changeStatus(student, StudentStatus.ACTIVE, 'activate', 'reactivateStudent');
+  }
+
+  deactivateStudent(student: Student): void {
+    this.#changeStatus(student, StudentStatus.INACTIVE, 'deactivate', 'deactivateStudent');
+  }
+
+  mapStudentFromExcelData(row: unknown[]): Student {
+    const cell = (index: number) =>
+      row[index] == null ? '' : String(row[index]).trim();
+
+    return {
+      id: '',
+      firstName: cell(0),
+      lastName: cell(1),
+      sex: cell(2) as Sex,
+      className: cell(3),
+      classNameId: '',
+      schoolYearId: '',
+      schoolYear: '',
+      info: {
+        emergency: { name: cell(4), phone: cell(5) },
+        departmentHead: { name: cell(6), phone: cell(7) },
+        sports: cell(8)
+          .split(',')
+          .map((sport) => sport.trim())
+          .filter(Boolean),
       },
-      {
-        allowSignalWrites: true,
-      },
+      status: (cell(9) as StudentStatus) || StudentStatus.ACTIVE,
+      notes: { healthIssues: [], negativeComments: [], positiveComments: [] },
+    };
+  }
+
+  #changeStatus(
+    student: Student,
+    status: StudentStatus,
+    endpoint: 'activate' | 'deactivate',
+    messagePrefix: string,
+  ): void {
+    this.#loader
+      .track(
+        this.#http.patch(
+          `${this.#apiUrl}/students/${endpoint}/${student.id}`,
+          student,
+        ),
+      )
+      .pipe(
+        catchError((error) =>
+          this.#errorHandler.handleError(error, `${messagePrefix}Error`),
+        ),
+      )
+      .subscribe(() => {
+        this.#studentsResource.value.update((students) =>
+          students.map((s) => (s.id === student.id ? { ...s, status } : s)),
+        );
+        this.#notifySuccess(`${messagePrefix}Success`);
+      });
+  }
+
+  #notifySuccess(messageKey: string): void {
+    this.#notification.success(
+      this.#translate.instant(`toaster.${messageKey}`),
     );
-  }
-
-  saveStudents(students: Student[]): void {
-    this.#loaderService.isLoading.set(true);
-
-    const body = students.filter((s) => s.status === 'active')!;
-
-    this.#http
-      .post<Student[]>(`${this.#apiUrl}/students`, body)
-      .pipe(
-        take(1),
-        tap((students) => {
-          this.#students.set(students);
-          this.#loaderService.isLoading.set(false);
-        }),
-        catchError((err) =>
-          this.#errorHandlerService.handleError(
-            err,
-            'saveStudentsSuccess',
-            true,
-          ),
-        ),
-      )
-      .subscribe();
-  }
-
-  getAllStudents(): void {
-    this.#loaderService.isLoading.set(true);
-    this.#http
-      .get<Student[]>(`${this.#apiUrl}/students`)
-      .pipe(
-        take(1),
-        tap((students: Student[]) => {
-          this.#students.set(students);
-          console.log('students', students);
-          this.#classesService.triggerFilteredStudents.set(true);
-          this.#loaderService.isLoading.set(false);
-        }),
-        catchError((err) => {
-          return this.#errorHandlerService.handleError(
-            err,
-            'studentsError',
-            true,
-          );
-        }),
-      )
-      .subscribe();
-  }
-
-  getStudentsByClassName() {
-    const filteredStudents = this.students().filter(
-      (student: Student) =>
-        student.className === this.#classesService.selectedClass(),
-    );
-    this.#filteredStudents.set(filteredStudents);
-  }
-
-  mapStudentFromExcelData(row: any[]): Student {
-    const student: Student = {} as Student;
-    student.firstName = row[0];
-    student.lastName = row[1];
-    student.sex = row[2];
-    student.className = row[3].toString();
-    student.info!.emergency.name = row[4] || '';
-    student.info!.emergency.phone = row[5] || '';
-    student.info!.departmentHead.name = row[6] || '';
-    student.info!.departmentHead.phone = row[7] || '';
-    student.info!.sports = row[8] || [];
-    student.status = row[9];
-    return student;
-  }
-
-  filterStudents() {
-    const filteredStudents = this.students().filter(
-      (student) => student.className === this.#classesService.selectedClass(),
-    );
-    this.#filteredStudents.set(filteredStudents);
-    console.log('filteredStudents', filteredStudents);
-    this.#classesService.triggerFilteredStudents.set(false);
-  }
-
-  deleteStudent(student: Student) {
-    this.#loaderService.isLoading.set(true);
-    this.#http
-      .delete(`${this.#apiUrl}/students/${student.id}`)
-      .pipe(
-        take(1),
-        tap(() => {
-          this.#students.set(
-            this.students().filter((s) => s.id !== student.id),
-          );
-          this.#filteredStudents.set(
-            this.filteredStudents().filter((s) => s.id !== student.id),
-          );
-          this.#loaderService.isLoading.set(false);
-          this.#toaster.success(
-            this.#translate.instant('toaster.deleteStudentsSuccess'),
-          );
-        }),
-        catchError((err) =>
-          this.#errorHandlerService.handleError(err, 'deleteStudentError'),
-        ),
-      )
-      .subscribe();
-  }
-
-  reactivateStudent(student: Student) {
-    this.#loaderService.isLoading.set(true);
-    this.#http
-      .patch(`${this.#apiUrl}/students/activate/${student.id}`, student)
-      .pipe(
-        take(1),
-        tap(() => {
-          const selectedStudent = this.students().find(
-            (s) => s.id === student.id,
-          )!;
-          selectedStudent.status = StudentStatus.ACTIVE;
-          this.#loaderService.isLoading.set(false);
-          this.#loaderService.isLoading.set(false);
-          this.#toaster.success(
-            this.#translate.instant('toaster.reactivateStudentSuccess'),
-          );
-        }),
-        catchError((err) =>
-          this.#errorHandlerService.handleError(err, 'reactivateStudentError'),
-        ),
-      )
-      .subscribe();
-  }
-
-  deactivateStudent(student: Student) {
-    this.#loaderService.isLoading.set(true);
-    return this.#http
-      .patch(`${this.#apiUrl}/students/deactivate/${student.id}`, student)
-      .pipe(
-        take(1),
-        tap(() => {
-          const selectedStudent = this.students().find(
-            (s) => s.id === student.id,
-          )!;
-          selectedStudent.status = StudentStatus.INACTIVE;
-          this.#loaderService.isLoading.set(false);
-          this.#toaster.success(
-            this.#translate.instant('toaster.deactivateStudentsSuccess'),
-          );
-        }),
-        catchError((err) =>
-          this.#errorHandlerService.handleError(err, 'reactivateStudentError'),
-        ),
-      )
-      .subscribe();
   }
 }

@@ -1,72 +1,66 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { GlobalService } from 'src/app/shared/services/global.service';
+import { Component, inject } from '@angular/core';
+import { DatePipe, LowerCasePipe } from '@angular/common';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { MatDivider } from '@angular/material/divider';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { TranslatePipe } from '@ngx-translate/core';
+
+import { GlobalService } from '../../../shared/services/global.service';
 import { Student } from '../../students/students.interface';
-import { NOTE_TYPE, Record } from './records.interface';
-import { CommonModule } from '@angular/common';
-import { MatDividerModule } from '@angular/material/divider';
-import { TranslateModule } from '@ngx-translate/core';
-import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
-import { OptionsComponent } from 'src/app/features/calendar/records/options/options.component';
-import { RecordsService } from './records.service';
 import { StudentsService } from '../../students/students.service';
-import { NotesModalComponent } from './notes-modal/notes-modal.component';
+import {
+  NotesModalComponent,
+  NotesModalData,
+} from './notes-modal/notes-modal.component';
+import { OptionsComponent } from './options/options.component';
+import { NOTE_TYPE, NoteType } from './records.interface';
+
+export interface RecordsDialogData {
+  date: Date;
+}
+
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
-  styleUrls: ['./records.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    MatDividerModule,
-    NgbPopoverModule,
-    OptionsComponent,
-  ],
+  styleUrl: './records.component.scss',
+  imports: [DatePipe, LowerCasePipe, TranslatePipe, MatDivider, NgbPopover],
 })
-export class RecordsComponent implements OnInit {
-  private recordsService = inject(RecordsService);
+export class RecordsComponent {
+  #dialog = inject(MatDialog);
+  #dialogRef = inject(MatDialogRef<RecordsComponent>);
+  #globalService = inject(GlobalService);
   protected studentsService = inject(StudentsService);
-  protected globalService = inject(GlobalService);
-  private dialog = inject(MatDialog);
-  protected record!: Record;
-  selectedDate!: Date;
-  // protected options = this.recordsService.options();
-  protected NOTE_TYPE = NOTE_TYPE;
+  protected readonly data = inject<RecordsDialogData>(MAT_DIALOG_DATA);
+  protected readonly NOTE_TYPE = NOTE_TYPE;
 
-  ngOnInit() {
-    this.studentsService.getStudentsByClassName();
-    console.log('students', this.studentsService.filteredStudents());
+  openNotesModal(type: NoteType, student: Student): void {
+    this.#dialog.open<NotesModalComponent, NotesModalData>(
+      NotesModalComponent,
+      {
+        data: { type, student },
+        height: 'auto',
+        width: this.#globalService.isMobile() ? '100vw' : '600px',
+        maxWidth: '100vw',
+        panelClass: 'user-dialog',
+        disableClose: true,
+      },
+    );
   }
 
-  fetchSelectedOption(option: any) {
-    console.log('selectedOption', option);
-  }
-
-  openNotesModal(type: string, student: Student) {
-    const dialogRef = this.dialog.open(NotesModalComponent, {
-      height: 'auto',
-      width: this.globalService.isMobile() ? '100vw' : '600px',
-      maxWidth: '100vw',
-      panelClass: 'user-dialog',
-      disableClose: true,
-    });
-
-    dialogRef.componentInstance.type = type;
-    dialogRef.componentInstance.student = student;
-  }
-
-  openModal(student: Student) {
-    const dialogRef = this.dialog.open(OptionsComponent, {
+  openOptions(): void {
+    this.#dialog.open(OptionsComponent, {
       height: 'auto',
       width: '300px',
-      // maxWidth: '200px',
       panelClass: 'user-dialog',
       disableClose: true,
     });
   }
 
-  closeModal() {
-    this.dialog.closeAll();
+  closeModal(): void {
+    this.#dialogRef.close();
   }
 }

@@ -8,7 +8,6 @@ export const routes: Routes = [
         (m) => m.CalendarComponent,
       ),
     title: 'menu.calendar',
-    data: { title: 'menu.calendar' },
   },
   {
     path: 'classes',
@@ -17,19 +16,15 @@ export const routes: Routes = [
         (m) => m.ClassesComponent,
       ),
     title: 'menu.classes',
-    data: { title: 'menu.classes' },
   },
   {
     path: 'students',
-
     loadComponent: () =>
       import('./features/students/students.component').then(
         (m) => m.StudentsComponent,
       ),
     title: 'menu.students',
-    data: { title: 'menu.students' },
   },
-
   {
     path: 'students/upload',
     loadComponent: () =>
@@ -37,7 +32,6 @@ export const routes: Routes = [
         './features/students/students-upload/students-upload.component'
       ).then((m) => m.StudentsUploadComponent),
     title: 'menu.uploadStudents',
-    data: { title: 'menu.uploadStudents' },
   },
   {
     path: '',

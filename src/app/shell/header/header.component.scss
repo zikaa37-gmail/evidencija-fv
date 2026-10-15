@@ -1,4 +1,4 @@
-@import 'src/theme/theme-variables.scss';
+@use "src/theme/theme-variables" as *;
 
 .img {
   width : 50px;

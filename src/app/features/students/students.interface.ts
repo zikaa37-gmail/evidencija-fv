@@ -2,7 +2,7 @@ export interface Student {
   id: string;
   firstName: string;
   lastName: string;
-  sex: 'male' | 'female';
+  sex: Sex;
   info: Info;
   status: StudentStatus;
   classNameId: string;
@@ -27,20 +27,10 @@ export interface NameNumber {
   phone: string;
 }
 
-// export interface Section {
-//   grade: string;
-//   department: string;
-// }
-
 export enum StudentStatus {
   'ACTIVE' = 'active',
   'PENDING' = 'pending',
   'INACTIVE' = 'inactive',
-}
-
-export enum Sexes {
-  'MALE' = 'male',
-  'FEMALE' = 'female',
 }
 
 export type Sex = 'male' | 'female';

@@ -1,26 +1,30 @@
-import { Component, EventEmitter, input, output } from '@angular/core';
-import { Student } from 'src/app/features/students/students.interface';
-import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, input, output } from '@angular/core';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardHeader,
+} from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
+
+import { Student } from '../../../features/students/students.interface';
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
-  standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, TranslateModule],
+  styleUrl: './card.component.scss',
+  imports: [MatCard, MatCardHeader, MatCardContent, MatIcon, TranslatePipe],
 })
 export class CardComponent {
-  item = input.required<Student>();
-  deletedItem = output<Student>();
-  reactivatedItem = output<Student>();
+  readonly item = input.required<Student>();
+  readonly deletedItem = output<Student>();
+  readonly reactivatedItem = output<Student>();
 
-  onItemDelete() {
+  onItemDelete(): void {
     this.deletedItem.emit(this.item());
   }
 
-  onItemPublish() {
+  onItemPublish(): void {
     this.reactivatedItem.emit(this.item());
   }
 }
