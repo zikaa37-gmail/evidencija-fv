@@ -13,6 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->alias([
+            'jwt' => \App\Http\Middleware\JwtAuthenticate::class,
+            'admin' => \App\Http\Middleware\EnsureAdmin::class,
+        ]);
+
         $middleware->api(append: [
             \App\Http\Middleware\UnescapeJsonUnicode::class,
         ]);

@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { catchError } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../../core/auth/auth.service';
 import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { NotificationService } from '../../shared/services/notification.service';
@@ -36,13 +37,14 @@ function groupByGrade(classes: ActiveClass[]): ActiveClass[][] {
 export class ClassesService {
   #apiUrl = environment.apiUrl;
   #http = inject(HttpClient);
+  #auth = inject(AuthService);
   #errorHandler = inject(ErrorHandlerService);
   #loader = inject(LoaderService);
   #notification = inject(NotificationService);
   #translate = inject(TranslateService);
 
   #classesResource = httpResource<ActiveClass[]>(
-    () => `${this.#apiUrl}/classes`,
+    () => (this.#auth.isAuthenticated() ? `${this.#apiUrl}/classes` : undefined),
     { defaultValue: [] },
   );
 

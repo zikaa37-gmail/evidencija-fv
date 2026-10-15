@@ -1,0 +1,47 @@
+<div class="login-page">
+  <form class="login-card" [formGroup]="form" (ngSubmit)="submit()">
+    <img src="images/logo.png" alt="Evidencija" class="login-logo" />
+    <h2 class="text-center mb-4">{{ "appTitle" | translate }}</h2>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "login.email" | translate }}</mat-label>
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        autocomplete="username"
+      />
+      @if (form.controls.email.hasError("required")) {
+        <mat-error>{{ "error.required" | translate }}</mat-error>
+      } @else if (form.controls.email.hasError("email")) {
+        <mat-error>{{ "error.email" | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "login.password" | translate }}</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="password"
+        autocomplete="current-password"
+      />
+      @if (form.controls.password.hasError("required")) {
+        <mat-error>{{ "error.required" | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    @if (errorKey(); as key) {
+      <div class="login-error" role="alert">{{ key | translate }}</div>
+    }
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="submitting()"
+    >
+      {{ "login.login" | translate }}
+    </button>
+  </form>
+</div>

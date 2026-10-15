@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { catchError, Observable, tap } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../../core/auth/auth.service';
 import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { NotificationService } from '../../shared/services/notification.service';
@@ -16,6 +17,7 @@ import { Sex, Student, StudentStatus } from './students.interface';
 export class StudentsService {
   #apiUrl = environment.apiUrl;
   #http = inject(HttpClient);
+  #auth = inject(AuthService);
   #errorHandler = inject(ErrorHandlerService);
   #loader = inject(LoaderService);
   #classesService = inject(ClassesService);
@@ -23,7 +25,7 @@ export class StudentsService {
   #translate = inject(TranslateService);
 
   #studentsResource = httpResource<Student[]>(
-    () => `${this.#apiUrl}/students`,
+    () => (this.#auth.isAuthenticated() ? `${this.#apiUrl}/students` : undefined),
     { defaultValue: [] },
   );
 

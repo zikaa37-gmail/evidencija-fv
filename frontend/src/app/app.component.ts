@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { AuthService } from './core/auth/auth.service';
 import { HeaderComponent } from './shell/header/header.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 
@@ -10,4 +11,6 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
   styleUrl: './app.component.scss',
   imports: [RouterOutlet, HeaderComponent, LoaderComponent],
 })
-export class AppComponent {}
+export class AppComponent {
+  protected readonly auth = inject(AuthService);
+}

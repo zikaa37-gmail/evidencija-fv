@@ -17,7 +17,7 @@
 
     <div class="collapse navbar-collapse" id="content">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        @for (link of links; track $index) {
+        @for (link of links(); track link.url) {
           <li class="nav-item">
             <button
               class="nav-link mx-3 active"
@@ -31,6 +31,21 @@
           </li>
         }
       </ul>
+
+      @if (auth.currentUser(); as user) {
+        <div class="d-flex align-items-center user-area">
+          <span class="mx-2">{{ user.name }}</span>
+          <button
+            type="button"
+            mat-button
+            class="mx-2"
+            data-testid="logout"
+            (click)="auth.logout()"
+          >
+            {{ "menu.logout" | translate }}
+          </button>
+        </div>
+      }
     </div>
   </div>
 </nav>

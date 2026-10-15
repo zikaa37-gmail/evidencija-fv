@@ -127,7 +127,10 @@
   "login": {
     "username": "Korisničko ime",
     "password": "Lozinka",
-    "login": "Prijava"
+    "login": "Prijava",
+    "email": "Email",
+    "invalidCredentials": "Pogrešan email ili lozinka.",
+    "serverError": "Prijava trenutno nije moguća. Pokušajte ponovo."
   },
   "classes": {
     "possibilities": "Odeljenja koja nisu odabrana",
@@ -156,7 +159,6 @@
     "classesError": "Greška prilikom učitavanja odeljenja",
     "saveSuccess": "Uspešno snimljeni podaci",
     "saveError": "Greška prilikom snimanja podataka",
-
     "addNoteSuccess": "Uspešno dodata beleška",
     "addNoteError": "Greška prilikom dodavanja beleške",
     "saveClassesSuccess": "Uspešno snimljena odeljenja",
