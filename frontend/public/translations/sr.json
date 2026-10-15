@@ -88,13 +88,18 @@
   },
   "students": {
     "students": "Učenici",
-    "create": "Kreiraj korisnika",
-    "edit": "Izmeni korisnika",
+    "create": "Novi učenik",
+    "edit": "Izmena učenika",
     "firstName": "Ime",
     "lastName": "Prezime",
-    "save": "Sačuvaj",
+    "save": "Sačuvaj učenike",
     "select": "Odaberi fajl",
-    "fileUpload": "Učitavanje podataka"
+    "fileUpload": "Uvoz učenika iz Excela",
+    "emergencyName": "Kontakt za hitne slučajeve (ime)",
+    "emergencyPhone": "Kontakt za hitne slučajeve (telefon)",
+    "commaHint": "Više vrednosti odvojiti zarezom",
+    "importHint": "Kolone: ime, prezime, pol (M/Ž), odeljenje (npr. 5-1), kontakt ime, kontakt telefon, -, -, sportovi, -, ograničenja. Postojeći učenik (isto ime i prezime u tekućoj godini) se ažurira, ostali se dodaju.",
+    "skippedRows": "Preskočeno redova sa nepotpunim podacima: {{count}}"
   },
   "sexes": {
     "sex": "Pol",
@@ -143,18 +148,18 @@
     "reactivateQuestion": "Da li ste sigurni da želite da reaktivirate podatak?"
   },
   "toaster": {
-    "studentsSuccess": "Uspešno učitani podaci o studentima",
-    "studentsError": "Greška prilikom učitavanja podataka o studentima",
-    "saveStudentsSuccess": "Uspešno snimljeni podaci o studentima",
-    "saveStudentsError": "Greška prilikom snimanja podataka o studentima",
-    "updateStudentsSuccess": "Uspešno ažurirani podaci o studentima",
-    "updateStudentsError": "Greška prilikom ažuriranja podataka o studentima",
-    "deleteStudentsSuccess": "Uspešno obrisan student",
-    "deleteStudentsError": "Greška prilikom brisanja studenta",
-    "reactivateStudentSuccess": "Uspešno reaktiviran student",
-    "reactivateStudentError": "Greška prilikom reaktiviranja studenta",
-    "deactivateStudentSuccess": "Uspešno deaktiviran student",
-    "deactivateStudentError": "Greška prilikom deaktiviranja studenta",
+    "studentsSuccess": "Uspešno učitani podaci o učenicima",
+    "studentsError": "Greška prilikom učitavanja podataka o učenicima",
+    "saveStudentsSuccess": "Uspešno snimljeni podaci o učenicima",
+    "saveStudentsError": "Greška prilikom snimanja podataka o učenicima",
+    "updateStudentsSuccess": "Podaci o učeniku su sačuvani",
+    "updateStudentsError": "Greška prilikom ažuriranja podataka o učenicima",
+    "deleteStudentsSuccess": "Uspešno obrisan učenik",
+    "deleteStudentsError": "Greška prilikom brisanja učenika",
+    "reactivateStudentSuccess": "Uspešno reaktiviran učenik",
+    "reactivateStudentError": "Greška prilikom reaktiviranja učenika",
+    "deactivateStudentSuccess": "Uspešno deaktiviran učenik",
+    "deactivateStudentError": "Greška prilikom deaktiviranja učenika",
     "classesSuccess": "Uspešno učitana odeljenja",
     "classesError": "Greška prilikom učitavanja odeljenja",
     "saveSuccess": "Uspešno snimljeni podaci",
@@ -164,6 +169,10 @@
     "saveClassesSuccess": "Uspešno snimljena odeljenja",
     "saveClassesError": "Greška prilikom snimanja odeljenja",
     "updateClassesSuccess": "Uspešno ažurirana odeljenja",
-    "updateClassesError": "Greška prilikom ažuriranja odeljenja"
+    "updateClassesError": "Greška prilikom ažuriranja odeljenja",
+    "createStudentSuccess": "Učenik je dodat",
+    "createStudentError": "Greška prilikom dodavanja učenika",
+    "importSuccess": "Uvezeno: {{created}} novih, {{updated}} izmenjenih",
+    "importError": "Greška prilikom uvoza učenika"
   }
 }

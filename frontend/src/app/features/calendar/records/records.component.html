@@ -52,14 +52,9 @@
         <div>
           <b>{{ "issues" | translate }}</b>
         </div>
-        @if (student.notes.healthIssues.length) {
-          <div>
-            @for (issue of student.notes.healthIssues; track $index) {
-              {{ issue }}
-              <br />
-            }
-          </div>
-        } @else {
+        @for (issue of student.health_issues; track $index) {
+          <div>{{ issue }}</div>
+        } @empty {
           -
         }
 
@@ -68,47 +63,30 @@
         </div>
         <div>
           <i class="fa fa-user mx-2"></i>
-          {{ student.info.emergency.name }}
+          {{ student.emergency_contact_name || "-" }}
         </div>
         <div>
           <i class="fa fa-phone mx-2"></i>
-          {{ student.info.emergency.phone }}
+          {{ student.emergency_contact_phone || "-" }}
         </div>
 
         <div class="mt-3">
           <b>{{ "departmentHead" | translate }}</b>
         </div>
-
         <div>
           <i class="fa fa-user mx-2"></i>
-          {{ student.info.departmentHead.name }}
+          {{ student.head_teacher_name || "-" }}
         </div>
-
         <div>
           <i class="fa fa-phone mx-2"></i>
-          {{ student.info.departmentHead.phone }}
+          {{ student.head_teacher_phone || "-" }}
         </div>
 
         <p class="mt-3">
           <b>{{ "sports.sports" | translate }}</b>
           <br />
-
-          @for (sport of student.info.sports; track $index) {
+          @for (sport of student.sports; track $index) {
             {{ "sports." + sport | lowercase | translate }}<br />
-          }
-        </p>
-
-        <p class="mt-3">
-          <b>{{ "notes.notes" | translate }}</b>
-          <br />
-          @for (
-            note of [
-              ...student.notes.positiveComments,
-              ...student.notes.negativeComments,
-            ];
-            track $index
-          ) {
-            {{ note }}<br />
           } @empty {
             -
           }
@@ -116,7 +94,7 @@
       </ng-template>
 
       <span class="mx-3 student"
-        >{{ student.firstName }} {{ student.lastName }}</span
+        >{{ student.first_name }} {{ student.last_name }}</span
       >
     </div>
     <hr />

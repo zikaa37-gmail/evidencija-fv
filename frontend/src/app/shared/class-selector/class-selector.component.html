@@ -11,17 +11,17 @@
 
     @for (group of classesService.thisYearClasses(); track $index) {
       <ul class="departments">
-        @for (item of group; track item.className) {
+        @for (item of group; track item.name) {
           <li
             class="border"
-            [class.active]="item.className === classesService.selectedClass()"
+            [class.active]="item.name === classesService.selectedClass()"
           >
             <button
               type="button"
               class="plain-button fill"
-              (click)="onClassSelect(item.className)"
+              (click)="onClassSelect(item.name)"
             >
-              {{ item.className }}
+              {{ item.name }}
             </button>
           </li>
         }

@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>
+  {{ (isEdit ? "students.edit" : "students.create") | translate }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-dialog-content class="student-form">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "students.firstName" | translate }}</mat-label>
+      <input matInput formControlName="first_name" />
+      <mat-error>{{ "error.required" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "students.lastName" | translate }}</mat-label>
+      <input matInput formControlName="last_name" />
+      <mat-error>{{ "error.required" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "sexes.sex" | translate }}</mat-label>
+      <mat-select formControlName="sex">
+        <mat-option value="male">{{ "sexes.male" | translate }}</mat-option>
+        <mat-option value="female">{{ "sexes.female" | translate }}</mat-option>
+      </mat-select>
+      <mat-error>{{ "error.required" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "section" | translate }}</mat-label>
+      <mat-select formControlName="school_class_id">
+        @for (schoolClass of classesService.classes(); track schoolClass.id) {
+          <mat-option [value]="schoolClass.id">{{ schoolClass.name }}</mat-option>
+        }
+      </mat-select>
+      <mat-error>{{ "error.required" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "students.emergencyName" | translate }}</mat-label>
+      <input matInput formControlName="emergency_contact_name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "students.emergencyPhone" | translate }}</mat-label>
+      <input matInput type="tel" formControlName="emergency_contact_phone" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "sports.sports" | translate }}</mat-label>
+      <input matInput formControlName="sports" />
+      <mat-hint>{{ "students.commaHint" | translate }}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "issues" | translate }}</mat-label>
+      <input matInput formControlName="health_issues" />
+      <mat-hint>{{ "students.commaHint" | translate }}</mat-hint>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button [mat-dialog-close]="undefined">
+      {{ "buttons.cancel" | translate }}
+    </button>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="saving()"
+    >
+      {{ "buttons.save" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>
