@@ -1,11 +1,12 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, TitleStrategy } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { routes } from './app.routes';
+import { authInterceptor } from './core/auth/auth.interceptor';
 import { TranslatedTitleStrategy } from './shared/services/translated-title.strategy';
 
 export const appConfig: ApplicationConfig = {
@@ -21,6 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     { provide: TitleStrategy, useClass: TranslatedTitleStrategy },
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
   ],
 };

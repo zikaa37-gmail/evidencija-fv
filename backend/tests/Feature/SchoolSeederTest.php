@@ -6,12 +6,15 @@ use App\Models\Enrollment;
 use App\Models\SchoolClass;
 use App\Models\SchoolYear;
 use App\Models\Student;
+use App\Models\User;
 use Database\Seeders\SchoolSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Concerns\AuthenticatesWithJwt;
 use Tests\TestCase;
 
 class SchoolSeederTest extends TestCase
 {
+    use AuthenticatesWithJwt;
     use RefreshDatabase;
 
     protected function setUp(): void
@@ -44,7 +47,11 @@ class SchoolSeederTest extends TestCase
 
     public function test_current_school_year_endpoint(): void
     {
-        $this->getJson('/api/school-years/current')
+        $this->getJson('/api/school-years/current')->assertUnauthorized();
+
+        $user = User::create(['name' => 'Test', 'email' => 'test@evidencija.test', 'password' => 'lozinka123']);
+
+        $this->withJwt($user)->getJson('/api/school-years/current')
             ->assertOk()
             ->assertJsonStructure(['id', 'name', 'starts_on', 'ends_on', 'school' => ['id', 'name', 'city']])
             ->assertJsonPath('school.city', 'Beograd');

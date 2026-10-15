@@ -53,6 +53,12 @@ referentne konvencije ako nešto ovde nije eksplicitno napisano.
 - Obaveštenja korisniku idu kroz `NotificationService` (`MatSnackBar`), tekst iz prevoda (`toaster.*`).
 - Destruktivne akcije idu kroz zajednički `ConfirmationModalComponent`; ne uvoditi `window.confirm()`.
 - Ne dodavati tajne u repozitorijum. Lokalni backend kredencijali idu u `backend/.env`.
+- Auth: JWT access token (60 min) + refresh token sa rotacijom (u bazi samo hash), kao u
+  kosarkaska-evidencija. Uloge `admin` (admin poslovi: odeljenja, učenici, prelazak godine) i
+  `teacher` (evidencija). Backend: middleware `jwt` / `admin`; frontend: `core/auth`
+  (`AuthService`, `authInterceptor` dodaje token samo na `/api` i radi refresh na 401,
+  `authGuard` / `adminGuard` / `guestGuard`). Lokalni nalozi iz seed-a:
+  `admin@evidencija.test` / `nastavnik@evidencija.test`, lozinka `lozinka123` (samo lokalno).
 - Backend: kontroleri u `app/Http/Controllers/Api`, odgovor se slaže u `present()` metodi
   kontrolera (snake_case ključevi), validacija preko `$request->validate(...)`. API čitanja sa
   filterima idu kao `POST .../list` sa JSON telom (kao u kosarkaska-evidencija); `GET` samo za id

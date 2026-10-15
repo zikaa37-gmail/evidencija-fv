@@ -1,0 +1,35 @@
+@use "src/theme/theme-variables" as *;
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 10vh 16px 0;
+  background: $default;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  padding: 32px 24px;
+  background: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba($black, 0.15);
+}
+
+.login-logo {
+  align-self: center;
+  width: 72px;
+  margin-bottom: 12px;
+}
+
+.login-error {
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  color: $white;
+  background: $danger;
+  border-radius: 4px;
+}
