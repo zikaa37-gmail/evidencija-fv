@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,21 +11,20 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 @Component({
-    selector: 'app-confirmation-modal',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        CommonModule,
-        TranslateModule,
-        MatDialogModule,
-        MatDialogTitle,
-        MatDialogContent,
-        MatDialogActions,
-        MatDialogClose,
-        MatButtonModule,
-        MatIconModule,
-    ],
-    templateUrl: './confirmation-modal.component.html',
-    styleUrl: './confirmation-modal.component.scss'
+  selector: 'app-confirmation-modal',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    MatDialogModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatButtonModule,
+    MatIconModule,
+  ],
+  templateUrl: './confirmation-modal.component.html',
+  styleUrl: './confirmation-modal.component.scss',
 })
 export class ConfirmationModalComponent {
   constructor(
@@ -38,6 +36,6 @@ export class ConfirmationModalComponent {
       rightButtonText: string;
       leftButtonIcon: string;
       rightButtonIcon: string;
-    }
+    },
   ) {}
 }

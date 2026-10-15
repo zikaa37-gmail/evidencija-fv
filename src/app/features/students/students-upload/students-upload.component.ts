@@ -4,22 +4,21 @@ import { Student, StudentStatus } from '../students.interface';
 import { StudentsService } from '../students.service';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
+
 import { XlsxFileUploadComponent } from 'src/app/shared/components/xlsx-file-upload/xlsx-file-upload.component';
 import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-selector.component';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 
 @Component({
-    selector: 'app-students-upload',
-    templateUrl: './students-upload.component.html',
-    styleUrls: ['./students-upload.component.scss'],
-    imports: [
-        CommonModule,
-        TranslateModule,
-        ClassSelectorComponent,
-        XlsxFileUploadComponent,
-        CardComponent,
-    ]
+  selector: 'app-students-upload',
+  templateUrl: './students-upload.component.html',
+  styleUrls: ['./students-upload.component.scss'],
+  imports: [
+    TranslateModule,
+    ClassSelectorComponent,
+    XlsxFileUploadComponent,
+    CardComponent,
+  ],
 })
 export class StudentsUploadComponent {
   private studentsService = inject(StudentsService);

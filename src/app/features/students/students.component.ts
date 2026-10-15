@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Student, StudentStatus } from './students.interface';
 import { StudentsService } from './students.service';
-import { CommonModule } from '@angular/common';
+
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-selector.component';
 import { ClassesService } from '../classes/classes.service';
@@ -14,17 +14,16 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { take } from 'rxjs';
 
 @Component({
-    selector: 'app-students',
-    templateUrl: './students.component.html',
-    styleUrls: ['./students.component.scss'],
-    imports: [
-        CommonModule,
-        TranslateModule,
-        CardComponent,
-        ClassSelectorComponent,
-        MatDialogModule,
-        MatButtonModule,
-    ]
+  selector: 'app-students',
+  templateUrl: './students.component.html',
+  styleUrls: ['./students.component.scss'],
+  imports: [
+    TranslateModule,
+    CardComponent,
+    ClassSelectorComponent,
+    MatDialogModule,
+    MatButtonModule,
+  ],
 })
 export class StudentsComponent {
   #translate = inject(TranslateService);

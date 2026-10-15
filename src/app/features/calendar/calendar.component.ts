@@ -5,22 +5,21 @@ import { GlobalService } from 'src/app/shared/services/global.service';
 import { RecordsComponent } from './records/records.component';
 import { CalendarService } from './calendar.service';
 import { CalendarType } from './calendar.interface';
-import { CommonModule } from '@angular/common';
+
 import { ClassSelectorComponent } from 'src/app/shared/class-selector/class-selector.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import { CalendarBodyComponent } from './calendar-body/calendar-body.component';
 import { ClassesService } from '../classes/classes.service';
 
 @Component({
-    selector: 'app-calendar',
-    templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss'],
-    imports: [
-        CommonModule,
-        ClassSelectorComponent,
-        MonthSelectorComponent,
-        CalendarBodyComponent,
-    ]
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  imports: [
+    ClassSelectorComponent,
+    MonthSelectorComponent,
+    CalendarBodyComponent,
+  ],
 })
 export class CalendarComponent {
   protected classesService = inject(ClassesService);

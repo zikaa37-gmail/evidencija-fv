@@ -1,6 +1,5 @@
 import {
   ApplicationConfig,
-  importProvidersFrom,
   inject,
   provideAppInitializer,
   provideZoneChangeDetection,
@@ -10,7 +9,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ToastrModule } from 'ngx-toastr';
 
 import { routes } from './app.routes';
 import { StudentsService } from './features/students/students.service';
@@ -18,11 +16,6 @@ import { ClassesService } from './features/classes/classes.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(
-      ToastrModule.forRoot({
-        positionClass: 'toast-top-full-width',
-      }),
-    ),
     provideTranslateService({
       lang: 'sr',
       fallbackLang: 'sr',

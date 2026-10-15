@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { LoaderService } from '../components/loader/loader.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ErrorHandlerService {
   #loaderService = inject(LoaderService);
   #tranlate = inject(TranslateService);
-  #toaster = inject(ToastrService);
+  #toaster = inject(NotificationService);
 
   handleError(err: any, message: string, isServerdown = false) {
     if (isServerdown) {

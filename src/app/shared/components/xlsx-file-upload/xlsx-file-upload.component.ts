@@ -1,14 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import * as XLSX from 'xlsx';
 
 @Component({
-    selector: 'app-xlsx-file-upload',
-    templateUrl: './xlsx-file-upload.component.html',
-    styleUrls: ['./xlsx-file-upload.component.scss'],
-    imports: [CommonModule, TranslateModule, MatButtonModule]
+  selector: 'app-xlsx-file-upload',
+  templateUrl: './xlsx-file-upload.component.html',
+  styleUrls: ['./xlsx-file-upload.component.scss'],
+  imports: [TranslateModule, MatButtonModule],
 })
 export class XlsxFileUploadComponent implements OnInit {
   allSheetsData: any[] = [];

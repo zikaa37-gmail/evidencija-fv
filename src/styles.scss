@@ -1,7 +1,6 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./theme/theme-variables.scss";
 @import "./theme/theme-overides.scss";
-@import "ngx-toastr/toastr";
 
 html,
 body {
@@ -35,4 +34,16 @@ i,
 
 .mat-mdc-dialog-container {
   margin: 10px !important;
+}
+
+.mat-mdc-snack-bar-container {
+  &.notification-success {
+    --mat-snack-bar-container-color: #51a351;
+    --mat-snack-bar-supporting-text-color: #{$white};
+  }
+
+  &.notification-error {
+    --mat-snack-bar-container-color: #bd362f;
+    --mat-snack-bar-supporting-text-color: #{$white};
+  }
 }

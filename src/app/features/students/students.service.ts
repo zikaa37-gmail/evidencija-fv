@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { effect, inject, Injectable, signal } from '@angular/core';
 import { catchError, Observable, of, take, tap } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 
 import { environment } from 'src/environments/environment';
@@ -19,7 +19,7 @@ export class StudentsService {
   #errorHandlerService = inject(ErrorHandlerService);
   #loaderService = inject(LoaderService);
   #classesService = inject(ClassesService);
-  #toaster = inject(ToastrService);
+  #toaster = inject(NotificationService);
   #translate = inject(TranslateService);
 
   #students = signal<Student[]>([]);
@@ -57,7 +57,7 @@ export class StudentsService {
         catchError((err) =>
           this.#errorHandlerService.handleError(
             err,
-            'saveStudentsSuccess',
+            'saveStudentsError',
             true,
           ),
         ),
@@ -139,7 +139,7 @@ export class StudentsService {
           );
         }),
         catchError((err) =>
-          this.#errorHandlerService.handleError(err, 'deleteStudentError'),
+          this.#errorHandlerService.handleError(err, 'deleteStudentsError'),
         ),
       )
       .subscribe();
@@ -182,11 +182,11 @@ export class StudentsService {
           selectedStudent.status = StudentStatus.INACTIVE;
           this.#loaderService.isLoading.set(false);
           this.#toaster.success(
-            this.#translate.instant('toaster.deactivateStudentsSuccess'),
+            this.#translate.instant('toaster.deactivateStudentSuccess'),
           );
         }),
         catchError((err) =>
-          this.#errorHandlerService.handleError(err, 'reactivateStudentError'),
+          this.#errorHandlerService.handleError(err, 'deactivateStudentError'),
         ),
       )
       .subscribe();
