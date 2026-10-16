@@ -218,7 +218,8 @@
     "archiveEmpty": "Arhiva je prazna."
   },
   "records": {
-    "readOnly": "Samo pregled — upis i izmena su mogući za poslednjih {{days}} dana."
+    "readOnly": "Samo pregled — upis i izmena su mogući za poslednjih {{days}} dana.",
+    "none": "Nema"
   },
   "reports": {
     "period": "Period",

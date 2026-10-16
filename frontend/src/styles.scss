@@ -77,16 +77,128 @@ i,
   )
 );
 
-.svg-icon {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background-color: currentColor;
-  mask: var(--icon) no-repeat center / contain;
+$icons: ball, chevron-left, chevron-right, close, edit, frown, heart, info, power, note, phone, restore,
+  school, smile, teacher, trash, user;
+
+$tones: (
+  "blue": #2f6fde,
+  "green": #2e9d5b,
+  "orange": #e8891c,
+  "red": #d64545,
+  "purple": #8e5bd6,
+  "teal": #1f9e9a,
+  "amber": #c99a06,
+  "gray": #6b7280,
+);
+
+:root {
+  @each $name, $color in $tones {
+    --tone-#{$name}: #{$color};
+  }
 }
 
-.icon-logout {
-  --icon: url("/icons/logout.svg");
+.svg-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--icon-size, 24px);
+  height: var(--icon-size, 24px);
+  background-color: currentColor;
+  mask: var(--icon) no-repeat center / contain;
+  vertical-align: middle;
+
+  &.icon-sm {
+    --icon-size: 16px;
+  }
+
+  &.icon-lg {
+    --icon-size: 28px;
+  }
+}
+
+@each $name in $icons {
+  .icon-#{$name} {
+    --icon: url("/icons/#{$name}.svg");
+  }
+}
+
+@each $name, $color in $tones {
+  .tone-#{$name} {
+    color: var(--tone-#{$name});
+  }
+}
+
+.icon-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  transition: background-color 0.15s;
+
+  &:hover,
+  &:focus-visible {
+    background: color-mix(in srgb, currentColor 22%, transparent);
+  }
+
+  &[aria-expanded="true"] {
+    color: var(--mat-sys-on-primary);
+    background: var(--tone-blue);
+  }
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  padding: 2px 10px;
+  font-size: 13px;
+  border-radius: 12px;
+  color: var(--chip-color, var(--tone-gray));
+  background: color-mix(in srgb, var(--chip-color, var(--tone-gray)) 12%, transparent);
+
+  &.chip-red {
+    --chip-color: var(--tone-red);
+  }
+
+  &.chip-blue {
+    --chip-color: var(--tone-blue);
+  }
+}
+
+.phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--tone-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.muted {
+  color: $gray-500;
+}
+
+.info-backdrop {
+  background: rgba(0, 0, 0, 0.18);
 }
 
 .plain-button {

@@ -1,10 +1,4 @@
 import { Component, input, output } from '@angular/core';
-import {
-  MatCard,
-  MatCardContent,
-  MatCardHeader,
-} from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { Student } from '../../../features/students/students.interface';
@@ -13,7 +7,7 @@ import { Student } from '../../../features/students/students.interface';
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
-  imports: [MatCard, MatCardHeader, MatCardContent, MatIcon, TranslatePipe],
+  imports: [TranslatePipe],
 })
 export class CardComponent {
   readonly item = input.required<Student>();

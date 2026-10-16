@@ -5,11 +5,12 @@
     >
     <button
       type="button"
-      class="plain-button m-2"
+      class="icon-action tone-gray m-2"
       [attr.aria-label]="'buttons.close' | translate"
+      [title]="'buttons.close' | translate"
       (click)="closeModal()"
     >
-      <i class="fa fa-2x fa-close"></i>
+      <span class="svg-icon icon-close" aria-hidden="true"></span>
     </button>
   </div>
 

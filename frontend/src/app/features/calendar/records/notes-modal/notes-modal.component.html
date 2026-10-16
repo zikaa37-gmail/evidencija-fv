@@ -6,14 +6,12 @@
     <div class="d-flex flex-column justify-content-center align-items-center">
       <button
         type="button"
-        class="plain-button mx-4"
+        class="note-type tone-green mx-3"
+        [class.selected]="type() === NOTE_TYPE.GOOD"
         [attr.aria-pressed]="type() === NOTE_TYPE.GOOD"
         (click)="type.set(NOTE_TYPE.GOOD)"
       >
-        <i
-          class="fa-regular fa-face-smile fa-2x text-success"
-          [class.fa-solid]="type() === NOTE_TYPE.GOOD"
-        ></i>
+        <span class="svg-icon icon-smile icon-lg" aria-hidden="true"></span>
       </button>
       {{ "notes.praise" | translate }}
     </div>
@@ -21,14 +19,12 @@
     <div class="d-flex flex-column justify-content-center align-items-center">
       <button
         type="button"
-        class="plain-button mx-4"
+        class="note-type tone-red mx-3"
+        [class.selected]="type() === NOTE_TYPE.BAD"
         [attr.aria-pressed]="type() === NOTE_TYPE.BAD"
         (click)="type.set(NOTE_TYPE.BAD)"
       >
-        <i
-          class="fa-regular fa-face-frown fa-2x text-danger"
-          [class.fa-solid]="type() === NOTE_TYPE.BAD"
-        ></i>
+        <span class="svg-icon icon-frown icon-lg" aria-hidden="true"></span>
       </button>
       {{ "notes.warning" | translate }}
     </div>
@@ -36,6 +32,7 @@
 
   <textarea
     id="note-text"
+    cdkFocusInitial
     rows="6"
     class="w-100 p-3"
     [value]="text()"
