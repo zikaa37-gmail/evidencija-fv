@@ -1,29 +1,30 @@
-# Deploy na cPanel (evidencija-fv.fiskultura.rs)
+# Deploy na cPanel (evidencija.fiskultura.rs)
 
 Isti hosting i isti obrazac kao `D:\Playground\Angular\kosarkaska-evidencija\docs\DEPLOY.md`:
 nema SSH-a, paketi idu preko FTP-a, a jednokratni PHP fajl na serveru ih raspakuje i pokrene migracije.
 
 ## Jednom, pre prvog deploy-a (ručno u cPanel-u)
 
-1. **Domains → Create a New Domain (poddomen)**: `evidencija-fv.fiskultura.rs`, document root
-   `evidencija-fv.fiskultura.rs` (u home folderu, kao `kk-borac.fiskultura.rs` — NE u `public_html`).
+1. Poddomen `evidencija.fiskultura.rs` već postoji (document root `~/evidencija.fiskultura.rs`, ranije je
+   tu bio stari statički build ove aplikacije — rezervna kopija je lokalno u
+   `deploy/backup-evidencija.fiskultura.rs-2026-10-16/`, van gita).
 2. Baza: koristi se postojeća deljena baza `fiskultu_porucivanje` (isti nalog kao kosarkaska-evidencija),
    razdvojena prefiksom `DB_PREFIX=efv_`. Ništa ne treba praviti.
 3. **Cron Jobs** (trajno, za automatski prelazak školske godine 1. septembra):
 
    ```
-   * * * * * /usr/local/bin/php /home/fiskultu/evidencija-fv_app/artisan schedule:run >> /dev/null 2>&1
+   * * * * * /usr/local/bin/php /home/fiskultu/evidencija_app/artisan schedule:run >> /dev/null 2>&1
    ```
 
 ## Folderi na serveru
 
 ```
-~/evidencija-fv.fiskultura.rs/   <- document root poddomena (javno)
+~/evidencija.fiskultura.rs/   <- document root poddomena (javno)
   index.php                      <- iz deploy/index.php (sa imenom app foldera)
   .htaccess                      <- iz deploy/htaccess-production (samo pri prvom deploy-u)
   index.html, *.js, *.css        <- Angular build
 
-~/evidencija-fv_app/             <- Laravel aplikacija, NIJE javna
+~/evidencija_app/             <- Laravel aplikacija, NIJE javna
   app/ bootstrap/ config/ database/ routes/ storage/ vendor/ .env
 ```
 
@@ -55,6 +56,14 @@ dupliralo podatke.
 
 Postupak je lokalno proveren simulacijom servera (isti folderi, PHP server sa pravilima kao `.htaccess`,
 posebna test baza): raspakivanje, migracije, seed, prijava i stranice rade.
+
+## Napomene sa servera
+
+- MySQL na serveru dozvoljava indeks do 1000 bajtova, pa je `Schema::defaultStringLength(191)` u
+  `AppServiceProvider`, a `failed_jobs.connection` / `queue` su skraćeni na 100 znakova. Nove migracije:
+  složeni indeksi preko stringova moraju da stanu u 1000 bajtova (utf8mb4 = 4 bajta po znaku).
+- Prvi deploy je urađen 16.10.2026 (`--seed`): 16 odeljenja × 30 učenika, probni nalozi. Sledeći deploy-i
+  idu bez `--seed`.
 
 ## Bezbednost
 
