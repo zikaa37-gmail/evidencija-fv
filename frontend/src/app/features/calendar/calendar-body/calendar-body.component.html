@@ -17,9 +17,15 @@
         <button
           type="button"
           class="plain-button fill"
+          [disabled]="lastSelectableDay() !== null && date > lastSelectableDay()!"
           (click)="dateSelect.emit(date)"
         >
-          <span [class.active]="date === selected()">{{ date }}</span>
+          <span
+            [class.active]="date === selected()"
+            [class.marked]="marked().has(date)"
+            [class.read-only]="readOnlyDays().has(date)"
+            >{{ date }}</span
+          >
         </button>
       </li>
     } @else {

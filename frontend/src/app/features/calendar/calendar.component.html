@@ -10,5 +10,8 @@
   [dates]="dates()"
   [days]="days"
   [selected]="selectedDay()"
+  [marked]="recordsService.markedDays()"
+  [lastSelectableDay]="lastSelectableDay()"
+  [readOnlyDays]="readOnlyDays()"
   (dateSelect)="onDateSelect($event)"
 />

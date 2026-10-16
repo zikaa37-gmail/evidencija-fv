@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\SchoolClassController;
 use App\Http\Controllers\Api\SchoolYearController;
 use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\StudentNoteController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:10,1');
@@ -17,6 +19,12 @@ Route::middleware('jwt')->group(function () {
     Route::get('/school-years/current', [SchoolYearController::class, 'current']);
     Route::post('/classes/list', [SchoolClassController::class, 'index']);
     Route::post('/students/list', [StudentController::class, 'index']);
+
+    Route::post('/attendance/list', [AttendanceController::class, 'index']);
+    Route::put('/attendance', [AttendanceController::class, 'save']);
+    Route::post('/notes/list', [StudentNoteController::class, 'index']);
+    Route::post('/notes', [StudentNoteController::class, 'store']);
+    Route::delete('/notes/{id}', [StudentNoteController::class, 'destroy'])->whereNumber('id');
 });
 
 Route::middleware(['jwt', 'admin'])->group(function () {

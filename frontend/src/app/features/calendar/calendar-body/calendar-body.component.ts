@@ -14,5 +14,8 @@ export class CalendarBodyComponent {
   readonly dates = input.required<(number | null)[]>();
   readonly days = input.required<string[]>();
   readonly selected = input<number | null>(null);
+  readonly marked = input<Set<number>>(new Set());
+  readonly lastSelectableDay = input<number | null>(null);
+  readonly readOnlyDays = input<Set<number>>(new Set());
   readonly dateSelect = output<number>();
 }

@@ -2,8 +2,9 @@
 
 .login-page {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   min-height: 100vh;
   padding: 10vh 16px 0;
   background: $default;
@@ -32,4 +33,28 @@
   color: $white;
   background: $danger;
   border-radius: 4px;
+}
+
+.demo-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 20px 24px;
+  background: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba($black, 0.15);
+}
+
+.demo-account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid $gray-200;
+}
+
+.demo-credentials {
+  font-size: 13px;
+  color: $gray-700;
+  word-break: break-all;
 }

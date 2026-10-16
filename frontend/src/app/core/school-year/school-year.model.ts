@@ -5,6 +5,7 @@ export interface CurrentSchoolYear {
   ends_on: string;
   preparation_starts_on: string;
   in_preparation: boolean;
+  edit_window_days: number;
   school: {
     id: number;
     name: string;

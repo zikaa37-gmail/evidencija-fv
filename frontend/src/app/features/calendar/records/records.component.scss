@@ -24,3 +24,15 @@ i {
 ::ng-deep .mat-dialog-container {
   padding: 10px !important;
 }
+
+.reason-badge {
+  margin-left: auto;
+  background: $primary;
+}
+
+.read-only-hint {
+  padding: 8px 12px;
+  color: $gray-700;
+  background: $gray-200;
+  border-radius: 4px;
+}

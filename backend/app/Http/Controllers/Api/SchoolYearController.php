@@ -48,6 +48,7 @@ class SchoolYearController extends Controller
             'ends_on' => $schoolYear->ends_on->toDateString(),
             'preparation_starts_on' => $schoolYear->preparationStartsOn()->toDateString(),
             'in_preparation' => $schoolYear->isInPreparation(),
+            'edit_window_days' => (int) config('school.edit_window_days'),
             'school' => [
                 'id' => $schoolYear->school->id,
                 'name' => $schoolYear->school->name,

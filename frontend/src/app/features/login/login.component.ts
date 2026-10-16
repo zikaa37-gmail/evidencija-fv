@@ -7,6 +7,7 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { TranslatePipe } from '@ngx-translate/core';
 
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
@@ -39,6 +40,7 @@ export class LoginComponent {
   });
   protected readonly submitting = signal(false);
   protected readonly errorKey = signal<string | null>(null);
+  protected readonly demoAccounts = environment.demoAccounts;
 
   submit(): void {
     if (this.form.invalid) {
@@ -47,6 +49,15 @@ export class LoginComponent {
     }
 
     const { email, password } = this.form.getRawValue();
+    this.#login(email, password);
+  }
+
+  loginAs(email: string, password: string): void {
+    this.form.setValue({ email, password });
+    this.#login(email, password);
+  }
+
+  #login(email: string, password: string): void {
     this.submitting.set(true);
     this.errorKey.set(null);
 

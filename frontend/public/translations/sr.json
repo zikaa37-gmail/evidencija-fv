@@ -136,7 +136,14 @@
     "login": "Prijava",
     "email": "Email",
     "invalidCredentials": "Pogrešan email ili lozinka.",
-    "serverError": "Prijava trenutno nije moguća. Pokušajte ponovo."
+    "serverError": "Prijava trenutno nije moguća. Pokušajte ponovo.",
+    "demoTitle": "Probni nalozi",
+    "demoHint": "Prijava jednim klikom za isprobavanje aplikacije.",
+    "loginAs": "Prijavi se",
+    "roles": {
+      "admin": "Administrator",
+      "teacher": "Nastavnik"
+    }
   },
   "classes": {
     "possibilities": "Odeljenja koja nisu odabrana",
@@ -175,7 +182,10 @@
     "createStudentError": "Greška prilikom dodavanja učenika",
     "importSuccess": "Uvezeno: {{created}} novih, {{updated}} izmenjenih",
     "importError": "Greška prilikom uvoza učenika",
-    "rolloverError": "Greška prilikom prelaska u novu školsku godinu"
+    "rolloverError": "Greška prilikom prelaska u novu školsku godinu",
+    "attendanceError": "Greška prilikom učitavanja evidencije",
+    "saveAttendanceError": "Greška prilikom čuvanja evidencije",
+    "deleteNoteError": "Greška prilikom brisanja beleške"
   },
   "admin": {
     "schoolYear": "Školska godina",
@@ -205,5 +215,8 @@
     "completed": "Završio školu",
     "leftSchool": "Napustio školu",
     "archiveEmpty": "Arhiva je prazna."
+  },
+  "records": {
+    "readOnly": "Samo pregled — upis i izmena su mogući za poslednjih {{days}} dana."
   }
 }
