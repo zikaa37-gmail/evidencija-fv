@@ -77,6 +77,18 @@ i,
   )
 );
 
+.svg-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: currentColor;
+  mask: var(--icon) no-repeat center / contain;
+}
+
+.icon-logout {
+  --icon: url("/icons/logout.svg");
+}
+
 .plain-button {
   background: none;
   border: 0;

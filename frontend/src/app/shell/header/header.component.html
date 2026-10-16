@@ -34,20 +34,17 @@
 
       @if (auth.currentUser(); as user) {
         <div class="d-flex align-items-center user-area">
-          @if (schoolYearService.current(); as schoolYear) {
-            <span class="mx-2 text-muted school-year" data-testid="school-year"
-              >{{ schoolYear.school.name }} · {{ schoolYear.name }}</span
-            >
-          }
           <span class="mx-2 user-name">{{ user.name }}</span>
           <button
             type="button"
-            mat-button
-            class="mx-2"
+            mat-icon-button
+            class="mx-1"
             data-testid="logout"
+            [attr.aria-label]="'menu.logout' | translate"
+            [title]="'menu.logout' | translate"
             (click)="auth.logout()"
           >
-            {{ "menu.logout" | translate }}
+            <span class="svg-icon icon-logout" aria-hidden="true"></span>
           </button>
         </div>
       }
