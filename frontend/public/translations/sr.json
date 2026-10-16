@@ -62,7 +62,8 @@
     "uploadStudents": "Učitavanje učenika",
     "studentsList": "Lista učenika",
     "classes": "Odabir odeljenja",
-    "admin": "Administracija"
+    "admin": "Administracija",
+    "reports": "Izveštaji"
   },
   "general": {
     "noItems": "Nema učitanih podataka"
@@ -218,5 +219,20 @@
   },
   "records": {
     "readOnly": "Samo pregled — upis i izmena su mogući za poslednjih {{days}} dana."
+  },
+  "reports": {
+    "period": "Period",
+    "month": "Mesec",
+    "periods": {
+      "month": "Mesec",
+      "first-term": "1. polugodište",
+      "second-term": "2. polugodište",
+      "year": "Cela godina"
+    },
+    "total": "Ukupno oznaka",
+    "praises": "Pohvale",
+    "warnings": "Opomene",
+    "sum": "Ukupno",
+    "export": "Izvezi u Excel"
   }
 }

@@ -31,6 +31,14 @@ export const routes: Routes = [
         title: 'menu.students',
       },
       {
+        path: 'reports',
+        loadComponent: () =>
+          import('./features/reports/reports.component').then(
+            (m) => m.ReportsComponent,
+          ),
+        title: 'menu.reports',
+      },
+      {
         path: 'admin',
         canActivate: [adminGuard],
         loadComponent: () =>

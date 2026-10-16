@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\SchoolClassController;
 use App\Http\Controllers\Api\SchoolYearController;
 use App\Http\Controllers\Api\StudentController;
@@ -25,6 +26,7 @@ Route::middleware('jwt')->group(function () {
     Route::post('/notes/list', [StudentNoteController::class, 'index']);
     Route::post('/notes', [StudentNoteController::class, 'store']);
     Route::delete('/notes/{id}', [StudentNoteController::class, 'destroy'])->whereNumber('id');
+    Route::post('/reports/class', [ReportController::class, 'schoolClass']);
 });
 
 Route::middleware(['jwt', 'admin'])->group(function () {

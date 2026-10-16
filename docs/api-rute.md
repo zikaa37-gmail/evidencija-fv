@@ -24,6 +24,7 @@ middleware `admin` (uloga `admin`).
 | POST | `/notes/list` | `school_class_id` → pohvale i opomene (`can_delete`) |
 | POST | `/notes` | `student_id`, `date`, `type` (`good`/`bad`), `text` — samo poslednjih 7 dana |
 | DELETE | `/notes/{id}` | Autor ili admin, samo u okviru 7 dana |
+| POST | `/reports/class` | `school_class_id`, `from`, `to` → po učeniku zbir oznaka po vrsti, `total`, `praises`, `warnings` |
 | POST | `/classes/list` | Odeljenja tekuće školske godine (`id`, `name`, `grade`, `section`, `head_teacher_*`, `students_count`) |
 | POST | `/students/list` | Učenici tekuće godine (opciono `school_class_id`); arhivirani se ne vraćaju |
 

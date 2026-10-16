@@ -1,0 +1,37 @@
+@use "src/theme/theme-variables" as *;
+
+.page {
+  padding: 16px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.month-select {
+  width: auto;
+  min-width: 180px;
+}
+
+.report-table {
+  td.has-value {
+    font-weight: 600;
+  }
+
+  .inactive-row td {
+    color: $gray-500;
+  }
+}
+
+.praise-count {
+  font-weight: 600;
+  color: $green;
+}
+
+.warning-count {
+  font-weight: 600;
+  color: $danger;
+}

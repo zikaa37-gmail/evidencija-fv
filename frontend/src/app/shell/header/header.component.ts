@@ -9,6 +9,7 @@ import { SchoolYearService } from '../../core/school-year/school-year.service';
 const LINKS = [
   { name: 'student-records', url: '/student-records', adminOnly: false },
   { name: 'studentsList', url: '/students', adminOnly: false },
+  { name: 'reports', url: '/reports', adminOnly: false },
   { name: 'admin', url: '/admin', adminOnly: true },
 ];
 
