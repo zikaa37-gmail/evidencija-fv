@@ -1,0 +1,14 @@
+@if (photo(); as photo) {
+  <button
+    type="button"
+    class="avatar photo"
+    data-testid="avatar-photo"
+    [attr.aria-label]="'photo.enlarge' | translate"
+    [title]="'photo.enlarge' | translate"
+    (click)="enlarge(photo)"
+  >
+    <img [src]="photo" alt="" />
+  </button>
+} @else {
+  <span class="avatar" aria-hidden="true">{{ initials() }}</span>
+}

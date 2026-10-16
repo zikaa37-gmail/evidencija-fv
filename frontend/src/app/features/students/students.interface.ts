@@ -22,10 +22,12 @@ export interface Student extends StudentFields {
   class_name: string;
   head_teacher_name: string | null;
   head_teacher_phone: string | null;
+  photo: string | null;
 }
 
 export interface StudentPayload extends StudentFields {
   school_class_id: number;
+  photo: string | null;
 }
 
 export interface StudentImportRow extends StudentFields {

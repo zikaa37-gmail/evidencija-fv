@@ -34,18 +34,19 @@
   <hr />
 }
 
-<div
-  class="d-flex flex-row justify-content-around flex-wrap overflow-auto card-container"
->
+<div class="preview-list" data-testid="import-preview">
   @for (item of visible(); track item.student.id) {
-    <app-card
-      class="mx-2 my-2"
-      [item]="item.student"
-      [editable]="true"
-      [allowEdit]="false"
-      (deletedItem)="onStudentDelete($event)"
-      (reactivatedItem)="onStudentReactivate($event)"
-    />
+    <app-list-row
+      [title]="item.student.first_name + ' ' + item.student.last_name"
+      [inactive]="item.student.status === StudentStatus.INACTIVE"
+      [subtitle]="item.student.status === StudentStatus.INACTIVE ? ('students.excluded' | translate) : null"
+    >
+      <app-row-actions
+        rowEnd
+        [actions]="actionsFor(item.student)"
+        (selected)="onAction(item.student, $event)"
+      />
+    </app-list-row>
   }
 </div>
 

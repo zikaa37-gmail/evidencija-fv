@@ -1,0 +1,15 @@
+<figure class="photo-viewer" data-testid="photo-viewer">
+  <img [src]="data.photo" [alt]="data.name" />
+  <figcaption>
+    <span>{{ data.name }}</span>
+    <button
+      type="button"
+      class="icon-action"
+      mat-dialog-close
+      [attr.aria-label]="'buttons.close' | translate"
+      [title]="'buttons.close' | translate"
+    >
+      <span class="svg-icon icon-close" aria-hidden="true"></span>
+    </button>
+  </figcaption>
+</figure>

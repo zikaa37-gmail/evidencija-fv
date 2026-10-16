@@ -67,7 +67,7 @@ class StudentController extends Controller
         $data = $request->validate($this->rules($schoolYear));
 
         $enrollment = DB::transaction(function () use ($data, $schoolYear) {
-            $student = Student::create([...$this->studentAttributes($data), 'school_id' => $schoolYear->school_id]);
+            $student = Student::create([...$this->studentAttributes($data), 'photo' => $data['photo'] ?? null, 'school_id' => $schoolYear->school_id]);
 
             return $student->enrollments()->create([
                 'school_class_id' => $data['school_class_id'],
@@ -86,7 +86,7 @@ class StudentController extends Controller
         $data = $request->validate($this->rules($schoolYear));
 
         DB::transaction(function () use ($enrollment, $data) {
-            $enrollment->student->update($this->studentAttributes($data));
+            $enrollment->student->update([...$this->studentAttributes($data), 'photo' => $data['photo'] ?? null]);
             $enrollment->update(['school_class_id' => $data['school_class_id']]);
         });
 
@@ -207,6 +207,7 @@ class StudentController extends Controller
             'sports.*' => ['string', 'max:50'],
             'health_issues' => ['nullable', 'array'],
             'health_issues.*' => ['string', 'max:200'],
+            'photo' => ['nullable', 'string', 'max:'.Student::PHOTO_MAX_LENGTH, 'regex:/^data:image\/(jpeg|png|webp);base64,/'],
         ];
     }
 
@@ -237,6 +238,7 @@ class StudentController extends Controller
             'emergency_contact_phone' => $student->emergency_contact_phone,
             'sports' => $student->sports ?? [],
             'health_issues' => $student->health_issues ?? [],
+            'photo' => $student->photo,
             'status' => $enrollment->status,
             'school_class_id' => $schoolClass->id,
             'class_name' => $schoolClass->name,

@@ -24,7 +24,8 @@ middleware `admin` (uloga `admin`).
 | POST | `/notes/list` | `school_class_id` → pohvale i opomene (`can_delete`) |
 | POST | `/notes` | `student_id`, `date`, `type` (`good`/`bad`), `text` — samo poslednjih 7 dana |
 | DELETE | `/notes/{id}` | Autor ili admin, samo u okviru 7 dana |
-| POST | `/reports/class` | `school_class_id`, `from`, `to` → po učeniku zbir oznaka po vrsti, `total`, `praises`, `warnings` |
+| POST | `/reports/class` | `school_class_id`, `from`, `to` → po učeniku zbir oznaka po vrsti, `total`, `praises`, `warnings` (uz `sex`, `photo`) |
+| POST | `/reports/student` | `student_id`, `from`, `to` → zbir kao gore + `records: [{date, reason}]` i `notes: [{date, type, text, author_name}]` |
 | POST | `/classes/list` | Odeljenja tekuće školske godine (`id`, `name`, `grade`, `section`, `head_teacher_*`, `students_count`) |
 | POST | `/students/list` | Učenici tekuće godine (opciono `school_class_id`); arhivirani se ne vraćaju |
 
@@ -36,8 +37,8 @@ middleware `admin` (uloga `admin`).
 | POST | `/school-years/rollover` | `first_grade_sections` — prelazak u novu školsku godinu (od 20. juna; automatski 1. septembra komandom `school-year:rollover`) |
 | POST | `/students/archive/list` | Arhivirani učenici (poslednje odeljenje i godina, `completed`) |
 | POST | `/classes/sync` | `classes: [{grade, section}]` — dodaje nova, briše uklonjena (422 ako odeljenje ima učenike) |
-| POST | `/students` | Novi učenik + upis u odeljenje tekuće godine |
+| POST | `/students` | Novi učenik + upis u odeljenje tekuće godine; `photo` je opcioni data URL (jpeg/png/webp, do 400 000 znakova) |
 | PUT | `/students/{id}` | Izmena podataka i premeštaj u drugo odeljenje |
 | PATCH | `/students/{id}/activate` · `/deactivate` | Status upisa za tekuću godinu |
 | DELETE | `/students/{id}` | Brisanje učenika |
-| POST | `/students/import` | `students: [{first_name, last_name, sex, class_name, ...}]` — postojeći (isto ime i prezime u tekućoj godini) se ažurira, ostali se dodaju; vraća `{created, updated}` |
+| POST | `/students/import` | `students: [{first_name, last_name, sex, class_name, ...}]` — postojeći (isto ime i prezime u tekućoj godini) se ažurira (fotografija ostaje), ostali se dodaju; vraća `{created, updated}` |

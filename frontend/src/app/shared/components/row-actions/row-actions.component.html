@@ -1,0 +1,43 @@
+<button
+  type="button"
+  class="icon-action tone-gray"
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin"
+  data-testid="row-actions"
+  aria-haspopup="menu"
+  [attr.aria-expanded]="open()"
+  [attr.aria-label]="'buttons.more' | translate"
+  [title]="'buttons.more' | translate"
+  (click)="toggle()"
+>
+  <span class="svg-icon icon-more-vert" aria-hidden="true"></span>
+</button>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="open()"
+  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayPush]="true"
+  (backdropClick)="close()"
+  (detach)="close()"
+  (overlayKeydown)="$event.key === 'Escape' && close()"
+>
+  <div class="row-actions-menu" role="menu" data-testid="row-actions-menu">
+    @for (action of actions(); track action.id) {
+      <button
+        type="button"
+        role="menuitem"
+        class="row-actions-item"
+        [class.danger]="action.danger"
+        [attr.data-testid]="'action-' + action.id"
+        (click)="select(action)"
+      >
+        <span class="svg-icon icon-sm icon-{{ action.icon }}" aria-hidden="true"></span>
+        {{ action.label | translate }}
+      </button>
+    }
+  </div>
+</ng-template>

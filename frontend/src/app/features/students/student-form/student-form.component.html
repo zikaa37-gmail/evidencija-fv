@@ -4,6 +4,31 @@
 
 <form [formGroup]="form" (ngSubmit)="save()">
   <mat-dialog-content class="student-form">
+    <div class="photo-field">
+      <app-avatar
+        size="large"
+        [name]="form.controls.first_name.value + ' ' + form.controls.last_name.value"
+        [photo]="photo()"
+      />
+      <input
+        #photoInput
+        type="file"
+        accept="image/*"
+        hidden
+        data-testid="photo-input"
+        (change)="onPhotoSelected($event)"
+      />
+      <button type="button" mat-stroked-button data-testid="photo-pick" (click)="photoInput.click()">
+        <span class="svg-icon icon-camera icon-sm" aria-hidden="true"></span>
+        {{ (photo() ? "photo.change" : "photo.add") | translate }}
+      </button>
+      @if (photo()) {
+        <button type="button" mat-button data-testid="photo-remove" (click)="photo.set(null)">
+          {{ "photo.remove" | translate }}
+        </button>
+      }
+    </div>
+
     <mat-form-field appearance="outline">
       <mat-label>{{ "students.firstName" | translate }}</mat-label>
       <input matInput formControlName="first_name" />

@@ -1,0 +1,90 @@
+<div class="no-print">
+  <app-class-selector />
+</div>
+
+<section class="page">
+  <div class="toolbar no-print">
+    <a mat-button routerLink="/reports">
+      <span class="svg-icon icon-arrow-left icon-sm me-2" aria-hidden="true"></span>
+      {{ "reports.backToList" | translate }}
+    </a>
+    <app-report-filters />
+  </div>
+
+  @if (reports.report(); as data) {
+    <div class="toolbar no-print">
+      <button mat-flat-button data-testid="print" (click)="print()">
+        <span class="svg-icon icon-printer icon-sm me-2" aria-hidden="true"></span>
+        {{ "reports.print" | translate }}
+      </button>
+      <button mat-stroked-button data-testid="export" (click)="exportToExcel(data)">
+        <span class="svg-icon icon-download icon-sm me-2" aria-hidden="true"></span>
+        {{ "reports.export" | translate }}
+      </button>
+    </div>
+
+    <article class="sheet" data-testid="summary-sheet">
+      <header class="sheet-head">
+        <h3>{{ "reports.summary" | translate }}</h3>
+        <div>
+          {{ "section" | translate }} <strong>{{ data.class_name }}</strong>
+          @if (schoolYear(); as year) {
+            · {{ "admin.schoolYear" | translate }} {{ year.name }}
+          }
+        </div>
+        <div>
+          {{ "reports.period" | translate }}: {{ data.from | date: "dd.MM.yyyy" }} –
+          {{ data.to | date: "dd.MM.yyyy" }}
+        </div>
+      </header>
+
+      <table class="table table-sm table-bordered summary-table">
+        <thead>
+          <tr>
+            <th class="number">#</th>
+            <th>{{ "student" | translate }}</th>
+            @for (column of columns; track column) {
+              <th class="text-center">{{ "options." + column | translate }}</th>
+            }
+            <th class="text-center">{{ "reports.total" | translate }}</th>
+            <th class="text-center">{{ "reports.praises" | translate }}</th>
+            <th class="text-center">{{ "reports.warnings" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of data.students; track row.student_id; let index = $index) {
+            <tr [class.inactive-row]="row.status === 'inactive'">
+              <td class="number">{{ index + 1 }}</td>
+              <td>{{ row.last_name }} {{ row.first_name }}</td>
+              @for (column of columns; track column) {
+                <td class="text-center" [class.has-value]="row[column] > 0">
+                  {{ row[column] || "" }}
+                </td>
+              }
+              <td class="text-center fw-bold">{{ row.total || "" }}</td>
+              <td class="text-center">{{ row.praises || "" }}</td>
+              <td class="text-center">{{ row.warnings || "" }}</td>
+            </tr>
+          }
+        </tbody>
+        <tfoot>
+          <tr class="fw-bold">
+            <td></td>
+            <td>{{ "reports.sum" | translate }}</td>
+            @for (column of columns; track column) {
+              <td class="text-center">{{ reports.totals()[column] }}</td>
+            }
+            <td class="text-center">{{ reports.totals()["total"] }}</td>
+            <td class="text-center">{{ reports.totals()["praises"] }}</td>
+            <td class="text-center">{{ reports.totals()["warnings"] }}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <footer class="sheet-foot">
+        <span>{{ "reports.printedOn" | translate }} {{ printedOn | date: "dd.MM.yyyy" }}</span>
+        <span class="signature">{{ "reports.signature" | translate }}</span>
+      </footer>
+    </article>
+  }
+</section>

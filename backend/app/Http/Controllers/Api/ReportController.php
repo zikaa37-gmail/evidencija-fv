@@ -68,6 +68,8 @@ class ReportController extends Controller
                     'student_id' => $enrollment->student_id,
                     'first_name' => $enrollment->student->first_name,
                     'last_name' => $enrollment->student->last_name,
+                    'sex' => $enrollment->student->sex,
+                    'photo' => $enrollment->student->photo,
                     'status' => $enrollment->status,
                     ...$counts->all(),
                     'total' => $counts->sum(),
@@ -75,6 +77,68 @@ class ReportController extends Controller
                     'warnings' => (int) ($noteTotals['bad'] ?? 0),
                 ];
             }),
+        ];
+    }
+
+    public function student(Request $request)
+    {
+        $schoolYear = $this->currentSchoolYear->for($request->user());
+        $data = $request->validate([
+            'student_id' => ['required', 'integer'],
+            'from' => ['required', 'date_format:Y-m-d'],
+            'to' => ['required', 'date_format:Y-m-d', 'after_or_equal:from'],
+        ]);
+
+        $enrollment = Enrollment::with(['student', 'schoolClass'])
+            ->where('school_year_id', $schoolYear->id)
+            ->where('student_id', $data['student_id'])
+            ->whereHas('student', fn ($query) => $query->whereNull('archived_at'))
+            ->firstOrFail();
+
+        $records = AttendanceRecord::query()
+            ->where('school_year_id', $schoolYear->id)
+            ->where('student_id', $enrollment->student_id)
+            ->whereDate('date', '>=', $data['from'])
+            ->whereDate('date', '<=', $data['to'])
+            ->orderByDesc('date')
+            ->get();
+
+        $notes = StudentNote::with('author')
+            ->where('school_year_id', $schoolYear->id)
+            ->where('student_id', $enrollment->student_id)
+            ->whereDate('date', '>=', $data['from'])
+            ->whereDate('date', '<=', $data['to'])
+            ->orderByDesc('date')
+            ->orderByDesc('id')
+            ->get();
+
+        $counts = collect(AttendanceRecord::REASONS)
+            ->mapWithKeys(fn ($reason) => [$reason => $records->where('reason', $reason)->count()]);
+
+        return [
+            'student_id' => $enrollment->student_id,
+            'first_name' => $enrollment->student->first_name,
+            'last_name' => $enrollment->student->last_name,
+            'sex' => $enrollment->student->sex,
+            'photo' => $enrollment->student->photo,
+            'class_name' => $enrollment->schoolClass->name,
+            'from' => $data['from'],
+            'to' => $data['to'],
+            ...$counts->all(),
+            'total' => $counts->sum(),
+            'praises' => $notes->where('type', 'good')->count(),
+            'warnings' => $notes->where('type', 'bad')->count(),
+            'records' => $records->map(fn (AttendanceRecord $record) => [
+                'date' => $record->date->toDateString(),
+                'reason' => $record->reason,
+            ])->values(),
+            'notes' => $notes->map(fn (StudentNote $note) => [
+                'id' => $note->id,
+                'date' => $note->date->toDateString(),
+                'type' => $note->type,
+                'text' => $note->text,
+                'author_name' => $note->author?->name,
+            ])->values(),
         ];
     }
 }

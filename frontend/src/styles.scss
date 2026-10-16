@@ -77,8 +77,8 @@ i,
   )
 );
 
-$icons: ball, chevron-left, chevron-right, close, edit, frown, heart, info, power, note, phone, restore,
-  school, smile, teacher, trash, user;
+$icons: arrow-left, ball, camera, chart, chevron-left, chevron-right, close, download, edit, eye, frown,
+  heart, info, more-vert, note, phone, power, printer, restore, school, smile, teacher, trash, user;
 
 $tones: (
   "blue": #2f6fde,
@@ -195,6 +195,38 @@ $tones: (
 
 .muted {
   color: $gray-500;
+}
+
+.reason-badge {
+  width: fit-content;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: $white;
+  white-space: nowrap;
+  border-radius: 12px;
+  background: var(--tone-gray);
+
+  &.reason-absent {
+    background: var(--tone-red);
+  }
+}
+
+.photo-dialog .mat-mdc-dialog-surface {
+  background: transparent;
+  box-shadow: none;
+}
+
+@media print {
+  app-header,
+  app-loader,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: $white;
+  }
 }
 
 .info-backdrop {

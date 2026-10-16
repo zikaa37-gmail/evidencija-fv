@@ -1,0 +1,40 @@
+:host {
+  --avatar-size: 44px;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+:host(.large) {
+  --avatar-size: 64px;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  padding: 0;
+  overflow: hidden;
+  font-weight: 700;
+  font-size: calc(var(--avatar-size) * 0.36);
+  color: var(--tone-blue);
+  background: color-mix(in srgb, var(--tone-blue) 14%, #fff);
+  border: 0;
+  border-radius: 50%;
+}
+
+.photo {
+  cursor: zoom-in;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tone-blue);
+    outline-offset: 2px;
+  }
+}

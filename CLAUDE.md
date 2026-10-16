@@ -64,6 +64,10 @@ referentne konvencije ako nešto ovde nije eksplicitno napisano.
 - Ikonice za akcije su SVG fajlovi u `frontend/public/icons/` i prikazuju se preko maske
   (`<span class="svg-icon icon-<ime>">`, klasa `.icon-<ime> { --icon: url("/icons/<ime>.svg"); }` u
   `styles.scss`), pa preuzimaju boju teksta; dugme sa samo ikonicom ima `aria-label` i `title`.
+- Liste (učenici, izveštaji, evidencija dana) su redovi preko deljenog `app-list-row` (avatar sa
+  fotografijom koja se uvećava ili inicijali, naslov, sadržaj kroz `<ng-content>`, desni deo kroz
+  atribut `rowEnd`) i `app-row-actions` (more_vert meni preko CDK overlay-a; akcije se šalju kao
+  `RowAction[]`, izbor stiže kroz `(selected)`). Ne praviti kartice za liste.
 - Obaveštenja korisniku idu kroz `NotificationService` (`MatSnackBar`), tekst iz prevoda (`toaster.*`).
 - Destruktivne akcije idu kroz zajednički `ConfirmationModalComponent`; ne uvoditi `window.confirm()`.
 - Ne dodavati tajne u repozitorijum. Lokalni backend kredencijali idu u `backend/.env`.
