@@ -23,7 +23,11 @@ export class LoaderService {
     });
   }
 
-  watch(isLoading: Signal<boolean>): void {
+  watch(isLoading: Signal<boolean>): () => void {
     this.#watchedSources.update((sources) => [...sources, isLoading]);
+    return () =>
+      this.#watchedSources.update((sources) =>
+        sources.filter((source) => source !== isLoading),
+      );
   }
 }

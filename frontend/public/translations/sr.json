@@ -61,7 +61,8 @@
     "logout": "Odjava",
     "uploadStudents": "Učitavanje učenika",
     "studentsList": "Lista učenika",
-    "classes": "Odabir odeljenja"
+    "classes": "Odabir odeljenja",
+    "admin": "Administracija"
   },
   "general": {
     "noItems": "Nema učitanih podataka"
@@ -173,6 +174,36 @@
     "createStudentSuccess": "Učenik je dodat",
     "createStudentError": "Greška prilikom dodavanja učenika",
     "importSuccess": "Uvezeno: {{created}} novih, {{updated}} izmenjenih",
-    "importError": "Greška prilikom uvoza učenika"
+    "importError": "Greška prilikom uvoza učenika",
+    "rolloverError": "Greška prilikom prelaska u novu školsku godinu"
+  },
+  "admin": {
+    "schoolYear": "Školska godina",
+    "archive": "Arhiva",
+    "rolloverTitle": "Prelazak u školsku {{year}}",
+    "rolloverWindow": "Priprema nove školske godine je moguća od {{from}} do {{to}}. Ako se ne uradi ručno, prelazak se automatski izvršava 1. septembra.",
+    "promotions": "Prelaze u sledeći razred",
+    "graduating": "Završavaju školu",
+    "studentsCount": "{{count}} uč.",
+    "inactiveToArchive": "Deaktivirani učenici koji idu u arhivu: {{count}}",
+    "firstGrade": "Novi 5. razred",
+    "firstGradeSections": "Broj odeljenja petog razreda",
+    "firstGradeHint": "Odeljenja se prave prazna; četvrtake posle prelaska unesite kroz formu ili Excel uvoz.",
+    "rolloverButton": "Pređi u {{year}}",
+    "rolloverNotYet": "Moguće od {{date}}.",
+    "rolloverAction": "Pređi u novu godinu",
+    "rolloverConfirmTitle": "Prelazak u školsku {{year}}",
+    "rolloverConfirmQuestion": "Sva odeljenja prelaze u sledeći razred, osmaci idu u arhivu, a otvara se {{sections}} odeljenja petog razreda. Ovo se ne može poništiti. Da li ste sigurni?",
+    "rolloverSuccess": "Tekuća školska godina je sada {{year}}",
+    "rolloverDone": "Školska godina {{year}} je otvorena. Sledeći korak: unos četvrtaka u peti razred.",
+    "addFirstGraders": "Unesi nove petake",
+    "preparationNotice": "Školska godina {{year}} se završava. Ažurirajte spiskove odeljenja i učenika: unesite četvrtake i arhivirajte osmake pre 1. septembra.",
+    "preparationLink": "Pripremi novu školsku godinu",
+    "archiveYear": "Školska {{year}}",
+    "archivedAt": "Arhiviran",
+    "reason": "Razlog",
+    "completed": "Završio školu",
+    "leftSchool": "Napustio školu",
+    "archiveEmpty": "Arhiva je prazna."
   }
 }

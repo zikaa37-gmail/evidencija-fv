@@ -1,0 +1,16 @@
+@use "src/theme/theme-variables" as *;
+
+.preparation-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #{$yellow};
+  color: #{$gray-900};
+
+  a {
+    font-weight: 600;
+    color: #{$gray-900};
+  }
+}

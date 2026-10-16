@@ -34,6 +34,33 @@ class StudentController extends Controller
             ->map(fn (Enrollment $enrollment) => $this->present($enrollment));
     }
 
+    public function archive(Request $request)
+    {
+        $schoolId = $request->user()->school_id;
+
+        return Student::with(['enrollments' => fn ($query) => $query->with(['schoolClass', 'schoolYear'])])
+            ->where('school_id', $schoolId)
+            ->whereNotNull('archived_at')
+            ->orderByDesc('archived_at')
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->get()
+            ->map(function (Student $student) {
+                $last = $student->enrollments->sortByDesc(fn (Enrollment $enrollment) => $enrollment->schoolYear->starts_on)->first();
+
+                return [
+                    'id' => $student->id,
+                    'first_name' => $student->first_name,
+                    'last_name' => $student->last_name,
+                    'sex' => $student->sex,
+                    'archived_at' => $student->archived_at->toDateString(),
+                    'last_class_name' => $last?->schoolClass->name,
+                    'last_school_year' => $last?->schoolYear->name,
+                    'completed' => $last?->schoolClass->grade === SchoolClass::LAST_GRADE && $last->status === Enrollment::ACTIVE,
+                ];
+            });
+    }
+
     public function store(Request $request)
     {
         $schoolYear = $this->currentSchoolYear->for($request->user());

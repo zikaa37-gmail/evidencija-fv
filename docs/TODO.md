@@ -20,8 +20,8 @@ Trenutno: Angular 22.2, TypeScript 6.0, zoneless (bez zone.js), esbuild (`@angul
 | #19 | Autentifikacija nastavnika (JWT), uloge admin / korisnik | ✅ |
 | #20 | Odeljenja (API + frontend) | ✅ |
 | #21 | Učenici (API + frontend), Excel uvoz za nove đake i izmene | ✅ |
-| #30 | Prelazak u novu školsku godinu (1. septembar) | |
-| #32 | Admin deo vs. korisnički deo, obaveštenja jun–avgust | |
+| #30 | Prelazak u novu školsku godinu (1. septembar) | ✅ |
+| #32 | Admin deo vs. korisnički deo, obaveštenja jun–avgust | ✅ |
 | #22 | Evidencija na času (izostanci, oprema...) | |
 | #23 | Napomene (pohvale / opomene) | |
 | #24 | Izveštaji | |

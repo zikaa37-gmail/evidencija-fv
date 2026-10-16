@@ -4,12 +4,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { AuthService } from '../../core/auth/auth.service';
+import { SchoolYearService } from '../../core/school-year/school-year.service';
 
 const LINKS = [
   { name: 'student-records', url: '/student-records', adminOnly: false },
-  { name: 'classes', url: '/classes', adminOnly: true },
-  { name: 'uploadStudents', url: '/students/upload', adminOnly: true },
   { name: 'studentsList', url: '/students', adminOnly: false },
+  { name: 'admin', url: '/admin', adminOnly: true },
 ];
 
 @Component({
@@ -20,6 +20,7 @@ const LINKS = [
 })
 export class HeaderComponent {
   protected readonly auth = inject(AuthService);
+  protected readonly schoolYearService = inject(SchoolYearService);
   protected readonly links = computed(() =>
     LINKS.filter((link) => !link.adminOnly || this.auth.isAdmin()),
   );
