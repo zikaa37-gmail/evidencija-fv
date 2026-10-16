@@ -20,17 +20,17 @@
   </p>
 }
 
-<div class="d-flex flex-column p-3">
+<div class="d-flex flex-column p-3 student-list" data-testid="student-list">
   @for (student of students(); track student.id) {
     <div class="d-flex flex-row align-items-center">
       <button
         type="button"
         class="plain-button my-2 mx-2"
-        placement="right"
-        container="body"
+        cdkOverlayOrigin
+        #infoOrigin="cdkOverlayOrigin"
         [attr.aria-label]="'info' | translate"
-        [ngbPopover]="popContentInfo"
-        [popoverTitle]="popTitleInfo"
+        [attr.aria-expanded]="infoStudent()?.id === student.id"
+        (click)="toggleInfo(student, infoOrigin)"
       >
         <i class="fa fa-2x fa-circle-info"></i>
       </button>
@@ -53,72 +53,6 @@
         </button>
       }
 
-      <ng-template #popTitleInfo>
-        {{ "info" | translate }}
-      </ng-template>
-      <ng-template #popContentInfo>
-        <div>
-          <b>{{ "issues" | translate }}</b>
-        </div>
-        @for (issue of student.health_issues; track $index) {
-          <div>{{ issue }}</div>
-        } @empty {
-          -
-        }
-
-        <div class="mt-3">
-          <b>{{ "emergencyContact" | translate }}</b>
-        </div>
-        <div>
-          <i class="fa fa-user mx-2"></i>
-          {{ student.emergency_contact_name || "-" }}
-        </div>
-        <div>
-          <i class="fa fa-phone mx-2"></i>
-          {{ student.emergency_contact_phone || "-" }}
-        </div>
-
-        <div class="mt-3">
-          <b>{{ "departmentHead" | translate }}</b>
-        </div>
-        <div>
-          <i class="fa fa-user mx-2"></i>
-          {{ student.head_teacher_name || "-" }}
-        </div>
-        <div>
-          <i class="fa fa-phone mx-2"></i>
-          {{ student.head_teacher_phone || "-" }}
-        </div>
-
-        <div class="mt-3">
-          <b>{{ "notes.notes" | translate }}</b>
-        </div>
-        @for (note of recordsService.notesFor(student.id); track note.id) {
-          <div class="popover-note">
-            <i
-              class="fa-solid"
-              [class.fa-face-smile]="note.type === NOTE_TYPE.GOOD"
-              [class.text-success]="note.type === NOTE_TYPE.GOOD"
-              [class.fa-face-frown]="note.type === NOTE_TYPE.BAD"
-              [class.text-danger]="note.type === NOTE_TYPE.BAD"
-            ></i>
-            {{ note.date | date: "dd.MM." }} {{ note.text }}
-          </div>
-        } @empty {
-          -
-        }
-
-        <p class="mt-3">
-          <b>{{ "sports.sports" | translate }}</b>
-          <br />
-          @for (sport of student.sports; track $index) {
-            {{ "sports." + sport | lowercase | translate }}<br />
-          } @empty {
-            -
-          }
-        </p>
-      </ng-template>
-
       <span class="mx-3 student"
         >{{ student.first_name }} {{ student.last_name }}</span
       >
@@ -131,3 +65,93 @@
     <hr />
   }
 </div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="infoOrigin()!"
+  [cdkConnectedOverlayOpen]="infoStudent() !== null"
+  [cdkConnectedOverlayPositions]="infoPositions"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayPush]="true"
+  (backdropClick)="closeInfo()"
+  (detach)="closeInfo()"
+  (overlayKeydown)="$event.key === 'Escape' && closeInfo()"
+>
+  @if (infoStudent(); as infoStudent) {
+    <div class="info-popover" role="dialog" data-testid="student-info">
+      <div class="info-title">
+        <strong>{{ infoStudent.first_name }} {{ infoStudent.last_name }}</strong>
+        <button
+          type="button"
+          class="plain-button"
+          [attr.aria-label]="'buttons.close' | translate"
+          (click)="closeInfo()"
+        >
+          <i class="fa fa-close"></i>
+        </button>
+      </div>
+      <div>
+        <b>{{ "issues" | translate }}</b>
+      </div>
+      @for (issue of infoStudent.health_issues; track $index) {
+        <div>{{ issue }}</div>
+      } @empty {
+        -
+      }
+
+      <div class="mt-3">
+        <b>{{ "emergencyContact" | translate }}</b>
+      </div>
+      <div>
+        <i class="fa fa-user mx-2"></i>
+        {{ infoStudent.emergency_contact_name || "-" }}
+      </div>
+      <div>
+        <i class="fa fa-phone mx-2"></i>
+        {{ infoStudent.emergency_contact_phone || "-" }}
+      </div>
+
+      <div class="mt-3">
+        <b>{{ "departmentHead" | translate }}</b>
+      </div>
+      <div>
+        <i class="fa fa-user mx-2"></i>
+        {{ infoStudent.head_teacher_name || "-" }}
+      </div>
+      <div>
+        <i class="fa fa-phone mx-2"></i>
+        {{ infoStudent.head_teacher_phone || "-" }}
+      </div>
+
+      <div class="mt-3">
+        <b>{{ "notes.notes" | translate }}</b>
+      </div>
+      @for (note of recordsService.notesFor(infoStudent.id); track note.id) {
+        <div class="popover-note">
+          <i
+            class="fa-solid"
+            [class.fa-face-smile]="note.type === NOTE_TYPE.GOOD"
+            [class.text-success]="note.type === NOTE_TYPE.GOOD"
+            [class.fa-face-frown]="note.type === NOTE_TYPE.BAD"
+            [class.text-danger]="note.type === NOTE_TYPE.BAD"
+          ></i>
+          {{ note.date | date: "dd.MM." }} {{ note.text }}
+        </div>
+      } @empty {
+        -
+      }
+
+      <p class="mt-3">
+        <b>{{ "sports.sports" | translate }}</b>
+        <br />
+        @for (sport of infoStudent.sports; track $index) {
+          {{ "sports." + sport | lowercase | translate }}<br />
+        } @empty {
+          -
+        }
+      </p>
+    
+    </div>
+  }
+</ng-template>
