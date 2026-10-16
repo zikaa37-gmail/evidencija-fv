@@ -25,7 +25,7 @@ Trenutno: Angular 22.2, TypeScript 6.0, zoneless (bez zone.js), esbuild (`@angul
 | #22 | Evidencija na času (izostanci, oprema...) | ✅ |
 | #23 | Napomene (pohvale / opomene) | ✅ |
 | #24 | Izveštaji (odeljenje × period, izvoz u Excel) | ✅ |
-| #15 | Deploy na cPanel | |
+| #15 | Deploy na cPanel (alat spreman; čeka poddomen u cPanel-u) | ⏳ |
 
 ## Napomene
 

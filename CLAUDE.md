@@ -10,7 +10,8 @@ Evidencija učenika na časovima fizičkog vaspitanja u jednoj školi:
   (`frontend/public/translations/sr.json`).
 - `backend/`: Laravel 13 API sa MySQL, prefiks tabela `efv_` (`DB_PREFIX`). Lokalno zasebna baza
   `evidencija_fv`; na serveru deljena baza, razdvajanje isključivo preko prefiksa.
-- `docs/`: plan (`TODO.md`), API rute (`api-rute.md`), radni tok (`git-workflow.md`).
+- `docs/`: plan (`TODO.md`), API rute (`api-rute.md`), radni tok (`git-workflow.md`), deploy (`DEPLOY.md`).
+- `deploy/`: `deploy.py` (FTP + jednokratni PHP za raspakivanje i migracije), `build-release.sh`.
 
 Domen: škola (`schools`) → školska godina (`school_years`, jedna `is_current`) → odeljenja
 (`school_classes`: razred 5–8 + broj odeljenja, razredni starešina) → upis učenika u odeljenje za
