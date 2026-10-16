@@ -1,3 +1,9 @@
 .page {
-  padding: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px 8px;
+}
+
+.chip {
+  width: fit-content;
 }

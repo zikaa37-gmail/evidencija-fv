@@ -10,12 +10,10 @@ import { ListRowComponent } from '../../shared/components/list-row/list-row.comp
 import { RowAction, RowActionsComponent } from '../../shared/components/row-actions/row-actions.component';
 import { GlobalService } from '../../shared/services/global.service';
 import { ReportFiltersComponent } from './report-filters/report-filters.component';
-import { REPORT_COLUMNS, ReportRow } from './reports.interface';
+import { ReportCountsComponent } from './report-counts/report-counts.component';
+import { ReportRow } from './reports.interface';
 import { ReportsService } from './reports.service';
-import {
-  StudentReportComponent,
-  StudentReportData,
-} from './student-report/student-report.component';
+import { openStudentReport } from './student-report/student-report.component';
 
 const ROW_ACTIONS: RowAction[] = [{ id: 'preview', label: 'reports.preview', icon: 'eye' }];
 
@@ -32,26 +30,19 @@ const ROW_ACTIONS: RowAction[] = [{ id: 'preview', label: 'reports.preview', ico
     ListRowComponent,
     RowActionsComponent,
     ReportFiltersComponent,
+    ReportCountsComponent,
   ],
 })
 export class ReportsComponent {
   #dialog = inject(MatDialog);
   #globalService = inject(GlobalService);
   protected readonly reports = inject(ReportsService);
-  protected readonly columns = REPORT_COLUMNS;
   protected readonly actions = ROW_ACTIONS;
 
   openPreview(row: ReportRow): void {
     const range = this.reports.range();
-    if (!range) {
-      return;
+    if (range) {
+      openStudentReport(this.#dialog, { row, range }, this.#globalService.isMobile());
     }
-    this.#dialog.open<StudentReportComponent, StudentReportData>(StudentReportComponent, {
-      data: { row, range },
-      width: this.#globalService.isMobile() ? '100vw' : '560px',
-      maxWidth: '100vw',
-      panelClass: 'user-dialog',
-      autoFocus: false,
-    });
   }
 }

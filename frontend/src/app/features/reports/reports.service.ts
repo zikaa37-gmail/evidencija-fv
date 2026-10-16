@@ -8,7 +8,7 @@ import { ErrorHandlerService } from '../../shared/services/error-handler.service
 import { MONTHS } from '../calendar/calendar.constants';
 import { toIsoDate } from '../calendar/records/records.interface';
 import { ClassesService } from '../classes/classes.service';
-import { ClassReport, Period, REPORT_COLUMNS, ReportRange, ReportRow } from './reports.interface';
+import { ClassReport, Period, REPORT_COLUMNS, ReportCounts, ReportRange, ReportRow } from './reports.interface';
 
 function parseDate(value: string): Date {
   const [year, month, day] = value.split('-').map(Number);
@@ -77,7 +77,13 @@ export class ReportsService {
 
   readonly report = computed(() => (this.#report.hasValue() ? (this.#report.value() ?? null) : null));
 
-  readonly totals = computed(() => {
+  readonly ranking = computed(() =>
+    [...(this.report()?.students ?? [])].sort(
+      (a, b) => b.total - a.total || b.warnings - a.warnings || a.last_name.localeCompare(b.last_name, 'sr'),
+    ),
+  );
+
+  readonly totals = computed<ReportCounts>(() => {
     const rows = this.report()?.students ?? [];
     const sum = (key: keyof ReportRow) => rows.reduce((acc, row) => acc + Number(row[key]), 0);
     return {
@@ -85,7 +91,7 @@ export class ReportsService {
       total: sum('total'),
       praises: sum('praises'),
       warnings: sum('warnings'),
-    } as Record<string, number>;
+    } as ReportCounts;
   });
 
   constructor() {

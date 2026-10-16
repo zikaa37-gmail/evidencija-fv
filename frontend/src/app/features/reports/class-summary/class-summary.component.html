@@ -38,7 +38,28 @@
         </div>
       </header>
 
-      <table class="table table-sm table-bordered summary-table">
+      <div class="no-print">
+        <app-report-stats [counts]="reports.totals()" />
+
+        <h6 class="section-title tone-blue mt-4">
+          <span class="svg-icon icon-chart icon-sm" aria-hidden="true"></span>
+          {{ "reports.ranking" | translate }}
+        </h6>
+        <div class="ranking" data-testid="summary-rows">
+          @for (row of reports.ranking(); track row.student_id) {
+            <app-list-row
+              [title]="row.first_name + ' ' + row.last_name"
+              [photo]="row.photo"
+              [inactive]="row.status === 'inactive'"
+            >
+              <app-report-counts [counts]="row" />
+              <app-row-actions rowEnd [actions]="actions" (selected)="openPreview(row)" />
+            </app-list-row>
+          }
+        </div>
+      </div>
+
+      <table class="table table-sm table-bordered summary-table print-only">
         <thead>
           <tr>
             <th class="number">#</th>
@@ -74,14 +95,14 @@
             @for (column of columns; track column) {
               <td class="text-center">{{ reports.totals()[column] }}</td>
             }
-            <td class="text-center">{{ reports.totals()["total"] }}</td>
-            <td class="text-center">{{ reports.totals()["praises"] }}</td>
-            <td class="text-center">{{ reports.totals()["warnings"] }}</td>
+            <td class="text-center">{{ reports.totals().total }}</td>
+            <td class="text-center">{{ reports.totals().praises }}</td>
+            <td class="text-center">{{ reports.totals().warnings }}</td>
           </tr>
         </tfoot>
       </table>
 
-      <footer class="sheet-foot">
+      <footer class="sheet-foot print-only">
         <span>{{ "reports.printedOn" | translate }} {{ printedOn | date: "dd.MM.yyyy" }}</span>
         <span class="signature">{{ "reports.signature" | translate }}</span>
       </footer>

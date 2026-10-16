@@ -1,0 +1,7 @@
+.count-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}

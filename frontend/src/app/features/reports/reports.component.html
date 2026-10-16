@@ -27,28 +27,7 @@
           [photo]="row.photo"
           [inactive]="row.status === 'inactive'"
         >
-          <div class="chips" data-testid="report-counts">
-            @for (column of columns; track column) {
-              @if (row[column] > 0) {
-                <span class="chip" [class.chip-red]="column === 'absent'"
-                  >{{ "options." + column | translate }} {{ row[column] }}</span
-                >
-              }
-            }
-            @if (row.praises > 0) {
-              <span class="chip count-chip tone-green">
-                <span class="svg-icon icon-smile icon-sm" aria-hidden="true"></span>{{ row.praises }}
-              </span>
-            }
-            @if (row.warnings > 0) {
-              <span class="chip count-chip tone-red">
-                <span class="svg-icon icon-frown icon-sm" aria-hidden="true"></span>{{ row.warnings }}
-              </span>
-            }
-            @if (!row.total && !row.praises && !row.warnings) {
-              <small class="muted">{{ "reports.noMarks" | translate }}</small>
-            }
-          </div>
+          <app-report-counts [counts]="row" />
           <app-row-actions rowEnd [actions]="actions" (selected)="openPreview(row)" />
         </app-list-row>
       } @empty {

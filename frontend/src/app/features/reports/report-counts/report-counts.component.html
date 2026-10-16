@@ -1,0 +1,20 @@
+@for (column of columns; track column) {
+  @if (counts()[column] > 0) {
+    <span class="chip" [class.chip-red]="column === 'absent'"
+      >{{ "options." + column | translate }} {{ counts()[column] }}</span
+    >
+  }
+}
+@if (counts().praises > 0) {
+  <span class="chip count-chip tone-green">
+    <span class="svg-icon icon-smile icon-sm" aria-hidden="true"></span>{{ counts().praises }}
+  </span>
+}
+@if (counts().warnings > 0) {
+  <span class="chip count-chip tone-red">
+    <span class="svg-icon icon-frown icon-sm" aria-hidden="true"></span>{{ counts().warnings }}
+  </span>
+}
+@if (!counts().total && !counts().praises && !counts().warnings) {
+  <small class="muted">{{ "reports.noMarks" | translate }}</small>
+}
