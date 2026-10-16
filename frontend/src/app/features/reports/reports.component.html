@@ -1,0 +1,93 @@
+<app-class-selector />
+
+<section class="page">
+  <div class="filters">
+    <div class="btn-group" role="group" [attr.aria-label]="'reports.period' | translate">
+      @for (item of periods; track item) {
+        <button
+          type="button"
+          class="btn"
+          [class.btn-primary]="period() === item"
+          [class.btn-light]="period() !== item"
+          [class.border]="period() !== item"
+          [attr.data-testid]="'period-' + item"
+          (click)="period.set(item)"
+        >
+          {{ "reports.periods." + item | translate }}
+        </button>
+      }
+    </div>
+
+    @if (period() === "month") {
+      <select
+        class="form-select month-select"
+        data-testid="report-month"
+        [attr.aria-label]="'reports.month' | translate"
+        [value]="selectedMonth()"
+        (change)="selectedMonth.set($any($event.target).value)"
+      >
+        @for (month of months(); track month.value) {
+          <option [value]="month.value" [selected]="month.value === selectedMonth()">
+            {{ "months." + month.name | translate }} {{ month.year }}
+          </option>
+        }
+      </select>
+    }
+  </div>
+
+  @if (report.hasValue() && report.value(); as data) {
+    <div class="d-flex flex-wrap align-items-center justify-content-between my-3 gap-2">
+      <h4 class="m-0">
+        {{ "section" | translate }} {{ data.class_name }}
+        <small class="text-muted"
+          >{{ data.from | date: "dd.MM.yyyy" }} – {{ data.to | date: "dd.MM.yyyy" }}</small
+        >
+      </h4>
+      <button mat-raised-button data-testid="export" (click)="exportToExcel(data)">
+        {{ "reports.export" | translate }}
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-sm table-striped report-table">
+        <thead>
+          <tr>
+            <th>{{ "student" | translate }}</th>
+            @for (column of columns; track column) {
+              <th class="text-center">{{ "options." + column | translate }}</th>
+            }
+            <th class="text-center">{{ "reports.total" | translate }}</th>
+            <th class="text-center">{{ "reports.praises" | translate }}</th>
+            <th class="text-center">{{ "reports.warnings" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of data.students; track row.student_id) {
+            <tr [class.inactive-row]="row.status === 'inactive'">
+              <td>{{ row.last_name }} {{ row.first_name }}</td>
+              @for (column of columns; track column) {
+                <td class="text-center" [class.has-value]="row[column] > 0">
+                  {{ row[column] || "" }}
+                </td>
+              }
+              <td class="text-center fw-bold">{{ row.total || "" }}</td>
+              <td class="text-center praise-count">{{ row.praises || "" }}</td>
+              <td class="text-center warning-count">{{ row.warnings || "" }}</td>
+            </tr>
+          }
+        </tbody>
+        <tfoot>
+          <tr class="fw-bold">
+            <td>{{ "reports.sum" | translate }}</td>
+            @for (column of columns; track column) {
+              <td class="text-center">{{ totals()[column] }}</td>
+            }
+            <td class="text-center">{{ totals()["total"] }}</td>
+            <td class="text-center">{{ totals()["praises"] }}</td>
+            <td class="text-center">{{ totals()["warnings"] }}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  }
+</section>

@@ -24,7 +24,7 @@ Trenutno: Angular 22.2, TypeScript 6.0, zoneless (bez zone.js), esbuild (`@angul
 | #32 | Admin deo vs. korisnički deo, obaveštenja jun–avgust | ✅ |
 | #22 | Evidencija na času (izostanci, oprema...) | ✅ |
 | #23 | Napomene (pohvale / opomene) | ✅ |
-| #24 | Izveštaji | |
+| #24 | Izveštaji (odeljenje × period, izvoz u Excel) | ✅ |
 | #15 | Deploy na cPanel | |
 
 ## Napomene

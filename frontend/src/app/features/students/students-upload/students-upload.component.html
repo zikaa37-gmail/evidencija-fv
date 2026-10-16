@@ -23,7 +23,8 @@
         type="button"
         class="btn mx-1 my-1"
         [class.btn-primary]="name === selectedClass()"
-        [class.btn-outline-secondary]="name !== selectedClass()"
+        [class.btn-light]="name !== selectedClass()"
+        [class.border]="name !== selectedClass()"
         (click)="selectedClass.set(name)"
       >
         {{ name }}
