@@ -11,6 +11,7 @@ import {
   RecordsComponent,
   RecordsDialogData,
 } from './records/records.component';
+import { RecordsService } from './records/records.service';
 
 @Component({
   selector: 'app-calendar',
@@ -21,31 +22,55 @@ import {
 export class CalendarComponent {
   #globalService = inject(GlobalService);
   #dialog = inject(MatDialog);
+  protected readonly recordsService = inject(RecordsService);
 
   protected readonly days = WEEKDAYS;
-  protected readonly visibleMonth = signal(this.#firstOfMonth(new Date()));
   protected readonly selectedDate = signal(new Date());
 
   protected readonly monthName = computed(
-    () => MONTHS[this.visibleMonth().getMonth()],
+    () => MONTHS[this.recordsService.month().getMonth()],
   );
-  protected readonly year = computed(() => this.visibleMonth().getFullYear());
+  protected readonly year = computed(() => this.recordsService.month().getFullYear());
 
   protected readonly dates = computed(() =>
-    buildMonthGrid(this.visibleMonth()),
+    buildMonthGrid(this.recordsService.month()),
   );
 
   protected readonly selectedDay = computed(() => {
     const selected = this.selectedDate();
-    const month = this.visibleMonth();
+    const month = this.recordsService.month();
     const isVisible =
       selected.getFullYear() === month.getFullYear() &&
       selected.getMonth() === month.getMonth();
     return isVisible ? selected.getDate() : null;
   });
 
+  protected readonly lastSelectableDay = computed(() => {
+    const month = this.recordsService.month();
+    const today = new Date();
+    const monthIndex = month.getFullYear() * 12 + month.getMonth();
+    const todayIndex = today.getFullYear() * 12 + today.getMonth();
+    if (monthIndex < todayIndex) {
+      return null;
+    }
+    return monthIndex === todayIndex ? today.getDate() : 0;
+  });
+
+  protected readonly readOnlyDays = computed(() => {
+    const month = this.recordsService.month();
+    const days = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
+    const readOnly = new Set<number>();
+    for (let day = 1; day <= days; day++) {
+      const date = new Date(month.getFullYear(), month.getMonth(), day);
+      if (date < new Date() && !this.recordsService.isEditable(date)) {
+        readOnly.add(day);
+      }
+    }
+    return readOnly;
+  });
+
   onMonthChange(action: MonthAction): void {
-    this.visibleMonth.update(
+    this.recordsService.month.update(
       (month) =>
         new Date(
           month.getFullYear(),
@@ -56,13 +81,9 @@ export class CalendarComponent {
   }
 
   onDateSelect(day: number): void {
-    const month = this.visibleMonth();
+    const month = this.recordsService.month();
     const date = new Date(month.getFullYear(), month.getMonth(), day);
     this.selectedDate.set(date);
-    this.#openRecords(date);
-  }
-
-  #openRecords(date: Date): void {
     this.#dialog.open<RecordsComponent, RecordsDialogData>(RecordsComponent, {
       data: { date },
       height: 'auto',
@@ -71,9 +92,5 @@ export class CalendarComponent {
       panelClass: 'user-dialog',
       disableClose: true,
     });
-  }
-
-  #firstOfMonth(date: Date): Date {
-    return new Date(date.getFullYear(), date.getMonth(), 1);
   }
 }

@@ -21,6 +21,11 @@ odeljenja, osmaci u arhivu (`SchoolYearRolloverService`; ručno od 20. juna — 
 1. septembra komandom `school-year:rollover` preko `schedule:run` crona). Admin poslovi su u `/admin`
 (školska godina, odeljenja, uvoz učenika, arhiva), odvojeni od svakodnevne evidencije; od 20. juna do
 kraja školske godine admin vidi baner za pripremu nove godine.
+Evidencija na času (`attendance_records`: jedna oznaka po učeniku i danu) i napomene (`student_notes`:
+pohvala / opomena) mogu da se upisuju i menjaju samo za poslednjih 7 dana (`config/school.php`
+`edit_window_days`, servis `EditWindow`); stariji dani su samo za čitanje, budući dani su onemogućeni.
+Login stranica ima probne naloge sa prijavom jednim klikom (`environment.demoAccounts`) — aplikacija nije
+tajna, korisnik je to izričito tražio.
 
 Plan upgrade-a i modernizacije: `docs/TODO.md`. Radni tok (issue → grana → PR): `docs/git-workflow.md`.
 Isti obrazac kao `D:\Playground\Angular\kosarkaska-evidencija` — pogledaj taj repo za

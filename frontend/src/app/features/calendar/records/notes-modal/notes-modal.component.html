@@ -1,5 +1,6 @@
 <div class="d-flex flex-column p-3">
-  <label for="note-text">{{ "notes.note" | translate }}</label>
+  <strong>{{ student.first_name }} {{ student.last_name }}</strong>
+  <label for="note-text" class="mt-2">{{ "notes.note" | translate }}</label>
 
   <div class="d-flex flex-row justify-content-start my-4 w-100">
     <div class="d-flex flex-column justify-content-center align-items-center">
@@ -52,6 +53,8 @@
       class="mx-3"
       mat-raised-button
       color="primary"
+      data-testid="save-note"
+      [disabled]="saving() || !text().trim()"
       (click)="addNote()"
     >
       {{ "notes.addNote" | translate }}

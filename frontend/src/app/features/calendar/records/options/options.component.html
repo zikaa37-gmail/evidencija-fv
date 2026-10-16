@@ -1,5 +1,8 @@
 <div class="d-flex flex-column p-2">
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-between align-items-center">
+    <strong class="mx-2"
+      >{{ data.student.first_name }} {{ data.student.last_name }}</strong
+    >
     <button
       type="button"
       class="plain-button m-2"
@@ -10,17 +13,18 @@
     </button>
   </div>
 
-  @for (option of recordsService.options(); track option.id) {
+  @for (option of recordsService.options; track option.label) {
     <button
       mat-raised-button
       [color]="option.bgColor"
       [style.max-width.px]="150"
       class="d-flex flex-row align-items-center py-2 m-2 option"
+      [disabled]="saving()"
       (click)="setOption(option)"
-      [title]="option.option | translate"
-      [class.active]="option.selected"
+      [title]="option.label | translate"
+      [class.active]="option.reason !== null && option.reason === current"
     >
-      <span class="mx-2">{{ option.option | translate }}</span>
+      <span class="mx-2">{{ option.label | translate }}</span>
     </button>
   }
 </div>

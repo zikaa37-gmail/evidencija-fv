@@ -18,7 +18,12 @@ middleware `admin` (uloga `admin`).
 |---|---|---|
 | GET | `/auth/me` | Prijavljeni korisnik (`id`, `name`, `email`, `role`, `school_id`) |
 | POST | `/auth/change-password` | `current_password`, `password`, `password_confirmation` → opoziva sve refresh tokene |
-| GET | `/school-years/current` | Tekuća školska godina škole korisnika (`id`, `name`, `starts_on`, `ends_on`, `preparation_starts_on`, `in_preparation`, `school`) |
+| GET | `/school-years/current` | Tekuća školska godina škole korisnika (`id`, `name`, `starts_on`, `ends_on`, `preparation_starts_on`, `in_preparation`, `edit_window_days`, `school`) |
+| POST | `/attendance/list` | `school_class_id`, `from`, `to` → oznake `[{student_id, date, reason}]` |
+| PUT | `/attendance` | `student_id`, `date`, `reason` (`absent`/`equipment`/`pity`/`late`/`ill`, `null` briše) — samo poslednjih 7 dana |
+| POST | `/notes/list` | `school_class_id` → pohvale i opomene (`can_delete`) |
+| POST | `/notes` | `student_id`, `date`, `type` (`good`/`bad`), `text` — samo poslednjih 7 dana |
+| DELETE | `/notes/{id}` | Autor ili admin, samo u okviru 7 dana |
 | POST | `/classes/list` | Odeljenja tekuće školske godine (`id`, `name`, `grade`, `section`, `head_teacher_*`, `students_count`) |
 | POST | `/students/list` | Učenici tekuće godine (opciono `school_class_id`); arhivirani se ne vraćaju |
 

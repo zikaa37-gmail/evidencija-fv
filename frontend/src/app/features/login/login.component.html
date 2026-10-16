@@ -44,4 +44,31 @@
       {{ "login.login" | translate }}
     </button>
   </form>
+
+  @if (demoAccounts.length) {
+    <section class="demo-card" data-testid="demo-accounts">
+      <h5>{{ "login.demoTitle" | translate }}</h5>
+      <p class="text-muted">{{ "login.demoHint" | translate }}</p>
+      @for (account of demoAccounts; track account.email) {
+        <div class="demo-account">
+          <div>
+            <strong>{{ "login.roles." + account.role | translate }}</strong>
+            <div class="demo-credentials">
+              {{ account.email }} · {{ account.password }}
+            </div>
+          </div>
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            [attr.data-testid]="'login-as-' + account.role"
+            [disabled]="submitting()"
+            (click)="loginAs(account.email, account.password)"
+          >
+            {{ "login.loginAs" | translate }}
+          </button>
+        </div>
+      }
+    </section>
+  }
 </div>
