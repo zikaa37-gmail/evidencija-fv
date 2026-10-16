@@ -20,6 +20,10 @@ Route::middleware('jwt')->group(function () {
 });
 
 Route::middleware(['jwt', 'admin'])->group(function () {
+    Route::get('/school-years/rollover/preview', [SchoolYearController::class, 'rolloverPreview']);
+    Route::post('/school-years/rollover', [SchoolYearController::class, 'rollover']);
+    Route::post('/students/archive/list', [StudentController::class, 'archive']);
+
     Route::post('/classes/sync', [SchoolClassController::class, 'sync']);
 
     Route::post('/students', [StudentController::class, 'store']);

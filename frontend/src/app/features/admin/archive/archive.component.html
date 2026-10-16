@@ -1,0 +1,41 @@
+<section class="page">
+  <h3>{{ "admin.archive" | translate }}</h3>
+
+  @for (group of groups(); track group.schoolYear) {
+    <h5 class="mt-4">
+      {{ "admin.archiveYear" | translate: { year: group.schoolYear } }}
+      <small class="text-muted">({{ group.students.length }})</small>
+    </h5>
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>{{ "students.lastName" | translate }}</th>
+          <th>{{ "students.firstName" | translate }}</th>
+          <th>{{ "section" | translate }}</th>
+          <th>{{ "admin.archivedAt" | translate }}</th>
+          <th>{{ "admin.reason" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (student of group.students; track student.id) {
+          <tr>
+            <td>{{ student.last_name }}</td>
+            <td>{{ student.first_name }}</td>
+            <td>{{ student.last_class_name ?? "-" }}</td>
+            <td>{{ student.archived_at | date: "dd.MM.yyyy" }}</td>
+            <td>
+              {{
+                (student.completed ? "admin.completed" : "admin.leftSchool")
+                  | translate
+              }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @empty {
+    @if (loaded()) {
+      <p>{{ "admin.archiveEmpty" | translate }}</p>
+    }
+  }
+</section>

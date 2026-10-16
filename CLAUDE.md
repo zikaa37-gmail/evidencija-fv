@@ -17,8 +17,10 @@ Domen: škola (`schools`) → školska godina (`school_years`, jedna `is_current
 tu godinu (`enrollments`, status aktivan/neaktivan). Učenik (`students`) traje kroz godine; osmaci
 posle završetka idu u arhivu (`archived_at`). Sve se vezuje za konkretan `school_year_id`.
 1. septembra svako odeljenje prelazi razred gore (5-1 → 6-1), četvrtaci dolaze u nova 5-x
-odeljenja, osmaci u arhivu (#30). Admin poslovi (odeljenja, učenici, prelazak godine) su odvojeni
-od svakodnevne evidencije (#32).
+odeljenja, osmaci u arhivu (`SchoolYearRolloverService`; ručno od 20. juna — `config/school.php`, automatski
+1. septembra komandom `school-year:rollover` preko `schedule:run` crona). Admin poslovi su u `/admin`
+(školska godina, odeljenja, uvoz učenika, arhiva), odvojeni od svakodnevne evidencije; od 20. juna do
+kraja školske godine admin vidi baner za pripremu nove godine.
 
 Plan upgrade-a i modernizacije: `docs/TODO.md`. Radni tok (issue → grana → PR): `docs/git-workflow.md`.
 Isti obrazac kao `D:\Playground\Angular\kosarkaska-evidencija` — pogledaj taj repo za

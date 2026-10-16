@@ -118,6 +118,10 @@ export class StudentsService {
       );
   }
 
+  reload(): void {
+    this.#studentsResource.reload();
+  }
+
   reactivateStudent(student: Student): void {
     this.#changeStatus(student, 'activate', 'reactivateStudent');
   }

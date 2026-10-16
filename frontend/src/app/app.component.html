@@ -2,6 +2,17 @@
   @if (auth.isAuthenticated()) {
     <app-header />
   }
+  @if (schoolYearService.showPreparationNotice()) {
+    <div class="preparation-notice" role="status" data-testid="preparation-notice">
+      <span>{{
+        "admin.preparationNotice"
+          | translate: { year: schoolYearService.current()?.name }
+      }}</span>
+      <a routerLink="/admin/school-year">{{
+        "admin.preparationLink" | translate
+      }}</a>
+    </div>
+  }
   <router-outlet />
 </div>
 

@@ -23,15 +23,6 @@ export const routes: Routes = [
         title: 'menu.calendar',
       },
       {
-        path: 'classes',
-        canActivate: [adminGuard],
-        loadComponent: () =>
-          import('./features/classes/classes.component').then(
-            (m) => m.ClassesComponent,
-          ),
-        title: 'menu.classes',
-      },
-      {
         path: 'students',
         loadComponent: () =>
           import('./features/students/students.component').then(
@@ -40,19 +31,49 @@ export const routes: Routes = [
         title: 'menu.students',
       },
       {
-        path: 'students/upload',
+        path: 'admin',
         canActivate: [adminGuard],
         loadComponent: () =>
-          import(
-            './features/students/students-upload/students-upload.component'
-          ).then((m) => m.StudentsUploadComponent),
-        title: 'menu.uploadStudents',
+          import('./features/admin/admin.component').then((m) => m.AdminComponent),
+        children: [
+          {
+            path: 'school-year',
+            loadComponent: () =>
+              import('./features/admin/school-year/school-year.component').then(
+                (m) => m.SchoolYearComponent,
+              ),
+            title: 'admin.schoolYear',
+          },
+          {
+            path: 'classes',
+            loadComponent: () =>
+              import('./features/classes/classes.component').then(
+                (m) => m.ClassesComponent,
+              ),
+            title: 'menu.classes',
+          },
+          {
+            path: 'import',
+            loadComponent: () =>
+              import(
+                './features/students/students-upload/students-upload.component'
+              ).then((m) => m.StudentsUploadComponent),
+            title: 'menu.uploadStudents',
+          },
+          {
+            path: 'archive',
+            loadComponent: () =>
+              import('./features/admin/archive/archive.component').then(
+                (m) => m.ArchiveComponent,
+              ),
+            title: 'admin.archive',
+          },
+          { path: '', pathMatch: 'full', redirectTo: 'school-year' },
+        ],
       },
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'student-records',
-      },
+      { path: 'classes', redirectTo: 'admin/classes' },
+      { path: 'students/upload', redirectTo: 'admin/import' },
+      { path: '', pathMatch: 'full', redirectTo: 'student-records' },
     ],
   },
   {

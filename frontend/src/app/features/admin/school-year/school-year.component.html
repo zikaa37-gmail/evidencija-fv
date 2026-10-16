@@ -1,0 +1,118 @@
+<section class="page">
+  @if (schoolYearService.current(); as current) {
+    <h3>
+      {{ "admin.schoolYear" | translate }} {{ current.name }}
+      <small class="text-muted">· {{ current.school.name }}</small>
+    </h3>
+    <p class="text-muted">
+      {{ current.starts_on | date: "dd.MM.yyyy" }} –
+      {{ current.ends_on | date: "dd.MM.yyyy" }}
+    </p>
+  }
+
+  @if (completedYear(); as year) {
+    <div class="next-steps" data-testid="rollover-done">
+      <p>{{ "admin.rolloverDone" | translate: { year } }}</p>
+      <a mat-raised-button color="primary" routerLink="/students">{{
+        "admin.addFirstGraders" | translate
+      }}</a>
+      <a mat-button routerLink="/admin/import">{{
+        "menu.uploadStudents" | translate
+      }}</a>
+    </div>
+  }
+
+  @if (preview.hasValue()) {
+    @let data = preview.value();
+    <h4 class="mt-4">
+      {{ "admin.rolloverTitle" | translate: { year: data.next_school_year } }}
+    </h4>
+    <p>
+      {{
+        "admin.rolloverWindow"
+          | translate
+            : {
+                from: (data.preparation_starts_on | date: "dd.MM.yyyy"),
+                to: (data.ends_on | date: "dd.MM.yyyy"),
+              }
+      }}
+    </p>
+
+    <div class="rollover-grid">
+      <div class="rollover-box">
+        <h5>{{ "admin.promotions" | translate }}</h5>
+        <table class="table table-sm">
+          <tbody>
+            @for (item of data.promotions; track item.from) {
+              <tr>
+                <td>{{ item.from }} → {{ item.to }}</td>
+                <td class="text-end">
+                  {{ "admin.studentsCount" | translate: { count: item.students } }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rollover-box">
+        <h5>{{ "admin.graduating" | translate }}</h5>
+        <table class="table table-sm">
+          <tbody>
+            @for (item of data.graduating; track item.class) {
+              <tr>
+                <td>{{ item.class }} → {{ "admin.archive" | translate }}</td>
+                <td class="text-end">
+                  {{ "admin.studentsCount" | translate: { count: item.students } }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        @if (data.inactive_to_archive) {
+          <p class="text-muted">
+            {{
+              "admin.inactiveToArchive"
+                | translate: { count: data.inactive_to_archive }
+            }}
+          </p>
+        }
+      </div>
+
+      <div class="rollover-box">
+        <h5>{{ "admin.firstGrade" | translate }}</h5>
+        <label for="first-grade-sections">{{
+          "admin.firstGradeSections" | translate
+        }}</label>
+        <input
+          id="first-grade-sections"
+          type="number"
+          min="0"
+          max="20"
+          class="form-control sections-input"
+          [value]="firstGradeSections()"
+          (input)="setSections($any($event.target).value)"
+        />
+        <p class="text-muted mt-2">{{ "admin.firstGradeHint" | translate }}</p>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-3 my-3">
+      <button
+        mat-raised-button
+        color="primary"
+        data-testid="rollover"
+        [disabled]="!data.can_rollover"
+        (click)="confirmRollover(data)"
+      >
+        {{ "admin.rolloverButton" | translate: { year: data.next_school_year } }}
+      </button>
+      @if (!data.can_rollover) {
+        <span class="text-muted">{{
+          "admin.rolloverNotYet"
+            | translate: { date: (data.preparation_starts_on | date: "dd.MM.yyyy") }
+        }}</span>
+      }
+    </div>
+  }
+</section>

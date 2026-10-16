@@ -49,7 +49,12 @@ class SchoolSeederTest extends TestCase
     {
         $this->getJson('/api/school-years/current')->assertUnauthorized();
 
-        $user = User::create(['name' => 'Test', 'email' => 'test@evidencija.test', 'password' => 'lozinka123']);
+        $user = User::create([
+            'school_id' => SchoolYear::where('is_current', true)->value('school_id'),
+            'name' => 'Test',
+            'email' => 'test@evidencija.test',
+            'password' => 'lozinka123',
+        ]);
 
         $this->withJwt($user)->getJson('/api/school-years/current')
             ->assertOk()

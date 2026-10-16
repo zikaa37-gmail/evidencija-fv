@@ -1,0 +1,12 @@
+<nav class="admin-nav">
+  @for (section of sections; track section.url) {
+    <a
+      class="admin-nav-link"
+      [routerLink]="section.url"
+      routerLinkActive="active"
+      >{{ section.label | translate }}</a
+    >
+  }
+</nav>
+
+<router-outlet />

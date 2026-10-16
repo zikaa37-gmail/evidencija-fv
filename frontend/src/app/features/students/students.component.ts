@@ -80,7 +80,7 @@ export class StudentsComponent {
   }
 
   gotoUpload(): void {
-    this.#router.navigate(['students/upload']);
+    this.#router.navigate(['/admin/import']);
   }
 
   #confirm(data: ConfirmationModalData, onConfirm: () => void): void {

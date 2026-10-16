@@ -34,7 +34,12 @@
 
       @if (auth.currentUser(); as user) {
         <div class="d-flex align-items-center user-area">
-          <span class="mx-2">{{ user.name }}</span>
+          @if (schoolYearService.current(); as schoolYear) {
+            <span class="mx-2 text-muted school-year" data-testid="school-year"
+              >{{ schoolYear.school.name }} · {{ schoolYear.name }}</span
+            >
+          }
+          <span class="mx-2 user-name">{{ user.name }}</span>
           <button
             type="button"
             mat-button

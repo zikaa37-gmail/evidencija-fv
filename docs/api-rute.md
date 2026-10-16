@@ -18,7 +18,7 @@ middleware `admin` (uloga `admin`).
 |---|---|---|
 | GET | `/auth/me` | Prijavljeni korisnik (`id`, `name`, `email`, `role`, `school_id`) |
 | POST | `/auth/change-password` | `current_password`, `password`, `password_confirmation` → opoziva sve refresh tokene |
-| GET | `/school-years/current` | Tekuća školska godina sa školom (`id`, `name`, `starts_on`, `ends_on`, `school`) |
+| GET | `/school-years/current` | Tekuća školska godina škole korisnika (`id`, `name`, `starts_on`, `ends_on`, `preparation_starts_on`, `in_preparation`, `school`) |
 | POST | `/classes/list` | Odeljenja tekuće školske godine (`id`, `name`, `grade`, `section`, `head_teacher_*`, `students_count`) |
 | POST | `/students/list` | Učenici tekuće godine (opciono `school_class_id`); arhivirani se ne vraćaju |
 
@@ -26,6 +26,9 @@ middleware `admin` (uloga `admin`).
 
 | Metod | Ruta | Opis |
 |---|---|---|
+| GET | `/school-years/rollover/preview` | Pregled prelaska: koja odeljenja prelaze, ko ide u arhivu, broj novih 5-x odeljenja, `can_rollover` |
+| POST | `/school-years/rollover` | `first_grade_sections` — prelazak u novu školsku godinu (od 20. juna; automatski 1. septembra komandom `school-year:rollover`) |
+| POST | `/students/archive/list` | Arhivirani učenici (poslednje odeljenje i godina, `completed`) |
 | POST | `/classes/sync` | `classes: [{grade, section}]` — dodaje nova, briše uklonjena (422 ako odeljenje ima učenike) |
 | POST | `/students` | Novi učenik + upis u odeljenje tekuće godine |
 | PUT | `/students/{id}` | Izmena podataka i premeštaj u drugo odeljenje |
