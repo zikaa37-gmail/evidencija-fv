@@ -1,4 +1,9 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import {
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  ConnectedPosition,
+} from '@angular/cdk/overlay';
 import { DatePipe, LowerCasePipe } from '@angular/common';
 import {
   MAT_DIALOG_DATA,
@@ -6,7 +11,6 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatDivider } from '@angular/material/divider';
-import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { GlobalService } from '../../../shared/services/global.service';
@@ -28,7 +32,14 @@ export interface RecordsDialogData {
   selector: 'app-records',
   templateUrl: './records.component.html',
   styleUrl: './records.component.scss',
-  imports: [DatePipe, LowerCasePipe, TranslatePipe, MatDivider, NgbPopover],
+  imports: [
+    DatePipe,
+    LowerCasePipe,
+    TranslatePipe,
+    MatDivider,
+    CdkOverlayOrigin,
+    CdkConnectedOverlay,
+  ],
 })
 export class RecordsComponent {
   #dialog = inject(MatDialog);
@@ -45,6 +56,27 @@ export class RecordsComponent {
       .filteredStudents()
       .filter((student) => student.status === StudentStatus.ACTIVE),
   );
+
+  protected readonly infoStudent = signal<Student | null>(null);
+  protected readonly infoOrigin = signal<CdkOverlayOrigin | null>(null);
+  protected readonly infoPositions: ConnectedPosition[] = [
+    { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top', offsetX: 8 },
+    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 8 },
+    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -8 },
+  ];
+
+  toggleInfo(student: Student, origin: CdkOverlayOrigin): void {
+    if (this.infoStudent()?.id === student.id) {
+      this.closeInfo();
+      return;
+    }
+    this.infoOrigin.set(origin);
+    this.infoStudent.set(student);
+  }
+
+  closeInfo(): void {
+    this.infoStudent.set(null);
+  }
 
   openNotesModal(type: NoteType, student: Student): void {
     this.#dialog.open<NotesModalComponent, NotesModalData>(

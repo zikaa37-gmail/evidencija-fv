@@ -89,6 +89,7 @@ export class CalendarComponent {
       height: 'auto',
       width: this.#globalService.isMobile() ? '100vw' : '600px',
       maxWidth: '100vw',
+      maxHeight: '90dvh',
       panelClass: 'user-dialog',
       disableClose: true,
     });
