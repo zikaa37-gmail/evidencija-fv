@@ -20,12 +20,12 @@ import {
 } from './records.interface';
 
 const OPTIONS: OptionItem[] = [
-  { reason: 'absent', label: 'options.absent', bgColor: 'danger' },
-  { reason: 'equipment', label: 'options.equipment', bgColor: 'primary' },
-  { reason: 'pity', label: 'options.pity', bgColor: 'primary' },
-  { reason: 'late', label: 'options.late', bgColor: 'primary' },
-  { reason: 'ill', label: 'options.ill', bgColor: 'primary' },
-  { reason: null, label: 'options.none', bgColor: 'accent' },
+  { reason: 'absent', label: 'options.absent' },
+  { reason: 'equipment', label: 'options.equipment' },
+  { reason: 'pity', label: 'options.pity' },
+  { reason: 'late', label: 'options.late' },
+  { reason: 'ill', label: 'options.ill' },
+  { reason: null, label: 'options.none' },
 ];
 
 function firstOfMonth(date: Date): Date {

@@ -43,7 +43,7 @@
           >{{ data.from | date: "dd.MM.yyyy" }} – {{ data.to | date: "dd.MM.yyyy" }}</small
         >
       </h4>
-      <button mat-raised-button data-testid="export" (click)="exportToExcel(data)">
+      <button mat-stroked-button data-testid="export" (click)="exportToExcel(data)">
         {{ "reports.export" | translate }}
       </button>
     </div>

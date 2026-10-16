@@ -36,8 +36,7 @@
     }
 
     <button
-      mat-raised-button
-      color="primary"
+      mat-flat-button
       type="submit"
       [disabled]="submitting()"
     >
@@ -53,14 +52,14 @@
         <div class="demo-account">
           <div>
             <strong>{{ "login.roles." + account.role | translate }}</strong>
+            <div class="demo-credentials">{{ account.email }}</div>
             <div class="demo-credentials">
-              {{ account.email }} · {{ account.password }}
+              {{ "login.password" | translate }}: {{ account.password }}
             </div>
           </div>
           <button
             type="button"
-            mat-raised-button
-            color="primary"
+            mat-flat-button
             [attr.data-testid]="'login-as-' + account.role"
             [disabled]="submitting()"
             (click)="loginAs(account.email, account.password)"

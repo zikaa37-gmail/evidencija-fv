@@ -15,8 +15,7 @@
 
   @for (option of recordsService.options; track option.label) {
     <button
-      mat-raised-button
-      [color]="option.bgColor"
+      mat-stroked-button
       [style.max-width.px]="150"
       class="d-flex flex-row align-items-center py-2 m-2 option"
       [disabled]="saving()"

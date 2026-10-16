@@ -52,7 +52,7 @@ class SchoolYearRolloverTest extends TestCase
         $this->assertSame('2027-06-20', $preview['preparation_starts_on']);
         $this->assertFalse($preview['can_rollover']);
         $this->assertCount(13, $preview['promotions']);
-        $this->assertSame(['from' => '5-1', 'to' => '6-1', 'students' => 6], $preview['promotions'][0]);
+        $this->assertSame(['from' => '5-1', 'to' => '6-1', 'students' => SchoolSeeder::STUDENTS_PER_CLASS], $preview['promotions'][0]);
         $this->assertSame(['8-1', '8-2', '8-3'], array_column($preview['graduating'], 'class'));
         $this->assertSame(4, $preview['first_grade_sections']);
     }
@@ -98,11 +98,11 @@ class SchoolYearRolloverTest extends TestCase
         );
         $this->assertSame(2, Enrollment::where('student_id', $promotedStudentId)->count());
 
-        $this->assertSame(19, Student::whereNotNull('archived_at')->count());
+        $this->assertSame(3 * SchoolSeeder::STUDENTS_PER_CLASS + 1, Student::whereNotNull('archived_at')->count());
         $this->assertNotNull(Student::find($inactive->student_id)->archived_at);
         $this->assertSame(0, Enrollment::where('student_id', $inactive->student_id)->where('school_year_id', $next->id)->count());
         $this->assertSame(0, $this->classOf('2027/28', '5-1')->enrollments()->count());
-        $this->assertSame(96 - 19, Enrollment::where('school_year_id', $next->id)->count());
+        $this->assertSame(16 * SchoolSeeder::STUDENTS_PER_CLASS - (3 * SchoolSeeder::STUDENTS_PER_CLASS + 1), Enrollment::where('school_year_id', $next->id)->count());
     }
 
     public function test_rollover_cannot_run_twice(): void
@@ -136,7 +136,7 @@ class SchoolYearRolloverTest extends TestCase
 
         $archive = collect($this->withJwt($this->admin)->postJson('/api/students/archive/list')->assertOk()->json());
 
-        $this->assertCount(18, $archive);
+        $this->assertCount(3 * SchoolSeeder::STUDENTS_PER_CLASS, $archive);
         $this->assertTrue($archive->every(fn ($item) => $item['completed'] && $item['last_school_year'] === '2026/27'));
         $this->assertSame(['8-1', '8-2', '8-3'], $archive->pluck('last_class_name')->unique()->sort()->values()->all());
     }

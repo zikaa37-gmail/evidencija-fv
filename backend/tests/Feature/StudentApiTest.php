@@ -55,7 +55,7 @@ class StudentApiTest extends TestCase
     {
         $response = $this->withJwt($this->teacher)->postJson('/api/students/list')->assertOk();
 
-        $this->assertCount(96, $response->json());
+        $this->assertCount(16 * SchoolSeeder::STUDENTS_PER_CLASS, $response->json());
         $response->assertJsonStructure(['*' => [
             'id', 'first_name', 'last_name', 'sex', 'emergency_contact_name', 'emergency_contact_phone',
             'sports', 'health_issues', 'status', 'school_class_id', 'class_name', 'head_teacher_name', 'head_teacher_phone',
@@ -63,7 +63,7 @@ class StudentApiTest extends TestCase
         $this->assertSame('5-1', $response->json('0.class_name'));
 
         $filtered = $this->withJwt($this->teacher)->postJson('/api/students/list', ['school_class_id' => $this->classId('6-2')])->json();
-        $this->assertCount(6, $filtered);
+        $this->assertCount(SchoolSeeder::STUDENTS_PER_CLASS, $filtered);
         $this->assertSame(['6-2'], collect($filtered)->pluck('class_name')->unique()->values()->all());
     }
 
@@ -71,7 +71,7 @@ class StudentApiTest extends TestCase
     {
         Student::first()->update(['archived_at' => now()]);
 
-        $this->assertCount(95, $this->withJwt($this->teacher)->postJson('/api/students/list')->json());
+        $this->assertCount(16 * SchoolSeeder::STUDENTS_PER_CLASS - 1, $this->withJwt($this->teacher)->postJson('/api/students/list')->json());
     }
 
     public function test_teacher_cannot_change_students(): void
@@ -138,6 +138,6 @@ class StudentApiTest extends TestCase
             ['first_name' => 'A', 'last_name' => 'B', 'sex' => 'female', 'class_name' => '5-9'],
         ]])->assertUnprocessable()->assertJsonValidationErrors('students');
 
-        $this->assertSame(96, Student::count());
+        $this->assertSame(16 * SchoolSeeder::STUDENTS_PER_CLASS, Student::count());
     }
 }

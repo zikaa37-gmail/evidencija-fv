@@ -13,7 +13,7 @@
   @if (completedYear(); as year) {
     <div class="next-steps" data-testid="rollover-done">
       <p>{{ "admin.rolloverDone" | translate: { year } }}</p>
-      <a mat-raised-button color="primary" routerLink="/students">{{
+      <a mat-flat-button routerLink="/students">{{
         "admin.addFirstGraders" | translate
       }}</a>
       <a mat-button routerLink="/admin/import">{{
@@ -99,8 +99,7 @@
 
     <div class="d-flex align-items-center gap-3 my-3">
       <button
-        mat-raised-button
-        color="primary"
+        mat-flat-button
         data-testid="rollover"
         [disabled]="!data.can_rollover"
         (click)="confirmRollover(data)"

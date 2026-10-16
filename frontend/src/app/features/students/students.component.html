@@ -4,15 +4,14 @@
   @if (auth.isAdmin()) {
     <div class="d-flex flex-row no-wrap">
       <button
-        mat-raised-button
-        color="primary"
+        mat-flat-button
         class="mx-1"
         data-testid="new-student"
         (click)="openForm()"
       >
         {{ "students.create" | translate }}
       </button>
-      <button mat-raised-button class="mx-1" (click)="gotoUpload()">
+      <button mat-stroked-button class="mx-1" (click)="gotoUpload()">
         {{ "buttons.upload" | translate }}
       </button>
     </div>

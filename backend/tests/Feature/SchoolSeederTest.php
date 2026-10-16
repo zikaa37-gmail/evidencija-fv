@@ -37,6 +37,18 @@ class SchoolSeederTest extends TestCase
         ], $names);
     }
 
+    public function test_every_class_has_the_configured_number_of_students_with_unique_names(): void
+    {
+        $this->assertSame(
+            [SchoolSeeder::STUDENTS_PER_CLASS],
+            SchoolClass::withCount('enrollments')->get()->pluck('enrollments_count')->unique()->values()->all(),
+        );
+        $this->assertSame(
+            Student::count(),
+            Student::all()->map(fn (Student $student) => "{$student->first_name} {$student->last_name}")->unique()->count(),
+        );
+    }
+
     public function test_every_student_is_enrolled_once_in_the_current_school_year(): void
     {
         $schoolYear = SchoolYear::where('is_current', true)->sole();

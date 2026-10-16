@@ -37,7 +37,7 @@ class ReportTest extends TestCase
         ])->assertOk()->json();
 
         $this->assertSame('5-1', $report['class_name']);
-        $this->assertCount(6, $report['students']);
+        $this->assertCount(SchoolSeeder::STUDENTS_PER_CLASS, $report['students']);
 
         $row = collect($report['students'])->firstWhere('student_id', $enrollment->student_id);
         $this->assertSame(

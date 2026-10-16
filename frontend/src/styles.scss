@@ -1,6 +1,22 @@
 @use "sass:meta";
+@use "@angular/material" as mat;
+@use "./theme/theme-colors";
 @use "./theme/theme-variables" as *;
 @use "./theme/theme-overides";
+
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: (
+        primary: theme-colors.$primary-palette,
+        tertiary: theme-colors.$tertiary-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
 
 html,
 body {

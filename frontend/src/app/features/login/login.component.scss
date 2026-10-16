@@ -56,5 +56,10 @@
 .demo-credentials {
   font-size: 13px;
   color: $gray-700;
-  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+.demo-account button {
+  flex-shrink: 0;
+  white-space: nowrap;
 }

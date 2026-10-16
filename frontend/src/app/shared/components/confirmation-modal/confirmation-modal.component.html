@@ -4,14 +4,14 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   @if (data.leftButtonText) {
-    <button mat-raised-button [mat-dialog-close]="false">
+    <button mat-stroked-button [mat-dialog-close]="false">
       @if (data.leftButtonIcon) {
         <mat-icon class="mx-2">{{ data.leftButtonIcon }}</mat-icon>
       }
       {{ data.leftButtonText | translate }}
     </button>
   }
-  <button mat-raised-button [mat-dialog-close]="true" color="primary">
+  <button mat-flat-button [mat-dialog-close]="true">
     @if (data.rightButtonIcon) {
       <mat-icon class="mx-2">{{ data.rightButtonIcon }}</mat-icon>
     }
