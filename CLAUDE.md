@@ -61,6 +61,9 @@ referentne konvencije ako nešto ovde nije eksplicitno napisano.
 - Material dugmad (M3 ignoriše `color` ulaz): glavna akcija `mat-flat-button`, sporedna
   `mat-stroked-button`, tekstualna `mat-button`. Boje komponenti idu preko M3 tokena
   (`var(--mat-sys-primary)`...), ne preko `color="primary"`.
+- Ikonice za akcije su SVG fajlovi u `frontend/public/icons/` i prikazuju se preko maske
+  (`<span class="svg-icon icon-<ime>">`, klasa `.icon-<ime> { --icon: url("/icons/<ime>.svg"); }` u
+  `styles.scss`), pa preuzimaju boju teksta; dugme sa samo ikonicom ima `aria-label` i `title`.
 - Obaveštenja korisniku idu kroz `NotificationService` (`MatSnackBar`), tekst iz prevoda (`toaster.*`).
 - Destruktivne akcije idu kroz zajednički `ConfirmationModalComponent`; ne uvoditi `window.confirm()`.
 - Ne dodavati tajne u repozitorijum. Lokalni backend kredencijali idu u `backend/.env`.

@@ -1,10 +1,9 @@
 import { Component, computed, inject } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { AuthService } from '../../core/auth/auth.service';
-import { SchoolYearService } from '../../core/school-year/school-year.service';
 
 const LINKS = [
   { name: 'student-records', url: '/student-records', adminOnly: false },
@@ -17,11 +16,10 @@ const LINKS = [
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [TranslatePipe, RouterLink, RouterLinkActive, MatButton],
+  imports: [TranslatePipe, RouterLink, RouterLinkActive, MatButton, MatIconButton],
 })
 export class HeaderComponent {
   protected readonly auth = inject(AuthService);
-  protected readonly schoolYearService = inject(SchoolYearService);
   protected readonly links = computed(() =>
     LINKS.filter((link) => !link.adminOnly || this.auth.isAdmin()),
   );
