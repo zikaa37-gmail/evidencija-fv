@@ -11,7 +11,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
-      providers: [provideRouter([]), provideTranslateService()],
+      providers: [provideRouter([{ path: '**', children: [] }]), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -21,5 +21,18 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('toggles the menu and closes it after a link is clicked', () => {
+    const element: HTMLElement = fixture.nativeElement;
+    const collapse = element.querySelector('.navbar-collapse')!;
+
+    element.querySelector<HTMLButtonElement>('[data-testid="menu-toggle"]')!.click();
+    fixture.detectChanges();
+    expect(collapse.classList).toContain('show');
+
+    element.querySelector<HTMLButtonElement>('.nav-link')!.click();
+    fixture.detectChanges();
+    expect(collapse.classList).not.toContain('show');
   });
 });

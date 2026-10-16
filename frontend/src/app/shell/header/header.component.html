@@ -6,16 +6,23 @@
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#content"
+      data-testid="menu-toggle"
       aria-controls="content"
-      aria-expanded="false"
+      [attr.aria-expanded]="menuOpen()"
       aria-label="Toggle navigation"
+      (click)="toggleMenu()"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="content">
+    <div class="collapse navbar-collapse" id="content" [class.show]="menuOpen()">
+      @if (auth.currentUser(); as user) {
+        <div class="mobile-user d-lg-none">
+          <span class="user-name">{{ user.name }}</span>
+          <hr />
+        </div>
+      }
+
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         @for (link of links(); track link.url) {
           <li class="nav-item">
@@ -25,6 +32,7 @@
               aria-current="page"
               [routerLink]="[link.url]"
               [routerLinkActive]="['router-link-active']"
+              (click)="closeMenu()"
             >
               {{ "menu." + link.name | translate }}
             </button>
@@ -33,18 +41,17 @@
       </ul>
 
       @if (auth.currentUser(); as user) {
-        <div class="d-flex align-items-center user-area">
-          <span class="mx-2 user-name">{{ user.name }}</span>
+        <div class="user-area">
+          <span class="user-name d-none d-lg-inline">{{ user.name }}</span>
           <button
             type="button"
-            mat-icon-button
-            class="mx-1"
+            mat-button
+            class="logout"
             data-testid="logout"
-            [attr.aria-label]="'menu.logout' | translate"
-            [title]="'menu.logout' | translate"
-            (click)="auth.logout()"
+            (click)="logout()"
           >
-            <span class="svg-icon icon-logout" aria-hidden="true"></span>
+            <span class="svg-icon icon-power icon-sm" aria-hidden="true"></span>
+            {{ "menu.logout" | translate }}
           </button>
         </div>
       }

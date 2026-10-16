@@ -59,7 +59,7 @@ export class StudentsComponent {
         leftButtonText: 'buttons.cancel',
         rightButtonText: 'buttons.delete',
         leftButtonIcon: 'close',
-        rightButtonIcon: 'delete',
+        rightButtonIcon: 'trash',
       },
       () => this.studentsService.deactivateStudent(student),
     );
@@ -73,7 +73,7 @@ export class StudentsComponent {
         leftButtonText: 'buttons.cancel',
         rightButtonText: 'buttons.reactivate',
         leftButtonIcon: 'close',
-        rightButtonIcon: 'star',
+        rightButtonIcon: 'restore',
       },
       () => this.studentsService.reactivateStudent(student),
     );

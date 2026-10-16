@@ -10,7 +10,6 @@ import {
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatDivider } from '@angular/material/divider';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { GlobalService } from '../../../shared/services/global.service';
@@ -36,7 +35,6 @@ export interface RecordsDialogData {
     DatePipe,
     LowerCasePipe,
     TranslatePipe,
-    MatDivider,
     CdkOverlayOrigin,
     CdkConnectedOverlay,
   ],

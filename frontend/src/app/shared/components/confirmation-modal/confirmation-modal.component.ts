@@ -7,7 +7,6 @@ import {
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 
 export interface ConfirmationModalData {
@@ -28,7 +27,6 @@ export interface ConfirmationModalData {
     MatDialogActions,
     MatDialogClose,
     MatButton,
-    MatIcon,
   ],
   templateUrl: './confirmation-modal.component.html',
   styleUrl: './confirmation-modal.component.scss',

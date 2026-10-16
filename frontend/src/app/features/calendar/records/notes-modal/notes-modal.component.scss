@@ -1,1 +1,32 @@
 @use "src/theme/theme-variables" as *;
+
+.note-type {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  &.selected {
+    color: #fff;
+    background: currentColor;
+    border-color: currentColor;
+
+    .svg-icon {
+      background-color: #fff;
+    }
+  }
+}
