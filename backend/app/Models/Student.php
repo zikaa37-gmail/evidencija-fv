@@ -17,10 +17,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'emergency_contact_phone',
     'sports',
     'health_issues',
+    'photo',
     'archived_at',
 ])]
 class Student extends Model
 {
+    public const PHOTO_MAX_LENGTH = 400000;
+
     protected function casts(): array
     {
         return [

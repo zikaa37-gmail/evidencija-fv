@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.note-date {
+  color: #6c757d;
+  white-space: nowrap;
+}

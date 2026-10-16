@@ -21,160 +21,31 @@
 
 <div class="student-list" data-testid="student-list">
   @for (student of students(); track student.id) {
-    <div class="student-row">
-      <button
-        type="button"
-        class="icon-action tone-blue"
-        cdkOverlayOrigin
-        #infoOrigin="cdkOverlayOrigin"
-        [attr.aria-label]="'info' | translate"
-        [title]="'info' | translate"
-        [attr.aria-expanded]="infoStudent()?.id === student.id"
-        (click)="toggleInfo(student, infoOrigin)"
-      >
-        <span class="svg-icon icon-info" aria-hidden="true"></span>
-      </button>
-      @if (editable) {
-        <button
-          type="button"
-          class="icon-action tone-blue"
-          [attr.aria-label]="'notes.addNote' | translate"
-          [title]="'notes.addNote' | translate"
-          (click)="openNotesModal(NOTE_TYPE.BAD, student)"
-        >
-          <span class="svg-icon icon-note" aria-hidden="true"></span>
-        </button>
-        <button
-          type="button"
-          class="icon-action tone-blue"
-          [attr.aria-label]="'buttons.edit' | translate"
-          [title]="'buttons.edit' | translate"
-          (click)="openOptions(student)"
-        >
-          <span class="svg-icon icon-edit" aria-hidden="true"></span>
-        </button>
-      }
-
-      <span class="student">{{ student.first_name }} {{ student.last_name }}</span>
+    <app-list-row
+      class="student-row"
+      [title]="student.first_name + ' ' + student.last_name"
+      [photo]="student.photo"
+    >
       @if (recordsService.reasonFor(student.id, dateIso); as reason) {
         <span class="reason-badge reason-{{ reason }}" data-testid="reason">{{
           "options." + reason | translate
         }}</span>
       }
-    </div>
+      <ng-container rowEnd>
+        @if (editable) {
+          <button
+            type="button"
+            class="icon-action tone-blue"
+            data-testid="mark"
+            [attr.aria-label]="'records.mark' | translate"
+            [title]="'records.mark' | translate"
+            (click)="openOptions(student)"
+          >
+            <span class="svg-icon icon-edit" aria-hidden="true"></span>
+          </button>
+        }
+        <app-row-actions [actions]="actions" (selected)="onAction(student, $event)" />
+      </ng-container>
+    </app-list-row>
   }
 </div>
-
-<ng-template
-  cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="infoOrigin()!"
-  [cdkConnectedOverlayOpen]="infoStudent() !== null"
-  [cdkConnectedOverlayPositions]="infoPositions"
-  [cdkConnectedOverlayHasBackdrop]="true"
-  cdkConnectedOverlayBackdropClass="info-backdrop"
-  [cdkConnectedOverlayPush]="true"
-  (backdropClick)="closeInfo()"
-  (detach)="closeInfo()"
-  (overlayKeydown)="$event.key === 'Escape' && closeInfo()"
->
-  @if (infoStudent(); as infoStudent) {
-    <div class="info-card" role="dialog" data-testid="student-info">
-      <div class="info-head">
-        <span class="info-avatar"
-          >{{ infoStudent.first_name.charAt(0) }}{{ infoStudent.last_name.charAt(0) }}</span
-        >
-        <div class="info-name">
-          <strong>{{ infoStudent.first_name }} {{ infoStudent.last_name }}</strong>
-          <small>{{ "section" | translate }} {{ infoStudent.class_name }}</small>
-        </div>
-        <button
-          type="button"
-          class="icon-action info-close"
-          [attr.aria-label]="'buttons.close' | translate"
-          (click)="closeInfo()"
-        >
-          <span class="svg-icon icon-close icon-sm" aria-hidden="true"></span>
-        </button>
-      </div>
-
-      <div class="info-body">
-        <section>
-          <h6 class="section-title tone-red">
-            <span class="svg-icon icon-heart icon-sm" aria-hidden="true"></span>
-            {{ "issues" | translate }}
-          </h6>
-          <div class="chips">
-            @for (issue of infoStudent.health_issues; track $index) {
-              <span class="chip chip-red">{{ issue }}</span>
-            } @empty {
-              <span class="muted">{{ "records.none" | translate }}</span>
-            }
-          </div>
-        </section>
-
-        <section>
-          <h6 class="section-title tone-blue">
-            <span class="svg-icon icon-user icon-sm" aria-hidden="true"></span>
-            {{ "emergencyContact" | translate }}
-          </h6>
-          <div>{{ infoStudent.emergency_contact_name || "-" }}</div>
-          @if (infoStudent.emergency_contact_phone; as phone) {
-            <a class="phone-link" [href]="'tel:' + phone">
-              <span class="svg-icon icon-phone icon-sm" aria-hidden="true"></span>{{ phone }}
-            </a>
-          }
-        </section>
-
-        <section>
-          <h6 class="section-title tone-blue">
-            <span class="svg-icon icon-teacher icon-sm" aria-hidden="true"></span>
-            {{ "departmentHead" | translate }}
-          </h6>
-          <div>{{ infoStudent.head_teacher_name || "-" }}</div>
-          @if (infoStudent.head_teacher_phone; as phone) {
-            <a class="phone-link" [href]="'tel:' + phone">
-              <span class="svg-icon icon-phone icon-sm" aria-hidden="true"></span>{{ phone }}
-            </a>
-          }
-        </section>
-
-        <section>
-          <h6 class="section-title tone-blue">
-            <span class="svg-icon icon-ball icon-sm" aria-hidden="true"></span>
-            {{ "sports.sports" | translate }}
-          </h6>
-          <div class="chips">
-            @for (sport of infoStudent.sports; track $index) {
-              <span class="chip chip-blue">{{ "sports." + sport | lowercase | translate }}</span>
-            } @empty {
-              <span class="muted">{{ "records.none" | translate }}</span>
-            }
-          </div>
-        </section>
-
-        <section>
-          <h6 class="section-title tone-blue">
-            <span class="svg-icon icon-note icon-sm" aria-hidden="true"></span>
-            {{ "notes.notes" | translate }}
-          </h6>
-          @for (note of recordsService.notesFor(infoStudent.id); track note.id) {
-            <div class="popover-note">
-              <span
-                class="svg-icon icon-sm"
-                [class.icon-smile]="note.type === NOTE_TYPE.GOOD"
-                [class.tone-green]="note.type === NOTE_TYPE.GOOD"
-                [class.icon-frown]="note.type === NOTE_TYPE.BAD"
-                [class.tone-red]="note.type === NOTE_TYPE.BAD"
-                aria-hidden="true"
-              ></span>
-              <span class="note-date">{{ note.date | date: "dd.MM." }}</span>
-              {{ note.text }}
-            </div>
-          } @empty {
-            <span class="muted">{{ "records.none" | translate }}</span>
-          }
-        </section>
-      </div>
-    </div>
-  }
-</ng-template>

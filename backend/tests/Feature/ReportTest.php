@@ -58,4 +58,37 @@ class ReportTest extends TestCase
             ->assertUnprocessable()
             ->assertJsonValidationErrors(['school_class_id', 'to']);
     }
+
+    public function test_student_report_lists_records_and_notes_within_the_period(): void
+    {
+        $this->seed([SchoolSeeder::class, UserSeeder::class]);
+        $teacher = User::where('role', User::TEACHER)->sole();
+        $schoolClass = SchoolClass::where('grade', 5)->where('section', 1)->sole();
+        $enrollment = $schoolClass->enrollments()->first();
+        $base = ['student_id' => $enrollment->student_id, 'school_year_id' => $enrollment->school_year_id, 'school_class_id' => $schoolClass->id];
+
+        AttendanceRecord::create([...$base, 'date' => '2026-10-01', 'reason' => 'absent']);
+        AttendanceRecord::create([...$base, 'date' => '2026-10-08', 'reason' => 'late']);
+        AttendanceRecord::create([...$base, 'date' => '2026-11-01', 'reason' => 'late']);
+        StudentNote::create(['student_id' => $enrollment->student_id, 'school_year_id' => $enrollment->school_year_id, 'date' => '2026-10-05', 'type' => 'good', 'text' => 'Bravo']);
+
+        $report = $this->withJwt($teacher)->postJson('/api/reports/student', [
+            'student_id' => $enrollment->student_id, 'from' => '2026-10-01', 'to' => '2026-10-31',
+        ])->assertOk()->json();
+
+        $this->assertSame('5-1', $report['class_name']);
+        $this->assertSame(2, $report['total']);
+        $this->assertSame(1, $report['praises']);
+        $this->assertSame([['date' => '2026-10-08', 'reason' => 'late'], ['date' => '2026-10-01', 'reason' => 'absent']], $report['records']);
+        $this->assertSame('Bravo', $report['notes'][0]['text']);
+    }
+
+    public function test_student_report_rejects_unknown_students(): void
+    {
+        $this->seed([SchoolSeeder::class, UserSeeder::class]);
+        $teacher = User::where('role', User::TEACHER)->sole();
+
+        $this->withJwt($teacher)->postJson('/api/reports/student', ['student_id' => 999999, 'from' => '2026-10-01', 'to' => '2026-10-31'])
+            ->assertNotFound();
+    }
 }

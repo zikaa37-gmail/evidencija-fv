@@ -1,0 +1,72 @@
+<app-profile-header
+  [name]="student.first_name + ' ' + student.last_name"
+  [subtitle]="('section' | translate) + ' ' + student.class_name + ' · ' + ('sexes.' + student.sex | translate)"
+  [photo]="student.photo"
+  (closed)="dialogRef.close()"
+/>
+
+<div class="details" data-testid="student-details">
+  <section>
+    <h6 class="section-title tone-red">
+      <span class="svg-icon icon-heart icon-sm" aria-hidden="true"></span>
+      {{ "issues" | translate }}
+    </h6>
+    <div class="chips">
+      @for (issue of student.health_issues; track $index) {
+        <span class="chip chip-red">{{ issue }}</span>
+      } @empty {
+        <span class="muted">{{ "records.none" | translate }}</span>
+      }
+    </div>
+  </section>
+
+  <section>
+    <h6 class="section-title tone-blue">
+      <span class="svg-icon icon-user icon-sm" aria-hidden="true"></span>
+      {{ "emergencyContact" | translate }}
+    </h6>
+    <div>{{ student.emergency_contact_name || "-" }}</div>
+    @if (student.emergency_contact_phone; as phone) {
+      <a class="phone-link" [href]="'tel:' + phone">
+        <span class="svg-icon icon-phone icon-sm" aria-hidden="true"></span>{{ phone }}
+      </a>
+    }
+  </section>
+
+  <section>
+    <h6 class="section-title tone-blue">
+      <span class="svg-icon icon-teacher icon-sm" aria-hidden="true"></span>
+      {{ "departmentHead" | translate }}
+    </h6>
+    <div>{{ student.head_teacher_name || "-" }}</div>
+    @if (student.head_teacher_phone; as phone) {
+      <a class="phone-link" [href]="'tel:' + phone">
+        <span class="svg-icon icon-phone icon-sm" aria-hidden="true"></span>{{ phone }}
+      </a>
+    }
+  </section>
+
+  <section>
+    <h6 class="section-title tone-blue">
+      <span class="svg-icon icon-ball icon-sm" aria-hidden="true"></span>
+      {{ "sports.sports" | translate }}
+    </h6>
+    <div class="chips">
+      @for (sport of student.sports; track $index) {
+        <span class="chip chip-blue">{{ "sports." + sport | lowercase | translate }}</span>
+      } @empty {
+        <span class="muted">{{ "records.none" | translate }}</span>
+      }
+    </div>
+  </section>
+
+  @if (data.notes; as notes) {
+    <section>
+      <h6 class="section-title tone-blue">
+        <span class="svg-icon icon-note icon-sm" aria-hidden="true"></span>
+        {{ "notes.notes" | translate }}
+      </h6>
+      <app-note-list [notes]="notes" />
+    </section>
+  }
+</div>

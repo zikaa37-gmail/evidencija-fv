@@ -1,0 +1,58 @@
+<app-profile-header
+  [name]="data.row.first_name + ' ' + data.row.last_name"
+  [subtitle]="(data.range.from | date: 'dd.MM.yyyy') + ' – ' + (data.range.to | date: 'dd.MM.yyyy')"
+  [photo]="data.row.photo"
+  (closed)="dialogRef.close()"
+/>
+
+<div class="report-body" data-testid="student-report">
+  @if (report(); as report) {
+    <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
+      <mat-tab [label]="'reports.tabs.summary' | translate">
+        <div class="tab-content">
+          <div class="stats">
+            @for (column of columns; track column) {
+              <div class="stat" [class.stat-red]="column === 'absent' && report[column] > 0">
+                <strong>{{ report[column] }}</strong>
+                <span>{{ "options." + column | translate }}</span>
+              </div>
+            }
+            <div class="stat stat-total">
+              <strong>{{ report.total }}</strong>
+              <span>{{ "reports.total" | translate }}</span>
+            </div>
+            <div class="stat tone-green">
+              <strong>{{ report.praises }}</strong>
+              <span>{{ "reports.praises" | translate }}</span>
+            </div>
+            <div class="stat tone-red">
+              <strong>{{ report.warnings }}</strong>
+              <span>{{ "reports.warnings" | translate }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab [label]="('reports.tabs.records' | translate) + ' (' + report.records.length + ')'">
+        <div class="tab-content">
+          @for (record of records(); track record.date) {
+            <div class="record-row" data-testid="report-record">
+              <span>{{ "days." + record.weekday | translate }}, {{ record.date | date: "dd.MM.yyyy" }}</span>
+              <span class="reason-badge reason-{{ record.reason }}">{{
+                "options." + record.reason | translate
+              }}</span>
+            </div>
+          } @empty {
+            <span class="muted">{{ "reports.noMarks" | translate }}</span>
+          }
+        </div>
+      </mat-tab>
+
+      <mat-tab [label]="('notes.notes' | translate) + ' (' + report.notes.length + ')'">
+        <div class="tab-content">
+          <app-note-list [notes]="report.notes" [showAuthor]="true" />
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  }
+</div>

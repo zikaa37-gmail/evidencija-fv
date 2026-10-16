@@ -12,8 +12,11 @@ import {
 import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
+import { resizeImage } from '../../../core/utils/resize-image';
+import { AvatarComponent } from '../../../shared/components/avatar/avatar.component';
+import { NotificationService } from '../../../shared/services/notification.service';
 import { ClassesService } from '../../classes/classes.service';
 import { Sex, Student, StudentPayload } from '../students.interface';
 import { StudentsService } from '../students.service';
@@ -49,6 +52,7 @@ function toList(value: string): string[] {
     MatSelect,
     MatOption,
     MatButton,
+    AvatarComponent,
   ],
 })
 export class StudentFormComponent {
@@ -59,6 +63,9 @@ export class StudentFormComponent {
 
   protected readonly isEdit = this.#data.student !== null;
   protected readonly saving = signal(false);
+  protected readonly photo = signal<string | null>(this.#data.student?.photo ?? null);
+  #notification = inject(NotificationService);
+  #translate = inject(TranslateService);
 
   protected readonly form = new FormGroup({
     first_name: new FormControl(this.#data.student?.first_name ?? '', {
@@ -93,6 +100,20 @@ export class StudentFormComponent {
     ),
   });
 
+  async onPhotoSelected(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) {
+      return;
+    }
+    try {
+      this.photo.set(await resizeImage(file));
+    } catch {
+      this.#notification.error(this.#translate.instant('toaster.photoError'));
+    }
+  }
+
   save(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -109,6 +130,7 @@ export class StudentFormComponent {
       emergency_contact_phone: value.emergency_contact_phone.trim() || null,
       sports: toList(value.sports),
       health_issues: toList(value.health_issues),
+      photo: this.photo(),
     };
 
     this.saving.set(true);

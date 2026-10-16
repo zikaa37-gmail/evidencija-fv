@@ -32,11 +32,8 @@ export const routes: Routes = [
       },
       {
         path: 'reports',
-        loadComponent: () =>
-          import('./features/reports/reports.component').then(
-            (m) => m.ReportsComponent,
-          ),
-        title: 'menu.reports',
+        loadChildren: () =>
+          import('./features/reports/reports.routes').then((m) => m.REPORTS_ROUTES),
       },
       {
         path: 'admin',

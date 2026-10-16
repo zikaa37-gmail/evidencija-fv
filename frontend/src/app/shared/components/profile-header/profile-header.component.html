@@ -1,0 +1,19 @@
+<header class="profile-header">
+  <app-avatar size="large" [name]="name()" [photo]="photo()" />
+  <div class="profile-name">
+    <strong>{{ name() }}</strong>
+    @if (subtitle(); as subtitle) {
+      <small>{{ subtitle }}</small>
+    }
+  </div>
+  <button
+    type="button"
+    class="icon-action tone-gray"
+    data-testid="profile-close"
+    [attr.aria-label]="'buttons.close' | translate"
+    [title]="'buttons.close' | translate"
+    (click)="closed.emit()"
+  >
+    <span class="svg-icon icon-close" aria-hidden="true"></span>
+  </button>
+</header>

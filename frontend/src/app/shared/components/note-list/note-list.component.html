@@ -1,0 +1,22 @@
+@for (note of notes(); track note.id) {
+  <div class="note" data-testid="note">
+    <span
+      class="svg-icon icon-sm"
+      [class.icon-smile]="note.type === NOTE_TYPE.GOOD"
+      [class.tone-green]="note.type === NOTE_TYPE.GOOD"
+      [class.icon-frown]="note.type === NOTE_TYPE.BAD"
+      [class.tone-red]="note.type === NOTE_TYPE.BAD"
+      [attr.aria-label]="(note.type === NOTE_TYPE.GOOD ? 'notes.praise' : 'notes.warning') | translate"
+      role="img"
+    ></span>
+    <span class="note-date">{{ note.date | date: "dd.MM." }}</span>
+    <span class="note-text">
+      {{ note.text }}
+      @if (showAuthor() && note.author_name) {
+        <small class="muted">— {{ note.author_name }}</small>
+      }
+    </span>
+  </div>
+} @empty {
+  <span class="muted">{{ "records.none" | translate }}</span>
+}

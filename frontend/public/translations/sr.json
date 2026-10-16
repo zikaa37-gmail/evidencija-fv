@@ -86,7 +86,8 @@
     "close": "Zatvori",
     "previous": "Prethodni",
     "next": "Sledeći",
-    "search": "Pretraga"
+    "search": "Pretraga",
+    "more": "Više opcija"
   },
   "students": {
     "students": "Učenici",
@@ -101,7 +102,12 @@
     "emergencyPhone": "Kontakt za hitne slučajeve (telefon)",
     "commaHint": "Više vrednosti odvojiti zarezom",
     "importHint": "Kolone: ime, prezime, pol (M/Ž), odeljenje (npr. 5-1), kontakt ime, kontakt telefon, -, -, sportovi, -, ograničenja. Postojeći učenik (isto ime i prezime u tekućoj godini) se ažurira, ostali se dodaju.",
-    "skippedRows": "Preskočeno redova sa nepotpunim podacima: {{count}}"
+    "skippedRows": "Preskočeno redova sa nepotpunim podacima: {{count}}",
+    "details": "Detalji",
+    "deactivate": "Deaktiviraj",
+    "exclude": "Izostavi iz uvoza",
+    "include": "Vrati u uvoz",
+    "excluded": "Neće biti uvezen"
   },
   "sexes": {
     "sex": "Pol",
@@ -154,7 +160,9 @@
     "deleteTitle": "Brisanje",
     "deleteQuestion": "Da li ste sigurni da želite da obrišete podatak?",
     "reactivateTitle": "Reaktivacija",
-    "reactivateQuestion": "Da li ste sigurni da želite da reaktivirate podatak?"
+    "reactivateQuestion": "Da li ste sigurni da želite da reaktivirate podatak?",
+    "deactivateTitle": "Deaktivacija",
+    "deactivateQuestion": "Da li ste sigurni da želite da deaktivirate učenika?"
   },
   "toaster": {
     "studentsSuccess": "Uspešno učitani podaci o učenicima",
@@ -186,7 +194,9 @@
     "rolloverError": "Greška prilikom prelaska u novu školsku godinu",
     "attendanceError": "Greška prilikom učitavanja evidencije",
     "saveAttendanceError": "Greška prilikom čuvanja evidencije",
-    "deleteNoteError": "Greška prilikom brisanja beleške"
+    "deleteNoteError": "Greška prilikom brisanja beleške",
+    "photoError": "Fotografija ne može da se učita",
+    "reportError": "Greška prilikom učitavanja izveštaja"
   },
   "admin": {
     "schoolYear": "Školska godina",
@@ -219,7 +229,8 @@
   },
   "records": {
     "readOnly": "Samo pregled — upis i izmena su mogući za poslednjih {{days}} dana.",
-    "none": "Nema"
+    "none": "Nema",
+    "mark": "Oznaka"
   },
   "reports": {
     "period": "Period",
@@ -234,6 +245,24 @@
     "praises": "Pohvale",
     "warnings": "Opomene",
     "sum": "Ukupno",
-    "export": "Izvezi u Excel"
+    "export": "Izvezi u Excel",
+    "title": "Izveštaj po učenicima",
+    "preview": "Pregled",
+    "summary": "Zbirni izveštaj odeljenja",
+    "noMarks": "Bez oznaka",
+    "tabs": {
+      "summary": "Ukupno",
+      "records": "Evidencija"
+    },
+    "backToList": "Nazad na učenike",
+    "print": "Štampaj / sačuvaj PDF",
+    "printedOn": "Datum:",
+    "signature": "Potpis nastavnika"
+  },
+  "photo": {
+    "enlarge": "Uvećaj fotografiju",
+    "add": "Dodaj fotografiju",
+    "change": "Promeni fotografiju",
+    "remove": "Ukloni fotografiju"
   }
 }

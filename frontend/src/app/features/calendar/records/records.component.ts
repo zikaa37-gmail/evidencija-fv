@@ -1,10 +1,5 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import {
-  CdkConnectedOverlay,
-  CdkOverlayOrigin,
-  ConnectedPosition,
-} from '@angular/cdk/overlay';
-import { DatePipe, LowerCasePipe } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -12,7 +7,10 @@ import {
 } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
 
+import { ListRowComponent } from '../../../shared/components/list-row/list-row.component';
+import { RowAction, RowActionsComponent } from '../../../shared/components/row-actions/row-actions.component';
 import { GlobalService } from '../../../shared/services/global.service';
+import { openStudentDetails } from '../../students/student-details/student-details.component';
 import { Student, StudentStatus } from '../../students/students.interface';
 import { StudentsService } from '../../students/students.service';
 import {
@@ -21,6 +19,9 @@ import {
 } from './notes-modal/notes-modal.component';
 import { OptionsComponent, OptionsDialogData } from './options/options.component';
 import { NOTE_TYPE, NoteType, toIsoDate } from './records.interface';
+
+const DETAILS_ACTION: RowAction = { id: 'details', label: 'students.details', icon: 'info' };
+const NOTE_ACTION: RowAction = { id: 'note', label: 'notes.addNote', icon: 'note' };
 import { RecordsService } from './records.service';
 
 export interface RecordsDialogData {
@@ -31,13 +32,7 @@ export interface RecordsDialogData {
   selector: 'app-records',
   templateUrl: './records.component.html',
   styleUrl: './records.component.scss',
-  imports: [
-    DatePipe,
-    LowerCasePipe,
-    TranslatePipe,
-    CdkOverlayOrigin,
-    CdkConnectedOverlay,
-  ],
+  imports: [DatePipe, TranslatePipe, ListRowComponent, RowActionsComponent],
 })
 export class RecordsComponent {
   #dialog = inject(MatDialog);
@@ -46,7 +41,6 @@ export class RecordsComponent {
   protected studentsService = inject(StudentsService);
   protected readonly data = inject<RecordsDialogData>(MAT_DIALOG_DATA);
   protected readonly recordsService = inject(RecordsService);
-  protected readonly NOTE_TYPE = NOTE_TYPE;
   protected readonly dateIso = toIsoDate(this.data.date);
   protected readonly editable = this.recordsService.isEditable(this.data.date);
   protected readonly students = computed(() =>
@@ -55,25 +49,18 @@ export class RecordsComponent {
       .filter((student) => student.status === StudentStatus.ACTIVE),
   );
 
-  protected readonly infoStudent = signal<Student | null>(null);
-  protected readonly infoOrigin = signal<CdkOverlayOrigin | null>(null);
-  protected readonly infoPositions: ConnectedPosition[] = [
-    { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top', offsetX: 8 },
-    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 8 },
-    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -8 },
-  ];
+  protected readonly actions = this.editable ? [DETAILS_ACTION, NOTE_ACTION] : [DETAILS_ACTION];
 
-  toggleInfo(student: Student, origin: CdkOverlayOrigin): void {
-    if (this.infoStudent()?.id === student.id) {
-      this.closeInfo();
+  onAction(student: Student, action: string): void {
+    if (action === NOTE_ACTION.id) {
+      this.openNotesModal(NOTE_TYPE.BAD, student);
       return;
     }
-    this.infoOrigin.set(origin);
-    this.infoStudent.set(student);
-  }
-
-  closeInfo(): void {
-    this.infoStudent.set(null);
+    openStudentDetails(
+      this.#dialog,
+      { student, notes: this.recordsService.notesFor(student.id) },
+      this.#globalService.isMobile(),
+    );
   }
 
   openNotesModal(type: NoteType, student: Student): void {

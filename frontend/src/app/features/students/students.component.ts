@@ -5,26 +5,42 @@ import { MatDialog } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { AuthService } from '../../core/auth/auth.service';
-import { CardComponent } from '../../shared/components/card/card.component';
 import { ClassSelectorComponent } from '../../shared/class-selector/class-selector.component';
 import {
   ConfirmationModalComponent,
   ConfirmationModalData,
 } from '../../shared/components/confirmation-modal/confirmation-modal.component';
+import { ListRowComponent } from '../../shared/components/list-row/list-row.component';
+import { RowAction, RowActionsComponent } from '../../shared/components/row-actions/row-actions.component';
 import { GlobalService } from '../../shared/services/global.service';
 import { ClassesService } from '../classes/classes.service';
 import {
   StudentFormComponent,
   StudentFormData,
 } from './student-form/student-form.component';
-import { Student } from './students.interface';
+import { openStudentDetails } from './student-details/student-details.component';
+import { Student, StudentStatus } from './students.interface';
 import { StudentsService } from './students.service';
+
+const DETAILS_ACTION: RowAction = { id: 'details', label: 'students.details', icon: 'info' };
+const EDIT_ACTION: RowAction = { id: 'edit', label: 'buttons.edit', icon: 'edit' };
+const TEACHER_ACTIONS = [DETAILS_ACTION];
+const ACTIVE_ADMIN_ACTIONS = [
+  DETAILS_ACTION,
+  EDIT_ACTION,
+  { id: 'deactivate', label: 'students.deactivate', icon: 'trash', danger: true },
+];
+const INACTIVE_ADMIN_ACTIONS = [
+  DETAILS_ACTION,
+  EDIT_ACTION,
+  { id: 'reactivate', label: 'buttons.reactivate', icon: 'restore' },
+];
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss',
-  imports: [TranslatePipe, CardComponent, ClassSelectorComponent, MatButton],
+  imports: [TranslatePipe, ClassSelectorComponent, ListRowComponent, RowActionsComponent, MatButton],
 })
 export class StudentsComponent {
   #dialog = inject(MatDialog);
@@ -33,6 +49,7 @@ export class StudentsComponent {
   protected auth = inject(AuthService);
   protected studentsService = inject(StudentsService);
   protected classesService = inject(ClassesService);
+  protected readonly StudentStatus = StudentStatus;
 
   readonly #selectedClassId = computed(
     () =>
@@ -40,6 +57,30 @@ export class StudentsComponent {
         .classes()
         .find((item) => item.name === this.classesService.selectedClass())?.id ?? null,
   );
+
+  actionsFor(student: Student): RowAction[] {
+    if (!this.auth.isAdmin()) {
+      return TEACHER_ACTIONS;
+    }
+    return student.status === StudentStatus.ACTIVE ? ACTIVE_ADMIN_ACTIONS : INACTIVE_ADMIN_ACTIONS;
+  }
+
+  onAction(student: Student, action: string): void {
+    switch (action) {
+      case 'details':
+        openStudentDetails(this.#dialog, { student }, this.#globalService.isMobile());
+        break;
+      case 'edit':
+        this.openForm(student);
+        break;
+      case 'deactivate':
+        this.onStudentDelete(student);
+        break;
+      case 'reactivate':
+        this.onStudentReactivate(student);
+        break;
+    }
+  }
 
   openForm(student: Student | null = null): void {
     this.#dialog.open<StudentFormComponent, StudentFormData>(StudentFormComponent, {
@@ -54,10 +95,10 @@ export class StudentsComponent {
   onStudentDelete(student: Student): void {
     this.#confirm(
       {
-        title: 'modal.deleteTitle',
-        question: 'modal.deleteQuestion',
+        title: 'modal.deactivateTitle',
+        question: 'modal.deactivateQuestion',
         leftButtonText: 'buttons.cancel',
-        rightButtonText: 'buttons.delete',
+        rightButtonText: 'students.deactivate',
         leftButtonIcon: 'close',
         rightButtonIcon: 'trash',
       },

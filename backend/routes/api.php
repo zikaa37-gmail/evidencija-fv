@@ -27,6 +27,7 @@ Route::middleware('jwt')->group(function () {
     Route::post('/notes', [StudentNoteController::class, 'store']);
     Route::delete('/notes/{id}', [StudentNoteController::class, 'destroy'])->whereNumber('id');
     Route::post('/reports/class', [ReportController::class, 'schoolClass']);
+    Route::post('/reports/student', [ReportController::class, 'student']);
 });
 
 Route::middleware(['jwt', 'admin'])->group(function () {

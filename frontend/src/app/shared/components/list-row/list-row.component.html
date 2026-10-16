@@ -1,0 +1,13 @@
+<app-avatar [name]="title()" [photo]="photo()" />
+
+<div class="row-main">
+  <span class="row-title" data-testid="row-title">{{ title() }}</span>
+  @if (subtitle(); as subtitle) {
+    <small class="row-subtitle">{{ subtitle }}</small>
+  }
+  <ng-content />
+</div>
+
+<div class="row-end">
+  <ng-content select="[rowEnd]" />
+</div>

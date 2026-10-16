@@ -1,0 +1,31 @@
+<div class="btn-group" role="group" [attr.aria-label]="'reports.period' | translate">
+  @for (item of reports.periods; track item) {
+    <button
+      type="button"
+      class="btn"
+      [class.btn-primary]="reports.period() === item"
+      [class.btn-light]="reports.period() !== item"
+      [class.border]="reports.period() !== item"
+      [attr.data-testid]="'period-' + item"
+      (click)="reports.period.set(item)"
+    >
+      {{ "reports.periods." + item | translate }}
+    </button>
+  }
+</div>
+
+@if (reports.period() === "month") {
+  <select
+    class="form-select month-select"
+    data-testid="report-month"
+    [attr.aria-label]="'reports.month' | translate"
+    [value]="reports.selectedMonth()"
+    (change)="reports.selectedMonth.set($any($event.target).value)"
+  >
+    @for (month of reports.months(); track month.value) {
+      <option [value]="month.value" [selected]="month.value === reports.selectedMonth()">
+        {{ "months." + month.name | translate }} {{ month.year }}
+      </option>
+    }
+  </select>
+}

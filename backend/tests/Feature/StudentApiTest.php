@@ -97,6 +97,29 @@ class StudentApiTest extends TestCase
         $this->assertSame(1, Enrollment::where('student_id', $created['id'])->count());
     }
 
+    public function test_admin_sets_and_removes_a_photo_and_import_keeps_it(): void
+    {
+        $photo = 'data:image/jpeg;base64,'.base64_encode('photo');
+        $created = $this->withJwt($this->admin)->postJson('/api/students', $this->payload(['photo' => $photo]))->assertCreated()->json();
+        $this->assertSame($photo, $created['photo']);
+
+        $this->withJwt($this->admin)->postJson('/api/students/import', ['students' => [
+            ['first_name' => 'Novak', 'last_name' => 'Novaković', 'sex' => 'male', 'class_name' => '5-1'],
+        ]])->assertOk();
+        $this->assertSame($photo, Student::find($created['id'])->photo);
+
+        $this->withJwt($this->admin)->putJson("/api/students/{$created['id']}", $this->payload(['photo' => null]))
+            ->assertOk()
+            ->assertJsonPath('photo', null);
+    }
+
+    public function test_rejects_photos_that_are_not_images(): void
+    {
+        $this->withJwt($this->admin)->postJson('/api/students', $this->payload(['photo' => 'data:text/html;base64,PHNjcmlwdD4=']))
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors('photo');
+    }
+
     public function test_rejects_a_class_from_another_school_year(): void
     {
         $this->withJwt($this->admin)->postJson('/api/students', $this->payload(['school_class_id' => 999999]))

@@ -1,37 +1,26 @@
-@use "src/theme/theme-variables" as *;
-
 .page {
-  padding: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px 8px;
 }
 
-.filters {
+.page-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
+  margin-bottom: 12px;
 }
 
-.month-select {
-  width: auto;
-  min-width: 180px;
+.report-list {
+  margin-top: 12px;
 }
 
-.report-table {
-  td.has-value {
-    font-weight: 600;
-  }
-
-  .inactive-row td {
-    color: $gray-500;
-  }
-}
-
-.praise-count {
+.count-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 600;
-  color: $green;
-}
-
-.warning-count {
-  font-weight: 600;
-  color: $danger;
+  background: color-mix(in srgb, currentColor 12%, transparent);
 }
