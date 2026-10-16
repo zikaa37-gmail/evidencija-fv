@@ -44,15 +44,14 @@
   ></textarea>
 
   <div class="d-flex flex-row justify-content-between my-4 w-100">
-    <button type="button" mat-raised-button (click)="closeModal()">
+    <button type="button" mat-stroked-button (click)="closeModal()">
       {{ "notes.cancel" | translate }}
     </button>
 
     <button
       type="button"
       class="mx-3"
-      mat-raised-button
-      color="primary"
+      mat-flat-button
       data-testid="save-note"
       [disabled]="saving() || !text().trim()"
       (click)="addNote()"

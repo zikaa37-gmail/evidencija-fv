@@ -6,7 +6,7 @@ Evidencija učenika na časovima fizičkog vaspitanja u jednoj školi:
 
 - `frontend/`: Angular 22 SPA (zoneless, OnPush podrazumevan, signali). Odeljenja
   (`features/classes`), učenici i uvoz iz Excela (`features/students`), kalendar sa evidencijom
-  po danu (`features/calendar`). UI: Angular Material + Bootstrap, prevodi preko `@ngx-translate`
+  po danu (`features/calendar`). UI: Angular Material (M3 tema, `mat.theme` + paleta u `src/theme/_theme-colors.scss`) + Bootstrap, prevodi preko `@ngx-translate`
   (`frontend/public/translations/sr.json`).
 - `backend/`: Laravel 13 API sa MySQL, prefiks tabela `efv_` (`DB_PREFIX`). Lokalno zasebna baza
   `evidencija_fv`; na serveru deljena baza, razdvajanje isključivo preko prefiksa.
@@ -58,6 +58,9 @@ referentne konvencije ako nešto ovde nije eksplicitno napisano.
   `ErrorHandlerService.notify`. Upis (POST/PATCH/DELETE) ide preko `HttpClient` umotanog u
   `LoaderService.track(...)`; posle uspeha lokalno se ažurira `resource.value`. Ne postavljati
   `isLoading` ručno.
+- Material dugmad (M3 ignoriše `color` ulaz): glavna akcija `mat-flat-button`, sporedna
+  `mat-stroked-button`, tekstualna `mat-button`. Boje komponenti idu preko M3 tokena
+  (`var(--mat-sys-primary)`...), ne preko `color="primary"`.
 - Obaveštenja korisniku idu kroz `NotificationService` (`MatSnackBar`), tekst iz prevoda (`toaster.*`).
 - Destruktivne akcije idu kroz zajednički `ConfirmationModalComponent`; ne uvoditi `window.confirm()`.
 - Ne dodavati tajne u repozitorijum. Lokalni backend kredencijali idu u `backend/.env`.

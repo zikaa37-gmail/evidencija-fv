@@ -62,7 +62,7 @@
 <div class="d-flex flex-row justify-content-around">
   <button
     class="my-4"
-    mat-raised-button
+    mat-stroked-button
     [disabled]="!classesService.hasChanges()"
     (click)="classesService.discardChanges()"
   >
@@ -70,8 +70,7 @@
   </button>
   <button
     class="my-4"
-    mat-raised-button
-    color="primary"
+    mat-flat-button
     data-testid="save-classes"
     [disabled]="!classesService.hasChanges()"
     (click)="classesService.saveClasses()"

@@ -5,7 +5,6 @@ export type AttendanceReason = 'absent' | 'equipment' | 'pity' | 'late' | 'ill';
 export interface OptionItem {
   reason: AttendanceReason | null;
   label: string;
-  bgColor: 'primary' | 'accent' | 'warn' | 'success' | 'danger';
 }
 
 export interface AttendanceRecord {

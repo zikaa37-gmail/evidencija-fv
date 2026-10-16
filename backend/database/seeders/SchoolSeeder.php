@@ -14,13 +14,23 @@ class SchoolSeeder extends Seeder
 {
     public const SECTIONS_PER_GRADE = [5 => 4, 6 => 5, 7 => 4, 8 => 3];
 
-    private const STUDENTS_PER_CLASS = 6;
+    public const STUDENTS_PER_CLASS = 30;
 
-    private const MALE_NAMES = ['Marko', 'Nikola', 'Luka', 'Stefan', 'Lazar', 'Filip', 'Vuk', 'Aleksa', 'Pavle', 'Mihajlo', 'Dušan', 'Ognjen'];
+    private const MALE_NAMES = [
+        'Marko', 'Nikola', 'Luka', 'Stefan', 'Lazar', 'Filip', 'Vuk', 'Aleksa', 'Pavle', 'Mihajlo',
+        'Dušan', 'Ognjen', 'Andrej', 'Petar', 'Uroš', 'Vasilije', 'Nemanja', 'Đorđe', 'Matija', 'Strahinja',
+    ];
 
-    private const FEMALE_NAMES = ['Ana', 'Milica', 'Jovana', 'Teodora', 'Sara', 'Mila', 'Dunja', 'Katarina', 'Lena', 'Nina', 'Iva', 'Sofija'];
+    private const FEMALE_NAMES = [
+        'Ana', 'Milica', 'Jovana', 'Teodora', 'Sara', 'Mila', 'Dunja', 'Katarina', 'Lena', 'Nina',
+        'Iva', 'Sofija', 'Anđela', 'Tara', 'Marija', 'Petra', 'Una', 'Lana', 'Hana', 'Vasilija',
+    ];
 
-    private const LAST_NAMES = ['Petrović', 'Jovanović', 'Nikolić', 'Marković', 'Đorđević', 'Stojanović', 'Ilić', 'Pavlović', 'Kostić', 'Popović', 'Živković', 'Todorović', 'Mitrović', 'Simić', 'Lukić'];
+    private const LAST_NAMES = [
+        'Petrović', 'Jovanović', 'Nikolić', 'Marković', 'Đorđević', 'Stojanović', 'Ilić', 'Pavlović', 'Kostić', 'Popović',
+        'Živković', 'Todorović', 'Mitrović', 'Simić', 'Lukić', 'Stanković', 'Milošević', 'Ristić', 'Kovačević', 'Savić',
+        'Lazić', 'Tomić', 'Radović', 'Vasić', 'Babić', 'Marinković', 'Obradović', 'Pešić', 'Janković', 'Božić',
+    ];
 
     private const HEAD_TEACHERS = ['Jelena Radović', 'Zoran Milić', 'Snežana Babić', 'Dragan Tomić', 'Marija Vasić', 'Goran Lazić', 'Ivana Kovačević', 'Branko Savić'];
 
@@ -28,9 +38,15 @@ class SchoolSeeder extends Seeder
 
     private const HEALTH_ISSUES = ['astma', 'alergija na polen', 'ravni tabani', 'skolioza'];
 
+    private array $availableNames = [];
+
     public function run(): void
     {
         mt_srand(2026);
+        $this->availableNames = [
+            'male' => $this->shuffledCombinations(self::MALE_NAMES),
+            'female' => $this->shuffledCombinations(self::FEMALE_NAMES),
+        ];
 
         $school = School::create(['name' => 'OŠ „Dositej Obradović"', 'city' => 'Beograd']);
         $schoolYear = $this->createCurrentSchoolYear($school);
@@ -66,11 +82,11 @@ class SchoolSeeder extends Seeder
     {
         foreach (range(1, self::STUDENTS_PER_CLASS) as $index) {
             $sex = $index % 2 === 0 ? 'female' : 'male';
-            $lastName = $this->pick(self::LAST_NAMES);
+            [$firstName, $lastName] = array_pop($this->availableNames[$sex]);
 
             $student = Student::create([
                 'school_id' => $school->id,
-                'first_name' => $this->pick($sex === 'male' ? self::MALE_NAMES : self::FEMALE_NAMES),
+                'first_name' => $firstName,
                 'last_name' => $lastName,
                 'sex' => $sex,
                 'emergency_contact_name' => 'Roditelj '.$lastName,
@@ -85,6 +101,23 @@ class SchoolSeeder extends Seeder
                 'status' => Enrollment::ACTIVE,
             ]);
         }
+    }
+
+    private function shuffledCombinations(array $firstNames): array
+    {
+        $combinations = [];
+        foreach ($firstNames as $firstName) {
+            foreach (self::LAST_NAMES as $lastName) {
+                $combinations[] = [$firstName, $lastName];
+            }
+        }
+
+        for ($i = count($combinations) - 1; $i > 0; $i--) {
+            $j = mt_rand(0, $i);
+            [$combinations[$i], $combinations[$j]] = [$combinations[$j], $combinations[$i]];
+        }
+
+        return $combinations;
     }
 
     private function pick(array $items): string

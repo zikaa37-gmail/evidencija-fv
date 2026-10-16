@@ -33,7 +33,7 @@ class SchoolClassApiTest extends TestCase
 
         $this->assertCount(16, $response->json());
         $this->assertSame('5-1', $response->json('0.name'));
-        $this->assertSame(6, $response->json('0.students_count'));
+        $this->assertSame(SchoolSeeder::STUDENTS_PER_CLASS, $response->json('0.students_count'));
         $this->assertNotNull($response->json('0.head_teacher_name'));
     }
 

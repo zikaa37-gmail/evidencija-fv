@@ -1,4 +1,8 @@
-.mat-success {
-  background-color: green;
-  color: #fff;
+.option {
+  min-width: 150px;
+
+  &.active {
+    color: var(--mat-sys-on-primary);
+    background: var(--mat-sys-primary);
+  }
 }
