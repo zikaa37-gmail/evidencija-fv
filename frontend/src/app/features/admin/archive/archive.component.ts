@@ -5,6 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { environment } from '../../../../environments/environment';
 import { ArchivedStudent } from '../../../core/school-year/school-year.model';
+import { ListRowComponent } from '../../../shared/components/list-row/list-row.component';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 interface ArchiveGroup {
@@ -16,7 +17,7 @@ interface ArchiveGroup {
   selector: 'app-archive',
   templateUrl: './archive.component.html',
   styleUrl: './archive.component.scss',
-  imports: [DatePipe, TranslatePipe],
+  imports: [DatePipe, TranslatePipe, ListRowComponent],
 })
 export class ArchiveComponent {
   readonly #archive = httpResource<ArchivedStudent[]>(

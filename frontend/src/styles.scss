@@ -217,7 +217,15 @@ $tones: (
   box-shadow: none;
 }
 
+.print-only {
+  display: none !important;
+}
+
 @media print {
+  .print-only {
+    display: revert !important;
+  }
+
   app-header,
   app-loader,
   .no-print {

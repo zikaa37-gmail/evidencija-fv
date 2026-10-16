@@ -10,26 +10,7 @@
     <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
       <mat-tab [label]="'reports.tabs.summary' | translate">
         <div class="tab-content">
-          <div class="stats">
-            @for (column of columns; track column) {
-              <div class="stat" [class.stat-red]="column === 'absent' && report[column] > 0">
-                <strong>{{ report[column] }}</strong>
-                <span>{{ "options." + column | translate }}</span>
-              </div>
-            }
-            <div class="stat stat-total">
-              <strong>{{ report.total }}</strong>
-              <span>{{ "reports.total" | translate }}</span>
-            </div>
-            <div class="stat tone-green">
-              <strong>{{ report.praises }}</strong>
-              <span>{{ "reports.praises" | translate }}</span>
-            </div>
-            <div class="stat tone-red">
-              <strong>{{ report.warnings }}</strong>
-              <span>{{ "reports.warnings" | translate }}</span>
-            </div>
-          </div>
+          <app-report-stats [counts]="report" />
         </div>
       </mat-tab>
 

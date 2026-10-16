@@ -1,0 +1,18 @@
+@for (column of columns; track column) {
+  <div class="stat" [class.stat-red]="column === 'absent' && counts()[column] > 0">
+    <strong>{{ counts()[column] }}</strong>
+    <span>{{ "options." + column | translate }}</span>
+  </div>
+}
+<div class="stat stat-total">
+  <strong>{{ counts().total }}</strong>
+  <span>{{ "reports.total" | translate }}</span>
+</div>
+<div class="stat tone-green">
+  <strong>{{ counts().praises }}</strong>
+  <span>{{ "reports.praises" | translate }}</span>
+</div>
+<div class="stat tone-red">
+  <strong>{{ counts().warnings }}</strong>
+  <span>{{ "reports.warnings" | translate }}</span>
+</div>

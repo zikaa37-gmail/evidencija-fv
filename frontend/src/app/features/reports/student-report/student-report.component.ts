@@ -1,7 +1,7 @@
 import { Component, computed, DestroyRef, effect, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { httpResource } from '@angular/common/http';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -11,7 +11,8 @@ import { NoteListComponent } from '../../../shared/components/note-list/note-lis
 import { ProfileHeaderComponent } from '../../../shared/components/profile-header/profile-header.component';
 import { ErrorHandlerService } from '../../../shared/services/error-handler.service';
 import { WEEKDAYS } from '../../calendar/calendar.constants';
-import { REPORT_COLUMNS, ReportRange, ReportRow, StudentReport } from '../reports.interface';
+import { ReportStatsComponent } from '../report-stats/report-stats.component';
+import { ReportRange, ReportRow, StudentReport } from '../reports.interface';
 
 export interface StudentReportData {
   row: ReportRow;
@@ -22,12 +23,19 @@ export interface StudentReportData {
   selector: 'app-student-report',
   templateUrl: './student-report.component.html',
   styleUrl: './student-report.component.scss',
-  imports: [DatePipe, TranslatePipe, MatTabGroup, MatTab, ProfileHeaderComponent, NoteListComponent],
+  imports: [
+    DatePipe,
+    TranslatePipe,
+    MatTabGroup,
+    MatTab,
+    ProfileHeaderComponent,
+    NoteListComponent,
+    ReportStatsComponent,
+  ],
 })
 export class StudentReportComponent {
   protected readonly dialogRef = inject(MatDialogRef<StudentReportComponent>);
   protected readonly data = inject<StudentReportData>(MAT_DIALOG_DATA);
-  protected readonly columns = REPORT_COLUMNS;
 
   readonly #report = httpResource<StudentReport>(() => ({
     url: `${environment.apiUrl}/reports/student`,
@@ -55,4 +63,14 @@ export class StudentReportComponent {
       }
     });
   }
+}
+
+export function openStudentReport(dialog: MatDialog, data: StudentReportData, mobile: boolean): void {
+  dialog.open<StudentReportComponent, StudentReportData>(StudentReportComponent, {
+    data,
+    width: mobile ? '100vw' : '560px',
+    maxWidth: '100vw',
+    panelClass: 'user-dialog',
+    autoFocus: false,
+  });
 }

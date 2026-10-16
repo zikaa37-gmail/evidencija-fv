@@ -257,7 +257,8 @@
     "backToList": "Nazad na učenike",
     "print": "Štampaj / sačuvaj PDF",
     "printedOn": "Datum:",
-    "signature": "Potpis nastavnika"
+    "signature": "Potpis nastavnika",
+    "ranking": "Učenici po broju oznaka"
   },
   "photo": {
     "enlarge": "Uvećaj fotografiju",

@@ -6,33 +6,26 @@
       {{ "admin.archiveYear" | translate: { year: group.schoolYear } }}
       <small class="text-muted">({{ group.students.length }})</small>
     </h5>
-    <table class="table table-sm table-striped">
-      <thead>
-        <tr>
-          <th>{{ "students.lastName" | translate }}</th>
-          <th>{{ "students.firstName" | translate }}</th>
-          <th>{{ "section" | translate }}</th>
-          <th>{{ "admin.archivedAt" | translate }}</th>
-          <th>{{ "admin.reason" | translate }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (student of group.students; track student.id) {
-          <tr>
-            <td>{{ student.last_name }}</td>
-            <td>{{ student.first_name }}</td>
-            <td>{{ student.last_class_name ?? "-" }}</td>
-            <td>{{ student.archived_at | date: "dd.MM.yyyy" }}</td>
-            <td>
-              {{
-                (student.completed ? "admin.completed" : "admin.leftSchool")
-                  | translate
-              }}
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+    <div class="archive-list" data-testid="archive-list">
+      @for (student of group.students; track student.id) {
+        <app-list-row
+          [title]="student.first_name + ' ' + student.last_name"
+          [subtitle]="
+            ('section' | translate) +
+            ' ' +
+            (student.last_class_name ?? '-') +
+            ' · ' +
+            ('admin.archivedAt' | translate) +
+            ' ' +
+            (student.archived_at | date: 'dd.MM.yyyy')
+          "
+        >
+          <span class="chip" [class.chip-blue]="student.completed" [class.chip-red]="!student.completed">{{
+            (student.completed ? "admin.completed" : "admin.leftSchool") | translate
+          }}</span>
+        </app-list-row>
+      }
+    </div>
   } @empty {
     @if (loaded()) {
       <p>{{ "admin.archiveEmpty" | translate }}</p>
